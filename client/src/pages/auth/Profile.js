@@ -88,7 +88,6 @@ const Profile = () => {
         snapchat: snapchat
       }
     }).then(updatedUser => {
-      console.log("Updated User in DB: ", updatedUser);
       setEdit(false);
     }).catch(err => {
       console.log("Error: ", err);

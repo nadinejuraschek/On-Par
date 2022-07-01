@@ -20,7 +20,6 @@ export const NoteProvider = props => {
       url: '/api/user/:id/notes',
       method: 'GET',
     }).then(res => {
-      // console.log(res.data.notes);
       setNotes(res.data.notes);
     }).catch(error => console.log('Error: ', error));
   };
@@ -51,11 +50,9 @@ export const NoteProvider = props => {
   // };
 
   const deleteNote = noteid => {
-    // console.log(noteid);
     axios
       .delete('/api/notes/' + noteid)
       .then(res => {
-        // console.log(res);
         getNotes();
       })
       .catch(error => {

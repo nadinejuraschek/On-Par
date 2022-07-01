@@ -21,7 +21,7 @@ const GatedComponent = ({ children }) => {
       setLoading(false);
     })
     .catch(error => {
-    console.log('Error: ' + error.message);
+      console.log('Error: ' + error.message);
     });
   }, []);
 

@@ -20,15 +20,12 @@ export const PaymentProvider = props => {
       url: '/api/user/:id/payments',
       method: 'GET',
     }).then(res => {
-      // console.log(res.data.payments);
       setPayments(res.data.payments);
     }).catch(error => console.log('Error: ', error));
   };
 
   const deletePayment = paymentid => {
-    // console.log(paymentid);
     axios.delete('/api/payments/' + paymentid).then(res => {
-      // console.log(res);
       getPayments();
     });
   };

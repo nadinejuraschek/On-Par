@@ -7,7 +7,7 @@ const ProfileInput = ({ name, value, handleChange, edit, icon, label }) => (
         {
           icon
           ?
-          <i class={`${icon} icon`}></i>
+          <i className={`${icon} icon`}></i>
           :
           null
         }

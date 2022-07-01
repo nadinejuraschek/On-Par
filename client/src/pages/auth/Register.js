@@ -44,7 +44,6 @@ const Register = ({ history }) => {
       data: newUser,
     })
       .then(response => {
-        console.log('Data: ' + response.data);
         history.push('/home');
       })
       .catch(error => {
@@ -60,7 +59,6 @@ const Register = ({ history }) => {
       data: { email: "tester@mail.com", password: "testing123" },
     })
       .then(response => {
-        console.log('Data: ' + response.data);
         history.push('/home');
       })
       .catch(error => {

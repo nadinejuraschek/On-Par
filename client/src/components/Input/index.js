@@ -8,7 +8,7 @@ const Input = ({ name, value, handleChange, icon, label }) => {
         {
           icon
           ?
-          <i class={`${icon} icon`}></i>
+          <i className={`${icon} icon`}></i>
           :
           null
         }

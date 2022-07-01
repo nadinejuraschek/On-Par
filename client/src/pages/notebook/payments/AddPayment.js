@@ -21,14 +21,12 @@ const AddPayment = () => {
 
   const handleSubmit = event => {
     event.preventDefault();
-    console.log('Payment to send to DB: ' + newPayment);
     axios({
       url: '/api/payments',
       method: 'POST',
       data: newPayment,
     })
       .then(response => {
-        console.log('Payment in DB: ' + response.data);
         getPayments();
         setNewPayment({ week: 0, paid: false, date: '', late: false });
       })

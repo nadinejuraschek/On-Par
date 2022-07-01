@@ -36,7 +36,6 @@ export const GoalProvider = props => {
   const checkGoal = goalid => {
     axios.put('/api/goals/' + goalid, { checked: true })
       .then(response => {
-        // console.log('Goal in DB: ' + response.data);
         getGoals();
       })
       .catch(error => {
@@ -46,7 +45,6 @@ export const GoalProvider = props => {
 
   const deleteGoal = goalid => {
     axios.delete('/api/goals/' + goalid).then(res => {
-      // console.log(res);
       getGoals();
     });
   };

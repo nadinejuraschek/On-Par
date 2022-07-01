@@ -16,8 +16,6 @@ const Workhours = () => {
   const [tab, setTab] = useState('weekly');
   const { workhours, getWorkhours, todayHours } = useContext(WorkhourContext);
 
-  console.log(todayHours);
-
   return (
     <main>
       <div className={styles.layout}>

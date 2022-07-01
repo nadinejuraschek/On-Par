@@ -17,7 +17,6 @@ exports.getPayments = async (req, res) => {
 exports.create = async (req, res) => {
   await db.Payment.create(req.body)
     .then(insertedPayment => {
-      // console.log('User is: ' + req.user);
       db.User.findByIdAndUpdate(
         { _id: req.user },
         { $push: { payments: insertedPayment._id } },
@@ -25,8 +24,6 @@ exports.create = async (req, res) => {
           if (error) {
             console.log('Error: ' + error);
           } else {
-            // TEST
-            // console.log('Success: ' + success);
             res.json('Success!');
           }
         }

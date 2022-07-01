@@ -67,7 +67,7 @@ const PaymentEntry = ({ paymentid, payment, deletePayment, getPayments }) => {
             className='no-style-button'
             onClick={() => deletePayment(paymentid)}
           >
-            <i class='trash alternate outline icon'></i>
+            <i className='trash alternate outline icon'></i>
           </button>
         </div>
       </div>

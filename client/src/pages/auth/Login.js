@@ -20,7 +20,6 @@ const Login = ({ history }) => {
       data: { email: email, password: password },
     })
       .then(response => {
-        // console.log('Data: ' + response.data);
         history.push('/home');
       })
       .catch(error => {
@@ -36,7 +35,6 @@ const Login = ({ history }) => {
       data: { email: "tester@mail.com", password: "testing123" },
     })
       .then(response => {
-        console.log('Data: ' + response.data);
         history.push('/home');
       })
       .catch(error => {

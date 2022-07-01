@@ -22,7 +22,6 @@ export const WorkhourProvider = props => {
       url: '/api/user/:id/workhours',
       method: 'GET',
     }).then(res => {
-      // console.log(res.data.workhours);
       setWorkhours(res.data.workhours);
     }).catch(error => console.log('Error: ', error));
   };
@@ -43,7 +42,6 @@ export const WorkhourProvider = props => {
 
   const deleteWorkhours = workhourid => {
     axios.delete('/api/workhours/' + workhourid).then(res => {
-      // console.log(res);
       getWorkhours();
     });
   };

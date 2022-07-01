@@ -39,7 +39,6 @@ const Goal = ({ data, month }) => {
       },
     })
       .then(response => {
-        // console.log('Goal in DB: ' + response.data);
         setText('');
         setType('');
         setOpenAddGoal(false);
