@@ -1,7 +1,6 @@
 // REACT
 import { useContext, useState } from 'react';
-import { withRouter } from 'react-router';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 // NPM PACKAGES
 import axios from 'axios';
@@ -23,16 +22,18 @@ import emergencyphone from 'images/emergency-call.svg';
 // STYLES
 import styles from './home.module.css';
 
-const Home = ({ history }) => {
+export const Home = () => {
   const [user] = useContext(UserContext);
   const [message, setMessage] = useState('');
+
+  const navigate = useNavigate();
 
   const handleLogout = () => {
     axios({
       url: '/api/user/signout',
       method: 'POST',
     }).then(res => {
-      history.push('/login');
+      navigate('/login');
     });
   };
 
@@ -101,5 +102,3 @@ const Home = ({ history }) => {
     </main>
   );
 };
-
-export default withRouter(Home);

@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 
 // COMPONENTS
-import Register from '../pages/auth/Register';
+import {Register} from '../pages/auth/Register';
 import Loading from '../components/Loading';
 
 const GatedComponent = ({ children }) => {

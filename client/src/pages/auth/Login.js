@@ -1,6 +1,6 @@
 // REACT
 import { useState } from 'react';
-import { withRouter } from 'react-router';
+import { useNavigate } from 'react-router-dom';
 
 // NPM PACKAGES
 import axios from 'axios';
@@ -8,9 +8,11 @@ import axios from 'axios';
 // STYLES
 import styles from './auth.module.css';
 
-const Login = ({ history }) => {
+export const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+  const navigate = useNavigate();
 
   const handleSubmit = event => {
     event.preventDefault();
@@ -20,7 +22,7 @@ const Login = ({ history }) => {
       data: { email: email, password: password },
     })
       .then(response => {
-        history.push('/home');
+        navigate('/home');
       })
       .catch(error => {
         console.log('Error: ' + error.response);
@@ -35,7 +37,7 @@ const Login = ({ history }) => {
       data: { email: "tester@mail.com", password: "testing123" },
     })
       .then(response => {
-        history.push('/home');
+        navigate('/home');
       })
       .catch(error => {
         console.log('Error: ' + error.response);
@@ -109,5 +111,3 @@ const Login = ({ history }) => {
     </main>
   );
 };
-
-export default withRouter(Login);

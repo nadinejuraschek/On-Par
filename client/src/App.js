@@ -1,5 +1,5 @@
 // REACT IMPORTS
-import { BrowserRouter, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 // COMPONENT IMPORTS
 import Navbar from './components/Navbar';
@@ -9,8 +9,8 @@ import GatedComponent from './components/GatedComponent';
 import Dev from './pages/Dev';
 // import WrongTurn from './WrongTurn';
 
-import Login from './pages/auth/Login';
-import Register from './pages/auth/Register';
+import {Login} from './pages/auth/Login';
+import {Register} from './pages/auth/Register';
 
 // import Cluster from './pages/cluster/Cluster';
 
@@ -27,7 +27,7 @@ import Resources from './pages/resources/Resources';
 import Tax from './pages/resources/tax/Tax';
 
 import EmergencyNumbers from './pages/EmergencyNumbers';
-import Home from './pages/home/Home';
+import {Home} from './pages/home/Home';
 // import Landing from './pages/Landing';
 import Profile from './pages/auth/Profile';
 
@@ -37,121 +37,96 @@ import { PaymentProvider } from './contexts/PaymentContext';
 import { GoalProvider } from './contexts/GoalContext';
 import { NoteProvider } from './contexts/NoteContext';
 
-const App = () => {
-  // const [active, setActive] = useState('');
-  return (
+const App = () => (
     <BrowserRouter>
       <div className='layout'>
         <Navbar />
         <div className='page-container'>
-
+    <Routes>
           {/* Landing Page */}
-          <Route exact path='/' component={Login} />
+          <Route path='/' element={Login} />
 
           {/* Authentication */}
-          <Route exact path='/login' component={Login} />
-          <Route exact path='/register' component={Register} />
+          <Route path='/login' element={Login} />
+          <Route path='/register' element={Register} />
 
           {/* Navbar Links */}
-          <Route exact path='/profile'>
-            <GatedComponent>
+          <Route path='/profile' element={<GatedComponent>
               <UserProvider>
                 <Profile />
               </UserProvider>
-            </GatedComponent>
-          </Route>
-          <Route exact path='/emergencynumbers' component={EmergencyNumbers} />
+            </GatedComponent>} />
+
+          <Route path='/emergencynumbers' element={EmergencyNumbers} />
 
           {/* Home */}
-          <Route exact path='/home'>
-            <GatedComponent>
+          <Route path='/home' element={
+<GatedComponent>
               <UserProvider>
                 <Home />
               </UserProvider>
             </GatedComponent>
-          </Route>
+          } />
 
           {/* Home Sections */}
-          <Route exact path='/messages'>
-            <GatedComponent>
+          <Route path='/messages' element={<GatedComponent>
               <Dev />
-            </GatedComponent>
-          </Route>
-          <Route exact path='/notebook'>
-            <GatedComponent>
+            </GatedComponent>} />
+          <Route path='/notebook' element={<GatedComponent>
               <Notebook />
-            </GatedComponent>
-          </Route>
-          <Route exact path='/hostfamily'>
-            <GatedComponent>
+            </GatedComponent>} />
+          <Route path='/hostfamily' element={<GatedComponent>
               <Dev />
               {/* <HostFamily /> */}
-            </GatedComponent>
-          </Route>
-          <Route exact path='/cluster'>
-            <GatedComponent>
+            </GatedComponent>} />
+          <Route path='/cluster' element={<GatedComponent>
               <Dev />
               {/* <Cluster /> */}
-            </GatedComponent>
-          </Route>
-          <Route exact path='/resources'>
-            <GatedComponent>
+            </GatedComponent>} />
+          <Route path='/resources' element={<GatedComponent>
               <Resources />
-            </GatedComponent>
-          </Route>
+            </GatedComponent>} />
 
           {/* Notebook Sections */}
-          <Route exact path='/notebook/workhours'>
-            <GatedComponent>
+          <Route path='/notebook/workhours' element={<GatedComponent>
               <WorkhourProvider>
                 <Workhours />
               </WorkhourProvider>
-            </GatedComponent>
-          </Route>
-          <Route exact path='/notebook/payments'>
-            <GatedComponent>
+            </GatedComponent>} />
+          <Route path='/notebook/payments' element={<GatedComponent>
               <PaymentProvider>
                 <Payments />
               </PaymentProvider>
-            </GatedComponent>
-          </Route>
-          <Route exact path='/notebook/goals'>
-            <GatedComponent>
+            </GatedComponent>} />
+          <Route path='/notebook/goals' element={<GatedComponent>
               <GoalProvider>
                 <Goals />
               </GoalProvider>
-            </GatedComponent>
-          </Route>
-          <Route exact path='/notebook/notes'>
-            <GatedComponent>
+            </GatedComponent>} />
+          <Route path='/notebook/notes' element={<GatedComponent>
               <NoteProvider>
                 <Notes />
               </NoteProvider>
-            </GatedComponent>
-          </Route>
+            </GatedComponent>} />
 
           {/* Resources Sections */}
-          <Route exact path='/resources/tax'>
-            <GatedComponent>
+          <Route path='/resources/tax' element={<GatedComponent>
               <Tax />
-            </GatedComponent>
-          </Route>
+            </GatedComponent>} />
 
           {/* HostFamily Sections */}
-          <Route exact path='/hostfamily/calendar'>
-            <GatedComponent>
+          <Route path='/hostfamily/calendar' element={            <GatedComponent>
               <Dev />
               {/* <CalendarView /> */}
-            </GatedComponent>
-          </Route>
+            </GatedComponent>} />
 
           {/* Error Page */}
           {/* <Route path='*' component={ WrongTurn } /> */}
+          </Routes>
         </div>
         {/* <Footer /> */}
       </div>
     </BrowserRouter>
   );
-};
 
 export default App;

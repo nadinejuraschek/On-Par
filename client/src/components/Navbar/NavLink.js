@@ -1,10 +1,11 @@
 // REACT
-import { withRouter } from 'react-router';
+import { useLocation } from 'react-router-dom';
 
 // STYLES
 import styles from './nav.module.css';
 
-const NavLink = ({ label, iconSrc, link, location } ) => {
+export const NavLink = ({ label, iconSrc, link } ) => {
+  const location = useLocation();
   const paths = location.pathname.split('/');
 
   return (
@@ -19,5 +20,3 @@ const NavLink = ({ label, iconSrc, link, location } ) => {
     </a>
   );
 };
-
-export default withRouter(NavLink);
