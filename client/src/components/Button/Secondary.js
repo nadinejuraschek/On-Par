@@ -1,18 +1,17 @@
-// STYLES
-import styles from './button.module.css';
+import styles from "./button.module.css";
 
-const Secondary = ({ link, label, handleClick }) => {
+const Secondary = ( { link, label, handleClick } ) => {
   return (
     <>
-      {link ? (
-        <a className={styles.secondary} href={link} aria-label={label}>
-          {label}
+      { link ? (
+        <a className={ styles.secondary } href={ link } aria-label={ label }>
+          { label }
         </a>
       ) : (
-        <button className={styles.secondary} onClick={handleClick}>
-          {label}
+        <button className={ styles.secondary } onClick={ handleClick }>
+          { label }
         </button>
-      )}
+      ) }
     </>
   );
 };

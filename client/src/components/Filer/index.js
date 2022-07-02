@@ -1,13 +1,13 @@
 // REACT
-import { useState } from 'react';
+import { useState } from "react";
 
 // STYLES
-import styles from './filer.module.css';
+import styles from "./filer.module.css";
 
-const Filer = ({ label }) => {
-  const [selectedFile, setSelectedFile] = useState(null);
+const Filer = () => {
+  const [selectedFile, setSelectedFile] = useState( null );
   const handleFileSelected = event => {
-    setSelectedFile(event.target.files[0]);
+    setSelectedFile( event.target.files[0] );
   };
 
   const handleUpload = event => {
@@ -15,9 +15,9 @@ const Filer = ({ label }) => {
   };
 
   return (
-    <div className={styles.container}>
-      <input type='file' onChange={handleFileSelected} />
-      <button onClick={handleUpload}>Upload</button>
+    <div className={ styles.container }>
+      <input type="file" onChange={ handleFileSelected } />
+      <button onClick={ handleUpload }>Upload</button>
     </div>
   );
 };

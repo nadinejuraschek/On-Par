@@ -1,38 +1,32 @@
-// REACT
-import { useState, createContext, useEffect } from 'react';
-
-// NPM PACKAGES
-import axios from 'axios';
-
-// CONTEXT
+import axios from "axios";
+import { useState, createContext, useEffect } from "react";
 export const PaymentContext = createContext();
 
 export const PaymentProvider = props => {
-  const [payments, setPayments] = useState([]);
+  const [payments, setPayments] = useState( [] );
 
-  // GET
-  useEffect(() => {
+  useEffect( () => {
     getPayments();
-  }, []);
+  }, [] );
 
   const getPayments = () => {
-    axios({
-      url: '/api/user/:id/payments',
-      method: 'GET',
-    }).then(res => {
-      setPayments(res.data.payments);
-    }).catch(error => console.log('Error: ', error));
+    axios( {
+      url: "/api/user/:id/payments",
+      method: "GET",
+    } ).then( res => {
+      setPayments( res.data.payments );
+    } ).catch( error => console.log( "Error: ", error ) );
   };
 
   const deletePayment = paymentid => {
-    axios.delete('/api/payments/' + paymentid).then(res => {
+    axios.delete( "/api/payments/" + paymentid ).then( res => {
       getPayments();
-    });
+    } );
   };
 
   return (
-    <PaymentContext.Provider value={{ payments, getPayments, deletePayment }}>
-      {props.children}
+    <PaymentContext.Provider value={ { payments, getPayments, deletePayment } }>
+      { props.children }
     </PaymentContext.Provider>
   );
 };

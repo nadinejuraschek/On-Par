@@ -1,30 +1,23 @@
-// REACT
-import { Component } from 'react';
+import { useState } from "react";
+import Calendar from "react-calendar";
 
-// NPM PACKAGES
-import Calendar from 'react-calendar';
+const CalendarView = () => {
+  const [date, setDate] = useState( new Date() );
 
-class CalendarView extends Component {
-  state = {
-    date: new Date(),
-  };
+  const handleChange = date => setDate( date );
 
-  onChange = date => this.setState({ date });
-
-  render() {
-    return (
-      <main>
-          <div>
-            <Calendar
-              showWeekNumbers
-              onChange={this.onChange}
-              value={this.state.date}
-            />
-            {console.log(this.state.date)}
-          </div>
-      </main>
-    );
-  }
+  return (
+    <main>
+      <div>
+        <Calendar
+          showWeekNumbers
+          onChange={ handleChange }
+          value={ date }
+        />
+        { date }
+      </div>
+    </main>
+  );
 }
 
 export default CalendarView;

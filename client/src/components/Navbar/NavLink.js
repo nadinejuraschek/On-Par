@@ -1,22 +1,19 @@
-// REACT
-import { useLocation } from 'react-router-dom';
+import { useLocation } from "react-router-dom";
+import styles from "./nav.module.css";
 
-// STYLES
-import styles from './nav.module.css';
-
-export const NavLink = ({ label, iconSrc, link } ) => {
+export const NavLink = ( { label, iconSrc, link } ) => {
   const location = useLocation();
-  const paths = location.pathname.split('/');
+  const paths = location.pathname.split( "/" );
 
   return (
     <a
-      className={styles.navLink}
-      href={link}
+      className={ styles.navLink }
+      href={ link }
     >
-      <div className={styles.icon}>
-        <img alt={label} src={iconSrc} />
+      <div className={ styles.icon }>
+        <img alt={ label } src={ iconSrc } />
       </div>
-      <p className={link === `/${paths[1]}` ? '' : styles.hide}>{label}</p>
+      <p className={ link === `/${ paths[1] }` ? "" : styles.hide }>{ label }</p>
     </a>
   );
 };

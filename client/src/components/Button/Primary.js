@@ -1,18 +1,17 @@
-// STYLES
-import styles from './button.module.css';
+import styles from "./button.module.css";
 
-const Primary = ({ link, label, handleClick }) => {
+const Primary = ( { link, label, handleClick } ) => {
   return (
     <>
-      {link ? (
-        <a className={styles.primary} href={link} aria-label={label}>
-          {label}
+      { link ? (
+        <a className={ styles.primary } href={ link } aria-label={ label }>
+          { label }
         </a>
       ) : (
-        <button className={styles.primary} onClick={handleClick}>
-          {label}
+        <button className={ styles.primary } onClick={ handleClick }>
+          { label }
         </button>
-      )}
+      ) }
     </>
   );
 };

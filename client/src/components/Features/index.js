@@ -1,11 +1,10 @@
-// STYLES
-import styles from './features.module.css';
+import styles from "./features.module.css";
 
-const FeatureCard = ({ link, icon, title, header }) => {
+const FeatureCard = ( { link, icon, title, header } ) => {
   return (
-    <a className={styles.container} href={link}>
-      <img src={icon} className={styles.icon} alt={title} />
-      <p className={styles.title}>{header}</p>
+    <a className={ styles.container } href={ link }>
+      <img src={ icon } className={ styles.icon } alt={ title } />
+      <p className={ styles.title }>{ header }</p>
     </a>
   );
 };

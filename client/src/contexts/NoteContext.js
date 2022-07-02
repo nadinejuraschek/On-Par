@@ -1,27 +1,22 @@
-// REACT
-import { useState, createContext, useEffect } from 'react';
-
-// NPM PACKAGES
-import axios from 'axios';
-
-// CONTEXTS
+import axios from "axios";
+import { useState, createContext, useEffect } from "react";
 export const NoteContext = createContext();
 
 export const NoteProvider = props => {
-  const [notes, setNotes] = useState([]);
+  const [notes, setNotes] = useState( [] );
   // const [ newNote, setNewNote ] = useState({ date: '', text: '' });
 
-  useEffect(() => {
+  useEffect( () => {
     getNotes();
-  }, []);
+  }, [] );
 
   const getNotes = () => {
-    axios({
-      url: '/api/user/:id/notes',
-      method: 'GET',
-    }).then(res => {
-      setNotes(res.data.notes);
-    }).catch(error => console.log('Error: ', error));
+    axios( {
+      url: "/api/user/:id/notes",
+      method: "GET",
+    } ).then( res => {
+      setNotes( res.data.notes );
+    } ).catch( error => console.log( "Error: ", error ) );
   };
 
   // const postNote = () => {
@@ -51,18 +46,18 @@ export const NoteProvider = props => {
 
   const deleteNote = noteid => {
     axios
-      .delete('/api/notes/' + noteid)
-      .then(res => {
+      .delete( "/api/notes/" + noteid )
+      .then( res => {
         getNotes();
-      })
-      .catch(error => {
-        console.log('Error: ' + error.response);
-      });
+      } )
+      .catch( error => {
+        console.log( "Error: " + error.response );
+      } );
   };
 
   return (
-    <NoteContext.Provider value={{ notes, getNotes, deleteNote }}>
-      {props.children}
+    <NoteContext.Provider value={ { notes, getNotes, deleteNote } }>
+      { props.children }
     </NoteContext.Provider>
   );
 };

@@ -1,40 +1,29 @@
-// REACT
-import { useContext, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-
-// NPM PACKAGES
-import axios from 'axios';
-
-// COMPONENTS
-import Countdown from 'components/Countdown';
-import Greeting from 'components/Greeting';
-import Today from 'components/TodayView';
-import Reminders from 'components/ReminderView';
-import Workhours from 'components/WorkhourView';
-import SecondaryBtn from 'components/Button/Secondary';
-
-// CONTEXTS
-import { UserContext } from 'contexts/UserContext';
-
-// ICONS
-import emergencyphone from 'images/emergency-call.svg';
-
-// STYLES
-import styles from './home.module.css';
+import axios from "axios";
+import SecondaryBtn from "components/Button/Secondary";
+import Countdown from "components/Countdown";
+import Greeting from "components/Greeting";
+import Reminders from "components/ReminderView";
+import Today from "components/TodayView";
+import Workhours from "components/WorkhourView";
+import { UserContext } from "contexts/UserContext";
+import emergencyphone from "images/emergency-call.svg";
+import { useContext, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import styles from "./home.module.css";
 
 export const Home = () => {
-  const [user] = useContext(UserContext);
-  const [message, setMessage] = useState('');
+  const [user] = useContext( UserContext );
+  const [message, setMessage] = useState( "" );
 
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    axios({
-      url: '/api/user/signout',
-      method: 'POST',
-    }).then(res => {
-      navigate('/login');
-    });
+    axios( {
+      url: "/api/user/signout",
+      method: "POST",
+    } ).then( res => {
+      navigate( "/login" );
+    } );
   };
 
   /* const activities = [
@@ -60,40 +49,40 @@ export const Home = () => {
 
   return (
     <main>
-      <div className={styles.grid}>
-        <div className={styles.header}>
-          <Greeting message={message} name={user.firstname} />
-          <div className={styles.buttons}>
+      <div className={ styles.grid }>
+        <div className={ styles.header }>
+          <Greeting message={ message } name={ user.firstname } />
+          <div className={ styles.buttons }>
             <SecondaryBtn link="/profile" label="Profile" />
-            <SecondaryBtn label="Log Out" handleClick={handleLogout} />
+            <SecondaryBtn label="Log Out" handleClick={ handleLogout } />
           </div>
         </div>
 
-        <div className={styles.hours}>
+        <div className={ styles.hours }>
           <Workhours />
         </div>
 
-        <div className={styles.today}>
+        <div className={ styles.today }>
           <Today />
         </div>
 
-        <div className={styles.reminders}>
+        <div className={ styles.reminders }>
           <Reminders />
         </div>
 
-        <div className={styles.countdown}>
+        <div className={ styles.countdown }>
           <Countdown
-            startDate={user.startDate}
-            endDate={user.endDate}
-            message={message}
-            setMessage={setMessage}
+            startDate={ user.startDate }
+            endDate={ user.endDate }
+            message={ message }
+            setMessage={ setMessage }
           />
         </div>
 
-        <div className={styles.misc}>
-          <Link to="/emergencynumbers" className={styles.emergency}>
-            <div className={styles.helpIcon}>
-              <img src={emergencyphone} alt="Emergency Numbers" />
+        <div className={ styles.misc }>
+          <Link to="/emergencynumbers" className={ styles.emergency }>
+            <div className={ styles.helpIcon }>
+              <img src={ emergencyphone } alt="Emergency Numbers" />
             </div>
             Emergency Numbers
           </Link>
