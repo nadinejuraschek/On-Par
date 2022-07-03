@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import styles from "./greeting.module.css";
 import blankProfile from "../../images/blankProfile.svg";
 
-const Greeting = ( { message, name } ) => {
+export const Greeting = ( { message, name } ) => {
   const month = new Date().getMonth() + 1;
   const day = new Date().getDate();
   const date = `${ month }/${ day }`;
@@ -38,5 +38,3 @@ const Greeting = ( { message, name } ) => {
     </>
   );
 };
-
-export default Greeting;
