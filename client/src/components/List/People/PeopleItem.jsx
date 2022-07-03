@@ -1,11 +1,11 @@
+import { TimeUtils } from "utils";
 import styles from "./people.module.css";
-import { getAge } from "../../../hooks/useTime";
 import blankProfile from "../../../images/blankProfile.svg";
 
 export const PeopleItem = ( { person } ) => {
   let age;
   if ( person.type === "hostchild" ) {
-    age = getAge( person.birthday );
+    age = TimeUtils.getAge( person.birthday );
   }
 
   return (

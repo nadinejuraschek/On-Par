@@ -1,7 +1,7 @@
 import moment from "moment";
 import { useEffect, useState } from "react";
+import { TimeUtils } from "utils";
 import styles from "./hours.module.css";
-import { minToH } from "../../../hooks/useTime";
 import { Disabled } from "../../Button";
 
 export const WeeklyItem = ( { day, hours } ) => {
@@ -30,7 +30,7 @@ export const WeeklyItem = ( { day, hours } ) => {
             ?
             null
             :
-            minToH( displayHours )
+            TimeUtils.minToH( displayHours )
         }
       </div>
       { startTrackerBtn }
