@@ -1,5 +1,5 @@
 import axios from "axios";
-import moment from "moment";
+import * as dayjs from "dayjs";
 import { useState, useEffect, createContext } from "react";
 export const WorkhourContext = createContext();
 
@@ -21,6 +21,7 @@ export const WorkhourProvider = ( { children } ) => {
     } ).catch( error => console.log( "Error: ", error ) );
   };
 
+  const currentDate = dayjs( new Date() );
   const getTodayHours = () => {
     axios( {
       url: "/api/user/:id/workhours",
@@ -28,7 +29,7 @@ export const WorkhourProvider = ( { children } ) => {
     } ).then( res => {
       const hours = res.data.workhours;
       hours.forEach( hour => {
-        if ( hour.dateFormat === moment( new Date() ).format( "YY-MM-DD" ) ) {
+        if ( hour.dateFormat === currentDate.format( "YY-MM-DD" ) ) {
           setTodayHours( hour.total );
         }
       } );

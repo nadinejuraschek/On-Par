@@ -1,17 +1,17 @@
-import moment from "moment";
+import * as dayjs from "dayjs";
 import styles from "./datepicker.module.css";
 
 export const Month = ( { handleCurrentDate, currentDate } ) => {
   const monthFormat = "MMMM";
-  const displayMonth = moment( currentDate ).format( monthFormat );
+  const displayMonth = dayjs( currentDate ).format( monthFormat );
 
   const prevMonth = () => {
-    const pastDate = moment( currentDate ).subtract( 1, "months" );
+    const pastDate = dayjs( currentDate ).subtract( 1, "months" );
     handleCurrentDate( pastDate );
   };
 
   const nextMonth = () => {
-    const futureDate = moment( currentDate ).add( 1, "months" );
+    const futureDate = dayjs( currentDate ).add( 1, "months" );
     handleCurrentDate( futureDate );
   };
 

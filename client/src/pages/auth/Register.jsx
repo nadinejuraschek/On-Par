@@ -1,6 +1,6 @@
 import axios from "axios";
 import { DatePicker } from "components";
-import moment from "moment";
+import * as dayjs from "dayjs";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./auth.module.css";
@@ -112,9 +112,9 @@ export const Register = () => {
             <input
               type="text"
               name="startDate"
-              placeholder={ moment().format( "DD/MM/YYYYY" ) }
+              placeholder={ dayjs().format( "DD/MM/YYYYY" ) }
               onChange={ handleDateChange }
-              value={ moment( startDate ).format( "DD/MM/YYYY" ) }
+              value={ dayjs( startDate ).format( "DD/MM/YYYY" ) }
             />
           </div>
           { openDatePicker ? (

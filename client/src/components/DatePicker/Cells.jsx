@@ -1,15 +1,15 @@
-import moment from "moment";
+import * as dayjs from "dayjs";
 import { Cell } from "./Cell";
 import styles from "./datepicker.module.css";
 
 export const Cells = ( { currentDate, selectedDate, handleDateClick } ) => {
   const dateFormat = "D";
 
-  const monthStart = moment( currentDate ).startOf( "month" );
-  const monthEnd = moment( currentDate ).endOf( "month" );
+  const monthStart = dayjs( currentDate ).startOf( "month" );
+  const monthEnd = dayjs( currentDate ).endOf( "month" );
 
-  const startDate = moment( monthStart ).startOf( "week" );
-  const endDate = moment( monthEnd ).endOf( "week" );
+  const startDate = dayjs( monthStart ).startOf( "week" );
+  const endDate = dayjs( monthEnd ).endOf( "week" );
 
   const rows = [];
   let days = [];
@@ -18,7 +18,7 @@ export const Cells = ( { currentDate, selectedDate, handleDateClick } ) => {
 
   while ( day <= endDate ) {
     for ( let i = 0; i < 7; i++ ) {
-      formattedDate = moment( day ).format( dateFormat );
+      formattedDate = dayjs( day ).format( dateFormat );
       days.push(
         <Cell
           day={ day }
@@ -29,7 +29,7 @@ export const Cells = ( { currentDate, selectedDate, handleDateClick } ) => {
           handleDateClick={ handleDateClick }
         />
       );
-      day = moment( day ).add( 1, "day" );
+      day = dayjs( day ).add( 1, "day" );
     }
     rows.push(
       <div className={ styles.row } key={ day }>

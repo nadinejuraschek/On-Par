@@ -1,15 +1,16 @@
-import moment from "moment";
+import * as dayjs from "dayjs";
 import { useEffect, useState } from "react";
 import styles from "./countdown.module.css";
 import { ProgressRing } from "../ProgressRing";
 
 export const Countdown = ( { startDate, setMessage } ) => {
-  const currentDate = new Date();
   const [tab, setTab] = useState( "days" );
-  const daysPassed = moment( currentDate ).diff( startDate, "days" );
-  const weeksPassed = moment( currentDate ).diff( startDate, "weeks" );
-  const monthsPassed = moment( currentDate ).diff( startDate, "months" );
-  const dayNum = moment( currentDate ).diff( startDate, "days" );
+
+  const currentDate = dayjs( new Date() );
+  const daysPassed = currentDate.diff( startDate, "days" );
+  const weeksPassed = currentDate.diff( startDate, "weeks" );
+  const monthsPassed = currentDate.diff( startDate, "months" );
+  const dayNum = currentDate.diff( startDate, "days" );
 
   useEffect( () => {
     if ( dayNum === 1 ) {
@@ -34,7 +35,7 @@ export const Countdown = ( { startDate, setMessage } ) => {
       setMessage(
         "Time to think of extension! Add your planned departure date on your profile page."
       );
-    } else if ( dayNum >= 351 ) {
+    } else if ( dayNum >= 351 && dayNum <= 366 ) {
       setMessage( "Make the most of your last few days!" );
     } else {
       setMessage( "What can I help you with?" );

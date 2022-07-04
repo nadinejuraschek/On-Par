@@ -13,7 +13,7 @@ import styles from "./auth.module.css";
 
 export const Profile = () => {
   const [user] = useContext( UserContext );
-  // const daysNum = moment(new Date()).diff(user.startDate, 'days');
+  // const daysNum = dayjs(new Date()).diff(user.startDate, 'days');
 
   const [email, setEmail] = useState( user.email );
   const [birthday, setBirthday] = useState( user.birthday || "" );

@@ -1,17 +1,17 @@
-import moment from "moment";
+import * as dayjs from "dayjs";
 import styles from "./datepicker.module.css";
 
 export const Year = ( { handleCurrentDate, currentDate } ) => {
   const yearFormat = "YYYY";
-  const displayYear = moment( currentDate ).format( yearFormat );
+  const displayYear = dayjs( currentDate ).format( yearFormat );
 
   const prevYear = () => {
-    const pastDate = moment( currentDate ).subtract( 1, "years" );
+    const pastDate = dayjs( currentDate ).subtract( 1, "years" );
     handleCurrentDate( pastDate );
   };
 
   const nextYear = () => {
-    const futureDate = moment( currentDate ).add( 1, "years" );
+    const futureDate = dayjs( currentDate ).add( 1, "years" );
     handleCurrentDate( futureDate );
   };
 

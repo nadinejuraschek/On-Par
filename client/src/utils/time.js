@@ -1,13 +1,14 @@
-import moment from "moment";
+import * as dayjs from "dayjs";
+import "dayjs/locale/en";
 
-moment.updateLocale( "en", {
-  week: {
-    dow : 1, // Monday is the first day of the week.
-  }
-} );
+const dayjsDuration = require( "dayjs/plugin/duration" );
+
+dayjs.locale( "en" );
+dayjs.extend( dayjsDuration );
 
 const getAge = date => {
-  const currentDate = moment( new Date() );
+  const currentDate = dayjs( new Date() );
+
   let age;
 
   if ( currentDate.diff( date, "weeks" ) < 1 ) {
@@ -47,8 +48,7 @@ const minToHandMin = time => {
 };
 
 const duration = ( start, end ) => {
-  const timeDifference = minToH( moment( start ).diff( end, "minutes" ) );
-  return timeDifference;
+  return minToH( start.diff( end, "minutes" ) );
 };
 
 export const TimeUtils = {

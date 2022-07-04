@@ -1,6 +1,6 @@
 // NPM PACKAGES
 const bcrypt = require('bcryptjs'),
-  moment = require('moment'),
+  dayjs = require('dayjs'),
   jwt = require('jsonwebtoken');
 
 // DATABASE
@@ -38,7 +38,7 @@ exports.register = async (req, res) => {
     lastname: req.body.lastname,
     country: req.body.country,
     startDate: req.body.startDate,
-    endDate: moment(req.body.startDate).add(1, 'years'),
+    endDate: dayjs(req.body.startDate).add(1, 'years'),
     email: req.body.email,
     password: password,
   });

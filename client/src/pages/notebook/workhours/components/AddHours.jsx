@@ -1,12 +1,12 @@
 import axios from "axios";
 import { Add } from "components/Button";
 import { Date, Time } from "components/Input";
-import moment from "moment";
+import * as dayjs from "dayjs";
 import { useState } from "react";
 import styles from "../workhours.module.css";
 
 export const AddHours = ( { updateWorkhours } ) => {
-  const today = moment();
+  const today = dayjs();
   const [start, setStart] = useState();
   const [end, setEnd] = useState();
   const [date, setDate] = useState( today );
@@ -17,13 +17,13 @@ export const AddHours = ( { updateWorkhours } ) => {
     const setTime = ( time ) => {
       const hours = time.split( ":" )[0];
       const minutes = time.split( ":" )[1];
-      const newTime = moment( date ).set( "hour", hours ).set( "minute", minutes );
+      const newTime = dayjs( date ).set( "hour", hours ).set( "minute", minutes );
       return newTime;
     };
 
     const startTime = setTime( start );
     const endTime = setTime( end );
-    const duration = moment( endTime ).diff( startTime, "minutes" );
+    const duration = dayjs( endTime ).diff( startTime, "minutes" );
 
     const newHours = {
       date: date,

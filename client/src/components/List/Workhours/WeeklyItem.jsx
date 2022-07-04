@@ -1,4 +1,4 @@
-import moment from "moment";
+import * as dayjs from "dayjs";
 import { useEffect, useState } from "react";
 import { TimeUtils } from "utils";
 import styles from "./hours.module.css";
@@ -7,12 +7,12 @@ import { Disabled } from "../../Button";
 export const WeeklyItem = ( { day, hours } ) => {
   const [ displayHours, setDisplayHours ] = useState( 0 );
 
-  const startTrackerBtn = moment( day ).format( "YY-MM-DD" ) ===
-      moment( new Date() ).format( "YY-MM-DD" ) && ( <Disabled label="Start" width="5rem" /> );
+  const startTrackerBtn = dayjs( day ).format( "YY-MM-DD" ) ===
+      dayjs( new Date() ).format( "YY-MM-DD" ) && ( <Disabled label="Start" width="5rem" /> );
 
   useEffect( () => {
     hours.forEach( item => {
-      if ( moment( item.date ).format( "YY-MM-DD" ) === moment( day ).format( "YY-MM-DD" ) ) {
+      if ( dayjs( item.date ).format( "YY-MM-DD" ) === dayjs( day ).format( "YY-MM-DD" ) ) {
         setDisplayHours( item.total );
       }
     } );
@@ -21,8 +21,8 @@ export const WeeklyItem = ( { day, hours } ) => {
   return (
     <li className={ styles.weeklyItem }>
       <div className={ styles.date }>
-        <div className={ styles.weekday }>{ moment( day ).format( "ddd" ) }</div>
-        <div>{ moment( day ).format( "DD" ) }</div>
+        <div className={ styles.weekday }>{ dayjs( day ).format( "ddd" ) }</div>
+        <div>{ dayjs( day ).format( "DD" ) }</div>
       </div>
       <div className={ `${ styles.date } ${ displayHours > 600 ? styles.red : styles.green }` }>
         {

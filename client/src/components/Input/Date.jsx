@@ -1,4 +1,4 @@
-import moment from "moment";
+import * as dayjs from "dayjs";
 import { useState } from "react";
 import styles from "./input.module.css";
 import { DatePicker } from "../DatePicker";
@@ -18,9 +18,9 @@ export const Date = ( { date, handleChange, icon, label } ) => {
         <input
           type="text"
           name="date"
-          placeholder={ moment().format( "DD/MM/YYYYY" ) }
+          placeholder={ dayjs().format( "DD/MM/YYYYY" ) }
           onChange={ handleChange }
-          value={ moment( date ).format( "DD/MM/YYYY" ) }
+          value={ dayjs( date ).format( "DD/MM/YYYY" ) }
         />
         <i className={ `${ icon } icon` }></i>
       </div>
