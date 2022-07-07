@@ -47,13 +47,18 @@ export const App = () => (
           <Route path="/register" element={ Register } />
 
           { /* Navbar Links */ }
-          <Route path="/profile" element={ <GatedComponent>
-            <UserProvider>
-              <Profile />
-            </UserProvider>
-          </GatedComponent> } />
+          <Route
+            path="/profile"
+            element={
+              <GatedComponent>
+                <UserProvider>
+                  <Profile />
+                </UserProvider>
+              </GatedComponent>
+            }
+          />
 
-          <Route path="/emergencynumbers" element={ EmergencyNumbers } />
+          <Route path="/emergencynumbers" element={ <EmergencyNumbers /> } />
 
           { /* Home */ }
           <Route path="/home" element={
@@ -111,7 +116,7 @@ export const App = () => (
           </GatedComponent> } />
 
           { /* HostFamily Sections */ }
-          <Route path="/hostfamily/calendar" element={            <GatedComponent>
+          <Route path="/hostfamily/calendar" element={<GatedComponent>
             <Dev />
             { /* <CalendarView /> */ }
           </GatedComponent> } />
