@@ -1,5 +1,3 @@
-import React from 'react';
-
 // STYLES
 import styles from './button.module.css';
 

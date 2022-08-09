@@ -1,6 +1,3 @@
-// REACT
-import React from 'react';
-
 const Add = ({ handleClick }) => {
   return (
     <button className='circular ui icon button' onClick={handleClick}>

@@ -1,6 +1,3 @@
-// REACT
-import React from 'react';
-
 // STYLES
 import styles from './resources.module.css';
 

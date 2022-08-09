@@ -1,5 +1,5 @@
 // REACT
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 // NPM PACKAGES
 import moment from 'moment';

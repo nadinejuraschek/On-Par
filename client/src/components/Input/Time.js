@@ -1,11 +1,7 @@
-// REACT
-import React from 'react';
-
 // STYLES
 import styles from './input.module.css';
 
-const Time = ({ start, end, handleStart, handleEnd }) => {
-  return (
+const Time = ({ start, end, handleStart, handleEnd }) => (
     <>
       <div className={styles.stacked}>
         <label className={styles.label} htmlFor="start">
@@ -35,6 +31,5 @@ const Time = ({ start, end, handleStart, handleEnd }) => {
       </div>
     </>
   );
-};
 
 export default Time;

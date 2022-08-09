@@ -1,11 +1,7 @@
-// REACT
-import React from 'react';
-
 // STYLES
 import styles from './input.module.css';
 
-const ProfileInput = ({ name, value, handleChange, edit, icon, label }) => {
-  return (
+const ProfileInput = ({ name, value, handleChange, edit, icon, label }) => (
     <div className={styles.field}>
       <label className={styles.label} htmlFor={name}>
         {
@@ -28,6 +24,5 @@ const ProfileInput = ({ name, value, handleChange, edit, icon, label }) => {
       />
     </div>
   );
-};
 
 export default ProfileInput;

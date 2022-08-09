@@ -1,5 +1,5 @@
 // REACT
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 // STYLES
 import styles from './datepicker.module.css';
