@@ -14,7 +14,7 @@ const DatePicker = ({ startDate, setStartDate }) => {
 
   useEffect(() => {
     setStartDate(selectedDate);
-  }, [selectedDate]);
+  }, [selectedDate, setStartDate]);
 
   return (
     <div className={styles.container}>

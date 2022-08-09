@@ -13,8 +13,8 @@ import DatePicker from 'components/DatePicker';
 import styles from './auth.module.css';
 
 const Register = ({ history }) => {
-  const [role, setRole] = useState('');
-  const [familyID, setFamilyID] = useState('');
+  // const [role, setRole] = useState('');
+  // const [familyID, setFamilyID] = useState('');
   const [firstname, setFirstname] = useState('');
   const [lastname, setLastname] = useState('');
   const [country, setCountry] = useState('');
@@ -349,9 +349,9 @@ const Register = ({ history }) => {
           </div>
           <div className={styles.messageItem}>
             <p>Testing?</p>
-            <a className='ui button' onClick={handleGuest}>
+            <button className='ui button' onClick={handleGuest}>
               Use Guest Account
-            </a>
+            </button>
           </div>
         </div>
       </form>

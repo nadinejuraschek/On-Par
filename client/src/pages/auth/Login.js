@@ -20,7 +20,7 @@ const Login = ({ history }) => {
       data: { email: email, password: password },
     })
       .then(response => {
-        console.log('Data: ' + response.data);
+        // console.log('Data: ' + response.data);
         history.push('/home');
       })
       .catch(error => {
@@ -90,9 +90,9 @@ const Login = ({ history }) => {
             </div>
             <div className={styles.messageItem}>
               <p>Testing?</p>
-              <a className='ui button' onClick={handleGuest}>
+              <button className='ui button' onClick={handleGuest}>
                 Use Guest Account
-              </a>
+              </button>
             </div>
             {/* <p>Or Log In with</p>
                                 <div className="ui small buttons">

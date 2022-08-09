@@ -11,18 +11,18 @@ import styles from './hours.module.css';
 import Disabled from '../../Button/Disabled';
 
 // HOOKS
-import { minToH } from '../../../hooks/useTime';
+import { minToH } from '../../../hooks/useTime';
 
 const WeeklyItem = ({ day, hours }) => {
   const [ displayHours, setDisplayHours ] = useState(0);
 
   useEffect(() => {
-    hours.map(item => {
+    hours.forEach(item => {
       if (moment(item.date).format('YY-MM-DD') === moment(day).format('YY-MM-DD')) {
         setDisplayHours(item.total);
       };
     });
-  }, [hours]);
+  }, [day, hours]);
 
   return (
     <li className={styles.weeklyItem}>

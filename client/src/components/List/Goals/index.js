@@ -17,7 +17,7 @@ import Close from 'components/Button/Close';
 import AddGoal from './AddGoal';
 
 const Goal = ({ data, month }) => {
-  const { getGoals, checkGoal, deleteGoal } = useContext(GoalContext);
+  const { getGoals, checkGoal } = useContext(GoalContext);
   const [type, setType] = useState('');
   const [text, setText] = useState('');
   const education = data.filter(item => item.type === 'education');

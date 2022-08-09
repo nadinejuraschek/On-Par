@@ -1,5 +1,5 @@
 // REACT
-import React, { useState } from 'react';
+import React from 'react';
 
 // STYLES
 import styles from './goals.module.css';

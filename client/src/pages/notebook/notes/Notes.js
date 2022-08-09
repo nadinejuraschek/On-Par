@@ -42,10 +42,10 @@ const Notes = props => {
     setNewNote(newNote => ({ ...newNote, [name]: value }));
   };
 
-  const handleEdit = event => {
+  /* const handleEdit = event => {
     event.preventDefault();
     editNote();
-  };
+  }; */
 
   return (
     <main>

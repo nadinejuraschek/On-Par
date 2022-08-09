@@ -46,7 +46,7 @@ const Countdown = ({ startDate, endDate, setMessage }) => {
     } else {
       setMessage('What can I help you with?');
     }
-  }, [dayNum]);
+  }, [dayNum, setMessage]);
 
   return (
     <div className={styles.container}>
