@@ -8,7 +8,6 @@ const db = require('../models/db');
 
 // READ
 exports.getUser = async (req, res) => {
-  // console.log('User ID: ' + req.user);
   await db.User.findById(req.user)
     .then(user => {
       res.status(200).json(user);
