@@ -46,7 +46,7 @@ export const GoalProvider = props => {
 
   const deleteGoal = goalid => {
     axios.delete('/api/goals/' + goalid).then(res => {
-      console.log(res);
+      // console.log(res);
       getGoals();
     });
   };

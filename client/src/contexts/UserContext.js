@@ -18,7 +18,7 @@ export const UserProvider = ({ children }) => {
       url: '/api/user',
     }).then(res => {
       setUser(res.data);
-    });
+    }).catch(error => console.log('Error: ', error));
   }, []);
 
   return (

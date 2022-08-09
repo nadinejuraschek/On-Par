@@ -24,7 +24,7 @@ export const WorkhourProvider = props => {
     }).then(res => {
       // console.log(res.data.workhours);
       setWorkhours(res.data.workhours);
-    });
+    }).catch(error => console.log('Error: ', error));
   };
 
   const getTodayHours = today => {

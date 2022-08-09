@@ -22,7 +22,7 @@ export const NoteProvider = props => {
     }).then(res => {
       // console.log(res.data.notes);
       setNotes(res.data.notes);
-    });
+    }).catch(error => console.log('Error: ', error));
   };
 
   // const postNote = () => {
@@ -55,7 +55,7 @@ export const NoteProvider = props => {
     axios
       .delete('/api/notes/' + noteid)
       .then(res => {
-        console.log(res);
+        // console.log(res);
         getNotes();
       })
       .catch(error => {

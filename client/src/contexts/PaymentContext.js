@@ -22,7 +22,7 @@ export const PaymentProvider = props => {
     }).then(res => {
       // console.log(res.data.payments);
       setPayments(res.data.payments);
-    });
+    }).catch(error => console.log('Error: ', error));
   };
 
   const deletePayment = paymentid => {
