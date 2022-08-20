@@ -8,9 +8,11 @@ const EmergencyNumbers = () => {
         <div className='costum-container'>
           <table className='ui selectable celled table'>
             <thead>
-              <th></th>
-              <th>Number</th>
-              <th>When to Call</th>
+              <tr>
+                <th></th>
+                <th>Number</th>
+                <th>When to Call</th>
+              </tr>
             </thead>
             <tbody>
               <tr>

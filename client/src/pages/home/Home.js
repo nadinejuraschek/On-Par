@@ -36,7 +36,7 @@ const Home = ({ history }) => {
     });
   };
 
-  const activities = [
+  /* const activities = [
     'Finger paint with shaving cream on colored paper.',
     'Decorate a small clay pot. Plant flower seeds, nurture, and watch them grow!',
     'Cut paper dolls from magazines.',
@@ -55,7 +55,7 @@ const Home = ({ history }) => {
     'Plant your own garden!',
     'Make a book: Have your host children create books about themselves. Include their birth date, handprints, foot prints, drawings, and stories of themselves and their family. These are wondeful keepsakes!',
     "Make placemats by covering your host child's artwork with clear contact paper.",
-  ];
+  ]; */
 
   return (
     <main>

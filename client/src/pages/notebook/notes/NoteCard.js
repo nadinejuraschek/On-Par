@@ -17,11 +17,9 @@ const NoteCard = ({ noteid, date, text, deleteNote, getNotes }) => {
 
   const handleEdit = event => {
     event.preventDefault();
-    // console.log('Updated note to send to DB: ' + updatedNote);
     axios
       .put('/api/notes/' + noteid, updatedNote)
       .then(res => {
-        // console.log('Updated note in DB: ' + res.data);
         getNotes();
         show === true ? setShow(false) : setShow(true);
       })
@@ -34,7 +32,6 @@ const NoteCard = ({ noteid, date, text, deleteNote, getNotes }) => {
     const name = event.target.name;
     const value = event.target.value;
     setUpdatedNote(updatedNote => ({ ...updatedNote, [name]: value }));
-    // console.log('updated Note: ' + updatedNote);
   };
 
   return (

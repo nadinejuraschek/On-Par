@@ -20,20 +20,17 @@ exports.getUser = async (req, res) => {
 exports.getUserById = async (req, res) => {
   await db.User.findById({ _id: req.params.id })
     .then(user => {
-      console.log('User data: ' + user);
       res.status(200).json(user);
     })
     .catch(err => {
-      console.log('User error: ' + err);
     });
 };
 
 exports.register = async (req, res) => {
-  // console.log(req.body);
   req.body.email = req.body.email.toLowerCase();
-  //has the password
+  // has the password
   const password = await bcrypt.hash(req.body.password, 10);
-  //create user in database
+  // create user in database
   const user = await db.User.create({
     role: req.body.role,
     familyID: req.body.familyID,
@@ -51,18 +48,15 @@ exports.register = async (req, res) => {
     httpOnly: true,
     maxAge: 1000 * 60 * 60 * 24 * 365, // 1 year cookie
   });
-  console.log('\n\n\n\n\n\n\n\n\n', user);
   res.json(user);
 };
 
 exports.login = async (req, res) => {
-  // console.log(req.body);
   const user = await db.User.findOne({ email: req.body.email });
   if (!user) {
     res.json({ message: 'No User found.' });
     return;
   }
-  console.log(user);
   const valid = await bcrypt.compare(req.body.password, user.password);
   if (!valid) {
     res.json({ message: 'Entered e-mail and password do not match!' });

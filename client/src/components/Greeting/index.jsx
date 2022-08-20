@@ -1,5 +1,5 @@
 // REACT
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 // STYLES
 import styles from './greeting.module.css';
@@ -30,6 +30,7 @@ const Greeting = ({ message, name }) => {
     } else {
       setGreeting(`Up so late, ${name}?`);
     };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

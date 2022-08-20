@@ -16,11 +16,9 @@ exports.getHours = async (req, res) => {
 
 // CREATE
 exports.create = async (req, res) => {
-  console.log("Req body: ", req.body);
   const { date, dateFormat, hours } = req.body;
 
   const workitem = await db.Workhour.findOne({ dateFormat: dateFormat});
-  console.log(workitem);
 
   if (workitem === null) {
     await db.Workhour.create({
@@ -30,7 +28,6 @@ exports.create = async (req, res) => {
       total: hours[0].duration,
     })
       .then(insertedWorkhour => {
-        // console.log('User is: ' + req.user);
         db.User.findByIdAndUpdate(
           { _id: req.user },
           { $push: { workhours: insertedWorkhour._id } },
@@ -38,8 +35,6 @@ exports.create = async (req, res) => {
             if (error) {
               console.log('Error: ' + error);
             } else {
-              // TEST
-              // console.log('Success: ' + success);
               res.json('Success!');
             }
           }
@@ -50,8 +45,6 @@ exports.create = async (req, res) => {
       });
   } else {
     const newTotal = workitem.total + hours[0].duration;
-    // TEST
-    // console.log(newTotal);
     await db.Workhour.findOneAndUpdate(
       { date: date },
       { total: newTotal, $push: { hours: hours } },

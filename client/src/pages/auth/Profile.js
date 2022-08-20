@@ -3,7 +3,6 @@ import { useContext, useState } from 'react';
 
 // NPM PACKAGES
 import axios from 'axios';
-import moment from 'moment';
 
 // COMPONENTS
 // import Filer from '../../components/Filer';
@@ -22,8 +21,8 @@ import { UserContext } from 'contexts/UserContext';
 import styles from './auth.module.css';
 
 const Profile = () => {
-  const [user, setUser, editUser] = useContext(UserContext);
-  const daysNum = moment(new Date()).diff(user.startDate, 'days');
+  const [user] = useContext(UserContext);
+  // const daysNum = moment(new Date()).diff(user.startDate, 'days');
 
   const [email, setEmail] = useState(user.email);
   const [birthday, setBirthday] = useState(user.birthday || '');
@@ -89,7 +88,6 @@ const Profile = () => {
         snapchat: snapchat
       }
     }).then(updatedUser => {
-      console.log("Updated User in DB: ", updatedUser);
       setEdit(false);
     }).catch(err => {
       console.log("Error: ", err);

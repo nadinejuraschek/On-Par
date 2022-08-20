@@ -1,6 +1,3 @@
-// REACT
-import React from 'react';
-
 // NPM PACKAGES
 import moment from 'moment';
 

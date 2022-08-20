@@ -1,14 +1,10 @@
-// REACT
-import React from 'react';
-
 // STYLES
 import styles from './people.module.css';
 
 // COMPONENTS
 import PeopleItem from './PeopleItem';
 
-const PeopleList = ({ data, label }) => {
-  return (
+const PeopleList = ({ data, label }) => (
     <div className={styles.people}>
       <label className={styles.label}>
         {label}:
@@ -20,6 +16,5 @@ const PeopleList = ({ data, label }) => {
       </ul>
     </div>
   );
-};
 
 export default PeopleList;

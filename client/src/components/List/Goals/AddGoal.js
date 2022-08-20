@@ -1,6 +1,3 @@
-// REACT
-import React, { useState } from 'react';
-
 // STYLES
 import styles from './goals.module.css';
 
@@ -12,8 +9,7 @@ import travel from 'images/travel.svg';
 // COMPONENTS
 import Input from 'components/Input';
 
-const AddGoal = ({ text, type, handleText, handleType }) => {
-  return (
+const AddGoal = ({ text, type, handleText, handleType }) => (
     <div className={styles.addContainer}>
       <div className={styles.typeContainer}>
         <div
@@ -53,6 +49,5 @@ const AddGoal = ({ text, type, handleText, handleType }) => {
       />
     </div>
   );
-};
 
 export default AddGoal;

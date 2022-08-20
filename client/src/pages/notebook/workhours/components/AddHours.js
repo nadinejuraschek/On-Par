@@ -41,9 +41,9 @@ const AddHours = ({updateWorkhours}) => {
         duration: duration,
       }],
     };
-    // console.log(newHours);
+
     axios.post('/api/workhours', newHours).then(workhours => {
-      console.log("Hours have been added successfully!", workhours);
+      // console.log("Hours have been added successfully!", workhours);
       updateWorkhours();
     }).catch(err => {
       console.log("Error: ", err);

@@ -1,5 +1,5 @@
 // REACT
-import React, { useState, createContext, useEffect } from 'react';
+import { useState, createContext, useEffect } from 'react';
 
 // NPM PACKAGES
 import axios from 'axios';
@@ -20,15 +20,12 @@ export const PaymentProvider = props => {
       url: '/api/user/:id/payments',
       method: 'GET',
     }).then(res => {
-      // console.log(res.data.payments);
       setPayments(res.data.payments);
-    });
+    }).catch(error => console.log('Error: ', error));
   };
 
   const deletePayment = paymentid => {
-    // console.log(paymentid);
     axios.delete('/api/payments/' + paymentid).then(res => {
-      // console.log(res);
       getPayments();
     });
   };

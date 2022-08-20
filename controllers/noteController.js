@@ -27,7 +27,6 @@ exports.getSingleNote = async (req, res) => {
 exports.create = async (req, res) => {
   await db.Note.create(req.body)
     .then(insertedNote => {
-      // console.log('User is: ' + req.user);
       db.User.findByIdAndUpdate(
         { _id: req.user },
         { $push: { notes: insertedNote._id } },
@@ -35,8 +34,6 @@ exports.create = async (req, res) => {
           if (error) {
             console.log('Error: ' + error);
           } else {
-            // TEST
-            // console.log('Success: ' + success);
             res.json('Success!');
           }
         }

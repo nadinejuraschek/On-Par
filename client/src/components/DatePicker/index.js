@@ -1,5 +1,5 @@
 // REACT
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 // STYLES
 import styles from './datepicker.module.css';
@@ -14,7 +14,7 @@ const DatePicker = ({ startDate, setStartDate }) => {
 
   useEffect(() => {
     setStartDate(selectedDate);
-  }, [selectedDate]);
+  }, [selectedDate, setStartDate]);
 
   return (
     <div className={styles.container}>

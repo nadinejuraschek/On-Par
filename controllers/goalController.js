@@ -27,7 +27,6 @@ exports.getSingleGoal = async (req, res) => {
 exports.create = async (req, res) => {
   await db.Goal.create(req.body)
     .then(insertedGoal => {
-      // console.log('User is: ' + req.user);
       db.User.findByIdAndUpdate(
         { _id: req.user },
         { $push: { goals: insertedGoal._id } },
@@ -35,8 +34,6 @@ exports.create = async (req, res) => {
           if (error) {
             console.log('Error: ' + error);
           } else {
-            // TEST
-            // console.log('Success: ' + success);
             res.json('Success!');
           }
         }

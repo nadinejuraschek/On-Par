@@ -1,17 +1,17 @@
 // REACT
-import { useState } from 'react';
+// import { useState } from 'react';
 
 // NPM PACKAGES
-import axios from 'axios';
+// import axios from 'axios';
 
 // STYLES
 import styles from './payments.module.css';
 
 const PaymentEntry = ({ paymentid, payment, deletePayment, getPayments }) => {
-  const [show, setShow] = useState(false);
-  const [updatedPayment, setUpdatedPayment] = useState({});
+  // const [show, setShow] = useState(false);
+  // const [updatedPayment, setUpdatedPayment] = useState({});
 
-  const showEdit = () => {
+  /* const showEdit = () => {
     show === true ? setShow(false) : setShow(true);
   };
 
@@ -34,7 +34,7 @@ const PaymentEntry = ({ paymentid, payment, deletePayment, getPayments }) => {
     const name = event.target.name;
     const value = event.target.value;
     setUpdatedPayment(updatedPayment => ({ ...updatedPayment, [name]: value }));
-  };
+  }; */
 
   return (
     <>
@@ -67,7 +67,7 @@ const PaymentEntry = ({ paymentid, payment, deletePayment, getPayments }) => {
             className='no-style-button'
             onClick={() => deletePayment(paymentid)}
           >
-            <i class='trash alternate outline icon'></i>
+            <i className='trash alternate outline icon'></i>
           </button>
         </div>
       </div>

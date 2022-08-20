@@ -1,5 +1,5 @@
 // REACT
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 // STYLES
 import styles from './filer.module.css';
@@ -11,9 +11,8 @@ const Filer = ({ label }) => {
   };
 
   const handleUpload = event => {
-      event.preventDefault();
-
-  }
+    event.preventDefault();
+  };
 
   return (
     <div className={styles.container}>

@@ -1,5 +1,5 @@
 // REACT
-import React, { useContext, useState } from 'react';
+import { useContext, useState } from 'react';
 
 // NPM PACKAGES
 import axios from 'axios';
@@ -17,7 +17,7 @@ import Close from 'components/Button/Close';
 import AddGoal from './AddGoal';
 
 const Goal = ({ data, month }) => {
-  const { getGoals, checkGoal, deleteGoal } = useContext(GoalContext);
+  const { getGoals, checkGoal } = useContext(GoalContext);
   const [type, setType] = useState('');
   const [text, setText] = useState('');
   const education = data.filter(item => item.type === 'education');
@@ -39,7 +39,6 @@ const Goal = ({ data, month }) => {
       },
     })
       .then(response => {
-        // console.log('Goal in DB: ' + response.data);
         setText('');
         setType('');
         setOpenAddGoal(false);

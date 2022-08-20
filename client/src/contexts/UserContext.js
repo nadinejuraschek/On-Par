@@ -1,5 +1,5 @@
 // REACT
-import React, { useState, createContext, useEffect } from 'react';
+import { useState, createContext, useEffect } from 'react';
 
 // NPM PACKAGES
 import axios from 'axios';
@@ -11,7 +11,6 @@ export const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
   const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     axios({
@@ -19,8 +18,7 @@ export const UserProvider = ({ children }) => {
       url: '/api/user',
     }).then(res => {
       setUser(res.data);
-      setLoading(false);
-    });
+    }).catch(error => console.log('Error: ', error));
   }, []);
 
   return (

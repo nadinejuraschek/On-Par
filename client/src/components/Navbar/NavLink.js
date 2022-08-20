@@ -1,5 +1,4 @@
 // REACT
-import React from 'react';
 import { withRouter } from 'react-router';
 
 // STYLES
@@ -7,8 +6,6 @@ import styles from './nav.module.css';
 
 const NavLink = ({ label, iconSrc, link, location } ) => {
   const paths = location.pathname.split('/');
-  // TEST
-  // console.log(paths[1]);
 
   return (
     <a

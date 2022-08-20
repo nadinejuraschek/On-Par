@@ -1,6 +1,3 @@
-// REACT
-import React from 'react';
-
 // STYLES
 import styles from './flag.module.css';
 
@@ -103,7 +100,7 @@ const Flag = ({ country }) => {
   return (
     <div className={styles.field}>
       <label className={styles.label}>
-        <i class={countryFlag}></i>
+        <i className={countryFlag}></i>
         Home Country:
       </label>
       <p>{countryName}</p>

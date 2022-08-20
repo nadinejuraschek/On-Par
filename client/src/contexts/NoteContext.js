@@ -1,5 +1,5 @@
 // REACT
-import React, { useState, createContext, useEffect } from 'react';
+import { useState, createContext, useEffect } from 'react';
 
 // NPM PACKAGES
 import axios from 'axios';
@@ -20,9 +20,8 @@ export const NoteProvider = props => {
       url: '/api/user/:id/notes',
       method: 'GET',
     }).then(res => {
-      // console.log(res.data.notes);
       setNotes(res.data.notes);
-    });
+    }).catch(error => console.log('Error: ', error));
   };
 
   // const postNote = () => {
@@ -51,11 +50,9 @@ export const NoteProvider = props => {
   // };
 
   const deleteNote = noteid => {
-    // console.log(noteid);
     axios
       .delete('/api/notes/' + noteid)
       .then(res => {
-        console.log(res);
         getNotes();
       })
       .catch(error => {

@@ -1,5 +1,5 @@
 // REACT
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 // NPM PACKAGES
 import moment from 'moment';
@@ -46,7 +46,7 @@ const Countdown = ({ startDate, endDate, setMessage }) => {
     } else {
       setMessage('What can I help you with?');
     }
-  }, [dayNum]);
+  }, [dayNum, setMessage]);
 
   return (
     <div className={styles.container}>

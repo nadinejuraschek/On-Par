@@ -1,5 +1,5 @@
 // REACT
-import React, { useState, useEffect, createContext } from 'react';
+import { useState, useEffect, createContext } from 'react';
 
 // NPM PACKAGES
 import axios from 'axios';
@@ -22,9 +22,8 @@ export const WorkhourProvider = props => {
       url: '/api/user/:id/workhours',
       method: 'GET',
     }).then(res => {
-      // console.log(res.data.workhours);
       setWorkhours(res.data.workhours);
-    });
+    }).catch(error => console.log('Error: ', error));
   };
 
   const getTodayHours = today => {
@@ -33,7 +32,7 @@ export const WorkhourProvider = props => {
       method: 'GET',
     }).then(res => {
       const hours = res.data.workhours;
-      hours.map(hour => {
+      hours.forEach(hour => {
         if (hour.dateFormat === moment(new Date()).format('YY-MM-DD')) {
           setTodayHours(hour.total);
         };
@@ -43,7 +42,6 @@ export const WorkhourProvider = props => {
 
   const deleteWorkhours = workhourid => {
     axios.delete('/api/workhours/' + workhourid).then(res => {
-      console.log(res);
       getWorkhours();
     });
   };

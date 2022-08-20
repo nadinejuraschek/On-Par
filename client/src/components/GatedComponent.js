@@ -1,5 +1,5 @@
 // REACT
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 // NPM PACKAGES
 import axios from 'axios';
@@ -21,7 +21,7 @@ const GatedComponent = ({ children }) => {
       setLoading(false);
     })
     .catch(error => {
-    console.log('Error: ' + error.message);
+      console.log('Error: ' + error.message);
     });
   }, []);
 

@@ -1,5 +1,5 @@
 // REACT
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 // NPM PACKAGES
 import moment from 'moment';
@@ -47,11 +47,11 @@ const WeeklyHours = ({ data }) => {
     <div className={styles.weeklyGrid}>
       <div className={styles.chooseDisplay}>
         <div onClick={prev}>
-          <i class="chevron left icon"></i>
+          <i className="chevron left icon"></i>
         </div>
         <h5>{`${moment(startWeek).format("MMM DD")} - ${moment(endWeek).format("MMM DD")}`}</h5>
         <div onClick={next}>
-          <i class="chevron right icon"></i>
+          <i className="chevron right icon"></i>
         </div>
       </div>
       <ul className={styles.weeklyList}>

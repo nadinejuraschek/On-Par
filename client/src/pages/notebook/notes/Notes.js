@@ -19,14 +19,12 @@ const Notes = props => {
 
   const handleSubmit = event => {
     event.preventDefault();
-    // console.log('Note to send to DB: ' + newNote);
     axios({
       url: '/api/notes',
       method: 'POST',
       data: newNote,
     })
       .then(response => {
-        // console.log('Note in DB: ' + response.data);
         // re-render component
         setNewNote({ date: '', text: '' });
         getNotes();
@@ -42,10 +40,10 @@ const Notes = props => {
     setNewNote(newNote => ({ ...newNote, [name]: value }));
   };
 
-  const handleEdit = event => {
+  /* const handleEdit = event => {
     event.preventDefault();
     editNote();
-  };
+  }; */
 
   return (
     <main>
