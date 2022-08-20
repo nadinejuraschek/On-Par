@@ -1,6 +1,6 @@
 // REACT
 import { useState } from 'react';
-import { withRouter } from 'react-router';
+import { useNavigate } from 'react-router-dom';
 
 // NPM PACKAGES
 import axios from 'axios';
@@ -12,7 +12,7 @@ import DatePicker from 'components/DatePicker';
 // STYLES
 import styles from './auth.module.css';
 
-const Register = ({ history }) => {
+export const Register = () => {
   // const [role, setRole] = useState('');
   // const [familyID, setFamilyID] = useState('');
   const [firstname, setFirstname] = useState('');
@@ -23,6 +23,8 @@ const Register = ({ history }) => {
   const [password, setPassword] = useState('');
 
   const [openDatePicker, setOpenDatePicker] = useState(false);
+
+  const navigate = useNavigate();
 
   const handleSubmit = event => {
     event.preventDefault();
@@ -44,7 +46,7 @@ const Register = ({ history }) => {
       data: newUser,
     })
       .then(response => {
-        history.push('/home');
+        navigate('/home');
       })
       .catch(error => {
         console.log('Error: ' + error.response);
@@ -59,7 +61,7 @@ const Register = ({ history }) => {
       data: { email: "tester@mail.com", password: "testing123" },
     })
       .then(response => {
-        history.push('/home');
+        navigate('/home');
       })
       .catch(error => {
         console.log('Error: ' + error.response);
@@ -356,5 +358,3 @@ const Register = ({ history }) => {
     </main>
   );
 };
-
-export default withRouter(Register);

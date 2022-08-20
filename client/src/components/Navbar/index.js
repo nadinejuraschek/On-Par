@@ -13,7 +13,7 @@ import menu from '../../images/menu.svg';
 import close from '../../images/close.svg';
 
 // COMPONENTS
-import NavLink from './NavLink';
+import {NavLink} from './NavLink';
 
 // CONTEXTS
 import { UserProvider } from 'contexts/UserContext';
