@@ -1,7 +1,7 @@
-const Close = ({ handleClick }) => {
+const Close = ( { handleClick } ) => {
   return (
-    <button className='circular ui icon button' onClick={handleClick}>
-        <i className='close icon'></i>
+    <button className="circular ui icon button" onClick={ handleClick }>
+      <i className="close icon"></i>
     </button>
   );
 };

@@ -1,67 +1,62 @@
-// STYLES
-import styles from './resources.module.css';
-
-// ICONS
-import tax from 'images/tax.svg';
-import childcare from 'images/childcare.svg';
-import app from 'images/app.svg';
-import traveling from 'images/traveling.svg';
-import education from 'images/education.svg';
-import firstAid from 'images/first-aid.svg';
-import englishLanguage from 'images/english-language.svg';
-import rule from 'images/rule.svg';
-import extension from 'images/extension.svg';
-import driversLicense from 'images/driver-license.svg';
-
-// COMPONENTS
-import Item from './ResourceItem';
+import app from "images/app.svg";
+import childcare from "images/childcare.svg";
+import driversLicense from "images/driver-license.svg";
+import education from "images/education.svg";
+import englishLanguage from "images/english-language.svg";
+import extension from "images/extension.svg";
+import firstAid from "images/first-aid.svg";
+import rule from "images/rule.svg";
+import tax from "images/tax.svg";
+import traveling from "images/traveling.svg";
+import Item from "./ResourceItem";
+import styles from "./resources.module.css";
 
 const Resources = () => {
   const resources = [
     {
       icon: tax,
-      label: 'Paying Taxes',
-      link: '/resources/tax',
+      label: "Paying Taxes",
+      link: "/resources/tax",
       active: true,
     },
     {
       icon: childcare,
-      label: 'Childcare Activities',
+      label: "Childcare Activities",
       active: false,
     },
     {
       icon: app,
-      label: 'Great Apps to Try',
+      label: "Great Apps to Try",
       active: false,
     },
     {
       icon: traveling,
-      label: 'Traveling',
+      label: "Traveling",
       active: false,
     },
     {
       icon: education,
-      label: 'Education',
+      label: "Education",
       active: false,
     },
     {
       icon: firstAid,
-      label: 'First Aid',
+      label: "First Aid",
       active: false,
     },
     {
       icon: englishLanguage,
-      label: 'Improving your English Skills',
+      label: "Improving your English Skills",
       active: false,
     },
     {
       icon: rule,
-      label: 'Au Pair Rules',
+      label: "Au Pair Rules",
       active: false,
     },
     {
       icon: extension,
-      label: 'Extending',
+      label: "Extending",
       active: false,
     },
     {
@@ -72,9 +67,9 @@ const Resources = () => {
   ];
 
   return (
-    <div className={styles.list}>
+    <div className={ styles.list }>
       {
-        resources.map((item, index) => <Item key={index} icon={item.icon} label={item.label} link={item.link} active={item.active} />)
+        resources.map( ( item, index ) => <Item key={ index } icon={ item.icon } label={ item.label } link={ item.link } active={ item.active } /> )
       }
     </div>
   );

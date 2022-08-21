@@ -29,6 +29,15 @@
   justify-content: space-between;
 }
 
+.cell, .icon {
+  background-color: transparent;
+  border: none;
+}
+
+.icon i {
+  color: #fff;
+}
+
 .month .icon {
   cursor: pointer;
   height: 1.5em;

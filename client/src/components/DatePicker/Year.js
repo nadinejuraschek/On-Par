@@ -1,37 +1,31 @@
-// NPM PACKAGES
-import moment from 'moment';
+import moment from "moment";
+import styles from "./datepicker.module.css";
 
-// STYLES
-import styles from './datepicker.module.css';
-
-const Year = ({ handleCurrentDate, currentDate }) => {
-  const yearFormat = 'YYYY';
-  const displayYear = moment(currentDate).format(yearFormat);
-
-  // TEST
-  // console.log(displayYear);
+const Year = ( { handleCurrentDate, currentDate } ) => {
+  const yearFormat = "YYYY";
+  const displayYear = moment( currentDate ).format( yearFormat );
 
   const prevYear = () => {
-    const pastDate = moment(currentDate).subtract(1, 'years');
-    handleCurrentDate(pastDate);
+    const pastDate = moment( currentDate ).subtract( 1, "years" );
+    handleCurrentDate( pastDate );
   };
 
   const nextYear = () => {
-    const futureDate = moment(currentDate).add(1, 'years');
-    handleCurrentDate(futureDate);
+    const futureDate = moment( currentDate ).add( 1, "years" );
+    handleCurrentDate( futureDate );
   };
 
   return (
-    <div className={styles.year}>
-      <div className={styles.icon} onClick={prevYear}>
-        <i className='chevron left icon'></i>
+    <div className={ styles.year }>
+      <button className={ styles.icon } onClick={ prevYear }>
+        <i className="chevron left icon"></i>
+      </button>
+      <div className={ styles.monthName }>
+        <span>{ displayYear }</span>
       </div>
-      <div className={styles.monthName}>
-        <span>{displayYear}</span>
-      </div>
-      <div className={styles.icon} onClick={nextYear}>
-        <i className='chevron right icon'></i>
-      </div>
+      <button className={ styles.icon } onClick={ nextYear }>
+        <i className="chevron right icon"></i>
+      </button>
     </div>
   );
 };

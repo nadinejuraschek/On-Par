@@ -1,3 +1,8 @@
+.arrow {
+  background-color: transparent;
+  border: none;
+}
+
 .weeklyGrid {
   display: grid;
   grid-template-columns: 1fr;

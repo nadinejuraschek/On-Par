@@ -1,32 +1,27 @@
-// STYLES
-import styles from './people.module.css';
+import styles from "./people.module.css";
+import { getAge } from "../../../hooks/useTime";
+import blankProfile from "../../../images/blankProfile.svg";
 
-// HOOKS
-import { getAge } from '../../../hooks/useTime';
-
-// IMAGES
-import blankProfile from '../../../images/blankProfile.svg';
-
-const PeopleItem = ({ person }) => {
+const PeopleItem = ( { person } ) => {
   let age;
-  if (person.type === 'hostchild') {
-    age = getAge(person.birthday);
-  };
+  if ( person.type === "hostchild" ) {
+    age = getAge( person.birthday );
+  }
 
   return (
-    <li className={styles.item}>
+    <li className={ styles.item }>
       <img
-        className={styles.img}
-        alt={person.name}
-        src={person.profileImg === '' ? blankProfile : person.profileImg}
+        className={ styles.img }
+        alt={ person.name }
+        src={ person.profileImg === "" ? blankProfile : person.profileImg }
       />
-      <div className={styles.details}>
-        <div className={styles.name}>{person.name}</div>
-        {person.type === 'hostchild'
+      <div className={ styles.details }>
+        <div className={ styles.name }>{ person.name }</div>
+        { person.type === "hostchild"
           ? age
-          : person.type === 'hostparent'
-          ? ''
-          : person.country}
+          : person.type === "hostparent"
+            ? ""
+            : person.country }
       </div>
     </li>
   );

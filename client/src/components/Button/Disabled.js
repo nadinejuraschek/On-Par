@@ -1,10 +1,9 @@
-// STYLES
-import styles from './button.module.css';
+import styles from "./button.module.css";
 
-const Disabled = ({ label, width }) => {
+const Disabled = ( { label, width } ) => {
   return (
-    <button className={styles.disabled} style={{width: width}}>
-      {label}
+    <button className={ styles.disabled } style={ { width: width } }>
+      { label }
     </button>
   );
 };
