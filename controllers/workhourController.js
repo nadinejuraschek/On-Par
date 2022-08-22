@@ -1,6 +1,6 @@
 // DATABASE
 const db = require('../models/db'),
-  moment = require('moment');
+  dayjs = require('dayjs');
 
 // READ
 exports.getHours = async (req, res) => {
@@ -23,7 +23,7 @@ exports.create = async (req, res) => {
   if (workitem === null) {
     await db.Workhour.create({
       date: date,
-      dateFormat: moment(date).format('YY-MM-DD'),
+      dateFormat: dayjs(date).format('YY-MM-DD'),
       hours: hours,
       total: hours[0].duration,
     })

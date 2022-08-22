@@ -1,4 +1,4 @@
-import moment from "moment";
+import * as dayjs from "dayjs";
 import styles from "./datepicker.module.css";
 
 export const Cell = ( {
@@ -8,15 +8,15 @@ export const Cell = ( {
   monthStart,
   handleDateClick,
 } ) => {
-  const clickedDate = moment( day ).format( "DD/MM/YY" );
-  const checkDate = moment( selectedDate ).format( "DD/MM/YY" );
+  const clickedDate = dayjs( day ).format( "DD/MM/YY" );
+  const checkDate = dayjs( selectedDate ).format( "DD/MM/YY" );
 
   return (
     <button
       className={ `${ styles.column } ${ styles.cell } ${
-        !moment( day ).isSame( monthStart, "month" )
+        !dayjs( day ).isSame( monthStart, "month" )
           ? `${ styles.disabled }`
-          : moment( day ).isSame( day, "month" )
+          : dayjs( day ).isSame( day, "month" )
             ? `${ styles.enabled }`
             : ""
       } ${ clickedDate === checkDate ? `${ styles.selected }` : "" }` }
