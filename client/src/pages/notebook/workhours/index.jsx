@@ -1,6 +1,5 @@
-import { WeeklyHours as WeeklyList } from "components/List";
-import { Timer } from "components/Timer";
-import { WorkhourContext } from "contexts/WorkhourContext";
+import { Timer, WeeklyHours as WeeklyList } from "components";
+import { WorkhourContext } from "contexts";
 import { useContext, useState } from "react";
 import { AddHours } from "./components/AddHours";
 import styles from "./workhours.module.css";

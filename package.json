@@ -16,10 +16,10 @@
     "type": "git",
     "url": "git+https://github.com/nadinejuraschek/APIA_Project.git"
   },
-  "author": "Nadine Juraschek",
+  "author": "Nadine Pesso",
   "license": "ISC",
   "engines": {
-    "node": "16.16.0"
+    "node": "16.17.0"
   },
   "bugs": {
     "url": "https://github.com/nadinejuraschek/APIA_Project/issues"
@@ -37,7 +37,7 @@
     "express-mongo-sanitize": "^2.2.0",
     "jsonwebtoken": "^8.5.1",
     "method-override": "^3.0.0",
-    "mongoose": "^6.5.2",
+    "mongoose": "^6.5.3",
     "morgan": "^1.10.0",
     "multer": "^1.4.4",
     "multer-gridfs-storage": "^4.2.0"

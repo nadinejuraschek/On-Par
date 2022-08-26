@@ -1,5 +1,5 @@
-import { Goals as GoalsList } from "components/List";
-import { GoalContext } from "contexts/GoalContext";
+import { Goals as GoalsList } from "components";
+import { GoalContext } from "contexts";
 import { useContext } from "react";
 import styles from "./goals.module.css";
 

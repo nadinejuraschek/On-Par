@@ -6,7 +6,8 @@ import {
 import { Primary } from "components/Button";
 import { ProfileInput } from "components/Input";
 import { PeopleList } from "components/List";
-import { UserContext } from "contexts/UserContext";
+import { UserContext } from "contexts";
+import { mockHostChildren, mockHostParents } from "data";
 import blankPic from "images/blankProfile.svg";
 import { useContext, useState } from "react";
 import styles from "./auth.module.css";
@@ -29,40 +30,6 @@ export const Profile = () => {
   const toggleEdit = () => {
     edit ? setEdit( false ) : setEdit( true );
   };
-
-  const hostparents = [
-    {
-      type: "hostparent",
-      name: "Mom",
-      profileImg: "",
-    },
-    {
-      type: "hostparent",
-      name: "Dad",
-      profileImg: "",
-    },
-  ];
-
-  const hostchildren = [
-    {
-      type: "hostchild",
-      name: "Child",
-      birthday: "2013-01-30T22:00:00.000Z",
-      profileImg: "",
-    },
-    {
-      type: "hostchild",
-      name: "Child",
-      birthday: "2017-06-03T22:00:00.000Z",
-      profileImg: "",
-    },
-    {
-      type: "hostchild",
-      name: "Child",
-      birthday: "2020-04-09T22:00:00.000Z",
-      profileImg: "",
-    },
-  ];
 
   const handleEdit = event => {
     event.preventDefault();
@@ -190,9 +157,9 @@ export const Profile = () => {
                 name="familyID"
                 value={ familyID }
               />
-              <PeopleList data={ hostparents } label="Host Parents" />
+              <PeopleList data={ mockHostParents } label="Host Parents" />
             </div>
-            <PeopleList data={ hostchildren } label="Host Children" />
+            <PeopleList data={ mockHostChildren } label="Host Children" />
           </div>
         </div>
       </div>
