@@ -1,5 +1,5 @@
 .container {
-  background-color: #ffffff;
+  background-color: var(--white);
   border-radius: 20px;
   box-shadow: 0 1px 6px #46637310;
   padding: 2rem;
@@ -12,7 +12,7 @@
 }
 
 .container:hover {
-  border: 1px solid #86abfa;
+  border: 1px solid var(--primary_500);
   box-shadow: 0 3px 6px #46637340;
 }
 
@@ -28,7 +28,7 @@
 }
 
 .title {
-  color: #313131;
+  color: var(--grey_800);
   font-size: 1.5rem;
   font-weight: 700;
 }

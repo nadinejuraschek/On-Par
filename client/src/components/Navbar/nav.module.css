@@ -1,5 +1,5 @@
 .navMobile {
-  background-color: #86abfa;
+  background-color: var(--primary_500);
   box-shadow: 2px 0 4px #46637320;
   height: 70px;
   padding: 0 24px;
@@ -20,12 +20,13 @@
   height: 40px;
 }
 
-.logo:hover, .menuIcon:hover {
+.logo:hover,
+.menuIcon:hover {
   cursor: pointer;
 }
 
 .logo p {
-  color: #ffffff;
+  color: var(--white);
   font-family: 'grand_hotelregular';
   font-size: 2rem;
   line-height: 40px;
@@ -44,13 +45,13 @@
 }
 
 .footer {
-  color: #ffffff;
+  color: var(--white);
   font-size: 12px;
   text-align: center;
 }
 
 .sideMobile {
-  background-color: #86abfa;
+  background-color: var(--primary_500);
   padding: 24px;
 
   height: calc(100vh - 70px);
@@ -84,14 +85,15 @@
   display: none;
 }
 
-.icon img, .navLogo img {
+.icon img,
+.navLogo img {
   object-fit: contain;
   height: 100%;
   width: 100%;
 }
 
 .navLink p {
-  color: #ffffff;
+  color: var(--white);
   font-size: 30px;
   margin-left: 1rem;
   text-transform: uppercase;
@@ -107,7 +109,12 @@
   }
 
   .navDesktop {
-    background-color: #86abfa;
+    background-color: var(--primary_300);
+    background-image: linear-gradient(
+      to right,
+      var(--primary_600),
+      var(--primary_500)
+    );
     border-radius: 0 0 40px 0;
     padding: 24px;
 

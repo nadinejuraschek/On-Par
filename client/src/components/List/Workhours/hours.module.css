@@ -53,7 +53,7 @@
 }
 
 .red {
-  color: #e63946;
+  color: var(--error_500);
   font-weight: bold;
 }
 

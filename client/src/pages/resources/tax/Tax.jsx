@@ -1,5 +1,5 @@
-import { Fragment } from "react";
 import { taxInfo } from "data";
+import { Fragment } from "react";
 import { createMarkup } from "utils";
 import styles from "../resources.module.css";
 

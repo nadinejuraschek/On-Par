@@ -12,7 +12,7 @@
 .addContainer,
 .timer,
 .reminder {
-  background-color: #ffffff;
+  background-color: var(--white);
   border-radius: 20px;
   box-shadow: 0 1px 6px #46637310;
   padding: 2rem;
@@ -37,7 +37,8 @@
   color: #e6394680;
 }
 
-.tabs, .timer {
+.tabs,
+.timer {
   display: none;
 }
 

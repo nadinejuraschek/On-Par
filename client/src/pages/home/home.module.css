@@ -13,7 +13,7 @@
 .reminders,
 .hours,
 .misc {
-  background-color: #ffffff;
+  background-color: var(--white);
   border-radius: 20px;
   box-shadow: 0 1px 6px #46637310;
   padding: 2rem;
@@ -48,7 +48,8 @@
   grid-row: 4 / 5;
 }
 
-.today, .reminders {
+.today,
+.reminders {
   display: none;
 }
 
@@ -79,7 +80,7 @@
 
 .buttons button:hover,
 .buttons a:hover {
-  border: 1px solid #86abfa;
+  border: 1px solid var(--primary_500);
   box-shadow: 0 3px 6px #46637340;
 }
 
@@ -136,7 +137,8 @@
     padding-left: 74px;
   }
 
-  .buttons button, .buttons a {
+  .buttons button,
+  .buttons a {
     padding: 0.5rem 1rem;
     margin-bottom: 1rem;
     min-width: 8rem;
@@ -147,7 +149,8 @@
     grid-row: 1 / 2;
   }
 
-  .today, .reminders {
+  .today,
+  .reminders {
     display: block;
   }
 

@@ -89,8 +89,6 @@ module.exports = {
       },
     ],
     "template-curly-spacing": ["warn", "always"],
-    "space-in-parens": ["warn", "always"],
-    "space-before-function-paren": ["warn", "never"],
     "no-multiple-empty-lines": ["warn", { "max": 2 } ],
     "implicit-arrow-linebreak": ["warn", "beside"],
     "comma-style": ["warn", "last"],

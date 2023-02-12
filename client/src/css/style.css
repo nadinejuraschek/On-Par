@@ -15,13 +15,88 @@
 
  background-image: linear-gradient(to bottom, #b8edff, #9fa4ff)
 ****************************************************************************/
+:root {
+  --white: #ffffff;
+
+  --grey_25: #fcfcfd;
+  --grey_50: #f9fafb;
+  --grey_100: #f2f4f7;
+  --grey_200: #eaecf0;
+  --grey_300: #d0d5dd;
+  --grey_400: #98a2b3;
+  --grey_500: #667085;
+  --grey_600: #475467;
+  --grey_700: #344054;
+  --grey_800: #1d2939;
+  --grey_900: #101828;
+
+  --primary_25: #fafcf5;
+  --primary_50: #eef2db;
+  --primary_100: #e1e8c2;
+  --primary_200: #d4dea9;
+  --primary_300: #c7d390;
+  --primary_400: #b9c879;
+  --primary_500: #abbc61;
+  --primary_600: #87954b;
+  --primary_700: #646e36;
+  --primary_800: #3f4621;
+  --primary_900: #1a1d0e;
+
+  --secondary_25: #f2fafb;
+  --secondary_50: #d0eef2;
+  --secondary_100: #aee1e7;
+  --secondary_200: #8dd4dc;
+  --secondary_300: #6dc6d0;
+  --secondary_400: #4eb7c3;
+  --secondary_500: #2fa8b6;
+  --secondary_600: #238691;
+  --secondary_700: #18636b;
+  --secondary_800: #0f3f45;
+  --secondary_900: #061a1d;
+
+  --tertiary_25: #fcf6f6;
+  --tertiary_50: #f5dfdd;
+  --tertiary_100: #edc8c5;
+  --tertiary_200: #e4b1ae;
+  --tertiary_300: #db9b97;
+  --tertiary_400: #d28581;
+  --tertiary_500: #c8706b;
+  --tertiary_600: #9f5753;
+  --tertiary_700: #753f3c;
+  --tertiary_800: #4a2725;
+  --tertiary_900: #1f100f;
+
+  --error_25: #fee5ee;
+  --error_50: #feccdc;
+  --error_100: #fd98b9;
+  --error_200: #fc6c9b;
+  --error_300: #fb4882;
+  --error_400: #fa236a;
+  --error_500: #f30553;
+  --error_600: #cb0445;
+  --error_700: #a20337;
+  --error_800: #7a0329;
+  --error_900: #51021c;
+
+  --warning_25: #fff9ec;
+  --warning_50: #fff3d9;
+  --warning_100: #fee8b3;
+  --warning_200: #fedc8c;
+  --warning_300: #fdd166;
+  --warning_400: #fdcb53;
+  --warning_500: #fdc540;
+  --warning_600: #dc6803;
+  --warning_700: #b54708;
+  --warning_800: #93370d;
+  --warning_900: #7a2e0e;
+}
 /****************************************************************************
  PAGE LAYOUT
 ****************************************************************************/
 body {
   font-family: 'Lato', 'Helvetica', 'Helvetica Neue', sans-serif;
-  background-color: #f6f6f6;
-  color: #313131;
+  background-color: var(--grey_25);
+  color: var(--grey_800);
 }
 button {
   font-family: 'Lato', 'Helvetica', 'Helvetica Neue', sans-serif;
@@ -30,7 +105,7 @@ nav {
   height: 4rem;
 }
 nav.ui.menu {
-  background-color: #ffffff;
+  background-color: var(--white);
 }
 nav a.header.item {
   font-family: 'grand_hotelregular';
@@ -114,22 +189,12 @@ img {
   margin: 1rem;
 }
 .ui .button {
-  background-color: #86abfa;
-  background-image: linear-gradient(
-    to right bottom,
-    rgb(196, 215, 255),
-    #86abfa
-  );
-  color: #ffffff;
+  background-color: var(--primary_500);
+  color: var(--white);
 }
 .ui .button:hover {
-  background-color: #ff9897;
-  background-image: linear-gradient(
-    to right bottom,
-    rgb(253, 184, 183),
-    #ff9897
-  );
-  color: #ffffff;
+  background-color: var(--primary_600);
+  color: var(--white);
 }
 .ui .card.feature-card,
 .ui .card.note-card,
@@ -141,19 +206,19 @@ img {
   padding: 1rem;
 }
 .ui .card.feature-card {
-  background-color: #86abfa;
+  background-color: var(--primary_500);
   background-image: linear-gradient(
     to right bottom,
-    rgb(196, 215, 255),
-    #86abfa
+    var(--primary_200),
+    var(--primary_500)
   );
 }
 .ui .card.feature-card:hover {
-  background-color: #ff9897;
+  background-color: var(--secondary_500);
   background-image: linear-gradient(
     to right bottom,
-    rgb(253, 184, 183),
-    #ff9897
+    var(--secondary_200),
+    var(--secondary_500)
   );
 }
 .ui .card.note-card,
@@ -161,7 +226,7 @@ img {
   padding: 2rem;
 }
 .ui .header.feature-header {
-  color: #ffffff;
+  color: var(--white);
 }
 .feature-icon {
   margin-top: 1rem;
@@ -173,28 +238,18 @@ img {
 .no-style-button {
   background: transparent;
   border: none;
-  color: #86abfa;
+  color: var(--primary_500);
 }
 .no-style-button:hover {
-  color: #ff9897;
+  color: var(--secondary_500);
 }
 .ui.button.activity-button {
-  background-color: #ff9897;
-  background-image: linear-gradient(
-    to right bottom,
-    rgb(253, 184, 183),
-    #ff9897
-  );
-  color: #ffffff;
+  background-color: var(--secondary_500);
+  color: var(--white);
 }
 .ui.button.activity-button:hover {
-  background-color: #86abfa;
-  background-image: linear-gradient(
-    to right bottom,
-    rgb(196, 215, 255),
-    #86abfa
-  );
-  color: #ffffff;
+  background-color: var(--primary_600);
+  color: var(--white);
 }
 .card-button {
   display: inline-block;
@@ -203,10 +258,10 @@ img {
   display: none;
 }
 .light {
-  color: #ff9897;
+  color: var(--secondary_500);
 }
 .dark {
-  color: #86abfa;
+  color: var(--primary_500);
 }
 .light-bg {
   background-color: #ff989725;
@@ -215,22 +270,22 @@ img {
   margin: 1rem 0 1rem 2rem;
 }
 .footer-link {
-  color: #313131;
+  color: var(--grey_800);
 }
 .footer-link:hover {
-  color: #ff9897;
+  color: var(--secondary_500);
 }
 .ui .message {
-  background-color: #ffffff;
+  background-color: var(--white);
 }
 .nav-logo {
   height: 3rem;
 }
 .start-button {
-  background-color: #ffffff;
+  background-color: var(--white);
   border: none;
   border-radius: 10px;
-  color: #313131;
+  color: var(--grey_800);
   font-size: 1.25rem;
   padding: 1rem;
   -webkit-box-shadow: 0px 4px 8px 0px #46637350;
@@ -239,22 +294,22 @@ img {
   margin: 2rem;
 }
 .start-button:hover {
-  background-color: #ff9897;
+  background-color: var(--secondary_500);
   background-image: linear-gradient(
     to right bottom,
-    rgb(253, 184, 183),
-    #ff9897
+    var(--secondary_200),
+    var(--secondary_500)
   );
-  color: #ffffff;
+  color: var(--white);
 }
 .tagline {
-  color: #ffffff;
+  color: var(--white);
 }
 .more-padding {
   margin-top: 4rem;
 }
 .negativeText {
-  color: #9f3a38;
+  color: var(--error_700);
 }
 .positiveText {
   color: #2c662d;
@@ -269,8 +324,8 @@ img {
 .ui.vertical.masthead.segment {
   background-image: linear-gradient(
     to right bottom,
-    rgb(196, 215, 255, 0.9),
-    #86abfa
+    var(--primary_200),
+    var(--primary_500)
   );
   background-size: cover;
   background-position: top center;
@@ -288,13 +343,13 @@ img {
   padding: 2rem;
 }
 .ui .card.landing-card:hover {
-  background-color: #ff9897;
+  background-color: var(--secondary_500);
   background-image: linear-gradient(
     to right bottom,
-    rgb(253, 184, 183),
-    #ff9897
+    var(--secondary_200),
+    var(--secondary_500)
   );
-  color: #313131;
+  color: var(--grey_800);
 }
 .icon-padding {
   margin-bottom: 2rem;
@@ -332,19 +387,19 @@ img {
 .react-calendar__tile--active {
   background-color: linear-gradient(
     to right bottom,
-    rgb(253, 184, 183),
-    #ff9897
+    var(--secondary_200),
+    var(--secondary_500)
   );
-  color: white;
+  color: var(--white);
 }
 
 .react-calendar__tile--active:enabled:hover,
 .react-calendar__tile--active:enabled:focus {
-  background-color: #86abfa;
+  background-color: var(--primary_500);
   background-color: linear-gradient(
     to right bottom,
-    rgb(253, 184, 183),
-    #ff9897
+    var(--secondary_200),
+    var(--secondary_500)
   );
 }
 
@@ -369,13 +424,17 @@ img {
   }
 
   .layout {
-    background-image: linear-gradient(to bottom, #86abfa 0%, #f6f6f6 100%);
+    background-image: linear-gradient(
+      to bottom,
+      var(--primary_500) 0%,
+      var(--grey_25) 100%
+    );
     display: grid;
     grid-template-columns: 150px auto;
   }
 
   .page-container {
-    background-color: #f6f6f6;
+    background-color: var(--grey_25);
     border-radius: 40px 0 0 0;
     grid-column: 2 / 3;
     grid-row: 1 / -1;

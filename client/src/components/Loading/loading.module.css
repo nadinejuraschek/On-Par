@@ -18,7 +18,7 @@
   position: absolute;
   width: 6px;
   height: 6px;
-  background: #86abfa;
+  background: var(--primary_500);
   border-radius: 50%;
   animation: spinner 1.2s linear infinite;
 }

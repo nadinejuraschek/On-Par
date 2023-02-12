@@ -31,19 +31,26 @@
   display: none;
 }
 
-.input, .profileInput, .dateInput {
-  background-color: #f6f6f6;
-  border: 1px solid rgba(34,36,38,.15);
-  border-radius: .28571429rem;
+.input,
+.profileInput,
+.dateInput {
+  background-color: var(--white);
+  border: 1px solid rgba(34, 36, 38, 0.15);
+  border-radius: 0.28571429rem;
   box-shadow: 0 0 0 0 transparent inset;
   font-size: 1em;
   line-height: 1.21428571em;
-  padding: .67857143em 1em;
-  transition: color .1s ease, border-color .1s ease;
+  padding: 0.67857143em 1em;
+  transition: color 0.1s ease, border-color 0.1s ease;
 }
 
-.iconInput:active, .iconInput:focus, .input:active, .input:focus, .profileInput:active, .profileInput:focus {
-  border: 1px solid #86abfa;
+.iconInput:active,
+.iconInput:focus,
+.input:active,
+.input:focus,
+.profileInput:active,
+.profileInput:focus {
+  border: 1px solid var(--primary_500);
 }
 
 .profileInput {
@@ -64,7 +71,6 @@
   border: none;
   width: 100%;
 }
-
 
 /********************************************
  GENERAL
