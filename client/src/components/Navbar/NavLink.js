@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import styles from "./nav.module.css";
 
@@ -6,14 +7,14 @@ export const NavLink = ( { label, iconSrc, link } ) => {
   const paths = location.pathname.split( "/" );
 
   return (
-    <a
+    <Link
       className={ styles.navLink }
-      href={ link }
+      to={ link }
     >
       <div className={ styles.icon }>
         <img alt={ label } src={ iconSrc } />
       </div>
       <p className={ link === `/${ paths[1] }` ? "" : styles.hide }>{ label }</p>
-    </a>
+    </Link>
   );
 };

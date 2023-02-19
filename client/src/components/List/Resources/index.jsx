@@ -67,10 +67,10 @@ export const Resources = () => {
   ];
 
   return (
-    <div className={ styles.list }>
+    <ul className={ styles.list }>
       {
         resources.map( ( item, index ) => <Item key={ index } icon={ item.icon } label={ item.label } link={ item.link } active={ item.active } /> )
       }
-    </div>
+    </ul>
   );
 };

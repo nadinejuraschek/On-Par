@@ -1,14 +1,14 @@
 .list {
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: auto;
+  grid-template-rows: repeat(auto, 1fr);
   grid-gap: 1rem;
 }
 
 .item {
   background-color: var(--white);
-  border-radius: 20px;
-  box-shadow: 0 1px 6px #46637310;
+  border-radius: 1.6rem;
+  box-shadow: var--shadow_xs;
   padding: 2rem;
   height: 6rem;
   width: 100%;
@@ -23,14 +23,8 @@
 }
 
 .icon {
-  height: 3rem;
-  width: 3rem;
-  margin-right: 1.5rem;
-}
-
-.label {
-  color: var(--grey_800);
-  font-size: 1.2rem;
+  height: 2rem;
+  width: 2rem;
 }
 
 .inactive {

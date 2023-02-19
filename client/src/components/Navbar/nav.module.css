@@ -17,7 +17,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 40px;
 }
 
 .logo:hover,
@@ -25,11 +24,9 @@
   cursor: pointer;
 }
 
-.logo p {
+.logoText {
   color: var(--primary_700);
   font-family: 'grand_hotelregular';
-  font-size: 2rem;
-  line-height: 40px;
 }
 
 .navDesktop {
@@ -59,7 +56,7 @@
   z-index: 5;
 
   position: absolute;
-  top: 70px;
+  top: 7rem;
   left: 0;
   right: 0;
   bottom: 0;
@@ -70,8 +67,8 @@
 }
 
 .navLogo {
-  height: 40px;
-  width: 30px;
+  height: 4rem;
+  width: 3rem;
   margin-right: 0.5rem;
 }
 
@@ -94,7 +91,7 @@
 
 .navLink p {
   color: var(--primary_700);
-  font-size: 30px;
+  font-size: 3rem;
   margin-left: 1rem;
   text-transform: uppercase;
 }
@@ -110,8 +107,8 @@
 
   .navDesktop {
     background-color: var(--primary_50);
-    border-radius: 0 0 40px 0;
-    padding: 24px;
+    border-radius: 0 0 4rem 0;
+    padding: 2.4rem;
 
     grid-column: 1 / 2;
 
@@ -121,7 +118,7 @@
     row-gap: 1rem;
 
     height: 100vh;
-    width: 150px;
+    width: 15rem;
 
     position: relative;
   }
@@ -146,8 +143,8 @@
 
   .icon {
     display: block;
-    height: 45px;
-    width: 45px;
+    height: 4.5rem;
+    width: 4.5rem;
   }
 
   .hide {
@@ -155,7 +152,7 @@
   }
 
   .navLink p {
-    font-size: 15px;
+    font-size: 1.5rem;
     font-weight: bold;
     margin-top: 0.5rem;
     margin-left: 0;
@@ -163,8 +160,5 @@
 }
 
 @media only screen and (min-width: 1200px) {
-  .navLogo {
-    height: 70px;
-    width: 70px;
-  }
+  
 }

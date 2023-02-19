@@ -1,16 +1,17 @@
-import { UserProvider } from "contexts/UserContext";
-import { useState } from "react";
 // import logo from '../../images/logo.svg';
+import { Text } from "components";
+import { UserProvider } from "contexts/UserContext";
+import notebook from "images/book.svg";
+import chat from "images/chat.svg";
+import close from "images/close.svg";
+import cluster from "images/cluster.svg";
+import dashboard from "images/dashboard.svg";
+import hostfamily from "images/family.svg";
+import menu from "images/menu.svg";
+import resources from "images/mom.svg";
+import { useState } from "react";
 import styles from "./nav.module.css";
 import { NavLink } from "./NavLink";
-import notebook from "../../images/book.svg";
-import chat from "../../images/chat.svg";
-import close from "../../images/close.svg";
-import cluster from "../../images/cluster.svg";
-import dashboard from "../../images/dashboard.svg";
-import hostfamily from "../../images/family.svg";
-import menu from "../../images/menu.svg";
-import resources from "../../images/mom.svg";
 
 export const Navbar = () => {
   const [openSidenav, setOpenSidenav] = useState( false );
@@ -63,7 +64,7 @@ export const Navbar = () => {
         />
 
         <div className={ styles.footer }>
-          <p>© { new Date().getFullYear() } Nadine Juraschek</p>
+          <Text as="p" size="xs">© { new Date().getFullYear() } Nadine Pesso</Text>
         </div>
       </UserProvider>
     </div>
@@ -73,7 +74,7 @@ export const Navbar = () => {
     <>
       <nav className={ styles.navMobile }>
         <a className={ styles.logo } href="/home">
-          <p>On Par</p>
+          <Text as="h1" className={ styles.logoText } color="--primary_700" size="xl">On Par</Text>
         </a>
         { openSidenav ? renderMenuButton( "close" ) : renderMenuButton( "menu" ) }
       </nav>
@@ -84,7 +85,7 @@ export const Navbar = () => {
           { /* <div className={styles.navLogo}>
           <img alt='App Logo' src={logo} />
         </div> */ }
-          <p>On Par</p>
+          <Text as="h1" className={ styles.logoText } color="--primary_700" size="xl">On Par</Text>
         </a>
 
         <UserProvider>
