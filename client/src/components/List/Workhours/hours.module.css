@@ -53,12 +53,16 @@
 }
 
 .red {
-  color: var(--error_500);
+  color: var(--error_600);
   font-weight: bold;
 }
 
 .green {
   color: #2c662d;
+}
+
+.startTrackerBtn {
+  width: 5rem;
 }
 
 @media only screen and (min-width: 900px) {

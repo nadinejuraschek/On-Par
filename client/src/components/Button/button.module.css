@@ -29,6 +29,13 @@
   justify-content: flex-start;
 }
 
+.btn.round {
+  border-radius: 50%;
+
+  min-width: 4rem;
+  width: 4rem;
+}
+
 /********************************************
  PRIMARY
 ********************************************/
@@ -88,8 +95,8 @@
 }
 
 .tertiary:hover {
-  background-color: var(--grey_50);
-  border-color: var(--grey_50);
+  background-color: var(--grey_100);
+  border-color: var(--grey_100);
 }
 
 .tertiary.disabled:hover {
@@ -100,7 +107,7 @@
 
 .tertiary:active,
 .tertiary:focus {
-  background-color: var(--grey_50);
+  background-color: var(--grey_100);
   box-shadow: var(--shadow_xs_focused);
 }
 

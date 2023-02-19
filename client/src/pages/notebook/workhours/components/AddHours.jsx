@@ -1,5 +1,5 @@
 import axios from "axios";
-import { Add } from "components";
+import { AddButton, Text } from "components";
 import { Date, Time } from "components/Input";
 import * as dayjs from "dayjs";
 
@@ -46,7 +46,7 @@ export const AddHours = ( { updateWorkhours } ) => {
 
   return (
     <>
-      <h3>Add Hours</h3>
+      <Text as="h3" size="lg" weight="bold">Add Hours</Text>
       <div className={ styles.addForm }>
         <Date
           date={ date }
@@ -64,7 +64,7 @@ export const AddHours = ( { updateWorkhours } ) => {
         />
       </div>
       <div className={ styles.btnWrapper }>
-        <Add handleClick={ handleSubmit } />
+        <AddButton handleClick={ handleSubmit } />
       </div>
     </>
   );

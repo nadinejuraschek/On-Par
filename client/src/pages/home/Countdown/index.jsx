@@ -72,7 +72,7 @@ export const Countdown = ( { startDate, setMessage } ) => {
           label={ progressLabel() }
         />
       </div>
-      <Tabs activeTab={ tab } fullWidth handleClick={ setTab } tabs={ tabs } variant="secondary" />
+      <Tabs activeTab={ tab } fullWidth handleClick={ setTab } spaceBetween tabs={ tabs } variant="secondary" />
     </div>
   );
 };

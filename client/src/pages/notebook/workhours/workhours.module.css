@@ -8,13 +8,18 @@
   width: 100%;
 }
 
+.tabsWrapper {
+  grid-column: 1 / 6;
+  grid-row: 2;
+}
+
 .tracker,
 .addContainer,
 .timer,
 .reminder {
   background-color: var(--white);
   border-radius: 20px;
-  box-shadow: 0 1px 6px #46637310;
+  filter: var(--shadow_sm);
   padding: 2rem;
 
   height: 100%;
@@ -34,10 +39,9 @@
 }
 
 .reminder strong {
-  color: #e6394680;
+  color: var(--error_600);
 }
 
-.tabs,
 .timer {
   display: none;
 }
@@ -53,26 +57,6 @@
   .header {
     grid-column: 1 / 6;
     grid-row: 1 / 2;
-  }
-
-  .tabs {
-    grid-column: 1 / 6;
-    grid-row: 2 / 3;
-
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-  }
-
-  .tab {
-  }
-
-  .tab:first-child {
-    margin-right: 2rem;
-  }
-
-  .tab:hover {
-    cursor: pointer;
   }
 
   .tracker {
@@ -95,38 +79,6 @@
   .reminder {
     grid-column: 1 / 6;
     grid-row: 8 / 8;
-
-    line-height: 1.5;
-  }
-
-  .tabs {
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    margin-top: 1rem;
-  }
-
-  .tab {
-    border: none;
-    background-color: transparent;
-    font-size: 1rem;
-    font-weight: bold;
-    padding: 1.25rem 2rem;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    height: 2rem;
-  }
-
-  .tab:hover {
-    cursor: pointer;
-  }
-
-  .active {
-    background-color: rgb(253, 184, 183);
-    border-radius: 4px;
   }
 
   .addForm {

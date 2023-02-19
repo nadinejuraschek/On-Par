@@ -1,9 +1,9 @@
 import styles from "./button.module.css";
 
-export const Button = ({ align = "alignCenter", children, disabled, label, link, handleClick, variant = "secondary" }) => {
+export const Button = ({ align = "alignCenter", children, className = "", disabled, label, link, handleClick, round = false, variant = "secondary" }) => {
   if (link) {
     <a
-      className={ `${ styles.btn } ${ styles[variant] } ${ disabled && styles.disabled } ${ align && styles[align] }` }
+      className={ `${ className } ${ styles.btn } ${ styles[variant] } ${ disabled && styles.disabled } ${ align && styles[align] } ${ round && styles.round }` }
       href={ link }
       aria-label={ label }
     >
@@ -13,7 +13,7 @@ export const Button = ({ align = "alignCenter", children, disabled, label, link,
 
   return (
     <button
-      className={ `${ styles.btn } ${ styles[variant] } ${ disabled && styles.disabled } ${ align && styles[align] }` } onClick={ handleClick }>
+      className={ `${ className } ${ styles.btn } ${ styles[variant] } ${ disabled && styles.disabled } ${ align && styles[align] } ${ round && styles.round }` } onClick={ handleClick }>
       { children }
     </button>
   );

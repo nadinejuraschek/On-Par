@@ -15,7 +15,7 @@
 .misc {
   background-color: var(--white);
   border-radius: 20px;
-  box-shadow: 0 1px 6px #46637310;
+  filter: var(--shadow_sm);
   padding: 2rem;
 
   height: 100%;

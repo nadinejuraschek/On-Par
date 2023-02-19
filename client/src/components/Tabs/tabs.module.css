@@ -10,7 +10,9 @@
 
 .tabs.fullWidth {
   width: 100%;
+}
 
+.tabs.spaceBetween {
   justify-content: space-between;
   gap: unset;
 }
@@ -35,6 +37,10 @@
 
 .tab.disabled {
   cursor: not-allowed;
+}
+
+.tab.primary {
+  border-bottom: 2px solid transparent;
 }
 
 .tab.primary.active {

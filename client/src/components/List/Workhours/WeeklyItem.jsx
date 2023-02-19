@@ -37,7 +37,7 @@ export const WeeklyItem = ({ day, hours }) => {
       >
         { displayHours === 0 ? null : TimeUtils.minToH(displayHours) }
       </div>
-      { renderStartTrackerButton && <Button disabled label="Start" width="5rem" variant="primary" /> }
+      { renderStartTrackerButton && <Button className={ styles.startTrackerBtn } disabled variant="primary">Start</Button> }
     </li>
   );
 };

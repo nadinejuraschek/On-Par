@@ -1,16 +1,28 @@
 import { Button, Text } from "components";
 
-import emergencyphone from "images/emergency-call.svg";
+import { quicklinks } from "data";
+import { useMemo } from "react";
 import styles from "./quicklinks.module.css";
 
 export const Quicklinks = () => {
+  const renderLinks = useMemo(() => {
+    return quicklinks.map( item => {
+      const { active, icon, label, link } = item;
+      return (
+        <Button align="alignStart" disabled={ !active } key={ `quicklink_${ label }` } link={ link } variant="tertiary">
+          <div className={ styles.icon }>
+            <img src={ icon } alt={ label } />
+          </div>
+          { label }
+        </Button>
+      );
+    });
+  }, []);
+
   return (
     <div className={ styles.container }>
       <Text as="h3" size="lg" weight="bold">Quicklinks</Text>
-      <Button align="alignStart" link="/emergencynumbers" variant="tertiary"><div className={ styles.helpIcon }>
-        <img src={ emergencyphone } alt="Emergency Numbers" />
-      </div>
-        Emergency Numbers</Button>
+      { renderLinks }
     </div>
   )
 };

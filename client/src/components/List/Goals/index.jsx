@@ -1,5 +1,5 @@
 import axios from "axios";
-import { Add, Close } from "components";
+import { AddButton, CloseButton, Text } from "components";
 import { GoalContext } from "contexts";
 import { useContext, useState } from "react";
 
@@ -43,18 +43,15 @@ export const Goals = ( { data, month } ) => {
   return (
     <div className={ styles.container }>
       <div className={ styles.header }>
-        <div className={ styles.month }>
-          <p className={ styles.month__lg }>{ month }</p>
-          <p className={ styles.month__sm }>months</p>
-        </div>
+        <Text as="p" size="lg" weight="bold">{ month } months</Text>
         <div className={ styles.btnContainer }>
           { openAddGoal ? (
             <>
-              <Close handleClick={ () => setOpenAddGoal( false ) } />
-              <Add handleClick={ handleCreate } />
+              <CloseButton handleClick={ () => setOpenAddGoal( false ) } />
+              <AddButton handleClick={ handleCreate } />
             </>
           ) : (
-            <Add handleClick={ setOpenAddGoal } />
+            <AddButton handleClick={ setOpenAddGoal } />
           ) }
         </div>
       </div>
