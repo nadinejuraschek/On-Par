@@ -1,4 +1,4 @@
-import { Primary } from "components/Button";
+import { Button } from "components/Button";
 import styles from "./workhour.module.css";
 
 export const WorkhourView = () => (
@@ -9,6 +9,6 @@ export const WorkhourView = () => (
       </div> */ }
     <h3 className={ styles.developmentNotice }>This app is currently in development.</h3>
     <h2 className={ styles.featureNotice }>To enjoy the first working features, go to </h2>
-    <Primary link="/notebook" label="Notebook" />
+    <Button link="/notebook" label="Notebook" variant="primary" />
   </div>
 );

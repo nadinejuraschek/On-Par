@@ -1,5 +1,5 @@
 .navMobile {
-  background-color: var(--primary_500);
+  background-color: var(--primary_50);
   box-shadow: 2px 0 4px #46637320;
   height: 70px;
   padding: 0 24px;
@@ -51,7 +51,7 @@
 }
 
 .sideMobile {
-  background-color: var(--primary_500);
+  background-color: var(--primary_50);
   padding: 24px;
 
   height: calc(100vh - 70px);
@@ -109,12 +109,7 @@
   }
 
   .navDesktop {
-    background-color: var(--primary_300);
-    background-image: linear-gradient(
-      to right,
-      var(--primary_600),
-      var(--primary_500)
-    );
+    background-color: var(--primary_50);
     border-radius: 0 0 40px 0;
     padding: 24px;
 
@@ -127,6 +122,20 @@
 
     height: 100vh;
     width: 150px;
+
+    position: relative;
+  }
+
+  .navDesktop::after {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    height: 50vh;
+    width: 100%;
+
+    background-image: linear-gradient(to bottom, #b9c87940, transparent);
+    content: '';
   }
 
   .navLink {

@@ -1,64 +1,81 @@
-.primary,
-.secondary,
-.disabled {
-  border-radius: 4px;
-  box-shadow: 0px 1px 6px #46637340;
-  color: var(--grey_800);
-  font-size: 1rem;
-  font-weight: 700;
-  padding: 0.5rem 1rem;
+.btn {
+  border-radius: 0.8rem;
+  font-size: 1.4rem;
+  font-weight: 500;
+  padding: 0 1.6rem;
+  text-decoration: none;
+
+  height: 4rem;
+  min-width: 8rem;
 
   display: flex;
   align-items: center;
   justify-content: center;
-  text-decoration: none;
-}
-
-.disabled {
-  background-color: rgba(0, 0, 0, 0.1);
-  color: rgba(0, 0, 0, 0.25);
-  border: none;
+  gap: 0.8rem;
 }
 
 .primary,
 .secondary {
-  min-width: 8rem;
+  box-shadow: var(--shadow_xs);
 }
 
 /********************************************
  PRIMARY
 ********************************************/
 .primary {
-  background-color: var(--primary_500);
-  border: 1px solid var(--primary_500);
-}
-
-.primary:hover {
-  box-shadow: 0 3px 6px #46637340;
+  background-color: var(--primary_600);
+  border: 1px solid var(--primary_600);
   color: var(--white);
 }
 
-.primary:active,
+.primary:hover {
+  background-color: var(--primary_700);
+  color: var(--white);
+}
+
 .primary:focus {
-  border: 1px solid var(--primary_600);
+  box-shadow: var(--shadow_xs_focused);
+}
+
+.primary.disabled {
+  background-color: var(--primary_300);
 }
 
 /********************************************
  SECONDARY
 ********************************************/
 .secondary {
-  background-color: var(--secondary_500);
-  border: 1px solid var(--secondary_500);
+  background-color: var(--white);
+  border: 1px solid var(--grey_300);
+  color: var(--grey_700);
 }
 
 .secondary:hover {
-  border: 1px solid var(--secondary_600);
-  box-shadow: 0 3px 6px #46637340;
+  background-color: var(--grey_50);
 }
 
-.secondary:active,
 .secondary:focus {
-  border: 1px solid var(--secondary_600);
-  box-shadow: 0 3px 6px #46637340;
-  color: var(--secondary_600);
+  box-shadow: var(--shadow_xs_focused);
+}
+
+.secondary.disabled {
+  color: var(--grey_300);
+}
+
+/********************************************
+ TERTIARY
+********************************************/
+.tertiary {
+  background: transparent;
+  border: 1px solid transparent;
+  color: var(--grey_700);
+}
+
+.tertiary:hover {
+  background-color: var(--grey_50);
+}
+
+.tertiary:hover {
+  background-color: var(--grey_50);
+  box-shadow: var(--shadow_xs_focused);
 }

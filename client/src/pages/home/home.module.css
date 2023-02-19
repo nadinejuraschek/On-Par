@@ -59,31 +59,6 @@
   justify-content: space-evenly;
 }
 
-.buttons button,
-.buttons a {
-  background-color: #f6f6f6;
-  border: 1px solid #f6f6f6;
-  border-radius: 4px;
-  box-shadow: 0px 1px 6px #46637340;
-  color: #313131;
-  font-size: 1rem;
-  font-weight: 700;
-
-  height: 36px;
-  width: 6rem;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-decoration: none;
-}
-
-.buttons button:hover,
-.buttons a:hover {
-  border: 1px solid var(--primary_500);
-  box-shadow: 0 3px 6px #46637340;
-}
-
 .features {
   display: grid;
   grid-template-columns: 1fr;

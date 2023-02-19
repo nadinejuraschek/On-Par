@@ -6,7 +6,8 @@ import {
   TodayView as Today,
   WorkhourView as Workhours,
 } from "components";
-import { Secondary as SecondaryBtn } from "components/Button";
+
+import { Button } from "components/Button";
 import { UserContext } from "contexts";
 import emergencyphone from "images/emergency-call.svg";
 import { useContext, useState } from "react";
@@ -34,8 +35,8 @@ export const Home = () => {
         <div className={ styles.header }>
           <Greeting message={ message } name={ user.firstname } />
           <div className={ styles.buttons }>
-            <SecondaryBtn link="/profile" label="Profile" />
-            <SecondaryBtn label="Log Out" handleClick={ handleLogout } />
+            <Button link="/profile" label="Profile" variant="secondary" />
+            <Button label="Log Out" handleClick={ handleLogout } variant="secondary" />
           </div>
         </div>
 
