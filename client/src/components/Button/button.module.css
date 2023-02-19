@@ -72,6 +72,7 @@
 
 .secondary:hover {
   background-color: var(--grey_50);
+  color: var(--grey_700);
 }
 
 .secondary:active,
@@ -97,6 +98,7 @@
 .tertiary:hover {
   background-color: var(--grey_100);
   border-color: var(--grey_100);
+  color: var(--grey_700);
 }
 
 .tertiary.disabled:hover {

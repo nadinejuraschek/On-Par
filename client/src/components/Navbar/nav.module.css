@@ -47,25 +47,6 @@
   text-align: center;
 }
 
-.sideMobile {
-  background-color: var(--primary_50);
-  padding: 24px;
-
-  height: calc(100vh - 70px);
-  width: 100vw;
-  z-index: 5;
-
-  position: absolute;
-  top: 7rem;
-  left: 0;
-  right: 0;
-  bottom: 0;
-
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: repeat(6, 1fr) min-content;
-}
-
 .navLogo {
   height: 4rem;
   width: 3rem;
@@ -159,6 +140,4 @@
   }
 }
 
-@media only screen and (min-width: 1200px) {
-  
-}
+@media only screen and (min-width: 1200px) {}

@@ -1,7 +1,5 @@
+import { LayoutWithNavbar } from "layout";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-
-import { GatedComponent } from "./auth/GatedComponent";
-import { Navbar } from "./components/Navbar";
 import {
   GoalProvider,
   NoteProvider,
@@ -27,165 +25,159 @@ import {
   Workhours,
 } from "./pages";
 
+
 export const App = () => (
   <BrowserRouter>
-    <div className="layout">
-      <Navbar />
-      <div className="page-container">
-        <Routes>
-          { /* Landing Page */ }
-          <Route path="/" element={ <Landing /> } />
+    <Routes>
+      { /* Landing Page */ }
+      <Route path="/" element={ <Landing /> } />
+      { /* Authentication */ }
+      <Route path="/login" element={ <Login /> } />
+      <Route path="/register" element={ <Register /> } />
 
-          { /* Authentication */ }
-          <Route path="/login" element={ <Login /> } />
-          <Route path="/register" element={ <Register /> } />
+      { /* Navbar Links */ }
+      <Route
+        path="/profile"
+        element={
+          <LayoutWithNavbar>
+            <UserProvider>
+              <Profile />
+            </UserProvider>
+          </LayoutWithNavbar>
+        }
+      />
 
-          { /* Navbar Links */ }
-          <Route
-            path="/profile"
-            element={
-              <GatedComponent>
-                <UserProvider>
-                  <Profile />
-                </UserProvider>
-              </GatedComponent>
-            }
-          />
+      <Route path="/emergencynumbers" element={ <EmergencyNumbers /> } />
 
-          <Route path="/emergencynumbers" element={ <EmergencyNumbers /> } />
+      { /* Home */ }
+      <Route
+        path="/home"
+        element={
+          <LayoutWithNavbar>
+            <UserProvider>
+              <Home />
+            </UserProvider>
+          </LayoutWithNavbar>
+        }
+      />
 
-          { /* Home */ }
-          <Route
-            path="/home"
-            element={
-              <GatedComponent>
-                <UserProvider>
-                  <Home />
-                </UserProvider>
-              </GatedComponent>
-            }
-          />
+      { /* Home Sections */ }
+      <Route
+        path="/messages"
+        element={
+          <LayoutWithNavbar>
+            <Dev />
+          </LayoutWithNavbar>
+        }
+      />
+      <Route
+        path="/notebook"
+        element={
+          <LayoutWithNavbar>
+            <Notebook />
+          </LayoutWithNavbar>
+        }
+      />
+      <Route
+        path="/hostfamily"
+        element={
+          <LayoutWithNavbar>
+            <Dev />
+            { /* <HostFamily /> */ }
+          </LayoutWithNavbar>
+        }
+      />
+      <Route
+        path="/cluster"
+        element={
+          <LayoutWithNavbar>
+            <Dev />
+            { /* <Cluster /> */ }
+          </LayoutWithNavbar>
+        }
+      />
+      <Route
+        path="/resources"
+        element={
+          <LayoutWithNavbar>
+            <Resources />
+          </LayoutWithNavbar>
+        }
+      />
 
-          { /* Home Sections */ }
-          <Route
-            path="/messages"
-            element={
-              <GatedComponent>
-                <Dev />
-              </GatedComponent>
-            }
-          />
-          <Route
-            path="/notebook"
-            element={
-              <GatedComponent>
-                <Notebook />
-              </GatedComponent>
-            }
-          />
-          <Route
-            path="/hostfamily"
-            element={
-              <GatedComponent>
-                <Dev />
-                { /* <HostFamily /> */ }
-              </GatedComponent>
-            }
-          />
-          <Route
-            path="/cluster"
-            element={
-              <GatedComponent>
-                <Dev />
-                { /* <Cluster /> */ }
-              </GatedComponent>
-            }
-          />
-          <Route
-            path="/resources"
-            element={
-              <GatedComponent>
-                <Resources />
-              </GatedComponent>
-            }
-          />
+      { /* Notebook Sections */ }
+      <Route
+        path="/notebook/workhours"
+        element={
+          <LayoutWithNavbar>
+            <WorkhourProvider>
+              <Workhours />
+            </WorkhourProvider>
+          </LayoutWithNavbar>
+        }
+      />
+      <Route
+        path="/notebook/payments"
+        element={
+          <LayoutWithNavbar>
+            <PaymentProvider>
+              <Payments />
+            </PaymentProvider>
+          </LayoutWithNavbar>
+        }
+      />
+      <Route
+        path="/notebook/goals"
+        element={
+          <LayoutWithNavbar>
+            <GoalProvider>
+              <Goals />
+            </GoalProvider>
+          </LayoutWithNavbar>
+        }
+      />
+      <Route
+        path="/notebook/notes"
+        element={
+          <LayoutWithNavbar>
+            <NoteProvider>
+              <Notes />
+            </NoteProvider>
+          </LayoutWithNavbar>
+        }
+      />
 
-          { /* Notebook Sections */ }
-          <Route
-            path="/notebook/workhours"
-            element={
-              <GatedComponent>
-                <WorkhourProvider>
-                  <Workhours />
-                </WorkhourProvider>
-              </GatedComponent>
-            }
-          />
-          <Route
-            path="/notebook/payments"
-            element={
-              <GatedComponent>
-                <PaymentProvider>
-                  <Payments />
-                </PaymentProvider>
-              </GatedComponent>
-            }
-          />
-          <Route
-            path="/notebook/goals"
-            element={
-              <GatedComponent>
-                <GoalProvider>
-                  <Goals />
-                </GoalProvider>
-              </GatedComponent>
-            }
-          />
-          <Route
-            path="/notebook/notes"
-            element={
-              <GatedComponent>
-                <NoteProvider>
-                  <Notes />
-                </NoteProvider>
-              </GatedComponent>
-            }
-          />
+      { /* Resources Sections */ }
+      <Route
+        path="/resources/tax"
+        element={
+          <LayoutWithNavbar>
+            <Tax />
+          </LayoutWithNavbar>
+        }
+      />
 
-          { /* Resources Sections */ }
-          <Route
-            path="/resources/tax"
-            element={
-              <GatedComponent>
-                <Tax />
-              </GatedComponent>
-            }
-          />
+      { /* HostFamily Sections */ }
+      <Route
+        path="/hostfamily/calendar"
+        element={
+          <LayoutWithNavbar>
+            <Dev />
+            { /* <CalendarView /> */ }
+          </LayoutWithNavbar>
+        }
+      />
 
-          { /* HostFamily Sections */ }
-          <Route
-            path="/hostfamily/calendar"
-            element={
-              <GatedComponent>
-                <Dev />
-                { /* <CalendarView /> */ }
-              </GatedComponent>
-            }
-          />
+      { /* Dev Sandbox */ }
+      <Route
+        path="/sandbox"
+        element={
+          <Sandbox />
+        }
+      />
 
-          { /* Dev Sandbox */ }
-          <Route
-            path="/sandbox"
-            element={
-              <Sandbox />
-            }
-          />
-
-          { /* Error Page */ }
-          { /* <Route path='*' component={ WrongTurn } /> */ }
-        </Routes>
-      </div>
-      { /* <Footer /> */ }
-    </div>
+      { /* Error Page */ }
+      { /* <Route path='*' component={ WrongTurn } /> */ }
+    </Routes>
   </BrowserRouter>
 );

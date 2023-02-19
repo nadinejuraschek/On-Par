@@ -57,7 +57,7 @@
     gap: 1.6rem;
   }
 
-  .buttons button {
+  .buttons button, .buttons a {
     width: 50%;
   }
 
