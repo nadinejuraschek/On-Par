@@ -1,10 +1,10 @@
 import { Text } from "components";
 import comingsoon from "images/comingsoon.svg";
-import styles from "./reminder.module.css";
+import styles from "./today.module.css";
 
-export const ReminderView = () => (
+export const DailyPlan = () => (
   <div className={ styles.container }>
-    <Text as="h3" size="lg" weight="bold">Reminders</Text>
+    <Text as="h3" size="lg" weight="bold">Today&apos;s Plan</Text>
     <div className={ styles.soon }>
       <div className={ styles.clock }>
         <img src={ comingsoon } alt="Coming Soon" />

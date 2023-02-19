@@ -5,7 +5,7 @@
 
 .profile {
   border-radius: 50%;
-  box-shadow: 0 1px 6px #46637310;
+  box-shadow: var(--shadow_xs);
   margin-right: 2rem;
   object-fit: cover;
 

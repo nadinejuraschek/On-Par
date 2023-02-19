@@ -1,8 +1,8 @@
-import { Text } from "components";
-import { useEffect, useState } from "react";
 
+import { Text } from "components";
+import blankProfile from "images/blankProfile.svg";
+import { useEffect, useState } from "react";
 import styles from "./greeting.module.css";
-import blankProfile from "../../images/blankProfile.svg";
 
 export const Greeting = ( { message, name } ) => {
   const month = new Date().getMonth() + 1;

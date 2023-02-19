@@ -1,18 +1,16 @@
 import axios from "axios";
-import {
-  Button,
-  Countdown,
-  Greeting,
-  ReminderView as Reminders,
-  TodayView as Today,
-  WorkhourView as Workhours,
-} from "components";
+import { Button } from "components";
 import { UserContext } from "contexts";
 import { useContext, useState } from "react";
 
 import { useNavigate } from "react-router-dom";
+import { Countdown } from "./Countdown";
+import { DailyPlan } from "./DailyPlan";
+import { Greeting } from "./Greeting";
 import styles from "./home.module.css";
 import { Quicklinks } from "./Quicklinks";
+import { Reminders } from "./Reminders";
+import { WorkhourSummary } from "./WorkhourSummary";
 
 export const Home = () => {
   const [user] = useContext( UserContext );
@@ -41,11 +39,11 @@ export const Home = () => {
         </div>
 
         <div className={ styles.hours }>
-          <Workhours />
+          <WorkhourSummary />
         </div>
 
         <div className={ styles.today }>
-          <Today />
+          <DailyPlan />
         </div>
 
         <div className={ styles.reminders }>
