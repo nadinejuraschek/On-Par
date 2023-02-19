@@ -1,56 +1,66 @@
-/********************************************
- PROFILE
-********************************************/
 .field {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-
-  height: 40px;
-}
-
-.stacked {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  justify-content: center;
+  gap: 0.6rem;
 
-  margin: 1rem 0;
-}
-
-.label {
-  font-weight: 700;
-  min-width: 95px;
-}
-
-.field p {
-  margin-left: 0.5rem;
-  margin-bottom: 0;
+  min-width: 20rem;
 }
 
 .hide {
   display: none;
 }
 
+.input {
+  width: 100%;
+}
+
 .input,
 .profileInput,
 .dateInput {
   background-color: var(--white);
-  border: 1px solid rgba(34, 36, 38, 0.15);
-  border-radius: 0.28571429rem;
-  box-shadow: 0 0 0 0 transparent inset;
-  font-size: 1em;
-  line-height: 1.21428571em;
-  padding: 0.67857143em 1em;
+  border: 1px solid var(--grey_300);
+  border-radius: 0.8rem;
+  box-shadow: var(--shadow_xs);
+  font-size: 1.4rem;
+  line-height: 2rem;
+  padding: 0 1.2rem;
   transition: color 0.1s ease, border-color 0.1s ease;
+
+  height: 4rem;
+}
+
+.input::placeholder,
+.profileInput::placeholder,
+.dateInput::placeholder {
+  color: var(--grey_500);
 }
 
 .iconInput:active,
 .iconInput:focus,
+.iconInput:focus-visible,
 .input:active,
 .input:focus,
+.input:focus-visible,
 .profileInput:active,
-.profileInput:focus {
-  border: 1px solid var(--primary_500);
+.profileInput:focus,
+.profileInput:focus-visible {
+  box-shadow: var(--shadow_xs_focused);
+  outline: transparent;
+}
+
+.disabled {
+  background-color: var(--grey_50);
+  color: var(--grey_500);
+}
+
+.error {
+  border-color: var(--error_300);
+}
+
+.error:focus {
+  box-shadow: var(--shadow_xs_focused_error);
 }
 
 .profileInput {
@@ -69,14 +79,6 @@
 .dateInput input {
   background-color: transparent;
   border: none;
-  width: 100%;
-}
-
-/********************************************
- GENERAL
-********************************************/
-.input {
-  margin: 0.5rem 0;
   width: 100%;
 }
 

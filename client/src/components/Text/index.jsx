@@ -1,7 +1,7 @@
 import styles from "./text.module.css";
 
-export const Text = ({ as, children, color, size, weight = "regular" }) => {
-  const className = `${ styles.text } ${ styles.size } ${ styles[weight] }`;
+export const Text = ({ as, children, color = "--grey_700", htmlFor = "", size = "xs", weight = "regular" }) => {
+  const className = `${ styles.text } ${ styles[size] } ${ styles[weight] }`;
   const style = { color: `var(${ color })` };
 
   switch (as) {
@@ -19,6 +19,8 @@ export const Text = ({ as, children, color, size, weight = "regular" }) => {
     return <h5 className={ className } style={ style }>{ children }</h5>;
   case "h6":
     return <h6 className={ className } style={ style }>{ children }</h6>;
+  case "label":
+    return <label className={ className } htmlFor={ htmlFor } style={ style }>{ children }</label>;
   case "span":
     return <span className={ className } style={ style }>{ children }</span>
   default:

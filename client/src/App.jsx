@@ -1,14 +1,14 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 
-import { GatedComponent } from './auth/GatedComponent';
-import { Navbar } from './components/Navbar';
+import { GatedComponent } from "./auth/GatedComponent";
+import { Navbar } from "./components/Navbar";
 import {
   GoalProvider,
   NoteProvider,
   PaymentProvider,
   UserProvider,
   WorkhourProvider,
-} from './contexts';
+} from "./contexts";
 import {
   Dev,
   EmergencyNumbers,
@@ -22,26 +22,27 @@ import {
   Profile,
   Register,
   Resources,
+  Sandbox,
   Tax,
   Workhours,
-} from './pages';
+} from "./pages";
 
 export const App = () => (
   <BrowserRouter>
-    <div className='layout'>
+    <div className="layout">
       <Navbar />
-      <div className='page-container'>
+      <div className="page-container">
         <Routes>
-          {/* Landing Page */}
-          <Route path='/' element={<Landing />} />
+          { /* Landing Page */ }
+          <Route path="/" element={ <Landing /> } />
 
-          {/* Authentication */}
-          <Route path='/login' element={<Login />} />
-          <Route path='/register' element={<Register />} />
+          { /* Authentication */ }
+          <Route path="/login" element={ <Login /> } />
+          <Route path="/register" element={ <Register /> } />
 
-          {/* Navbar Links */}
+          { /* Navbar Links */ }
           <Route
-            path='/profile'
+            path="/profile"
             element={
               <GatedComponent>
                 <UserProvider>
@@ -51,11 +52,11 @@ export const App = () => (
             }
           />
 
-          <Route path='/emergencynumbers' element={<EmergencyNumbers />} />
+          <Route path="/emergencynumbers" element={ <EmergencyNumbers /> } />
 
-          {/* Home */}
+          { /* Home */ }
           <Route
-            path='/home'
+            path="/home"
             element={
               <GatedComponent>
                 <UserProvider>
@@ -65,9 +66,9 @@ export const App = () => (
             }
           />
 
-          {/* Home Sections */}
+          { /* Home Sections */ }
           <Route
-            path='/messages'
+            path="/messages"
             element={
               <GatedComponent>
                 <Dev />
@@ -75,7 +76,7 @@ export const App = () => (
             }
           />
           <Route
-            path='/notebook'
+            path="/notebook"
             element={
               <GatedComponent>
                 <Notebook />
@@ -83,25 +84,25 @@ export const App = () => (
             }
           />
           <Route
-            path='/hostfamily'
+            path="/hostfamily"
             element={
               <GatedComponent>
                 <Dev />
-                {/* <HostFamily /> */}
+                { /* <HostFamily /> */ }
               </GatedComponent>
             }
           />
           <Route
-            path='/cluster'
+            path="/cluster"
             element={
               <GatedComponent>
                 <Dev />
-                {/* <Cluster /> */}
+                { /* <Cluster /> */ }
               </GatedComponent>
             }
           />
           <Route
-            path='/resources'
+            path="/resources"
             element={
               <GatedComponent>
                 <Resources />
@@ -109,9 +110,9 @@ export const App = () => (
             }
           />
 
-          {/* Notebook Sections */}
+          { /* Notebook Sections */ }
           <Route
-            path='/notebook/workhours'
+            path="/notebook/workhours"
             element={
               <GatedComponent>
                 <WorkhourProvider>
@@ -121,7 +122,7 @@ export const App = () => (
             }
           />
           <Route
-            path='/notebook/payments'
+            path="/notebook/payments"
             element={
               <GatedComponent>
                 <PaymentProvider>
@@ -131,7 +132,7 @@ export const App = () => (
             }
           />
           <Route
-            path='/notebook/goals'
+            path="/notebook/goals"
             element={
               <GatedComponent>
                 <GoalProvider>
@@ -141,7 +142,7 @@ export const App = () => (
             }
           />
           <Route
-            path='/notebook/notes'
+            path="/notebook/notes"
             element={
               <GatedComponent>
                 <NoteProvider>
@@ -151,9 +152,9 @@ export const App = () => (
             }
           />
 
-          {/* Resources Sections */}
+          { /* Resources Sections */ }
           <Route
-            path='/resources/tax'
+            path="/resources/tax"
             element={
               <GatedComponent>
                 <Tax />
@@ -161,22 +162,30 @@ export const App = () => (
             }
           />
 
-          {/* HostFamily Sections */}
+          { /* HostFamily Sections */ }
           <Route
-            path='/hostfamily/calendar'
+            path="/hostfamily/calendar"
             element={
               <GatedComponent>
                 <Dev />
-                {/* <CalendarView /> */}
+                { /* <CalendarView /> */ }
               </GatedComponent>
             }
           />
 
-          {/* Error Page */}
-          {/* <Route path='*' component={ WrongTurn } /> */}
+          { /* Dev Sandbox */ }
+          <Route
+            path="/sandbox"
+            element={
+              <Sandbox />
+            }
+          />
+
+          { /* Error Page */ }
+          { /* <Route path='*' component={ WrongTurn } /> */ }
         </Routes>
       </div>
-      {/* <Footer /> */}
+      { /* <Footer /> */ }
     </div>
   </BrowserRouter>
 );

@@ -36,6 +36,7 @@
   color: var(--white);
 }
 
+.primary:active,
 .primary:focus {
   box-shadow: var(--shadow_xs_focused);
 }
@@ -57,6 +58,7 @@
   background-color: var(--grey_50);
 }
 
+.secondary:active,
 .secondary:focus {
   box-shadow: var(--shadow_xs_focused);
 }
@@ -79,6 +81,7 @@
   border-color: var(--grey_50);
 }
 
+.tertiary:active,
 .tertiary:focus {
   background-color: var(--grey_50);
   box-shadow: var(--shadow_xs_focused);
@@ -99,6 +102,7 @@
   color: var(--error_800);
 }
 
+.danger:active,
 .danger:focus {
   box-shadow: var(--shadow_xs_focused_error);
 }
@@ -124,6 +128,7 @@
   color: var(--warning_800);
 }
 
+.warning:active,
 .warning:focus {
   box-shadow: var(--shadow_xs_focused_warning);
 }
