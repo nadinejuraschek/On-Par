@@ -26,10 +26,7 @@
   grid-row: 1 / 2;
 
   display: grid;
-  grid-template-rows: 65px auto min-content;
-  grid-gap: 1.5rem;
-
-  height: 100%;
+  grid-template-rows: auto 4rem;
 }
 
 .misc {
@@ -55,9 +52,14 @@
 
 .buttons {
   display: flex;
-  align-items: flex-start;
-  justify-content: space-evenly;
-}
+    flex-direction: row;
+    align-items: center;
+    gap: 1.6rem;
+  }
+
+  .buttons button {
+    width: 50%;
+  }
 
 .features {
   display: grid;
@@ -65,28 +67,6 @@
   grid-gap: 1.5rem;
   width: 100%;
   max-width: 1024px;
-}
-
-.emergency {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  color: #e63946;
-  font-size: 1.15rem;
-  font-weight: bold;
-}
-
-.emergency:hover {
-  cursor: pointer;
-  text-decoration: none;
-}
-
-.helpIcon {
-  margin-right: 1rem;
-
-  height: 40px;
-  width: 40px;
 }
 
 @media screen and (min-width: 900px) {
@@ -101,22 +81,6 @@
 
   .header {
     grid-column: 1 / 4;
-  }
-
-  .buttons {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: center;
-
-    padding-left: 74px;
-  }
-
-  .buttons button,
-  .buttons a {
-    padding: 0.5rem 1rem;
-    margin-bottom: 1rem;
-    min-width: 8rem;
   }
 
   .hours {
@@ -147,19 +111,5 @@
   .misc {
     grid-column: 5 / 7;
     grid-row: 3 / 4;
-  }
-}
-
-@media only screen and (min-width: 1024px) {
-  .buttons {
-    height: 40px;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-evenly;
-  }
-
-  .buttons button,
-  .buttons a {
-    margin-bottom: 0;
   }
 }

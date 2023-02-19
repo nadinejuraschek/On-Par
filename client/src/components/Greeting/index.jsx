@@ -1,4 +1,6 @@
+import { Text } from "components";
 import { useEffect, useState } from "react";
+
 import styles from "./greeting.module.css";
 import blankProfile from "../../images/blankProfile.svg";
 
@@ -29,12 +31,12 @@ export const Greeting = ( { message, name } ) => {
   }, [] );
 
   return (
-    <>
-      <div className={ styles.greeting }>
-        <img className={ styles.profile } src={ blankProfile } alt={ name } />
-        <h2>{ greeting }</h2>
+    <div className={ styles.greeting }>
+      <img className={ styles.profile } src={ blankProfile } alt={ name } />
+      <div className={ styles.messages }>
+        <Text as="h2" size="lg" weight="bold">{ greeting }</Text>
+        <Text as="h4" size="md">{ message }</Text>
       </div>
-      <h4 className={ styles.message }>{ message }</h4>
-    </>
+    </div>
   );
 };

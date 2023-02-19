@@ -1,7 +1,7 @@
 import { Button, Input, Tabs } from "components";
 
-import styles from "./sandbox.module.css";
 import { useState } from "react";
+import styles from "./sandbox.module.css";
 
 export const Sandbox = () => {
   const [value, setValue] = useState("");

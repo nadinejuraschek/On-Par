@@ -1,18 +1,18 @@
 import axios from "axios";
 import {
+  Button,
   Countdown,
   Greeting,
   ReminderView as Reminders,
   TodayView as Today,
   WorkhourView as Workhours,
 } from "components";
-
-import { Button } from "components";
 import { UserContext } from "contexts";
-import emergencyphone from "images/emergency-call.svg";
 import { useContext, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+
+import { useNavigate } from "react-router-dom";
 import styles from "./home.module.css";
+import { Quicklinks } from "./Quicklinks";
 
 export const Home = () => {
   const [user] = useContext( UserContext );
@@ -24,7 +24,7 @@ export const Home = () => {
     axios( {
       url: "/api/user/signout",
       method: "POST",
-    } ).then( res => {
+    } ).then( () => {
       navigate( "/login" );
     } );
   };
@@ -62,12 +62,7 @@ export const Home = () => {
         </div>
 
         <div className={ styles.misc }>
-          <Link to="/emergencynumbers" className={ styles.emergency }>
-            <div className={ styles.helpIcon }>
-              <img src={ emergencyphone } alt="Emergency Numbers" />
-            </div>
-            Emergency Numbers
-          </Link>
+          <Quicklinks />
         </div>
       </div>
     </main>

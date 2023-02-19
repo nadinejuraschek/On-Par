@@ -25,6 +25,10 @@
   cursor: not-allowed;
 }
 
+.btn.alignStart {
+  justify-content: flex-start;
+}
+
 /********************************************
  PRIMARY
 ********************************************/

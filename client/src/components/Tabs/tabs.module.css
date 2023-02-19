@@ -8,6 +8,13 @@
   height: 4.2rem;
 }
 
+.tabs.fullWidth {
+  width: 100%;
+
+  justify-content: space-between;
+  gap: unset;
+}
+
 .tabs.primary {
   border-bottom: 1px solid var(--grey_200);
 }

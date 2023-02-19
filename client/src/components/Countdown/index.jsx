@@ -1,10 +1,18 @@
+import { ProgressRing, Tabs } from "components";
 import * as dayjs from "dayjs";
+
 import { useEffect, useState } from "react";
+
 import styles from "./countdown.module.css";
-import { ProgressRing } from "../ProgressRing";
 
 export const Countdown = ( { startDate, setMessage } ) => {
   const [tab, setTab] = useState( "days" );
+
+  const tabs = [
+    { label: "Days", value: "days" },
+    { label: "Weeks", value: "weeks" },
+    { label: "Months", value: "months" },
+  ];
 
   const currentDate = dayjs( new Date() );
   const daysPassed = currentDate.diff( startDate, "days" );
@@ -64,26 +72,7 @@ export const Countdown = ( { startDate, setMessage } ) => {
           label={ progressLabel() }
         />
       </div>
-      <div className={ styles.tabs }>
-        <button
-          className={ `${ styles.tab } ${ tab === "days" ? styles.active : null }` }
-          onClick={ () => setTab( "days" ) }
-        >
-          Days
-        </button>
-        <button
-          className={ `${ styles.tab } ${ tab === "weeks" ? styles.active : null }` }
-          onClick={ () => setTab( "weeks" ) }
-        >
-          Weeks
-        </button>
-        <button
-          className={ `${ styles.tab } ${ tab === "months" ? styles.active : null }` }
-          onClick={ () => setTab( "months" ) }
-        >
-          Months
-        </button>
-      </div>
+      <Tabs activeTab={ tab } fullWidth handleClick={ setTab } tabs={ tabs } variant="secondary" />
     </div>
   );
 };

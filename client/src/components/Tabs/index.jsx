@@ -2,7 +2,7 @@ import { useMemo } from "react";
 import styles from "./tabs.module.css";
 import { Text } from "../Text";
 
-export const Tabs = ({ activeTab, handleClick, tabs, variant = "primary" }) => {
+export const Tabs = ({ activeTab, fullWidth = false, handleClick, tabs, variant = "primary" }) => {
   const renderTabs = useMemo(() => {
     return tabs.map(tab => {
       const { label, value } = tab;
@@ -20,5 +20,5 @@ export const Tabs = ({ activeTab, handleClick, tabs, variant = "primary" }) => {
     });
   }, [activeTab, handleClick, tabs, variant]);
 
-  return <div className={ `${ styles.tabs } ${ styles[variant] }` }>{ renderTabs }</div>;
+  return <div className={ `${ styles.tabs } ${ styles[variant] } ${ fullWidth && styles.fullWidth }` }>{ renderTabs }</div>;
 }
