@@ -1,13 +1,27 @@
-import { Button, Input } from "components";
+import { Button, Input, Tabs } from "components";
 
-import { useState } from "react";
 import styles from "./sandbox.module.css";
+import { useState } from "react";
 
 export const Sandbox = () => {
   const [value, setValue] = useState("");
+  const [activeTab, setActiveTab] = useState("cluster");
+
+  const primaryTabs = [
+    { label: "Cluster", value: "cluster" },
+    { label: "Family", value: "family" },
+    { label: "Resources", value: "resources" },
+  ];
+  const secondaryTabs = [
+    { label: "Cluster", value: "cluster" },
+    { label: "Family", value: "family" },
+    { label: "Resources", value: "resources" },
+  ];
 
   return (
     <div className={ styles.container }>
+      <Tabs activeTab={ activeTab } handleClick={ setActiveTab } tabs={ primaryTabs } variant="primary" />
+      <Tabs activeTab={ activeTab } handleClick={ setActiveTab } tabs={ secondaryTabs } variant="secondary" />
       <Button variant="primary">Primary</Button>
       <Button disabled variant="primary">Primary</Button>
       <Button variant="secondary">Secondary</Button>

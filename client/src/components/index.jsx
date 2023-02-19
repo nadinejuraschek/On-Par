@@ -13,6 +13,7 @@ export * from "./Loading";
 export * from "./Navbar";
 export * from "./ProgressRing";
 export * from "./ReminderView";
+export * from "./Tabs";
 export * from "./Text";
 export * from "./Timer";
 export * from "./TodayView";
