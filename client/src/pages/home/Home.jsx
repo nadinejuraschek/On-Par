@@ -7,7 +7,7 @@ import {
   WorkhourView as Workhours,
 } from "components";
 
-import { Button } from "components/Button";
+import { Button } from "components";
 import { UserContext } from "contexts";
 import emergencyphone from "images/emergency-call.svg";
 import { useContext, useState } from "react";

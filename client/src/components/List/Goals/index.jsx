@@ -1,7 +1,8 @@
 import axios from "axios";
-import { Add, Close } from "components/Button";
+import { Add, Close } from "components";
 import { GoalContext } from "contexts";
 import { useContext, useState } from "react";
+
 import { AddGoal } from "./AddGoal";
 import { GoalItem } from "./GoalItem";
 import styles from "./goals.module.css";

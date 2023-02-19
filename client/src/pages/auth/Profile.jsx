@@ -1,8 +1,5 @@
 import axios from "axios";
-import {
-  Flag,
-} from "components";
-import { Button } from "components/Button";
+import { Button, Flag } from "components";
 
 import { ProfileInput } from "components/Input";
 import { PeopleList } from "components/List";

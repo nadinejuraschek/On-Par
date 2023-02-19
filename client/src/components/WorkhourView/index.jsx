@@ -1,4 +1,4 @@
-import { Button } from "components/Button";
+import { Button } from "components";
 import styles from "./workhour.module.css";
 
 export const WorkhourView = () => (

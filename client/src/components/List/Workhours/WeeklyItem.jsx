@@ -1,10 +1,10 @@
+import { Button } from "components";
 import * as dayjs from "dayjs";
 
 import { useEffect, useState } from "react";
 
 import { TimeUtils } from "utils";
 import styles from "./hours.module.css";
-import { Button } from "../../Button";
 
 export const WeeklyItem = ({ day, hours }) => {
   const [displayHours, setDisplayHours] = useState(0);
