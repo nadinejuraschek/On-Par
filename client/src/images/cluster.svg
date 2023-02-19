@@ -2,13 +2,13 @@
     <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
         <g id="Artboard" transform="translate(-933.000000, -474.000000)">
             <g id="cluster" transform="translate(935.000000, 474.000000)">
-                <g id="Group-19" transform="translate(53.000000, 46.000000)" stroke="#FFFFFF">
+                <g id="Group-19" transform="translate(53.000000, 46.000000)" stroke="#646e36">
                     <path d="M41.5,2 C37.3379493,2 33.6328476,4.32495828 31.941446,7.85516279 L31.1976794,9.40751336 L29.5518702,8.90323827 C27.603757,8.30633737 25.5725078,8 23.5,8 C11.6449536,8 2,18.0553771 2,30.5 C2,42.9446229 11.6449536,53 23.5,53 C35.3550464,53 45,42.9446229 45,30.5 C45,28.1963822 44.6696944,25.9423438 44.0276972,23.7914642 L43.4890812,21.9869421 L45.257966,21.3408353 C49.2945808,19.8664125 52,16.16643 52,12 C52,6.49583067 47.3168431,2 41.5,2 Z" id="Combined-Shape" stroke-width="4"></path>
                     <path d="M3.5,24 C6.16666667,24.9767422 9.5,25.2695899 13.5,24.8785431 C17.5,24.4874963 22,22.9716063 27,20.3308731 C30.3333333,23.1680045 33.5,25.394953 36.5,27.0117188 C39.5,28.6284845 42.4895833,29.2909194 45.46875,28.9990234" id="Path-9" stroke-width="4" stroke-linejoin="round"></path>
                     <line x1="33" y1="34.75" x2="33" y2="37.25" id="Line-9" stroke-width="5" stroke-linecap="round"></line>
                     <line x1="15" y1="34.75" x2="15" y2="37.25" id="Line-9-Copy" stroke-width="5" stroke-linecap="round"></line>
                 </g>
-                <g id="Group-18" transform="translate(0.000000, 52.000000)" stroke="#FFFFFF">
+                <g id="Group-18" transform="translate(0.000000, 52.000000)" stroke="#646e36">
                     <path d="M0,15.8299948 C12.2592659,21.0388711 26.2592659,19.0955395 42,10" id="Path-8" stroke-width="4" stroke-linecap="round"></path>
                     <g id="Group-16" transform="translate(16.500000, 28.500000)" stroke-linecap="round" stroke-width="5">
                         <line x1="0.5" y1="0.25" x2="0.5" y2="2.75" id="Line-9"></line>
@@ -16,11 +16,11 @@
                     </g>
                     <ellipse id="Oval" stroke-width="4" cx="26.5" cy="24.5" rx="21.5" ry="22.5"></ellipse>
                 </g>
-                <path d="M0,67.8299948 C12.2592659,73.0388711 26.2592659,71.0955395 42,62" id="Path-8" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round"></path>
-                <line x1="17" y1="80.75" x2="17" y2="83.25" id="Line-9" stroke="#FFFFFF" stroke-width="5" stroke-linecap="round"></line>
-                <line x1="35" y1="80.75" x2="35" y2="83.25" id="Line-9-Copy" stroke="#FFFFFF" stroke-width="5" stroke-linecap="round"></line>
-                <path d="M30.9004024,45.269538 L41.9088285,38.5 L82.5,38.5 C92.4411255,38.5 100.5,30.4411255 100.5,20.5 C100.5,10.5588745 92.4411255,2.5 82.5,2.5 L21.5,2.5 C11.5588745,2.5 3.5,10.5588745 3.5,20.5 C3.5,30.4411255 11.5588745,38.5 21.5,38.5 L28.4154049,38.5 L29.0168731,40.1384975 L30.9004024,45.269538 Z" id="Combined-Shape" stroke="#FFFFFF" stroke-width="5"></path>
-                <g id="Group-17" transform="translate(27.000000, 16.000000)" fill="#FFFFFF">
+                <path d="M0,67.8299948 C12.2592659,73.0388711 26.2592659,71.0955395 42,62" id="Path-8" stroke="#646e36" stroke-width="4" stroke-linecap="round"></path>
+                <line x1="17" y1="80.75" x2="17" y2="83.25" id="Line-9" stroke="#646e36" stroke-width="5" stroke-linecap="round"></line>
+                <line x1="35" y1="80.75" x2="35" y2="83.25" id="Line-9-Copy" stroke="#646e36" stroke-width="5" stroke-linecap="round"></line>
+                <path d="M30.9004024,45.269538 L41.9088285,38.5 L82.5,38.5 C92.4411255,38.5 100.5,30.4411255 100.5,20.5 C100.5,10.5588745 92.4411255,2.5 82.5,2.5 L21.5,2.5 C11.5588745,2.5 3.5,10.5588745 3.5,20.5 C3.5,30.4411255 11.5588745,38.5 21.5,38.5 L28.4154049,38.5 L29.0168731,40.1384975 L30.9004024,45.269538 Z" id="Combined-Shape" stroke="#646e36" stroke-width="5"></path>
+                <g id="Group-17" transform="translate(27.000000, 16.000000)" fill="#646e36">
                     <circle id="Oval" cx="5" cy="5" r="5"></circle>
                     <circle id="Oval-Copy-3" cx="26" cy="5" r="5"></circle>
                     <circle id="Oval-Copy-4" cx="46" cy="5" r="5"></circle>

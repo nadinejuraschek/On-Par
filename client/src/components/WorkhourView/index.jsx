@@ -9,6 +9,6 @@ export const WorkhourView = () => (
       </div> */ }
     <h3 className={ styles.developmentNotice }>This app is currently in development.</h3>
     <h2 className={ styles.featureNotice }>To enjoy the first working features, go to </h2>
-    <Button link="/notebook" label="Notebook" variant="primary" />
+    <Button link="/notebook" variant="primary">Notebook</Button>
   </div>
 );

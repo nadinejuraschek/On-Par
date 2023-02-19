@@ -35,8 +35,8 @@ export const Home = () => {
         <div className={ styles.header }>
           <Greeting message={ message } name={ user.firstname } />
           <div className={ styles.buttons }>
-            <Button link="/profile" label="Profile" variant="secondary" />
-            <Button label="Log Out" handleClick={ handleLogout } variant="secondary" />
+            <Button link="/profile" variant="secondary">Profile</Button>
+            <Button handleClick={ handleLogout } variant="secondary">Log Out</Button>
           </div>
         </div>
 
