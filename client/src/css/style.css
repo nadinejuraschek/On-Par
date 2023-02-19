@@ -114,11 +114,8 @@ body {
 }
 
 button {
-  font-family: 'Lato', 'Helvetica', 'Helvetica Neue', sans-serif;
-}
-
-button:hover {
   cursor: pointer;
+  font-family: 'Lato', 'Helvetica', 'Helvetica Neue', sans-serif;
 }
 
 nav {
