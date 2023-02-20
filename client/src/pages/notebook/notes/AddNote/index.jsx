@@ -1,5 +1,5 @@
 import axios from "axios";
-import { Button, Text } from "components";
+import { Button, Card, Text } from "components";
 
 import { NoteContext } from "contexts/NoteContext";
 import dayjs from "dayjs";
@@ -35,7 +35,7 @@ export const AddNote = () => {
   };
 
   return (
-    <div className={ styles.addNote }>
+    <Card className={ styles.addNote }>
       <Text as="h4" size="sm" weight="bold">New Note</Text>
       <form className="ui form" onSubmit={ handleSubmit }>
         <div className="field">
@@ -64,6 +64,6 @@ export const AddNote = () => {
           </Button>
         </div>
       </form>
-    </div>
+    </Card>
   );
 }

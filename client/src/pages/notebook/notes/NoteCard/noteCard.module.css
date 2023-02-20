@@ -1,7 +1,5 @@
 .note {
-  border-radius: 2rem;
-  filter: var(--shadow_sm);
-  padding: 2rem;
+  height: auto;
 }
 
 .note.secondary {

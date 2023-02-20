@@ -1,9 +1,10 @@
-import { Text } from "components";
+import { Card, Text } from "components";
+
 import styles from "./suggestions.module.css";
 
 export const Suggestions = () => {
   return (
-    <div className={ styles.ideas }>
+    <Card className={ styles.ideas }>
       <Text as="h4" size="md" weight="bold">A Space for You to Write Down Your Thoughts</Text>
       <div>
         <Text as="h5" size="sm" weight="bold">Ideas:</Text>
@@ -17,6 +18,6 @@ export const Suggestions = () => {
           </div>
         </div>
       </div>
-    </div>
+    </Card>
   );
 }

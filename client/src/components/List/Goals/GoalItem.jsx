@@ -3,12 +3,16 @@ import personal from "images/personal.svg";
 import travel from "images/travel.svg";
 import styles from "./goals.module.css";
 
-export const GoalItem = ( { item, handleCheck } ) => {
-  const { type, text, _id, checked } = item;
+export const GoalItem = ( { handleCheck, item } ) => {
+  const { _id, checked, text, type } = item;
 
   const renderIcon = () => {
-    if ( type === "education" ) <img src={ education } alt={ text } />;
-    if ( type === "travel" ) <img src={ travel } alt={ text } />;
+    if ( type === "education" ) {
+      return <img src={ education } alt={ text } />;
+    }
+    if ( type === "travel" ) {
+      return <img src={ travel } alt={ text } />;
+    }
     return <img src={ personal } alt={ text } />;
   };
 

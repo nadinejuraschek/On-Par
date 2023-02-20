@@ -7,7 +7,7 @@ import styles from "./notes.module.css";
 import { Suggestions } from "./Suggestions";
 
 export const Notes = () => {
-  const { getNotes, editNote, deleteNote, notes } = useContext( NoteContext );
+  const { deleteNote, editNote, getNotes, notes } = useContext( NoteContext );
 
   return (
     <main>

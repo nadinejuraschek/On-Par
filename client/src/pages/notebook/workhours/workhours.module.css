@@ -13,19 +13,6 @@
   grid-row: 2;
 }
 
-.tracker,
-.addContainer,
-.timer,
-.reminder {
-  background-color: var(--white);
-  border-radius: 20px;
-  filter: var(--shadow_sm);
-  padding: 2rem;
-
-  height: 100%;
-  width: 100%;
-}
-
 .addContainer {
   display: grid;
   grid-template-columns: 1fr;

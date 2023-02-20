@@ -1,14 +1,15 @@
+import { Card } from "components";
 import { PaymentContext } from "contexts/PaymentContext";
 import { useContext } from "react";
 import { PaymentEntry } from "./PaymentEntry";
 import styles from "./payments.module.css";
 
 export const PaymentTable = () => {
-  const { getPayments, deletePayment, payments } = useContext( PaymentContext );
+  const { deletePayment, getPayments, payments } = useContext( PaymentContext );
   const sortedPayments = payments.reverse();
 
   return (
-    <div className={ styles.container }>
+    <Card className={ styles.container }>
       <div className={ styles.listHeader }>
         <div className={ styles.week }>Week</div>
         <div className={ styles.date }>Paid On</div>
@@ -25,6 +26,6 @@ export const PaymentTable = () => {
           />
         ) ) }
       </div>
-    </div>
+    </Card>
   );
 };

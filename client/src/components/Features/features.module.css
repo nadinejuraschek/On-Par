@@ -1,18 +1,11 @@
 .container {
-  background-color: var(--white);
-  border-radius: 20px;
-  filter: var(--shadow_sm);
-  padding: 2rem;
-  width: 100%;
   text-align: center;
+
+  width: 100%;
 
   display: flex;
   align-items: center;
   justify-content: space-evenly;
-}
-
-.container:hover {
-  border: 1px solid var(--primary_500);
 }
 
 .icon {

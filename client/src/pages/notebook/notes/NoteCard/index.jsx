@@ -1,10 +1,10 @@
 import axios from "axios";
-import { Button, Text } from "components";
+import { Button, Card, Text } from "components";
 import { useCallback, useMemo, useState } from "react";
 
 import styles from "./noteCard.module.css";
 
-export const NoteCard = ( { color, noteid, date, text, title, deleteNote, getNotes } ) => {
+export const NoteCard = ( { color, date, deleteNote, getNotes, noteid, text, title } ) => {
   const [updatedNote, setUpdatedNote] = useState( {} );
   const [showEditForm, setShowEditForm] = useState( false );
 
@@ -87,8 +87,8 @@ export const NoteCard = ( { color, noteid, date, text, title, deleteNote, getNot
   ), [handleChange, handleEdit, text, title]);
 
   return (
-    <div className={ `${ styles.note } ${ styles[color] }` }>
+    <Card className={ `${ styles.note } ${ styles[color] }` }>
       { showEditForm ? renderEditForm : renderNote }
-    </div>
+    </Card>
   );
 };

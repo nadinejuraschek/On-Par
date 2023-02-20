@@ -5,7 +5,7 @@ import { useContext } from "react";
 import styles from "./goals.module.css";
 
 export const Goals = () => {
-  const { threeMonths, sixMonths, nineMonths, twelveMonths } = useContext( GoalContext );
+  const { nineMonths, sixMonths, threeMonths, twelveMonths } = useContext( GoalContext );
 
   return (
     <main>

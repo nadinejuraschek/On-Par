@@ -1,5 +1,5 @@
 import axios from "axios";
-import { Button } from "components";
+import { Button, Card } from "components";
 import { UserContext } from "contexts";
 import { useContext, useState } from "react";
 
@@ -30,38 +30,38 @@ export const Home = () => {
   return (
     <main>
       <div className={ styles.grid }>
-        <div className={ styles.header }>
+        <Card className={ styles.header }>
           <Greeting message={ message } name={ user.firstname } />
           <div className={ styles.buttons }>
             <Button link="/profile" variant="secondary">Profile</Button>
             <Button handleClick={ handleLogout } variant="secondary">Log Out</Button>
           </div>
-        </div>
+        </Card>
 
-        <div className={ styles.hours }>
+        <Card className={ styles.hours }>
           <WorkhourSummary />
-        </div>
+        </Card>
 
-        <div className={ styles.today }>
+        <Card className={ styles.today }>
           <DailyPlan />
-        </div>
+        </Card>
 
-        <div className={ styles.reminders }>
+        <Card className={ styles.reminders }>
           <Reminders />
-        </div>
+        </Card>
 
-        <div className={ styles.countdown }>
+        <Card className={ styles.countdown }>
           <Countdown
             startDate={ user.startDate }
             endDate={ user.endDate }
             message={ message }
             setMessage={ setMessage }
           />
-        </div>
+        </Card>
 
-        <div className={ styles.misc }>
+        <Card className={ styles.misc }>
           <Quicklinks />
-        </div>
+        </Card>
       </div>
     </main>
   );

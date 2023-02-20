@@ -1,5 +1,7 @@
 import axios from "axios";
-import { useState, useContext } from "react";
+import { Card } from "components";
+import { useContext, useState } from "react";
+
 import styles from "./payments.module.css";
 import { PaymentContext } from "../../../contexts/PaymentContext";
 
@@ -35,7 +37,7 @@ export const AddPayment = () => {
   };
 
   return (
-    <div className={ styles.form }>
+    <Card className={ styles.form }>
       <form className="ui form" onSubmit={ handleSubmit }>
         <div className="four fields">
           <div className="field">
@@ -93,6 +95,6 @@ export const AddPayment = () => {
           </button>
         </div>
       </form>
-    </div>
+    </Card>
   );
 };
