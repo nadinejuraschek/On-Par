@@ -13,9 +13,9 @@
 .reminders,
 .hours,
 .misc {
-  background-color: #ffffff;
+  background-color: var(--white);
   border-radius: 20px;
-  box-shadow: 0 1px 6px #46637310;
+  filter: var(--shadow_sm);
   padding: 2rem;
 
   height: 100%;
@@ -26,10 +26,7 @@
   grid-row: 1 / 2;
 
   display: grid;
-  grid-template-rows: 65px auto min-content;
-  grid-gap: 1.5rem;
-
-  height: 100%;
+  grid-template-rows: auto 4rem;
 }
 
 .misc {
@@ -48,40 +45,21 @@
   grid-row: 4 / 5;
 }
 
-.today, .reminders {
+.today,
+.reminders {
   display: none;
 }
 
 .buttons {
   display: flex;
-  align-items: flex-start;
-  justify-content: space-evenly;
-}
+    flex-direction: row;
+    align-items: center;
+    gap: 1.6rem;
+  }
 
-.buttons button,
-.buttons a {
-  background-color: #f6f6f6;
-  border: 1px solid #f6f6f6;
-  border-radius: 4px;
-  box-shadow: 0px 1px 6px #46637340;
-  color: #313131;
-  font-size: 1rem;
-  font-weight: 700;
-
-  height: 36px;
-  width: 6rem;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-decoration: none;
-}
-
-.buttons button:hover,
-.buttons a:hover {
-  border: 1px solid #86abfa;
-  box-shadow: 0 3px 6px #46637340;
-}
+  .buttons button, .buttons a {
+    width: 50%;
+  }
 
 .features {
   display: grid;
@@ -89,28 +67,6 @@
   grid-gap: 1.5rem;
   width: 100%;
   max-width: 1024px;
-}
-
-.emergency {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  color: #e63946;
-  font-size: 1.15rem;
-  font-weight: bold;
-}
-
-.emergency:hover {
-  cursor: pointer;
-  text-decoration: none;
-}
-
-.helpIcon {
-  margin-right: 1rem;
-
-  height: 40px;
-  width: 40px;
 }
 
 @media screen and (min-width: 900px) {
@@ -127,27 +83,13 @@
     grid-column: 1 / 4;
   }
 
-  .buttons {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: center;
-
-    padding-left: 74px;
-  }
-
-  .buttons button, .buttons a {
-    padding: 0.5rem 1rem;
-    margin-bottom: 1rem;
-    min-width: 8rem;
-  }
-
   .hours {
     grid-column: 4 / 7;
     grid-row: 1 / 2;
   }
 
-  .today, .reminders {
+  .today,
+  .reminders {
     display: block;
   }
 
@@ -169,19 +111,5 @@
   .misc {
     grid-column: 5 / 7;
     grid-row: 3 / 4;
-  }
-}
-
-@media only screen and (min-width: 1024px) {
-  .buttons {
-    height: 40px;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-evenly;
-  }
-
-  .buttons button,
-  .buttons a {
-    margin-bottom: 0;
   }
 }

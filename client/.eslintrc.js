@@ -22,7 +22,8 @@ module.exports = {
     sourceType: "module" // Allows for the use of imports
   },
   plugins: [
-    "import" // eslint-plugin-import plugin. https://www.npmjs.com/package/eslint-plugin-import
+    "import", // eslint-plugin-import plugin. https://www.npmjs.com/package/eslint-plugin-import
+    "sort-destructure-keys"
   ],
   root: true, // For configuration cascading.
   rules: {
@@ -89,8 +90,6 @@ module.exports = {
       },
     ],
     "template-curly-spacing": ["warn", "always"],
-    "space-in-parens": ["warn", "always"],
-    "space-before-function-paren": ["warn", "never"],
     "no-multiple-empty-lines": ["warn", { "max": 2 } ],
     "implicit-arrow-linebreak": ["warn", "beside"],
     "comma-style": ["warn", "last"],
@@ -101,7 +100,8 @@ module.exports = {
     "no-invalid-regexp": "error",
     "no-fallthrough": "error",
     "react/prop-types": "off",
-    "jsx-a11y/click-events-have-key-events": "off"
+    "jsx-a11y/click-events-have-key-events": "off",
+    "sort-destructure-keys/sort-destructure-keys": [2, { "caseSensitive": false }]
   },
   settings: {
     react: {

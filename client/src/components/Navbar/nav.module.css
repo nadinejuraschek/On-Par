@@ -1,5 +1,5 @@
 .navMobile {
-  background-color: #86abfa;
+  background-color: var(--primary_50);
   box-shadow: 2px 0 4px #46637320;
   height: 70px;
   padding: 0 24px;
@@ -17,18 +17,16 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 40px;
 }
 
-.logo:hover, .menuIcon:hover {
+.logo:hover,
+.menuIcon:hover {
   cursor: pointer;
 }
 
-.logo p {
-  color: #ffffff;
+.logoText {
+  color: var(--primary_700);
   font-family: 'grand_hotelregular';
-  font-size: 2rem;
-  line-height: 40px;
 }
 
 .navDesktop {
@@ -44,33 +42,14 @@
 }
 
 .footer {
-  color: #ffffff;
+  color: var(--primary_700);
   font-size: 12px;
   text-align: center;
 }
 
-.sideMobile {
-  background-color: #86abfa;
-  padding: 24px;
-
-  height: calc(100vh - 70px);
-  width: 100vw;
-  z-index: 5;
-
-  position: absolute;
-  top: 70px;
-  left: 0;
-  right: 0;
-  bottom: 0;
-
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: repeat(6, 1fr) min-content;
-}
-
 .navLogo {
-  height: 40px;
-  width: 30px;
+  height: 4rem;
+  width: 3rem;
   margin-right: 0.5rem;
 }
 
@@ -84,15 +63,16 @@
   display: none;
 }
 
-.icon img, .navLogo img {
+.icon img,
+.navLogo img {
   object-fit: contain;
   height: 100%;
   width: 100%;
 }
 
 .navLink p {
-  color: #ffffff;
-  font-size: 30px;
+  color: var(--primary_700);
+  font-size: 3rem;
   margin-left: 1rem;
   text-transform: uppercase;
 }
@@ -107,9 +87,9 @@
   }
 
   .navDesktop {
-    background-color: #86abfa;
-    border-radius: 0 0 40px 0;
-    padding: 24px;
+    background-color: var(--primary_50);
+    border-radius: 0 0 4rem 0;
+    padding: 2.4rem;
 
     grid-column: 1 / 2;
 
@@ -119,7 +99,21 @@
     row-gap: 1rem;
 
     height: 100vh;
-    width: 150px;
+    width: 15rem;
+
+    position: relative;
+  }
+
+  .navDesktop::after {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    height: 50vh;
+    width: 100%;
+
+    background-image: linear-gradient(to bottom, #b9c87940, transparent);
+    content: '';
   }
 
   .navLink {
@@ -130,8 +124,8 @@
 
   .icon {
     display: block;
-    height: 45px;
-    width: 45px;
+    height: 4.5rem;
+    width: 4.5rem;
   }
 
   .hide {
@@ -139,16 +133,11 @@
   }
 
   .navLink p {
-    font-size: 15px;
+    font-size: 1.5rem;
     font-weight: bold;
     margin-top: 0.5rem;
     margin-left: 0;
   }
 }
 
-@media only screen and (min-width: 1200px) {
-  .navLogo {
-    height: 70px;
-    width: 70px;
-  }
-}
+@media only screen and (min-width: 1200px) {}

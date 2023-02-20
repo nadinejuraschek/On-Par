@@ -1,0 +1,16 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  height: 100%;
+}
+
+.developmentNotice {
+  color: #31313180;
+  margin-bottom: 0;
+}
+
+.featureNotice {
+  margin: 2rem 0;
+}

@@ -1,0 +1,20 @@
+.greeting {
+  display: flex;
+  align-items: center;
+}
+
+.profile {
+  border-radius: 50%;
+  box-shadow: var(--shadow_xs);
+  margin-right: 2rem;
+  object-fit: cover;
+
+  height: 8rem;
+  width: 8rem;
+}
+
+.messages {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}

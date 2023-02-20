@@ -1,19 +1,11 @@
 .container {
-  background-color: #ffffff;
-  border-radius: 20px;
-  box-shadow: 0 1px 6px #46637310;
-  padding: 2rem;
-  width: 100%;
   text-align: center;
+
+  width: 100%;
 
   display: flex;
   align-items: center;
   justify-content: space-evenly;
-}
-
-.container:hover {
-  border: 1px solid #86abfa;
-  box-shadow: 0 3px 6px #46637340;
 }
 
 .icon {
@@ -28,7 +20,7 @@
 }
 
 .title {
-  color: #313131;
+  color: var(--grey_800);
   font-size: 1.5rem;
   font-weight: 700;
 }

@@ -1,15 +1,16 @@
-import { Goals as GoalsList } from "components";
+import { Goals as GoalsList, Text } from "components";
+
 import { GoalContext } from "contexts";
 import { useContext } from "react";
 import styles from "./goals.module.css";
 
 export const Goals = () => {
-  const { threeMonths, sixMonths, nineMonths, twelveMonths } = useContext( GoalContext );
+  const { nineMonths, sixMonths, threeMonths, twelveMonths } = useContext( GoalContext );
 
   return (
     <main>
       <div className={ styles.layout }>
-        <h2 className={ styles.header }>Your Goals</h2>
+        <Text as="h2" className={ styles.header } size="xl" weight="bold">Your Goals</Text>
 
         <GoalsList className={ styles.three } month={ 3 } data={ threeMonths } />
 

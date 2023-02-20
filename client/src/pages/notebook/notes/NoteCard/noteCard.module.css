@@ -1,0 +1,66 @@
+.note {
+  height: auto;
+}
+
+.note.secondary {
+  background-color: var(--secondary_50);
+  color: var(--secondary_800);
+}
+
+.note.tertiary {
+  background-color: var(--tertiary_50);
+  color: var(--tertiary_800);
+}
+
+.note.warning {
+  background-color: var(--warning_50);
+  color: var(--warning_800);
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+.titleText {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.actions {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.actions button {
+  background-color: #ffffff30;
+  border-color: #ffffff30;
+}
+
+.actions button:hover {
+  background-color: #ffffff50;
+  border-color: transparent;
+}
+
+.actions button i.icon {
+  margin: 0;
+}
+
+.body {}
+
+.editActions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 1rem;
+}

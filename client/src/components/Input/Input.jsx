@@ -1,18 +1,20 @@
 import styles from "./input.module.css";
+import { Text } from "../Text";
 
-export const Input = ( { name, value, handleChange, icon, label } ) => (
-  <div className={ `${ styles.field } ${ styles.stacked }` }>
-    <label className={ styles.label } htmlFor={ name }>
+export const Input = ( { error, handleChange, icon, label, name, placeholder = "Type here...", value } ) => (
+  <div className={ styles.field }>
+    <Text as="label" htmlFor={ name } size="sm">
       { icon && <i className={ `${ icon } icon` }></i> }
-      { label }:
-    </label>
+      { label }
+    </Text>
     <input
-      className={ styles.input }
-      type="text"
+      className={ `${ styles.input } ${ error && styles.error }` }
       name={ name }
-      placeholder={ value }
-      value={ value }
       onChange={ event => handleChange( event.target.value ) }
+      placeholder={ placeholder }
+      type="text"
+      value={ value }
     />
+    { error && <Text as="p" color="--error_300" size="sm" >{ error }</Text> }
   </div>
 );

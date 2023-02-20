@@ -81,10 +81,11 @@
   display: none;
 }
 
-.details, .hostfamily {
-  background-color: #ffffff;
+.details,
+.hostfamily {
+  background-color: var(--white);
   border-radius: 20px;
-  box-shadow: 0 1px 6px #46637310;
+  filter: var(--shadow_sm);
   padding: 2rem;
 
   width: 100%;
@@ -120,7 +121,7 @@
     display: block;
     width: 100%;
     border-radius: 20px;
-    box-shadow: 0 1px 6px #46637310;
+    filter: var(--shadow_sm);
   }
 
   .details {

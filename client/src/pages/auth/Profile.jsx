@@ -1,9 +1,6 @@
 import axios from "axios";
-import {
-  // Filer,
-  Flag,
-} from "components";
-import { Primary } from "components/Button";
+import { Button, Flag } from "components";
+
 import { ProfileInput } from "components/Input";
 import { PeopleList } from "components/List";
 import { UserContext } from "contexts";
@@ -53,7 +50,7 @@ export const Profile = () => {
     } );
   };
 
-  const editButton = edit ? <Primary label="Update" handleClick={ handleEdit } /> : <Primary label="Edit" handleClick={ toggleEdit } />;
+  const editButton = edit ? <Button label="Update" handleClick={ handleEdit } variant="primary" /> : <Button label="Edit" handleClick={ toggleEdit } variant="primary" />;
 
   return (
     <main>

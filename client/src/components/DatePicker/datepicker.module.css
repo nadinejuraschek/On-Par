@@ -1,5 +1,5 @@
 .container {
-  background-color: #ffffff;
+  background-color: var(--white);
   border-radius: 0.28571429rem;
   width: 300px;
 
@@ -12,11 +12,11 @@
 .year {
   background-image: linear-gradient(
     to right bottom,
-    rgb(253, 184, 183),
-    #ff9897
+    var(--secondary_200),
+    var(--secondary_500)
   );
   border-bottom: 1px solid lightgray;
-  color: #ffffff;
+  color: var(--white);
   font-weight: bold;
   text-transform: uppercase;
   height: 2.5em;
@@ -29,13 +29,14 @@
   justify-content: space-between;
 }
 
-.cell, .icon {
+.cell,
+.icon {
   background-color: transparent;
   border: none;
 }
 
 .icon i {
-  color: #fff;
+  color: var(--white);
 }
 
 .month .icon {
@@ -60,7 +61,7 @@
 
 /* Calendar */
 .calendar {
-  background: #ffffff;
+  background: var(--white);
   border: 1px solid lightgray;
   border-radius: 0.28571429rem;
 }

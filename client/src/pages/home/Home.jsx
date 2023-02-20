@@ -1,17 +1,16 @@
 import axios from "axios";
-import {
-  Countdown,
-  Greeting,
-  ReminderView as Reminders,
-  TodayView as Today,
-  WorkhourView as Workhours,
-} from "components";
-import { Secondary as SecondaryBtn } from "components/Button";
+import { Button, Card } from "components";
 import { UserContext } from "contexts";
-import emergencyphone from "images/emergency-call.svg";
 import { useContext, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+
+import { useNavigate } from "react-router-dom";
+import { Countdown } from "./Countdown";
+import { DailyPlan } from "./DailyPlan";
+import { Greeting } from "./Greeting";
 import styles from "./home.module.css";
+import { Quicklinks } from "./Quicklinks";
+import { Reminders } from "./Reminders";
+import { WorkhourSummary } from "./WorkhourSummary";
 
 export const Home = () => {
   const [user] = useContext( UserContext );
@@ -23,7 +22,7 @@ export const Home = () => {
     axios( {
       url: "/api/user/signout",
       method: "POST",
-    } ).then( res => {
+    } ).then( () => {
       navigate( "/login" );
     } );
   };
@@ -31,43 +30,38 @@ export const Home = () => {
   return (
     <main>
       <div className={ styles.grid }>
-        <div className={ styles.header }>
+        <Card className={ styles.header }>
           <Greeting message={ message } name={ user.firstname } />
           <div className={ styles.buttons }>
-            <SecondaryBtn link="/profile" label="Profile" />
-            <SecondaryBtn label="Log Out" handleClick={ handleLogout } />
+            <Button link="/profile" variant="secondary">Profile</Button>
+            <Button handleClick={ handleLogout } variant="secondary">Log Out</Button>
           </div>
-        </div>
+        </Card>
 
-        <div className={ styles.hours }>
-          <Workhours />
-        </div>
+        <Card className={ styles.hours }>
+          <WorkhourSummary />
+        </Card>
 
-        <div className={ styles.today }>
-          <Today />
-        </div>
+        <Card className={ styles.today }>
+          <DailyPlan />
+        </Card>
 
-        <div className={ styles.reminders }>
+        <Card className={ styles.reminders }>
           <Reminders />
-        </div>
+        </Card>
 
-        <div className={ styles.countdown }>
+        <Card className={ styles.countdown }>
           <Countdown
             startDate={ user.startDate }
             endDate={ user.endDate }
             message={ message }
             setMessage={ setMessage }
           />
-        </div>
+        </Card>
 
-        <div className={ styles.misc }>
-          <Link to="/emergencynumbers" className={ styles.emergency }>
-            <div className={ styles.helpIcon }>
-              <img src={ emergencyphone } alt="Emergency Numbers" />
-            </div>
-            Emergency Numbers
-          </Link>
-        </div>
+        <Card className={ styles.misc }>
+          <Quicklinks />
+        </Card>
       </div>
     </main>
   );

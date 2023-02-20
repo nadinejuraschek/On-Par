@@ -1,8 +1,11 @@
+import { Card } from "components";
 import styles from "./features.module.css";
 
-export const FeatureCard = ( { link, icon, title, header } ) => (
-  <a className={ styles.container } href={ link }>
-    <img src={ icon } className={ styles.icon } alt={ title } />
-    <p className={ styles.title }>{ header }</p>
+export const FeatureCard = ( { header, icon, link, title } ) => (
+  <a href={ link }>
+    <Card className={ styles.container } withHover>
+      <img src={ icon } className={ styles.icon } alt={ title } />
+      <p className={ styles.title }>{ header }</p>
+    </Card>
   </a>
 );

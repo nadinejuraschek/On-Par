@@ -1,19 +1,22 @@
 import axios from "axios";
-import { Add, Close } from "components/Button";
+import { AddButton, Card, CloseButton, Text } from "components";
 import { GoalContext } from "contexts";
 import { useContext, useState } from "react";
+
 import { AddGoal } from "./AddGoal";
 import { GoalItem } from "./GoalItem";
 import styles from "./goals.module.css";
 
 export const Goals = ( { data, month } ) => {
-  const { getGoals, checkGoal } = useContext( GoalContext );
-  const [type, setType] = useState( "" );
+  const { checkGoal, getGoals } = useContext( GoalContext );
+
+  const [openAddGoal, setOpenAddGoal] = useState( false );
+  const [type, setType] = useState( "personal" );
   const [text, setText] = useState( "" );
+
   const education = data.filter( item => item.type === "education" );
   const personal = data.filter( item => item.type === "personal" );
   const travel = data.filter( item => item.type === "travel" );
-  const [openAddGoal, setOpenAddGoal] = useState( false );
 
   const handleCreate = event => {
     event.preventDefault();
@@ -40,20 +43,17 @@ export const Goals = ( { data, month } ) => {
   };
 
   return (
-    <div className={ styles.container }>
+    <Card className={ styles.container }>
       <div className={ styles.header }>
-        <div className={ styles.month }>
-          <p className={ styles.month__lg }>{ month }</p>
-          <p className={ styles.month__sm }>months</p>
-        </div>
+        <Text as="p" size="lg" weight="bold">{ month } months</Text>
         <div className={ styles.btnContainer }>
           { openAddGoal ? (
             <>
-              <Close handleClick={ () => setOpenAddGoal( false ) } />
-              <Add handleClick={ handleCreate } />
+              <CloseButton handleClick={ () => setOpenAddGoal( false ) } />
+              <AddButton handleClick={ handleCreate } />
             </>
           ) : (
-            <Add handleClick={ setOpenAddGoal } />
+            <AddButton handleClick={ setOpenAddGoal } />
           ) }
         </div>
       </div>
@@ -89,6 +89,6 @@ export const Goals = ( { data, month } ) => {
           ) ) }
         </ul>
       ) }
-    </div>
+    </Card>
   );
 };
