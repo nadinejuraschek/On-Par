@@ -4,7 +4,7 @@
 
 import styles from "./payments.module.css";
 
-export const PaymentEntry = ( { paymentid, payment, deletePayment } ) => {
+export const PaymentEntry = ( { deletePayment, payment, paymentid } ) => {
   // const [show, setShow] = useState(false);
   // const [updatedPayment, setUpdatedPayment] = useState({});
 

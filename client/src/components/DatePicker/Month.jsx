@@ -1,7 +1,7 @@
 import * as dayjs from "dayjs";
 import styles from "./datepicker.module.css";
 
-export const Month = ( { handleCurrentDate, currentDate } ) => {
+export const Month = ( { currentDate, handleCurrentDate } ) => {
   const monthFormat = "MMMM";
   const displayMonth = dayjs( currentDate ).format( monthFormat );
 

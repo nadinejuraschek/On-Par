@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 
 import styles from "./countdown.module.css";
 
-export const Countdown = ( { startDate, setMessage } ) => {
+export const Countdown = ( { setMessage, startDate } ) => {
   const [tab, setTab] = useState( "days" );
 
   const tabs = [

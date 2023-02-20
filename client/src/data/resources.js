@@ -40,7 +40,7 @@ export const resources = [
   {
     icon: emergencyphone,
     label: "Emergency Numbers",
-    link: "/emergencynumbers",
+    link: "/resources/emergencynumbers",
     active: true,
   },
   {

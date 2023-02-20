@@ -4,7 +4,7 @@ import styles from "./datepicker.module.css";
 import { Month } from "./Month";
 import { Year } from "./Year";
 
-export const DatePicker = ( { startDate, setStartDate } ) => {
+export const DatePicker = ( { setStartDate, startDate } ) => {
   const [selectedDate, setSelectedDate] = useState( startDate );
 
   useEffect( () => {

@@ -5,7 +5,6 @@ export * from "./Features";
 export * from "./Filer";
 export * from "./Flag";
 export * from "./Footer";
-export * from "./Header";
 export * from "./Input";
 export * from "./List";
 export * from "./Loading";

@@ -3,10 +3,10 @@ import styles from "./datepicker.module.css";
 
 export const Cell = ( {
   day,
-  selectedDate,
   formattedDate,
-  monthStart,
   handleDateClick,
+  monthStart,
+  selectedDate,
 } ) => {
   const clickedDate = dayjs( day ).format( "DD/MM/YY" );
   const checkDate = dayjs( selectedDate ).format( "DD/MM/YY" );

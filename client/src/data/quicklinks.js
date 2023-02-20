@@ -1,12 +1,12 @@
 import childcare from "images/childcare.svg";
 import emergencyphone from "images/emergency-call.svg";
-import extension from "images/extension.svg";
+import tax from "images/tax.svg";
 
 export const quicklinks = [
   {
     icon: emergencyphone,
     label: "Emergency Numbers",
-    link: "/emergencynumbers",
+    link: "/resources/emergencynumbers",
     active: true,
   },
   { icon: childcare,
@@ -15,8 +15,9 @@ export const quicklinks = [
     active: false,
   },
   {
-    icon: extension,
-    label: "Extending",
-    active: false,
+    icon: tax,
+    label: "Paying Taxes",
+    link: "/resources/tax",
+    active: true,
   },
 ]

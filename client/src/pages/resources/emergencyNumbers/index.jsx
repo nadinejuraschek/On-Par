@@ -1,5 +1,6 @@
-import { Header } from "components";
-import { emergencyNumbers } from "data/emergencyNumbers";
+import { Text } from "components";
+import { emergencyNumbers } from "data";
+import styles from "./emergencyNumbers.module.css";
 
 export const EmergencyNumbers = () => {
   const { contentRows, headerRows } = emergencyNumbers;
@@ -22,10 +23,10 @@ export const EmergencyNumbers = () => {
 
   return (
     <main>
-      <Header header="Emergency Numbers" />
+      <div className={ styles.layout }>
+        <Text as="h2" size="xl" weight="bold">Emergency Numbers</Text>
 
-      <div className="costum-container">
-        <table className="ui selectable celled table">
+        <table className="ui selectable celled table" style={ { borderRadius: "2rem", filter: "drop-shadow(0 1px 3px #10182810) drop-shadow(0 1px 2px #10182806)", height: "100%", overflow: "hidden" } }>
           <thead>
             { renderHeaderRows( headerRows ) }
           </thead>
@@ -33,6 +34,7 @@ export const EmergencyNumbers = () => {
             { renderContentRows( contentRows ) }
           </tbody>
         </table>
+ 
       </div>
     </main>
   );
