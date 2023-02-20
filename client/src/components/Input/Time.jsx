@@ -1,6 +1,6 @@
 import styles from "./input.module.css";
 
-export const Time = ( { start, end, handleStart, handleEnd } ) => (
+export const Time = ( { end, handleEnd, handleStart, start } ) => (
   <>
     <div className={ styles.stacked }>
       <label className={ styles.label } htmlFor="start">

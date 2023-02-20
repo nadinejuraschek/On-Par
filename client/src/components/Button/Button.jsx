@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import styles from "./button.module.css";
 
-export const Button = ({ align = "alignCenter", children, className = "", disabled, label, link, handleClick, round = false, variant = "secondary" }) => {
+export const Button = ({ align = "alignCenter", children, className = "", disabled, handleClick, label, link, round = false, variant = "secondary" }) => {
   if (link) {
     return (
       <Link

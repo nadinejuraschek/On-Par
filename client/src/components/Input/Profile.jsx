@@ -1,6 +1,6 @@
 import styles from "./input.module.css";
 
-export const ProfileInput = ( { name, value, handleChange, edit, icon, label } ) => (
+export const ProfileInput = ( { edit, handleChange, icon, label, name, value } ) => (
   <div className={ styles.field }>
     <label className={ styles.label } htmlFor={ name }>
       { icon && <i className={ `${ icon } icon` }></i> }

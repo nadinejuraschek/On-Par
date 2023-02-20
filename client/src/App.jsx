@@ -47,7 +47,14 @@ export const App = () => (
         }
       />
 
-      <Route path="/emergencynumbers" element={ <EmergencyNumbers /> } />
+      <Route
+        path="/resources/emergencynumbers"
+        element={
+          <LayoutWithNavbar>
+            <EmergencyNumbers />
+          </LayoutWithNavbar>
+        }
+      />
 
       { /* Home */ }
       <Route

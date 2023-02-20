@@ -1,7 +1,7 @@
 import * as dayjs from "dayjs";
 import styles from "./datepicker.module.css";
 
-export const Year = ( { handleCurrentDate, currentDate } ) => {
+export const Year = ( { currentDate, handleCurrentDate } ) => {
   const yearFormat = "YYYY";
   const displayYear = dayjs( currentDate ).format( yearFormat );
 

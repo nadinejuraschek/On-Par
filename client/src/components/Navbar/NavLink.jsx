@@ -2,7 +2,7 @@ import { NavLink, useLocation } from "react-router-dom";
 
 import styles from "./nav.module.css";
 
-export const NavLinkComp = ( { label, iconSrc, link } ) => {
+export const NavLinkComp = ( { iconSrc, label, link } ) => {
   const location = useLocation();
   const paths = location.pathname.split( "/" );
 

@@ -2,7 +2,7 @@ import * as dayjs from "dayjs";
 import { Cell } from "./Cell";
 import styles from "./datepicker.module.css";
 
-export const Cells = ( { currentDate, selectedDate, handleDateClick } ) => {
+export const Cells = ( { currentDate, handleDateClick, selectedDate } ) => {
   const dateFormat = "D";
 
   const monthStart = dayjs( currentDate ).startOf( "month" );
