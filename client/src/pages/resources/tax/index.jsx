@@ -1,8 +1,8 @@
-import { Text } from "components";
-import { taxInfo } from "data";
 import { Fragment } from "react";
+import { Text } from "components";
 import { createMarkup } from "utils";
 import styles from "./tax.module.css";
+import { taxInfo } from "data";
 
 export const Tax = () => {
   const { contentRows, headerRows } = taxInfo;

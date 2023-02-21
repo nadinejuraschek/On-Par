@@ -1,15 +1,15 @@
 // import logo from '../../images/logo.svg';
 
-
-import { Text } from "components";
-import { UserProvider } from "contexts/UserContext";
-import { navLinks } from "data";
-import close from "images/close.svg";
-import menu from "images/menu.svg";
 import { useMemo, useState } from "react";
-import styles from "./nav.module.css";
+
 import { NavLinkComp as NavLink } from "./NavLink";
 import { Sidenav } from "./Sidenav";
+import { Text } from "components";
+import { UserProvider } from "contexts/UserContext";
+import close from "images/close.svg";
+import menu from "images/menu.svg";
+import { navLinks } from "data";
+import styles from "./nav.module.css";
 
 export const Navbar = () => {
   const [openSidenav, setOpenSidenav] = useState( false );

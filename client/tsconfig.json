@@ -1,10 +1,12 @@
 {
   "compilerOptions": {
+    "jsx": "preserve",
     "baseUrl": "src"
   },
   "include": ["src"],
   "eslint.validate": [
     "javascript",
     "javascriptreact"
-  ]
+  ],
+  "files": ["global.d.ts"]
 }

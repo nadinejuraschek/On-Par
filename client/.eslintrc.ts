@@ -90,7 +90,7 @@ module.exports = {
       },
     ],
     "template-curly-spacing": ["warn", "always"],
-    "no-multiple-empty-lines": ["warn", { "max": 2 } ],
+    "no-multiple-empty-lines": ["warn", { "max": 2 }],
     "implicit-arrow-linebreak": ["warn", "beside"],
     "comma-style": ["warn", "last"],
     "no-var": "error",
@@ -101,7 +101,19 @@ module.exports = {
     "no-fallthrough": "error",
     "react/prop-types": "off",
     "jsx-a11y/click-events-have-key-events": "off",
-    "sort-destructure-keys/sort-destructure-keys": [2, { "caseSensitive": false }]
+    "sort-destructure-keys/sort-destructure-keys": [2, { "caseSensitive": false }],
+    "default-case": "on",
+    "default-case-last": "on",
+    "prefer-const": "on",
+    "array-bracker-spacing": [
+      "warn",
+      "always",
+      { "singleValue": false, "objectsInArrays": false },
+    ],
+    "array-element-newline": ["warn", { "multiline": true, "minItems": 4 }],
+    "arrow-spacing": ["warn", { "before": true, "after": true }],
+    "block-spacing": ["warn", "always"],
+    "comma-dangle": ["warn", "always-multiline"]
   },
   settings: {
     react: {

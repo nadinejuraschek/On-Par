@@ -1,7 +1,7 @@
 import { Button } from "components";
 import { resources } from "data";
-import { useMemo } from "react";
 import styles from "./resources.module.css";
+import { useMemo } from "react";
 
 export const Resources = () => {
   const renderItems = useMemo(() => {

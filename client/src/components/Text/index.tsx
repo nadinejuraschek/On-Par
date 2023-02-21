@@ -1,6 +1,15 @@
+import { IText } from "./types";
 import styles from "./text.module.css";
 
-export const Text = ({ as, children, className = "", color = "--grey_700", htmlFor = "", size = "xs", weight = "regular" }) => {
+export const Text = ({
+  as,
+  children,
+  className = "",
+  color = "--grey_700",
+  htmlFor = "",
+  size = "xs",
+  weight = "regular",
+}: IText): JSX.Element => {
   const compiledClassName = `${ className } ${ styles.text } ${ styles[size] } ${ styles[weight] }`;
   const style = { color: `var(${ color })` };
 

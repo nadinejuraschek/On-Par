@@ -10,12 +10,12 @@ export const emergencyNumbers = {
     { cells: [
       { value: "Au Pair in America 24-Hour Emergency Service" },
       { value: "+1 (800) 928-7247" },
-      { value: <ul className="ui list">
+      { value: (<ul className="ui list">
         <li>Community Counselor can not be reached</li>
         <li>severe issue that needs immediate attention</li>
         <li>legal trouble</li>
         <li>serious medical issue</li>
-      </ul> },
+      </ul>) },
     ] },
     { cells: [
       { value: "Ambulance, Police, Fire Department" },
