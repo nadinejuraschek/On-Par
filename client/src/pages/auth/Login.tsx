@@ -1,9 +1,9 @@
 import axios from "axios";
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import styles from "./auth.module.css";
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
-export const Login = () => {
+export const Login = (): JSX.Element => {
   const [email, setEmail] = useState( "" );
   const [password, setPassword] = useState( "" );
 

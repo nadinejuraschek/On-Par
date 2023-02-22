@@ -1,9 +1,11 @@
+import { Dispatch, SetStateAction } from 'react';
+
 import { TVariant } from "types";
 
 export interface ITabs {
   activeTab: number | string;
   fullWidth?: boolean;
-  handleClick: (value: number | string) => void;
+  handleClick: Dispatch<SetStateAction<string>>;
   spaceBetween?: boolean;
   tabs: TTab[];
   variant: TVariant;

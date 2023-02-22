@@ -4,7 +4,7 @@ import { createMarkup } from "utils";
 import styles from "./tax.module.css";
 import { taxInfo } from "data";
 
-export const Tax = () => {
+export const Tax = (): JSX.Element => {
   const { contentRows, headerRows } = taxInfo;
 
   const renderHeader = () => headerRows.cells.map( ( cell, index ) => (

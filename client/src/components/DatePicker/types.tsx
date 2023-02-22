@@ -1,7 +1,9 @@
+import { Dispatch, SetStateAction } from "react";
+
 import { Dayjs } from "dayjs";
 
 export interface IDatePicker {
-  setStartDate: (date: Date | Dayjs) => void;
+  setStartDate: Dispatch<SetStateAction<Date>>;
   startDate: Date;
 }
 

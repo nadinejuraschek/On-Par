@@ -1,4 +1,5 @@
-import { ReactNode } from "react";
+import { MouseEvent, ReactNode } from "react";
+
 import { TVariant } from "types";
 
 export interface IButton {
@@ -6,7 +7,7 @@ export interface IButton {
   children: ReactNode;
   className?: string;
   disabled?: boolean;
-  handleClick?: () => void;
+  handleClick?: (() => void) | ((event: MouseEvent) => void);
   label?: string;
   link?: string;
   round?: boolean;

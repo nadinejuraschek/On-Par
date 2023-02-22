@@ -1,13 +1,14 @@
-import { useState } from "react";
 import Calendar from "react-calendar";
+import { useState } from "react";
 
-export const CalendarView = () => {
+export const CalendarView = (): JSX.Element => {
   const [date, setDate] = useState( new Date() );
 
-  const handleChange = date => setDate( date );
+  const handleChange = (date: Date): void => setDate( date );
 
   return (
     <main>
+      {/* @ts-ignore-next-line */}
       <div>
         <Calendar
           showWeekNumbers

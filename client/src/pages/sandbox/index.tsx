@@ -1,10 +1,9 @@
 import { Button, Input, Tabs } from "components";
 
-import { useState } from "react";
 import styles from "./sandbox.module.css";
+import { useState } from "react";
 
-export const Sandbox = () => {
-  const [value, setValue] = useState("");
+export const Sandbox = (): JSX.Element => {
   const [activeTab, setActiveTab] = useState("cluster");
 
   const primaryTabs = [
@@ -32,6 +31,5 @@ export const Sandbox = () => {
       <Button disabled variant="danger">Danger</Button>
       <Button variant="warning">Warning</Button>
       <Button disabled variant="warning">Warning</Button>
-      <Input error="This field is required" name="name" value={ value } handleChange={ (e) => setValue(e.target.value) } label="Name" />
     </div>);
 }

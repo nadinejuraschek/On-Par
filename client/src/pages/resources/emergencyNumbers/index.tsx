@@ -2,10 +2,10 @@ import { Text } from "components";
 import { emergencyNumbers } from "data";
 import styles from "./emergencyNumbers.module.css";
 
-export const EmergencyNumbers = () => {
+export const EmergencyNumbers = (): JSX.Element => {
   const { contentRows, headerRows } = emergencyNumbers;
 
-  const renderHeaderRows = ( rows ) => {
+  const renderHeaderRows = ( rows ): JSX.Element[] => {
     return rows.map( ( row, index ) => (
       <tr key={ index }>
         { row.cells.map( ( cell, index ) => <th key={ index }>{ cell.value }</th> ) }
@@ -13,7 +13,7 @@ export const EmergencyNumbers = () => {
     ) );
   };
 
-  const renderContentRows = ( rows ) => {
+  const renderContentRows = ( rows ): JSX.Element[] => {
     return rows.map( ( row, index ) => (
       <tr key={ index }>
         { row.cells.map( ( cell, index ) => <td key={ index }>{ cell.value }</td> ) }

@@ -1,10 +1,11 @@
 import blankPic from "images/blankProfile.svg";
 
-export const CounselorInfo = () => (
+export const CounselorInfo = (): JSX.Element => (
   <div className="ui card">
     <div className="content">
       <img
         className="right floated mini ui avatar image"
+        /* @ts-ignore-next-line */
         src={ blankPic }
         alt="counselor"
       />

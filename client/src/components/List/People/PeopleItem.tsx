@@ -8,6 +8,7 @@ export const PeopleItem = ( { person }: IPeopleItem ): JSX.Element => {
 
   let age;
   if ( type === "hostchild" ) {
+    /* @ts-ignore-next-line */
     age = TimeUtils.getAge( birthday );
   }
 

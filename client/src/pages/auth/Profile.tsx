@@ -1,15 +1,16 @@
-import axios from "axios";
 import { Button, Flag } from "components";
-
-import { ProfileInput } from "components/Input";
-import { PeopleList } from "components/List";
-import { UserContext } from "contexts";
+import { MouseEvent, useContext, useState } from "react";
 import { mockHostChildren, mockHostParents } from "data";
+
+import { PeopleList } from "components/List";
+import { ProfileInput } from "components/Input";
+import { UserContext } from "contexts";
+import axios from "axios";
 import blankPic from "images/blankProfile.svg";
-import { useContext, useState } from "react";
 import styles from "./auth.module.css";
 
-export const Profile = () => {
+export const Profile = (): JSX.Element => {
+  /* @ts-ignore */
   const [user] = useContext( UserContext );
   // const daysNum = dayjs(new Date()).diff(user.startDate, 'days');
 
@@ -24,11 +25,11 @@ export const Profile = () => {
   const [familyID, setFamilyID] = useState( user.familyID );
   const [edit, setEdit] = useState( false );
 
-  const toggleEdit = () => {
+  const toggleEdit = (): void => {
     edit ? setEdit( false ) : setEdit( true );
   };
 
-  const handleEdit = event => {
+  const handleEdit = (event: MouseEvent): void => {
     event.preventDefault();
     axios.put( "/api/user/" + user._id, {
       email: email,
@@ -50,13 +51,17 @@ export const Profile = () => {
     } );
   };
 
-  const editButton = edit ? <Button label="Update" handleClick={ handleEdit } variant="primary" /> : <Button label="Edit" handleClick={ toggleEdit } variant="primary" />;
+  const editButton = edit ? (
+    <Button label="Update" handleClick={ handleEdit } variant="primary">Update</Button>)
+    :
+    (<Button label="Edit" handleClick={ toggleEdit } variant="primary">Edit</Button>);
 
   return (
     <main>
       <div className={ styles.grid }>
         <h2 className={ styles.header }>Your Profile</h2>
         <div className={ styles.imageContainer }>
+          {/* @ts-ignore */}
           <img className={ styles.image } src={ blankPic } alt={ user.firstname } />
           { /* <Filer /> */ }
         </div>

@@ -1,7 +1,8 @@
 import blankPic from "images/blankProfile.svg";
 
-export const AuPairInfo = () => (
+export const AuPairInfo = (): JSX.Element => (
   <div className="item">
+    {/* @ts-ignore-next-line */}
     <img className="ui avatar image" src={ blankPic } alt="aupair" />
     <div className="content">
       <p className="header">Friend Name</p>

@@ -2,7 +2,7 @@ import { Resources as ResourcesList, Text } from "components";
 
 import styles from "./resources.module.css";
 
-export const Resources = () => (
+export const Resources = (): JSX.Element => (
   <main>
     <div className={ styles.layout }>
       <Text as="h2" size="xl" weight="bold">Resources</Text>

@@ -1,11 +1,13 @@
-import axios from "axios";
-import { DatePicker } from "components";
 import * as dayjs from "dayjs";
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import styles from "./auth.module.css";
 
-export const Register = () => {
+import { FormEvent, useState } from "react";
+
+import { DatePicker } from "components";
+import axios from "axios";
+import styles from "./auth.module.css";
+import { useNavigate } from "react-router-dom";
+
+export const Register = (): JSX.Element => {
   // const [role, setRole] = useState('');
   // const [familyID, setFamilyID] = useState('');
   const [firstname, setFirstname] = useState( "" );
@@ -19,7 +21,7 @@ export const Register = () => {
 
   const navigate = useNavigate();
 
-  const handleSubmit = event => {
+  const handleSubmit = (event: FormEvent): void => {
     event.preventDefault();
 
     const newUser = {
@@ -62,7 +64,7 @@ export const Register = () => {
   };
 
   const handleDateChange = startDate => {
-    setStartDate( { startDate } );
+    setStartDate( startDate );
   };
 
   const toggleDatePicker = event => {

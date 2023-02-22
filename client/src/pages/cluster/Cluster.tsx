@@ -1,7 +1,7 @@
 import { AuPairInfo } from "./AuPairInfo";
 import { CounselorInfo } from "./CounselorInfo";
 
-export const Cluster = () => (
+export const Cluster = (): JSX.Element => (
   <main>
     <div className="ui vertical center aligned segment nav-push middle-aligned">
       <h2>My Cluster</h2>
