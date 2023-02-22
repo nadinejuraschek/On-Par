@@ -1,6 +1,8 @@
+import { ReactNode } from 'react';
+
 export interface IText {
   as?: TElement;
-  children: string | string[] | JSX.Element | JSX.Element[];
+  children: ReactNode;
   className?: string;
   color?: string;
   htmlFor?: string;

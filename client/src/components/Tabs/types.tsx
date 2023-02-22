@@ -11,6 +11,6 @@ export interface ITabs {
 
 export type TTab = {
   disabled?: boolean;
-  label: string;
+  label: JSX.Element | string;
   value: number | string;
 }

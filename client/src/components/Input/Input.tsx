@@ -4,6 +4,7 @@ import { Text } from "../Text";
 import styles from "./input.module.css";
 
 export const Input = ( {
+  className = '',
   error,
   handleChange,
   icon,

@@ -18,7 +18,7 @@ export const AddGoal = ( { handleText, handleType, text, type }: IAddGoal ): JSX
 
   return (
     <div className={ styles.addContainer }>
-      <Tabs acitveTab={ type } fullWidth handleClick={ handleType } tabs={ tabs } variant="secondary" />
+      <Tabs activeTab={ type } fullWidth handleClick={ handleType } tabs={ tabs } variant="secondary" />
       <Input
         className={ styles.input }
         name="goal"

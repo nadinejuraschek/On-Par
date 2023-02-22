@@ -1,11 +1,12 @@
+import { ReactNode } from "react";
 import { TVariant } from "types";
 
 export interface IButton {
   align?: "alignCenter" | "alignStart" | "alignEnd";
-  children: string | JSX.Element | JSX.Element[];
+  children: ReactNode;
   className?: string;
   disabled?: boolean;
-  handleClick: () => void;
+  handleClick?: () => void;
   label?: string;
   link?: string;
   round?: boolean;
@@ -13,7 +14,7 @@ export interface IButton {
 }
 
 export interface IAddButton {
-  handleClick: () => void;
+  handleClick: any;
 }
 
 export interface ICloseButton {

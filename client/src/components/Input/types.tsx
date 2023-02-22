@@ -6,9 +6,10 @@ export interface IDateInput {
 }
 
 export interface IInput {
-  error: string;
+  className?: string;
+  error?: string;
   handleChange: (value: string) => void;
-  icon: string;
+  icon?: string;
   label: string;
   name: string;
   placeholder?: string;

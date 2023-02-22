@@ -1,12 +1,4 @@
-import { LayoutWithNavbar } from "layout";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import {
-  GoalProvider,
-  NoteProvider,
-  PaymentProvider,
-  UserProvider,
-  WorkhourProvider,
-} from "./contexts";
 import {
   Dev,
   EmergencyNumbers,
@@ -24,9 +16,17 @@ import {
   Tax,
   Workhours,
 } from "./pages";
+import {
+  GoalProvider,
+  NoteProvider,
+  PaymentProvider,
+  UserProvider,
+  WorkhourProvider,
+} from "./contexts";
 
+import { LayoutWithNavbar } from "layout";
 
-export const App = () => (
+export const App = (): JSX.Element => (
   <BrowserRouter>
     <Routes>
       { /* Landing Page */ }

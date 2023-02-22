@@ -1,5 +1,7 @@
+import { ReactNode } from 'react';
+
 export interface ICard {
-  children: JSX.Element | JSX.Element[];
+  children: ReactNode;
   className?: string;
   withHover?: boolean;
 }
