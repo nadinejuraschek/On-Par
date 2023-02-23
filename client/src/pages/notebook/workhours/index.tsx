@@ -7,7 +7,6 @@ import styles from "./workhours.module.css";
 
 export const Workhours = (): JSX.Element => {
   const [tab, setTab] = useState( "weekly" );
-  /* @ts-ignore-next-line */
   const { getWorkhours, todayHours, workhours } = useContext( WorkhourContext );
 
   const tabs = [

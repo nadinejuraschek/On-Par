@@ -1,8 +1,11 @@
-import axios from "axios";
-import { useState, createContext, useEffect } from "react";
-export const NoteContext = createContext();
+import { INoteContext, INoteProvider } from "./types";
+import { createContext, useEffect, useState } from "react";
 
-export const NoteProvider = props => {
+import axios from "axios";
+
+export const NoteContext = createContext<INoteContext>({});
+
+export const NoteProvider = ({ children }: INoteProvider): JSX.Element => {
   const [notes, setNotes] = useState( [] );
   // const [ newNote, setNewNote ] = useState({ date: '', text: '' });
 
@@ -10,7 +13,7 @@ export const NoteProvider = props => {
     getNotes();
   }, [] );
 
-  const getNotes = () => {
+  const getNotes = (): void => {
     axios( {
       url: "/api/user/:id/notes",
       method: "GET",
@@ -44,7 +47,7 @@ export const NoteProvider = props => {
   //     });
   // };
 
-  const deleteNote = noteid => {
+  const deleteNote = (noteid: string): void => {
     axios
       .delete( "/api/notes/" + noteid )
       .then( res => {
@@ -57,7 +60,7 @@ export const NoteProvider = props => {
 
   return (
     <NoteContext.Provider value={ { notes, getNotes, deleteNote } }>
-      { props.children }
+      { children }
     </NoteContext.Provider>
   );
 };

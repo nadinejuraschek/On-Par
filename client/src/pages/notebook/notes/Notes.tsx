@@ -1,14 +1,13 @@
 import { AddNote } from "./AddNote";
 import { NoteCard } from "./NoteCard";
-import { NoteContext } from "contexts/NoteContext";
+import { NoteContext } from "contexts";
 import { Suggestions } from "./Suggestions";
-import { TNote } from "./types";
+import { TNote } from "contexts/NoteContext/types";
 import { Text } from "components";
 import styles from "./notes.module.css";
 import { useContext } from "react";
 
 export const Notes = (): JSX.Element => {
-  /* @ts-ignore-next-line */
   const { deleteNote, editNote, getNotes, notes } = useContext( NoteContext );
 
   return (

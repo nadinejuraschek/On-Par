@@ -6,10 +6,8 @@ import { useContext } from "react";
 
 export const PaymentTable = (): JSX.Element => {
   const {
-    /* @ts-ignore-next-line */
     deletePayment,
     // getPayments,
-    /* @ts-ignore-next-line */
     payments,
    } = useContext( PaymentContext );
   const sortedPayments = payments.reverse();

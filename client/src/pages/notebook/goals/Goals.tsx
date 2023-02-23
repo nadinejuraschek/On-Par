@@ -5,7 +5,6 @@ import styles from "./goals.module.css";
 import { useContext } from "react";
 
 export const Goals = (): JSX.Element => {
-  /* @ts-ignore-next-line */
   const { nineMonths, sixMonths, threeMonths, twelveMonths } = useContext( GoalContext );
 
   return (

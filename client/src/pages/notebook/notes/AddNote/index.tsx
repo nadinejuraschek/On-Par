@@ -3,13 +3,12 @@ import * as dayjs from "dayjs";
 import { Button, Card, Text } from "components";
 import { useContext, useState } from "react";
 
-import { NoteContext } from "contexts/NoteContext";
+import { NoteContext } from "contexts";
 import axios from "axios";
 import styles from "./addNote.module.css";
 
 export const AddNote = (): JSX.Element => {
   const currentDate = dayjs().format("MMMM D, YYYY");
-  /* @ts-ignore-next-line */
   const { getNotes } = useContext( NoteContext );
   const [newNote, setNewNote] = useState( { date: currentDate, text: "", title: "" } );
 

@@ -1,9 +1,13 @@
-import axios from "axios";
 import * as dayjs from "dayjs";
-import { useState, useEffect, createContext } from "react";
-export const WorkhourContext = createContext();
 
-export const WorkhourProvider = ( { children } ) => {
+import { IWorkhourContext, IWorkhourProvider, THour } from "./types";
+import { createContext, useEffect, useState } from "react";
+
+import axios from "axios";
+
+export const WorkhourContext = createContext<IWorkhourContext>({});
+
+export const WorkhourProvider = ( { children }: IWorkhourProvider ): JSX.Element => {
   const [workhours, setWorkhours] = useState( [] );
   const [todayHours, setTodayHours] = useState( 0 );
 
@@ -12,7 +16,7 @@ export const WorkhourProvider = ( { children } ) => {
     getTodayHours();
   }, [] );
 
-  const getWorkhours = () => {
+  const getWorkhours = (): void => {
     axios( {
       url: "/api/user/:id/workhours",
       method: "GET",
@@ -22,21 +26,22 @@ export const WorkhourProvider = ( { children } ) => {
   };
 
   const currentDate = dayjs( new Date() );
-  const getTodayHours = () => {
+  const getTodayHours = (): void => {
     axios( {
       url: "/api/user/:id/workhours",
       method: "GET",
     } ).then( res => {
       const hours = res.data.workhours;
-      hours.forEach( hour => {
+      hours.forEach( (hour: THour): void => {
         if ( hour.dateFormat === currentDate.format( "YY-MM-DD" ) ) {
           setTodayHours( hour.total );
         }
+        return;
       } );
     } );
   };
 
-  const deleteWorkhours = workhourid => {
+  const deleteWorkhours = (workhourid: string) => {
     axios.delete( "/api/workhours/" + workhourid ).then( res => {
       getWorkhours();
     } );

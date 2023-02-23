@@ -6,7 +6,6 @@ import axios from "axios";
 import styles from "./payments.module.css";
 
 export const AddPayment = (): JSX.Element => {
-  /* @ts-ignore-next-line */
   const { getPayments } = useContext( PaymentContext );
   const [newPayment, setNewPayment] = useState( {
     week: 0,

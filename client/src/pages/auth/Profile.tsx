@@ -10,7 +10,7 @@ import blankPic from "images/blankProfile.svg";
 import styles from "./auth.module.css";
 
 export const Profile = (): JSX.Element => {
-  /* @ts-ignore */
+  /* @ts-ignore-next-line */
   const [user] = useContext( UserContext );
   // const daysNum = dayjs(new Date()).diff(user.startDate, 'days');
 
@@ -61,7 +61,7 @@ export const Profile = (): JSX.Element => {
       <div className={ styles.grid }>
         <h2 className={ styles.header }>Your Profile</h2>
         <div className={ styles.imageContainer }>
-          {/* @ts-ignore */}
+          {/* @ts-ignore-next-line */}
           <img className={ styles.image } src={ blankPic } alt={ user.firstname } />
           { /* <Filer /> */ }
         </div>

@@ -1,10 +1,12 @@
+import { createContext, useEffect, useState } from "react";
+
+import { IUserProvider } from "./types";
+import { Loading } from "../../components";
 import axios from "axios";
-import { useState, createContext, useEffect } from "react";
-import { Loading } from "../components";
 
-export const UserContext = createContext();
+export const UserContext = createContext({});
 
-export const UserProvider = ( { children } ) => {
+export const UserProvider = ( { children }: IUserProvider ): JSX.Element => {
   const [user, setUser] = useState( null );
 
   useEffect( () => {

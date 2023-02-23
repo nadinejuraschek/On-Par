@@ -9,7 +9,6 @@ import axios from "axios";
 import styles from "./goals.module.css";
 
 export const Goals = ( { data, month }: IGoalsList ): JSX.Element => {
-  /* @ts-ignore-next-line */
   const { checkGoal, getGoals } = useContext( GoalContext );
 
   const [openAddGoal, setOpenAddGoal] = useState( false );

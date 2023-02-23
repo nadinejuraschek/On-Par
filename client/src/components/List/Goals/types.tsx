@@ -1,3 +1,5 @@
+import { TGoal } from "contexts/GoalContext/types";
+
 export interface IGoalsList {
   className?: string;
   data: any;
@@ -6,19 +8,12 @@ export interface IGoalsList {
 
 export interface IGoalItem {
   handleCheck: (id: string) => void;
-  item: TGoalItem;
+  item: TGoal;
 }
 
 export interface IAddGoal {
   handleText: (value: string) => void;
   handleType: (value: string) => void;
-  text: string;
-  type: string;
-}
-
-export type TGoalItem = {
-  _id: string;
-  checked: boolean;
   text: string;
   type: string;
 }

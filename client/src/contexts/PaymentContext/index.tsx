@@ -1,15 +1,18 @@
-import axios from "axios";
-import { useState, createContext, useEffect } from "react";
-export const PaymentContext = createContext();
+import { IPaymentContext, IPaymentProvider } from "./types";
+import { createContext, useEffect, useState } from "react";
 
-export const PaymentProvider = props => {
+import axios from "axios";
+
+export const PaymentContext = createContext<IPaymentContext>({});
+
+export const PaymentProvider = ({ children }: IPaymentProvider): JSX.Element => {
   const [payments, setPayments] = useState( [] );
 
   useEffect( () => {
     getPayments();
   }, [] );
 
-  const getPayments = () => {
+  const getPayments = (): void => {
     axios( {
       url: "/api/user/:id/payments",
       method: "GET",
@@ -18,7 +21,7 @@ export const PaymentProvider = props => {
     } ).catch( error => console.log( "Error: ", error ) );
   };
 
-  const deletePayment = paymentid => {
+  const deletePayment = (paymentid: string): void => {
     axios.delete( "/api/payments/" + paymentid ).then( res => {
       getPayments();
     } );
@@ -26,7 +29,7 @@ export const PaymentProvider = props => {
 
   return (
     <PaymentContext.Provider value={ { payments, getPayments, deletePayment } }>
-      { props.children }
+      { children }
     </PaymentContext.Provider>
   );
 };
