@@ -24,8 +24,8 @@ export interface IInput {
 
 export interface ITime {
   end: string;
-  handleEnd: Dispatch<(prevState: undefined) => undefined>;
-  handleStart: Dispatch<(prevState: undefined) => undefined>;
+  handleEnd: any;
+  handleStart: any;
   start: string;
 }
 

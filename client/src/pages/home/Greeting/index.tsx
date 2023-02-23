@@ -28,7 +28,6 @@ export const Greeting = ( { message, name }: IGreeting ): JSX.Element => {
     } else {
       setGreeting( `Up so late, ${ name }?` );
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [] );
 
   return (

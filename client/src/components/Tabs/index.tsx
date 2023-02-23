@@ -17,7 +17,6 @@ export const Tabs = ({
       const { disabled = false, label, value } = tab;
       const isActive = value === (activeTab || tabs[0].value);
       return (
-        // eslint-disable-next-line jsx-a11y/no-static-element-interactions
         <div
           className={ `${ styles.tab } ${ styles[variant] } ${ isActive && styles.active } ${ disabled && styles.disabled }` }
           key={ `tab_${ value }` }

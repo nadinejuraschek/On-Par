@@ -14,7 +14,7 @@ export const Time = ( { end, handleEnd, handleStart, start }: ITime ): JSX.Eleme
         name="start"
         placeholder={ start }
         value={ start }
-        onChange={ (event: ChangeEvent) => handleStart( (event.target as HTMLInputElement).value ) }
+        onChange={ (event: ChangeEvent) => handleStart( (event.target as HTMLInputElement).value )}
       />
     </div>
     <div className={ styles.stacked }>

@@ -5,7 +5,7 @@ import { TVariant } from "types";
 export interface ITabs {
   activeTab: number | string;
   fullWidth?: boolean;
-  handleClick: Dispatch<SetStateAction<string>>;
+  handleClick: Dispatch<SetStateAction<number | string>>;
   spaceBetween?: boolean;
   tabs: TTab[];
   variant: TVariant;

@@ -113,7 +113,7 @@ module.exports = {
     "array-element-newline": ["warn", { "multiline": true, "minItems": 4 }],
     "arrow-spacing": ["warn", { "before": true, "after": true }],
     "block-spacing": ["warn", "always"],
-    "comma-dangle": ["warn", "always-multiline"]
+    "comma-dangle": ["warn", "always-multiline"],
   },
   settings: {
     react: {

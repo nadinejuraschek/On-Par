@@ -2,6 +2,7 @@ import { ReactNode } from "react";
 
 export interface INoteContext {
   notes?: TNote[];
+  editNote?: (id: string) => void;
   getNotes?: () => void;
   deleteNote?: (id: string) => void;
 }

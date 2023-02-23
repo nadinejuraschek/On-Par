@@ -1,10 +1,11 @@
 import { AddButton, Card, CloseButton, Text } from "components";
-import { IGoalsList, TGoalItem } from "./types";
 import { MouseEvent, useContext, useState } from "react";
 
 import { AddGoal } from "./AddGoal";
 import { GoalContext } from "contexts";
 import { GoalItem } from "./GoalItem";
+import { IGoalsList } from "./types";
+import { TGoal } from "contexts/GoalContext/types";
 import axios from "axios";
 import styles from "./goals.module.css";
 
@@ -15,9 +16,9 @@ export const Goals = ( { data, month }: IGoalsList ): JSX.Element => {
   const [type, setType] = useState( "personal" );
   const [text, setText] = useState( "" );
 
-  const education = data.filter( (item: TGoalItem) => item.type === "education" );
-  const personal = data.filter( (item: TGoalItem) => item.type === "personal" );
-  const travel = data.filter( (item: TGoalItem) => item.type === "travel" );
+  const education = data.filter( ({ type }: TGoal) => type === "education" );
+  const personal = data.filter( ({ type }: TGoal) => type === "personal" );
+  const travel = data.filter( ({ type }: TGoal) => type === "travel" );
 
   const handleCreate = (event: MouseEvent) => {
     event.preventDefault();
@@ -67,21 +68,21 @@ export const Goals = ( { data, month }: IGoalsList ): JSX.Element => {
         />
       ) : (
         <ul className={ styles.list }>
-          { education.map( ( item: TGoalItem, index: number ) => (
+          { education.map( ( item: TGoal, index: number ) => (
             <GoalItem
               item={ item }
               key={ index }
               handleCheck={ checkGoal }
             />
           ) ) }
-          { personal.map( ( item: TGoalItem, index: number ) => (
+          { personal.map( ( item: TGoal, index: number ) => (
             <GoalItem
               item={ item }
               key={ index }
               handleCheck={ checkGoal }
             />
           ) ) }
-          { travel.map( ( item: TGoalItem, index: number ) => (
+          { travel.map( ( item: TGoal, index: number ) => (
             <GoalItem
               item={ item }
               key={ index }

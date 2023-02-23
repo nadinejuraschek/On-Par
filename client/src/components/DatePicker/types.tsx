@@ -17,7 +17,7 @@ export interface ICell {
   formattedDate: string;
   handleDateClick: (date: Date | Dayjs) => void;
   monthStart: Date | Dayjs;
-  selectedDate: Date;
+  selectedDate: Date | Dayjs;
 }
 
 export interface ICells {
