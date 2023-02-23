@@ -1,11 +1,17 @@
 import { Card } from "components";
 import { PaymentContext } from "contexts/PaymentContext";
-import { useContext } from "react";
 import { PaymentEntry } from "./PaymentEntry";
 import styles from "./payments.module.css";
+import { useContext } from "react";
 
-export const PaymentTable = () => {
-  const { deletePayment, getPayments, payments } = useContext( PaymentContext );
+export const PaymentTable = (): JSX.Element => {
+  const {
+    /* @ts-ignore-next-line */
+    deletePayment,
+    // getPayments,
+    /* @ts-ignore-next-line */
+    payments,
+   } = useContext( PaymentContext );
   const sortedPayments = payments.reverse();
 
   return (
@@ -22,7 +28,7 @@ export const PaymentTable = () => {
             paymentid={ payment._id }
             payment={ payment }
             deletePayment={ deletePayment }
-            getPayments={ getPayments }
+            // getPayments={ getPayments }
           />
         ) ) }
       </div>

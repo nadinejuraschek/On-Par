@@ -1,5 +1,5 @@
 export interface IProgressRing {
-  label: string;
+  label: number | string;
   progress: number;
   radius: number;
   stroke: number;

@@ -6,7 +6,7 @@ import { DatePicker } from "../DatePicker";
 import { IDateInput } from "./types";
 import styles from "./input.module.css";
 
-export const Date = ( { date, handleChange, icon, label }: IDateInput ): JSX.Element => {
+export const Date = ( { date, handleChange, icon, label, name }: IDateInput ): JSX.Element => {
   const [openDatePicker, setOpenDatePicker] = useState( false );
 
   const toggleDatePicker = (event: MouseEvent): void => {
@@ -16,7 +16,7 @@ export const Date = ( { date, handleChange, icon, label }: IDateInput ): JSX.Ele
 
   return (
     <div className={ `field ${ styles.stacked }` }>
-      <label className={ styles.label }>{ label }</label>
+      <label className={ styles.label } htmlFor={name}>{ label }</label>
       <div className={ styles.dateInput } onClick={ toggleDatePicker } role="presentation">
         <input
           type="text"

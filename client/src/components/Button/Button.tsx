@@ -11,6 +11,7 @@ export const Button = ({
   label = "",
   link,
   round = false,
+  type = 'button',
   variant = "secondary",
 }: IButton): JSX.Element => {
   if (link) {
@@ -27,7 +28,10 @@ export const Button = ({
 
   return (
     <button
-      className={ `${ className } ${ styles.btn } ${ styles[variant] } ${ disabled && styles.disabled } ${ align && styles[align] } ${ round && styles.round }` } onClick={ handleClick }>
+      className={ `${ className } ${ styles.btn } ${ styles[variant] } ${ disabled && styles.disabled } ${ align && styles[align] } ${ round && styles.round }` }
+      onClick={ handleClick }
+      type={ type }
+    >
       { children }
     </button>
   );

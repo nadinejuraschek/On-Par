@@ -2,9 +2,14 @@
 
 // import axios from 'axios';
 
+import { IPaymentEntry } from "./types";
 import styles from "./payments.module.css";
 
-export const PaymentEntry = ( { deletePayment, payment, paymentid } ) => {
+export const PaymentEntry = ( {
+  deletePayment,
+  payment,
+  paymentid,
+}: IPaymentEntry ): JSX.Element => {
   // const [show, setShow] = useState(false);
   // const [updatedPayment, setUpdatedPayment] = useState({});
 
@@ -33,19 +38,21 @@ export const PaymentEntry = ( { deletePayment, payment, paymentid } ) => {
     setUpdatedPayment(updatedPayment => ({ ...updatedPayment, [name]: value }));
   }; */
 
+  const { date, late, week } = payment;
+
   return (
     <>
       <div className={ styles.listItem }>
-        <div className={ styles.itemWeek }>{ payment.week }</div>
+        <div className={ styles.itemWeek }>{ week }</div>
         <div
           className={ `${ styles.itemDate } ${
-            payment.late ? styles.paidLate : ""
+            late ? styles.paidLate : ""
           }` }
         >
-          { payment.date }
+          { date }
         </div>
         <div className={ styles.itemDue }>
-          { payment.late ? (
+          { late ? (
             <i className="icon light checkmark"></i>
           ) : (
             <i className="icon dark close"></i>
@@ -104,7 +111,7 @@ export const PaymentEntry = ( { deletePayment, payment, paymentid } ) => {
               <input
                 type='text'
                 name='date'
-                placeholder={payment.date}
+                placeholder={date}
                 onChange={handleChange}
               />
             </div>

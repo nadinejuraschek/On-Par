@@ -1,12 +1,14 @@
-import { Text } from "components";
-import { NoteContext } from "contexts/NoteContext";
-import { useContext } from "react";
 import { AddNote } from "./AddNote";
 import { NoteCard } from "./NoteCard";
-import styles from "./notes.module.css";
+import { NoteContext } from "contexts/NoteContext";
 import { Suggestions } from "./Suggestions";
+import { TNote } from "./types";
+import { Text } from "components";
+import styles from "./notes.module.css";
+import { useContext } from "react";
 
-export const Notes = () => {
+export const Notes = (): JSX.Element => {
+  /* @ts-ignore-next-line */
   const { deleteNote, editNote, getNotes, notes } = useContext( NoteContext );
 
   return (
@@ -16,16 +18,17 @@ export const Notes = () => {
         <Suggestions />
         <AddNote />
         <div className={ styles.list }>
-          { notes.map( (note, index) => {
+          { notes.map( (note: TNote, index: number) => {
             const color = index % 3 === 0 ? "warning" : index % 2 === 0 ? "secondary" : "tertiary";
+            const { _id, date, text, title } = note;
             return (
               <NoteCard
                 color={ color }
-                key={ note._id }
-                noteid={ note._id }
-                date={ note.date }
-                text={ note.text }
-                title={ note.title }
+                key={ _id }
+                noteid={ _id }
+                date={ date }
+                text={ text }
+                title={ title }
                 deleteNote={ deleteNote }
                 editNote={ editNote }
                 getNotes={ getNotes }

@@ -1,12 +1,13 @@
 import { Card, Tabs, Text, Timer, WeeklyHours as WeeklyList } from "components";
-import { WorkhourContext } from "contexts";
 import { useContext, useState } from "react";
 
 import { AddHours } from "./components/AddHours";
+import { WorkhourContext } from "contexts";
 import styles from "./workhours.module.css";
 
-export const Workhours = () => {
+export const Workhours = (): JSX.Element => {
   const [tab, setTab] = useState( "weekly" );
+  /* @ts-ignore-next-line */
   const { getWorkhours, todayHours, workhours } = useContext( WorkhourContext );
 
   const tabs = [

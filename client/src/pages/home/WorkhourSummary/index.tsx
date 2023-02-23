@@ -3,7 +3,7 @@ import { useMemo, useState } from "react";
 
 import styles from "./workhour.module.css";
 
-export const WorkhourSummary = () => {
+export const WorkhourSummary = (): JSX.Element => {
   const [activeTab, setActiveTab] = useState("day");
 
   const tabs = [

@@ -1,24 +1,25 @@
-import axios from "axios";
-import { AddButton, Text } from "components";
-import { Date, Time } from "components/Input";
 import * as dayjs from "dayjs";
 
+import { AddButton, Text } from "components";
+import { Date, Time } from "components/Input";
 
-import { useState } from "react";
+import { FormEvent } from 'react';
+import axios from "axios";
 import styles from "../workhours.module.css";
+import { useState } from "react";
 
-export const AddHours = ( { updateWorkhours } ) => {
+export const AddHours = ( { updateWorkhours } ): JSX.Element => {
   const today = dayjs();
   const [start, setStart] = useState();
   const [end, setEnd] = useState();
   const [date, setDate] = useState( today );
 
-  const handleSubmit = event => {
+  const handleSubmit = (event: FormEvent): void => {
     event.preventDefault();
 
-    const setTime = ( time ) => {
-      const hours = time.split( ":" )[0];
-      const minutes = time.split( ":" )[1];
+    const setTime = ( time: string ): dayjs.Dayjs => {
+      const hours = Number(time.split( ":" )[0]);
+      const minutes = Number(time.split( ":" )[1]);
       const newTime = dayjs( date ).set( "hour", hours ).set( "minute", minutes );
       return newTime;
     };

@@ -1,13 +1,15 @@
-import axios from "axios";
+import * as dayjs from "dayjs";
+
 import { Button, Card, Text } from "components";
+import { useContext, useState } from "react";
 
 import { NoteContext } from "contexts/NoteContext";
-import dayjs from "dayjs";
-import { useContext, useState } from "react";
+import axios from "axios";
 import styles from "./addNote.module.css";
 
-export const AddNote = () => {
+export const AddNote = (): JSX.Element => {
   const currentDate = dayjs().format("MMMM D, YYYY");
+  /* @ts-ignore-next-line */
   const { getNotes } = useContext( NoteContext );
   const [newNote, setNewNote] = useState( { date: currentDate, text: "", title: "" } );
 
@@ -52,8 +54,7 @@ export const AddNote = () => {
             className={ styles.textarea }
             name="text"
             onChange={ handleChange }
-            rows="3"
-            type="textarea"
+            rows={3}
             placeholder="Note"
             value={ newNote.text }
           />

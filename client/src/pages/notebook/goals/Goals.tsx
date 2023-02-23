@@ -1,10 +1,11 @@
 import { Goals as GoalsList, Text } from "components";
 
 import { GoalContext } from "contexts";
-import { useContext } from "react";
 import styles from "./goals.module.css";
+import { useContext } from "react";
 
-export const Goals = () => {
+export const Goals = (): JSX.Element => {
+  /* @ts-ignore-next-line */
   const { nineMonths, sixMonths, threeMonths, twelveMonths } = useContext( GoalContext );
 
   return (

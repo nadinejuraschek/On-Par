@@ -1,6 +1,7 @@
 export interface IGoalsList {
+  className?: string;
   data: any;
-  month: string;
+  month: number;
 }
 
 export interface IGoalItem {

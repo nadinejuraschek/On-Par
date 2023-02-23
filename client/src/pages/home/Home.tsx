@@ -1,18 +1,19 @@
-import axios from "axios";
 import { Button, Card } from "components";
-import { UserContext } from "contexts";
 import { useContext, useState } from "react";
 
-import { useNavigate } from "react-router-dom";
 import { Countdown } from "./Countdown";
 import { DailyPlan } from "./DailyPlan";
 import { Greeting } from "./Greeting";
-import styles from "./home.module.css";
 import { Quicklinks } from "./Quicklinks";
 import { Reminders } from "./Reminders";
+import { UserContext } from "contexts";
 import { WorkhourSummary } from "./WorkhourSummary";
+import axios from "axios";
+import styles from "./home.module.css";
+import { useNavigate } from "react-router-dom";
 
-export const Home = () => {
+export const Home = (): JSX.Element => {
+  /* @ts-ignore-next-line */
   const [user] = useContext( UserContext );
   const [message, setMessage] = useState( "" );
 

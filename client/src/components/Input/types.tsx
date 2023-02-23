@@ -1,8 +1,14 @@
+import { ChangeEventHandler, Dispatch, SetStateAction } from 'react';
+
+import { Dayjs } from 'dayjs';
+
 export interface IDateInput {
-  date: Date;
-  handleChange: () => void;
+  date: Date | Dayjs;
+  handleChange: Dispatch<SetStateAction<any>>;
   icon: string;
   label: string;
+  name: string;
+  value?: Date | Dayjs;
 }
 
 export interface IInput {
@@ -18,8 +24,8 @@ export interface IInput {
 
 export interface ITime {
   end: string;
-  handleEnd: (value: string) => void;
-  handleStart: (value: string) => void;
+  handleEnd: Dispatch<(prevState: undefined) => undefined>;
+  handleStart: Dispatch<(prevState: undefined) => undefined>;
   start: string;
 }
 

@@ -3,12 +3,12 @@ import { Dispatch, SetStateAction } from "react";
 import { Dayjs } from "dayjs";
 
 export interface IDatePicker {
-  setStartDate: Dispatch<SetStateAction<Date>>;
-  startDate: Date;
+  setStartDate: Dispatch<SetStateAction<any>>;
+  startDate: Date | Dayjs;
 }
 
 export interface IMonth {
-  currentDate: Date;
+  currentDate: Date | Dayjs;
   handleCurrentDate: (date: Dayjs) => void;
 }
 
@@ -21,7 +21,7 @@ export interface ICell {
 }
 
 export interface ICells {
-  currentDate: Date;
+  currentDate: Date | Dayjs;
   handleDateClick: (date: Date | Dayjs) => void;
-  selectedDate: Date;
+  selectedDate: Date | Dayjs;
 }

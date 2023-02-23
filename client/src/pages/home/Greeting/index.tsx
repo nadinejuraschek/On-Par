@@ -1,15 +1,16 @@
+import { useEffect, useState } from "react";
 
+import { IGreeting } from "./types";
 import { Text } from "components";
 import blankProfile from "images/blankProfile.svg";
-import { useEffect, useState } from "react";
 import styles from "./greeting.module.css";
 
-export const Greeting = ( { message, name } ) => {
+export const Greeting = ( { message, name }: IGreeting ): JSX.Element => {
   const month = new Date().getMonth() + 1;
   const day = new Date().getDate();
   const date = `${ month }/${ day }`;
   const time = new Date().getHours();
-  const [ greeting, setGreeting ] = useState();
+  const [ greeting, setGreeting ] = useState('');
 
   useEffect( () => {
     if ( date === "12/24" || date === "12/25" ) {
@@ -32,6 +33,7 @@ export const Greeting = ( { message, name } ) => {
 
   return (
     <div className={ styles.greeting }>
+      {/* @ts-ignore-next-line */}
       <img className={ styles.profile } src={ blankProfile } alt={ name } />
       <div className={ styles.messages }>
         <Text as="h2" size="lg" weight="bold">{ greeting }</Text>

@@ -1,11 +1,12 @@
-import axios from "axios";
-import { Card } from "components";
 import { useContext, useState } from "react";
 
-import styles from "./payments.module.css";
+import { Card } from "components";
 import { PaymentContext } from "../../../contexts/PaymentContext";
+import axios from "axios";
+import styles from "./payments.module.css";
 
-export const AddPayment = () => {
+export const AddPayment = (): JSX.Element => {
+  /* @ts-ignore-next-line */
   const { getPayments } = useContext( PaymentContext );
   const [newPayment, setNewPayment] = useState( {
     week: 0,
@@ -58,6 +59,7 @@ export const AddPayment = () => {
               name="paid"
               className="ui fluid dropdown"
               onChange={ handleChange }
+              /* @ts-ignore-next-line */
               value={ newPayment.paid }
             >
               <option value=""></option>
@@ -81,6 +83,7 @@ export const AddPayment = () => {
               name="late"
               className="ui fluid dropdown"
               onChange={ handleChange }
+              /* @ts-ignore-next-line */
               value={ newPayment.late }
             >
               <option value=""></option>

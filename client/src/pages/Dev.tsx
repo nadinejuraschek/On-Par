@@ -1,4 +1,4 @@
-export const Dev = () => (
+export const Dev = (): JSX.Element => (
   <main>
     <div className="custom-container">
       <h2>This feature is currently in development.</h2>

@@ -1,11 +1,12 @@
-import { ProgressRing, Tabs } from "components";
 import * as dayjs from "dayjs";
 
+import { ProgressRing, Tabs } from "components";
 import { useEffect, useState } from "react";
 
+import { ICountdown } from "./types";
 import styles from "./countdown.module.css";
 
-export const Countdown = ( { setMessage, startDate } ) => {
+export const Countdown = ( { setMessage, startDate }: ICountdown ): JSX.Element => {
   const [tab, setTab] = useState( "days" );
 
   const tabs = [
@@ -66,8 +67,8 @@ export const Countdown = ( { setMessage, startDate } ) => {
     <div className={ styles.container }>
       <div className={ styles.body }>
         <ProgressRing
-          radius="60"
-          stroke="4"
+          radius={60}
+          stroke={4}
           progress={ progress() }
           label={ progressLabel() }
         />

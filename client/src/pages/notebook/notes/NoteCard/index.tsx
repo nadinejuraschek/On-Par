@@ -1,10 +1,11 @@
-import axios from "axios";
 import { Button, Card, Text } from "components";
 import { useCallback, useMemo, useState } from "react";
 
+import { INoteCard } from "./types";
+import axios from "axios";
 import styles from "./noteCard.module.css";
 
-export const NoteCard = ( { color, date, deleteNote, getNotes, noteid, text, title } ) => {
+export const NoteCard = ( { color, date, deleteNote, getNotes, noteid, text, title = '' }: INoteCard ): JSX.Element => {
   const [updatedNote, setUpdatedNote] = useState( {} );
   const [showEditForm, setShowEditForm] = useState( false );
 
@@ -71,16 +72,19 @@ export const NoteCard = ( { color, date, deleteNote, getNotes, noteid, text, tit
         <textarea
           name="text"
           onChange={ handleChange }
-          rows="3"
-          type="textarea"
+          rows={3}
           placeholder={ text }
         />
       </div>
       <div className={ styles.editActions }>
-        <Button handleClick={ () => {
-          setShowEditForm(false);
-          setUpdatedNote({});
-        } }>Cancel</Button>
+        <Button
+          handleClick={ () => {
+            setShowEditForm(false);
+            setUpdatedNote({});
+          } }
+        >
+          Cancel
+        </Button>
         <Button type="submit" variant="primary">Save</Button>
       </div>
     </form>
