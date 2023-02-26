@@ -2,6 +2,7 @@ import { INoteContext, INoteProvider } from "./types";
 import { createContext, useEffect, useState } from "react";
 
 import axios from "axios";
+import { toast } from "react-toastify";
 
 export const NoteContext = createContext<INoteContext>({});
 
@@ -19,7 +20,10 @@ export const NoteProvider = ({ children }: INoteProvider): JSX.Element => {
       method: "GET",
     } ).then( res => {
       setNotes( res.data.notes );
-    } ).catch( error => console.log( "Error: ", error ) );
+    } ).catch( () => {
+      toast.error("Could not fetch notes. Please try again later!");
+      // console.debug( "Error: ", error );
+    });
   };
 
   // const postNote = () => {
@@ -50,11 +54,13 @@ export const NoteProvider = ({ children }: INoteProvider): JSX.Element => {
   const deleteNote = (noteid: string): void => {
     axios
       .delete( "/api/notes/" + noteid )
-      .then( res => {
+      .then( () => {
+        toast.success("The note has been deleted successfully!");
         getNotes();
       } )
-      .catch( error => {
-        console.log( "Error: " + error.response );
+      .catch( () => {
+        toast.error("Could not delete the note. Please try again later!");
+        // console.debug( "Error: " + error.response );
       } );
   };
 

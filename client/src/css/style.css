@@ -52,6 +52,18 @@
   --tertiary_800: #4a2725;
   --tertiary_900: #1f100f;
 
+  --success_25: #E3F7DE;
+  --success_50: #C6EEBE;
+  --success_100: #AAE69D;
+  --success_200: #8EDD7D;
+  --success_300: #71D55C;
+  --success_400: #55CC3C;
+  --success_500: #45B12E;
+  --success_600: #399426;
+  --success_700: #2E761F;
+  --success_800: #225917;
+  --success_900: #173B0F;
+
   --error_25: #fee5ee;
   --error_50: #feccdc;
   --error_100: #fd98b9;
@@ -82,7 +94,7 @@
   --shadow_xs: 0 1px 2px #1018280d; /* box-shadow */
   --shadow_sm: drop-shadow(0 1px 3px #10182810) drop-shadow(0 1px 2px #10182806); /* filter */
   --shadow_md: ;
-  --shadow_lg: ;
+  --shadow_lg: 0 12px 16px -4px rgba(16, 24, 40, 0.08), 0 4px 6px -2px rgba(16, 24, 40, 0.03);
 
   --shadow_xs_focused: 0 1px 2px #1018280d, 0 0 0 4px #e1e8c2;
   --shadow_xs_focused_error: 0 1px 2px #1018280d, 0 0 0 4px #fee5ee;
@@ -471,4 +483,31 @@ img {
 }
 
 @media screen and (min-width: 1200px) {
+}
+
+/****************************************************************************
+ TOAST
+****************************************************************************/
+.Toastify__toast.toast {
+  border-radius: 8px;
+  box-shadow: var(--shadow_lg);
+  padding: 1.6rem;
+}
+
+.Toastify__toast-theme--colored.Toastify__toast--success.toast {
+  background: var(--success_50);
+  border-color: var(--success_800);
+  color: var(--success_800);
+}
+
+.Toastify__toast-theme--colored.Toastify__toast--error.toast {
+  background: var(--error_50);
+  border-color: var(--error_800);
+  color: var(--error_800);
+}
+
+.Toastify__toast-theme--colored.Toastify__toast--warning.toast {
+  background: var(--warning_50);
+  border-color: var(--warning_800);
+  color: var(--warning_800);
 }

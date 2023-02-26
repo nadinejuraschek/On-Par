@@ -1,5 +1,6 @@
 import axios from "axios";
 import styles from "./auth.module.css";
+import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
@@ -16,11 +17,12 @@ export const Login = (): JSX.Element => {
       method: "POST",
       data: { email: email, password: password },
     } )
-      .then( response => {
+      .then( () => {
         navigate( "/home" );
       } )
-      .catch( error => {
-        console.log( "Error: " + error.response );
+      .catch( () => {
+        toast.error("Could not log you in. Please try again later!");
+        // console.debug( "Error when logging in user: " + error.response );
       } );
   };
 
@@ -31,11 +33,12 @@ export const Login = (): JSX.Element => {
       method: "POST",
       data: { email: "tester@mail.com", password: "testing123" },
     } )
-      .then( response => {
+      .then( () => {
         navigate( "/home" );
       } )
       .catch( error => {
-        console.log( "Error: " + error.response );
+        toast.error("Could not log in test user. Please try again later!");
+        // console.debug( "Error: " + error.response );
       } );
   };
 

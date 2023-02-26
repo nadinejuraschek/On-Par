@@ -2,6 +2,7 @@ import { IGoalContext, IGoalProvider, TGoal } from "./types";
 import { createContext, useEffect, useState } from "react";
 
 import axios from "axios";
+import { toast } from "react-toastify";
 
 export const GoalContext = createContext<IGoalContext>({});
 
@@ -26,25 +27,30 @@ export const GoalProvider = ({ children }: IGoalProvider): JSX.Element => {
       setSixMonths( allGoals.filter( ({ month }: TGoal) => month === 6 ) );
       setNineMonths( allGoals.filter( ({ month }: TGoal) => month === 9 ) );
       setTwelveMonths( allGoals.filter( ({ month }: TGoal) => month === 12 ) );
-    } ).catch( err => {
-      console.log( err );
+    } ).catch( () => {
+      toast.error("Could not fetch goals. Please try again later!");
+      // console.debug( 'Error when fetching goals: ', err );
     } );
   };
 
   const checkGoal = (goalid: string): void => {
     axios.put( "/api/goals/" + goalid, { checked: true } )
-      .then( response => {
+      .then( () => {
         getGoals();
       } )
-      .catch( error => {
-        console.log( "Error: " + error );
+      .catch( () => {
+        // console.debug( "Error when checking off goal: " + error );
       } );
   };
 
   const deleteGoal = (goalid: string): void => {
-    axios.delete( "/api/goals/" + goalid ).then( res => {
+    axios.delete( "/api/goals/" + goalid ).then( () => {
+      toast.success("The goal has been deleted successfully!");
       getGoals();
-    } );
+    } ).catch(() => {
+      toast.error("The goal could not be deleted. Please try again later!");
+      // console.debug('Error when deleting a goal: ', error);
+    });
   };
 
   return (

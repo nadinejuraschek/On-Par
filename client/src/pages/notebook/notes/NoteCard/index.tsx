@@ -4,6 +4,7 @@ import { useCallback, useMemo, useState } from "react";
 import { INoteCard } from "./types";
 import axios from "axios";
 import styles from "./noteCard.module.css";
+import { toast } from "react-toastify";
 
 export const NoteCard = ( { color, date, deleteNote, getNotes, noteid, text, title = '' }: INoteCard ): JSX.Element => {
   const [updatedNote, setUpdatedNote] = useState( {} );
@@ -19,8 +20,9 @@ export const NoteCard = ( { color, date, deleteNote, getNotes, noteid, text, tit
         getNotes();
         showEditForm ? setShowEditForm( false ) : setShowEditForm( true );
       } )
-      .catch( error => {
-        console.log( "Error: " + error.response );
+      .catch( () => {
+        toast.error("Could not edit the note. Please try again later!");
+        // console.debug( "Error when editing a note: " + error.response );
       } );
   }, [getNotes, noteid, showEditForm, updatedNote]);
 
