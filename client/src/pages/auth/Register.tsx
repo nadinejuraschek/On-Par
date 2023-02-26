@@ -5,6 +5,7 @@ import { FormEvent, useState } from "react";
 import { DatePicker } from "components";
 import axios from "axios";
 import styles from "./auth.module.css";
+import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
 export const Register = (): JSX.Element => {
@@ -40,11 +41,12 @@ export const Register = (): JSX.Element => {
       method: "POST",
       data: newUser,
     } )
-      .then( response => {
+      .then( () => {
         navigate( "/home" );
       } )
-      .catch( error => {
-        console.log( "Error: " + error.response );
+      .catch( () => {
+        toast.error("Could not register user. Please try again later!");
+        // console.debug( "Error when registering user: " + error.response );
       } );
   };
 
@@ -55,11 +57,12 @@ export const Register = (): JSX.Element => {
       method: "POST",
       data: { email: "tester@mail.com", password: "testing123" },
     } )
-      .then( response => {
+      .then( () => {
         navigate( "/home" );
       } )
-      .catch( error => {
-        console.log( "Error: " + error.response );
+      .catch( () => {
+        toast.error("Could not log in test user. Please try again later!");
+        // console.debug( "Error: " + error.response );
       } );
   };
 

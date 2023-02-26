@@ -13,7 +13,7 @@ export const Input = ( {
   placeholder = "Type here...",
   value,
 }: IInput ): JSX.Element => (
-  <div className={ styles.field }>
+  <div className={ `${className} ${styles.field}` }>
     <Text as="label" htmlFor={ name } size="sm">
       <>
         { icon && <i className={ `${ icon } icon` }></i> }

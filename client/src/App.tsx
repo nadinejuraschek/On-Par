@@ -1,3 +1,5 @@
+import 'react-toastify/dist/ReactToastify.min.css';
+
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import {
   Dev,
@@ -25,6 +27,7 @@ import {
 } from "./contexts";
 
 import { LayoutWithNavbar } from "layout";
+import { ToastContainer } from "react-toastify";
 
 export const App = (): JSX.Element => (
   <BrowserRouter>
@@ -186,5 +189,15 @@ export const App = (): JSX.Element => (
       { /* Error Page */ }
       { /* <Route path='*' component={ WrongTurn } /> */ }
     </Routes>
+    <ToastContainer
+      autoClose={false}
+      closeButton
+      closeOnClick
+      draggable={false}
+      hideProgressBar
+      position="bottom-right"
+      theme="colored"
+      toastClassName="toast"
+    />
   </BrowserRouter>
 );

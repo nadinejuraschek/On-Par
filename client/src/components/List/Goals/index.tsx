@@ -8,6 +8,7 @@ import { IGoalsList } from "./types";
 import { TGoal } from "contexts/GoalContext/types";
 import axios from "axios";
 import styles from "./goals.module.css";
+import { toast } from "react-toastify";
 
 export const Goals = ( { data, month }: IGoalsList ): JSX.Element => {
   const { checkGoal, getGoals } = useContext( GoalContext );
@@ -33,14 +34,16 @@ export const Goals = ( { data, month }: IGoalsList ): JSX.Element => {
         checked: false,
       },
     } )
-      .then( response => {
+      .then( () => {
+        toast.success("Your goal was added successfully!");
         setText( "" );
         setType( "" );
         setOpenAddGoal( false );
         getGoals();
       } )
-      .catch( error => {
-        console.log( "Error: " + error );
+      .catch( () => {
+        toast.error("Goal could not be added. Please try again later!");
+        // console.debug( "Error when creating a goal: " + error );
       } );
   };
 

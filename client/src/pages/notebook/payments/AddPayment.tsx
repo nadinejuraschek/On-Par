@@ -4,6 +4,7 @@ import { Card } from "components";
 import { PaymentContext } from "../../../contexts/PaymentContext";
 import axios from "axios";
 import styles from "./payments.module.css";
+import { toast } from "react-toastify";
 
 export const AddPayment = (): JSX.Element => {
   const { getPayments } = useContext( PaymentContext );
@@ -21,12 +22,14 @@ export const AddPayment = (): JSX.Element => {
       method: "POST",
       data: newPayment,
     } )
-      .then( response => {
+      .then( () => {
+        toast.success("The payment has been added successfully!");
         getPayments();
         setNewPayment( { week: 0, paid: false, date: "", late: false } );
       } )
-      .catch( error => {
-        console.log( "Error: " + error );
+      .catch( () => {
+        toast.error("Could not add the payment. Please try again later!");
+        // console.debug( "Error when adding a payment: " + error );
       } );
   };
 

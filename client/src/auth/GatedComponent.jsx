@@ -1,7 +1,8 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
+
 import { Loading } from "../components/Loading";
 import { Register } from "../pages/auth/Register";
+import axios from "axios";
 
 export const GatedComponent = ( { children } ) => {
   const [user, setUser] = useState( null );
@@ -15,8 +16,8 @@ export const GatedComponent = ( { children } ) => {
         setUser( res.data );
         setLoading( false );
       } )
-      .catch( error => {
-        console.log( "Error: " + error.message );
+      .catch( () => {
+        // console.debug( "Error when checking for signed in user: " + error.message );
       } );
   }, [] );
 

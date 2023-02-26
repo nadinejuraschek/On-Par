@@ -4,6 +4,7 @@ import { IWorkhourContext, IWorkhourProvider, THour } from "./types";
 import { createContext, useEffect, useState } from "react";
 
 import axios from "axios";
+import { toast } from "react-toastify";
 
 export const WorkhourContext = createContext<IWorkhourContext>({});
 
@@ -22,7 +23,10 @@ export const WorkhourProvider = ( { children }: IWorkhourProvider ): JSX.Element
       method: "GET",
     } ).then( res => {
       setWorkhours( res.data.workhours );
-    } ).catch( error => console.log( "Error: ", error ) );
+    } ).catch( () => {
+      toast.error("Could not fetch workhours. Please try again later!");
+      // console.debug( "Error when fetching workhours: ", error );
+    });
   };
 
   const currentDate = dayjs( new Date() );
@@ -42,9 +46,13 @@ export const WorkhourProvider = ( { children }: IWorkhourProvider ): JSX.Element
   };
 
   const deleteWorkhours = (workhourid: string) => {
-    axios.delete( "/api/workhours/" + workhourid ).then( res => {
+    axios.delete( "/api/workhours/" + workhourid ).then( () => {
+      toast.success("The selected workhours have been deleted successfully!");
       getWorkhours();
-    } );
+    } ).catch(() => {
+      toast.error("Could not delete the workhours. Please try again later!");
+      // console.debug('Error when deleting workhours: ', error);
+    });
   };
 
   return (

@@ -1,37 +1,42 @@
 import * as dayjs from "dayjs";
 
 import { Button, Card, Text } from "components";
+import { ChangeEvent, FormEvent } from 'react';
 import { useContext, useState } from "react";
 
 import { NoteContext } from "contexts";
 import axios from "axios";
 import styles from "./addNote.module.css";
+import { toast } from 'react-toastify';
 
 export const AddNote = (): JSX.Element => {
   const currentDate = dayjs().format("MMMM D, YYYY");
   const { getNotes } = useContext( NoteContext );
   const [newNote, setNewNote] = useState( { date: currentDate, text: "", title: "" } );
 
-  const handleSubmit = event => {
+  const handleSubmit = (event: FormEvent): void => {
     event.preventDefault();
     axios( {
       url: "/api/notes",
       method: "POST",
       data: newNote,
     } )
-      .then( response => {
+      .then( () => {
+        toast.success('Your note has been added successfully!');
         // re-render component
         setNewNote( { date: currentDate, text: "", title: "" } );
         getNotes();
       } )
-      .catch( error => {
-        console.log( "Error: " + error );
+      .catch( () => {
+        toast.error('The note could not be added. Please try again later!');
+        // console.debug( "Error when adding a note: " + error );
       } );
   };
 
-  const handleChange = event => {
-    const name = event.target.name;
-    const value = event.target.value;
+  const handleChange = (event: ChangeEvent): void => {
+    const target = event.target as HTMLInputElement;
+    const name = target.name;
+    const value = target.value;
     setNewNote( newNote => ( { ...newNote, [name]: value } ) );
   };
 
@@ -59,7 +64,7 @@ export const AddNote = (): JSX.Element => {
           />
         </div>
         <div className={ styles.saveButton }>
-          <Button round variant="primary">
+          <Button round type="submit" variant="primary">
             <i className="plus icon"></i>
           </Button>
         </div>
