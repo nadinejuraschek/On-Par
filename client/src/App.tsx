@@ -190,7 +190,6 @@ export const App = (): JSX.Element => (
       { /* <Route path='*' component={ WrongTurn } /> */ }
     </Routes>
     <ToastContainer
-      autoClose={false}
       closeButton
       closeOnClick
       draggable={false}
