@@ -1,14 +1,14 @@
 .list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 2rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto;
+  grid-gap: 2rem;
   align-content: flex-start;
 
   max-height: 100%;
 }
 
 .list button, .list a {
-  max-width: 40rem;
   width: 100%;
 }
 

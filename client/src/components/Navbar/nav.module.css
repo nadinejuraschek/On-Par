@@ -57,6 +57,8 @@
   display: flex;
   align-items: center;
   justify-content: flex-start;
+
+  cursor: pointer;
 }
 
 .icon {
@@ -116,10 +118,23 @@
     content: '';
   }
 
+  .navDesktop a {
+    z-index: 1;
+  }
+
   .navLink {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+  }
+
+  .label {
+    height: 1.5rem;
+    margin-top: 0.5rem;
+  }
+
+  .hide {
+    display: none;
   }
 
   .icon {
@@ -128,14 +143,9 @@
     width: 4.5rem;
   }
 
-  .hide {
-    display: none;
-  }
-
-  .navLink p {
+  .label p {
     font-size: 1.5rem;
     font-weight: bold;
-    margin-top: 0.5rem;
     margin-left: 0;
   }
 }

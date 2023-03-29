@@ -16,12 +16,14 @@ export const emergencyNumbers = {
         { value: "Au Pair in America 24-Hour Emergency Service" },
         { value: "+1 (800) 928-7247" },
         {
-          value: (`<ul className= "ui list" >
-            <li>Community Counselor can not be reached</ li >
-        <li>severe issue that needs immediate attention < /li>
-        < li > legal trouble < /li>
-        < li > serious medical issue < /li>
-        < /ul>`)
+          value: (
+            <ul>
+              <li>Community Counselor can not be reached</li>
+              <li>severe issue that needs immediate attention</li>
+              <li>legal trouble</li>
+              <li>serious medical issue</li>
+            </ul>
+          )
         },
       ]
     },
@@ -30,14 +32,17 @@ export const emergencyNumbers = {
         { value: "Ambulance, Police, Fire Department" },
         { value: "911" },
         {
-          value: `<ul className="ui list">
-            <li>Crime in Progress < /li>
-            < li > Life - threatening Situation(Medical or Other)< /li>
-        < li > Fire, Smoke < /li>
-        < li > Traffic Accident < /li>
-        < li > Elevator Rescue < /li>
-        < li > Beach or Water - Related Emergency < /li>
-        < /ul>` },
+          value: (
+            <ul>
+              <li>Crime in Progress</li>
+              <li>Life - threatening Situation(Medical or Other)</li>
+              <li>Fire, Smoke</li>
+              <li>Traffic Accident</li>
+              <li>Elevator Rescue</li>
+              <li>Beach or Water - Related Emergency</li>
+            </ul>
+          )
+        },
       ]
     },
     {
@@ -58,7 +63,7 @@ export const emergencyNumbers = {
       cells: [
         { value: "Animal Poison Control" },
         { value: "+1 (888) 426-4435" },
-        { value: "Reaches the ASPCA Animal Poison Control Center. Call if the family&apos;s pet may have ingested a poisonous substance." },
+        { value: "Reaches the ASPCA Animal Poison Control Center. Call if the family's pet may have ingested a poisonous substance." },
       ]
     },
   ],
