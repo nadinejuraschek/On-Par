@@ -1,5 +1,6 @@
 import { ISidenav } from "./types";
 import { NavLinkComp as NavLink } from "../NavLink";
+import { Text } from "components";
 import { UserProvider } from "contexts";
 import { navLinks } from "data";
 import styles from "./sidenav.module.css";
@@ -22,10 +23,15 @@ export const Sidenav = ({ toggleSidenav }: ISidenav): JSX.Element => {
   }, []);
 
   return (
-    <div className={ styles.sideMobile }>
-      <UserProvider>
-        { renderLinks }
-      </UserProvider>
-    </div>
-  )
+    <>
+      <div className={ styles.sideMobile }>
+        <UserProvider>
+          { renderLinks }
+        </UserProvider>
+      </div>
+      <div className={ styles.footer }>
+        <Text as="p" size="xs">© { new Date().getFullYear() } Nadine Pesso</Text>
+      </div>
+    </>
+  );
 }
