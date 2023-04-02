@@ -19,37 +19,36 @@ export const Countdown = ( { setMessage, startDate }: ICountdown ): JSX.Element 
   const daysPassed = currentDate.diff( startDate, "days" );
   const weeksPassed = currentDate.diff( startDate, "weeks" );
   const monthsPassed = currentDate.diff( startDate, "months" );
-  const dayNum = currentDate.diff( startDate, "days" );
 
   useEffect( () => {
-    if ( dayNum === 1 ) {
+    if ( daysPassed === 1 ) {
       setMessage( "Welcome to the USA!" );
-    } else if ( dayNum === 2 ) {
+    } else if ( daysPassed === 2 ) {
       setMessage( "Have you made new friends, yet?" );
-    } else if ( dayNum === 3 ) {
+    } else if ( daysPassed === 3 ) {
       setMessage( "Are you ready to meet your host family?" );
-    } else if ( dayNum >= 28 && dayNum <= 31 ) {
+    } else if ( daysPassed >= 28 && daysPassed <= 31 ) {
       setMessage(
         "Congratulations! You have already spent a whole month in the US!"
       );
-    } else if ( dayNum === 90 ) {
+    } else if ( daysPassed === 90 ) {
       setMessage(
         "You have made it through the first quarter of your Au Pair experience!"
       );
-    } else if ( dayNum === 180 ) {
+    } else if ( daysPassed === 180 ) {
       setMessage(
         "Halftime! Review the goals you have set for the year and make sure you make plans for the ones you haven't completed yet!"
       );
-    } else if ( dayNum >= 270 && dayNum <= 330 ) {
+    } else if ( daysPassed >= 270 && daysPassed <= 330 ) {
       setMessage(
         "Time to think of extension! Add your planned departure date on your profile page."
       );
-    } else if ( dayNum >= 351 && dayNum <= 366 ) {
+    } else if ( daysPassed >= 351 && daysPassed <= 366 ) {
       setMessage( "Make the most of your last few days!" );
     } else {
       setMessage( "What can I help you with?" );
     }
-  }, [dayNum, setMessage] );
+  }, [daysPassed, setMessage] );
 
   const progress = () => {
     if ( tab === "days" ) ( 100 / 365 ) * daysPassed;
@@ -73,7 +72,14 @@ export const Countdown = ( { setMessage, startDate }: ICountdown ): JSX.Element 
           label={ progressLabel() }
         />
       </div>
-      <Tabs activeTab={ tab } fullWidth handleClick={ setTab } spaceBetween tabs={ tabs } variant="secondary" />
+      <Tabs
+        activeTab={ tab }
+        fullWidth
+        handleClick={ setTab }
+        spaceBetween
+        tabs={ tabs }
+        variant="secondary"
+      />
     </div>
   );
 };

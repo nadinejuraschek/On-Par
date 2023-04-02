@@ -1,5 +1,6 @@
 import app from "images/app.svg";
 import childcare from "images/childcare.svg";
+import documents from "images/document.svg";
 import driversLicense from "images/driver-license.svg";
 import education from "images/education.svg";
 import emergencyphone from "images/emergency-call.svg";
@@ -66,6 +67,31 @@ export const resources = [
   {
     icon: driversLicense,
     label: "Getting your Driver's License",
+    active: false,
+  },
+  {
+    icon: documents,
+    label: "Travel Month",
+    active: false,
+  },
+  {
+    icon: documents,
+    label: "Adding Your Experience to Your Resume / CV",
+    active: false,
+  },
+  {
+    icon: documents,
+    label: "Host Family Interview Preparation",
+    active: false,
+  },
+  {
+    icon: documents,
+    label: "Your J-1 Visa",
+    active: false,
+  },
+  {
+    icon: documents,
+    label: "Apply for your SSN",
     active: false,
   },
 ];
