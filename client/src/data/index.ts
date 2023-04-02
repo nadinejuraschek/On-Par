@@ -1,5 +1,6 @@
 export * from "./childActivities";
 export * from "./emergencyNumbers";
+export * from "./holidays";
 export * from "./hostFamily";
 export * from "./navLinks";
 export * from "./notebook";

@@ -2,7 +2,7 @@ import { Button, Card } from "components";
 import { useContext, useState } from "react";
 
 import { Countdown } from "./Countdown";
-import { DailyPlan } from "./DailyPlan";
+import { Events } from "./Events";
 import { Greeting } from "./Greeting";
 import { Quicklinks } from "./Quicklinks";
 import { Reminders } from "./Reminders";
@@ -44,7 +44,7 @@ export const Home = (): JSX.Element => {
         </Card>
 
         <Card className={ styles.today }>
-          <DailyPlan />
+          <Events />
         </Card>
 
         <Card className={ styles.reminders }>

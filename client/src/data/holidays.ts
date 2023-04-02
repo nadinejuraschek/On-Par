@@ -1,0 +1,160 @@
+import { TEvent } from 'components/Event/types';
+
+export const holidays: TEvent[] = [
+  {
+    name: "New Year's Day",
+    day: 1,
+    month: 1,
+    type: 'holiday',
+  },
+  {
+    name: "Martin Luther King Jr. Day",
+    day: 16,
+    month: 1,
+    type: 'holiday',
+  },
+  {
+    name: "Valentine's Day",
+    day: 14,
+    month: 2,
+    type: 'holiday',
+  },
+  {
+    name: "President's Day",
+    day: 20,
+    month: 2,
+    type: 'holiday',
+  },
+  {
+    name: "St. Patrick's Day",
+    day: 17,
+    month: 3,
+    type: 'holiday',
+  },
+  {
+    name: "Easter Sunday",
+    day: 9,
+    month: 4,
+    type: 'holiday',
+  },
+  {
+    name: "Easter Monday",
+    day: 10,
+    month: 4,
+    type: 'holiday',
+  },
+  {
+    name: "Tax Day",
+    day: 18,
+    month: 4,
+    type: 'holiday',
+  },
+  {
+    name: "Cinco de Mayo",
+    day: 5,
+    month: 5,
+    type: 'holiday',
+  },
+  {
+    name: "Mother's Day",
+    day: 14,
+    month: 5,
+    type: 'holiday',
+  },
+  {
+    name: "Memorial Day",
+    day: 29,
+    month: 5,
+    type: 'holiday',
+  },
+  {
+    name: "Father's Day",
+    day: 18,
+    month: 6,
+    type: 'holiday',
+  },
+  {
+    name: "Juneteenth",
+    day: 19,
+    month: 6,
+    type: 'holiday',
+  },
+  {
+    name: "Independence Day",
+    day: 4,
+    month: 7,
+    type: 'holiday',
+  },
+  {
+    name: "Labor Day",
+    day: 4,
+    month: 9,
+    type: 'holiday',
+  },
+  {
+    name: "Columbus Day",
+    day: 9,
+    month: 10,
+    type: 'holiday',
+  },
+  {
+    name: "Halloween",
+    day: 31,
+    month: 10,
+    type: 'holiday',
+  },
+  {
+    name: "Election Day",
+    day: 7,
+    month: 11,
+    type: 'holiday',
+  },
+  {
+    name: "Veteran's Day",
+    day: 11,
+    month: 11,
+    type: 'holiday',
+  },
+  {
+    name: "Thanksgiving",
+    day: 23,
+    month: 11,
+    type: 'holiday',
+  },
+  {
+    name: "Black Friday",
+    day: 24,
+    month: 11,
+    type: 'holiday',
+  },
+  {
+    name: "Hanukkah",
+    day: 8,
+    month: 12,
+    type: 'holiday',
+  },
+  {
+    name: "Christmas Eve",
+    day: 24,
+    month: 12,
+    type: 'holiday',
+  },
+  {
+    name: "Christmas Day",
+    day: 25,
+    month: 12,
+    type: 'holiday',
+  },
+  {
+    name: "Kwanzaa",
+    day: 26,
+    month: 12,
+    type: 'holiday',
+  },
+  {
+    name: "New Year's Eve",
+    day: 31,
+    month: 12,
+    type: 'holiday',
+  }
+];
