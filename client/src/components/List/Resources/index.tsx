@@ -5,7 +5,19 @@ import { useMemo } from "react";
 
 export const Resources = (): JSX.Element => {
   const renderItems = useMemo(() => {
-    return resources.map( item => {
+    const sortedResources = resources.sort((a, b) => {
+      if (a.label < b.label) {
+        return -1;
+      }
+
+      if (a.label > b.label) {
+        return 1;
+      }
+
+      return 0;
+    });
+
+    return sortedResources.map( item => {
       const { active, icon, label, link } = item;
       return (
         <Button align="alignStart" disabled={ !active } link={ link } key={ `resource_${ label }` }>

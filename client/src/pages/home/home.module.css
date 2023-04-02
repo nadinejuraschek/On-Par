@@ -27,6 +27,7 @@
 
   display: grid;
   grid-template-rows: auto 4rem;
+  grid-gap: 1rem;
 }
 
 .misc {
@@ -81,6 +82,7 @@
 
   .header {
     grid-column: 1 / 4;
+    grid-gap: 0;
   }
 
   .hours {

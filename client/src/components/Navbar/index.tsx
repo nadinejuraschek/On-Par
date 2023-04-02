@@ -1,5 +1,3 @@
-// import logo from '../../images/logo.svg';
-
 import { useMemo, useState } from "react";
 
 import { NavLinkComp as NavLink } from "./NavLink";
@@ -14,9 +12,7 @@ import styles from "./nav.module.css";
 export const Navbar = (): JSX.Element => {
   const [openSidenav, setOpenSidenav] = useState( false );
 
-  const toggleSidenav = () => {
-    openSidenav ? setOpenSidenav( false ) : setOpenSidenav( true );
-  };
+  const toggleSidenav = () => setOpenSidenav( !openSidenav );
 
   const renderMenuButton = ( icon ) => (
     <button className={ styles.menuIcon } onClick={ toggleSidenav }>
@@ -28,7 +24,14 @@ export const Navbar = (): JSX.Element => {
   const renderLinks = useMemo(() => {
     return navLinks.map(link => {
       const { iconSrc, label, link: href } = link;
-      return (<NavLink iconSrc={ iconSrc } key={ `navLink_${ label }` } label={ label } link={ href } />);
+      return (
+        <NavLink
+          iconSrc={ iconSrc }
+          key={ `navLink_${ label }` }
+          label={ label }
+          link={ href }
+        />
+      );
     });
   }, []);
 
@@ -40,13 +43,10 @@ export const Navbar = (): JSX.Element => {
         </a>
         { openSidenav ? renderMenuButton( "close" ) : renderMenuButton( "menu" ) }
       </nav>
-      { openSidenav && <Sidenav /> }
+      { openSidenav && <Sidenav toggleSidenav={toggleSidenav} /> }
 
       <nav className={ styles.navDesktop }>
         <a className={ styles.logo } href="/home">
-          { /* <div className={styles.navLogo}>
-          <img alt='App Logo' src={logo} />
-        </div> */ }
           <Text as="h1" className={ styles.logoText } color="--primary_700" size="xl">On Par</Text>
         </a>
 

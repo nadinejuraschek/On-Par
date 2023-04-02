@@ -1,14 +1,14 @@
 .list {
   display: flex;
+  align-content: flex-start;
+  flex-direction: column;
   flex-wrap: wrap;
   gap: 2rem;
-  align-content: flex-start;
 
-  max-height: 100%;
+  max-height: calc(100% - 4rem);
 }
 
 .list button, .list a {
-  max-width: 40rem;
   width: 100%;
 }
 
@@ -18,13 +18,7 @@
 }
 
 @media only screen and (min-width: 600px) {
-  .list {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media only screen and (min-width: 900px) {
-  .list {
-    grid-template-columns: repeat(3, 1fr);
+  .list button, .list a {
+    max-width: calc((100% / 3) - 4rem);
   }
 }

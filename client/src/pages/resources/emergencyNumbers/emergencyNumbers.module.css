@@ -8,3 +8,9 @@
   height: 100%;
   width: 100%;
 }
+
+.layout ul {
+  margin: 0;
+  margin-left: 1rem;
+  padding: 0;
+}
