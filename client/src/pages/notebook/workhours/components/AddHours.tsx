@@ -1,6 +1,6 @@
 import * as dayjs from "dayjs";
 
-import { AddButton, Text } from "components";
+import { Button, Text } from "components";
 import { Date, Time } from "components/Input";
 
 import { FormEvent } from 'react';
@@ -64,9 +64,9 @@ export const AddHours = ( { updateWorkhours } ): JSX.Element => {
           handleEnd={ setEnd }
         />
       </div>
-      <div className={ styles.btnWrapper }>
-        <AddButton handleClick={ handleSubmit } />
-      </div>
+      <Button fullWidth handleClick={ handleSubmit } variant="primary">
+        Add Hours
+      </Button>
     </>
   );
 };

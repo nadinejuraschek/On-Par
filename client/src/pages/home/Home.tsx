@@ -7,6 +7,7 @@ import { useContext, useState } from "react";
 import { Countdown } from "./Countdown";
 import { Events } from "./Events";
 import { Greeting } from "./Greeting";
+import { LoadingSpinner } from "components";
 import { Quicklinks } from "./Quicklinks";
 import { Reminders } from "./Reminders";
 import { UserContext } from "contexts";
@@ -32,6 +33,10 @@ export const Home = (): JSX.Element => {
       navigate( "/login" );
     } );
   };
+
+  if (!user) {
+    return <LoadingSpinner />;
+  }
 
   const currentDate = dayjs( new Date() );
   const hasCompletedYear = dayjs(currentDate).isSameOrAfter(user.endDate);

@@ -36,6 +36,14 @@
   width: 4rem;
 }
 
+.btn.fullWidth {
+  width: 100%;
+}
+
+.btn:focus, .btn:focus-within, .btn:focus-visible {
+  outline: none;
+}
+
 /********************************************
  PRIMARY
 ********************************************/
@@ -90,8 +98,8 @@
  TERTIARY
 ********************************************/
 .tertiary {
-  background: transparent;
-  border-color: transparent;
+  background: var(--grey_50);
+  border-color: var(--grey_50);
   color: var(--grey_700);
 }
 
@@ -102,8 +110,8 @@
 }
 
 .tertiary.disabled:hover {
-  background: transparent;
-  border-color: transparent;
+  background: var(--grey_50);
+  border-color: var(--grey_50);
   color: var(--grey_300);
 }
 

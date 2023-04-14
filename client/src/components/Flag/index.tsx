@@ -100,10 +100,9 @@ export const Flag = ( { country }: IFlag ): JSX.Element => {
   return (
     <div className={ styles.field }>
       <div className={ styles.label }>
-        <i className={ countryFlag }></i>
         Home Country:
       </div>
-      <p>{ countryName }</p>
+      <p><i className={ countryFlag }></i>{ countryName }</p>
     </div>
   );
 };

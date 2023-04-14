@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import { Loading } from "../components/Loading";
+import { LoadingSpinner } from "components";
 import { Register } from "../pages/auth/Register";
 import axios from "axios";
 
@@ -22,6 +22,6 @@ export const GatedComponent = ( { children } ) => {
   }, [] );
 
   return (
-    <div>{ loading ? <main><Loading /></main> : user ? <>{ children }</> : <Register /> }</div>
+    <div>{ loading ? <main><LoadingSpinner /></main> : user ? <>{ children }</> : <Register /> }</div>
   );
 };

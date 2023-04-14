@@ -1,18 +1,24 @@
 import * as dayjs from "dayjs";
 
 import { ProgressRing, Tabs } from "components";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 import { ICountdown } from "./types";
 import styles from "./countdown.module.css";
 
+enum COUNTDOWN_TABS {
+  DAYS = 0,
+  WEEKS = 1,
+  MONTHS = 2,
+};
+
 export const Countdown = ( { setMessage, startDate }: ICountdown ): JSX.Element => {
-  const [tab, setTab] = useState( "days" );
+  const [tab, setTab] = useState( COUNTDOWN_TABS.DAYS );
 
   const tabs = [
-    { label: "Days", value: "days" },
-    { label: "Weeks", value: "weeks" },
-    { label: "Months", value: "months" },
+    { label: "Days", value: COUNTDOWN_TABS.DAYS },
+    { label: "Weeks", value: COUNTDOWN_TABS.WEEKS },
+    { label: "Months", value: COUNTDOWN_TABS.MONTHS },
   ];
 
   const currentDate = dayjs( new Date() );
@@ -21,7 +27,7 @@ export const Countdown = ( { setMessage, startDate }: ICountdown ): JSX.Element 
   const monthsPassed = currentDate.diff( startDate, "months" );
 
   useEffect( () => {
-    if ( daysPassed === 1 ) {
+    if ( daysPassed === 0 || daysPassed === 1 ) {
       setMessage( "Welcome to the USA!" );
     } else if ( daysPassed === 2 ) {
       setMessage( "Have you made new friends, yet?" );
@@ -50,17 +56,17 @@ export const Countdown = ( { setMessage, startDate }: ICountdown ): JSX.Element 
     }
   }, [daysPassed, setMessage] );
 
-  const progress = () => {
-    if ( tab === "days" ) ( 100 / 365 ) * daysPassed;
-    if ( tab === "weeks" ) ( 100 / 52 ) * weeksPassed;
+  const progress = useMemo(() => {
+    if ( tab === COUNTDOWN_TABS.DAYS ) return ( 100 / 365 ) * daysPassed;
+    if ( tab === COUNTDOWN_TABS.WEEKS ) return ( 100 / 52 ) * weeksPassed;
     return ( 100 / 12 ) * monthsPassed;
-  };
+  }, [daysPassed, monthsPassed, tab, weeksPassed]);
 
-  const progressLabel = () => {
-    if ( tab === "days" ) daysPassed;
-    if ( tab === "weeks" ) weeksPassed;
+  const progressLabel = useMemo(() => {
+    if ( tab === COUNTDOWN_TABS.DAYS ) return daysPassed;
+    if ( tab === COUNTDOWN_TABS.WEEKS ) return weeksPassed;
     return monthsPassed;
-  };
+  }, [daysPassed, monthsPassed, tab, weeksPassed]);
 
   return (
     <div className={ styles.container }>
@@ -68,8 +74,8 @@ export const Countdown = ( { setMessage, startDate }: ICountdown ): JSX.Element 
         <ProgressRing
           radius={60}
           stroke={4}
-          progress={ progress() }
-          label={ progressLabel() }
+          progress={ progress }
+          label={ progressLabel }
         />
       </div>
       <Tabs

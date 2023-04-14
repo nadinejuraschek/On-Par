@@ -11,12 +11,6 @@
   height: 12rem;
 }
 
-.saveButton {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
 @media only screen and (min-width: 900px) {
   .addNote {
     grid-column: 1 / 2;

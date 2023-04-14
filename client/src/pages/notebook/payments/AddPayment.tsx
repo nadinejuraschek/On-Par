@@ -1,6 +1,6 @@
+import { Button, Card } from "components";
 import { useContext, useState } from "react";
 
-import { Card } from "components";
 import { PaymentContext } from "../../../contexts/PaymentContext";
 import axios from "axios";
 import styles from "./payments.module.css";
@@ -94,10 +94,10 @@ export const AddPayment = (): JSX.Element => {
             </select>
           </div>
         </div>
-        <div className="centered">
-          <button className="circular ui icon button">
-            <i className="plus icon"></i>
-          </button>
+        <div className={ styles.btnWrapper }>
+          <Button type="submit" variant="primary">
+            Add Entry
+          </Button>
         </div>
       </form>
     </Card>

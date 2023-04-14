@@ -1,6 +1,7 @@
 import * as dayjs from "dayjs";
 
 import { IWeeklyHours } from "./types";
+import { Text } from "components";
 import { WeeklyItem } from "./WeeklyItem";
 import styles from "./hours.module.css";
 import { useState } from "react";
@@ -44,7 +45,9 @@ export const WeeklyHours = ( { data }: IWeeklyHours ): JSX.Element => {
         <button className={ styles.arrow } onClick={ prev }>
           <i className="chevron left icon"></i>
         </button>
-        <h5>{ `${ dayjs( startWeek ).format( "MMM DD" ) } - ${ dayjs( endWeek ).format( "MMM DD" ) }` }</h5>
+        <Text as="h5" size="sm" weight="bold">
+          { `${ dayjs( startWeek ).format( "MMM DD" ) } - ${ dayjs( endWeek ).format( "MMM DD" ) }` }
+        </Text>
         <button className={ styles.arrow } onClick={ next }>
           <i className="chevron right icon"></i>
         </button>

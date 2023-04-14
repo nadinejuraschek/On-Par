@@ -1,3 +1,5 @@
+import { Button, Text } from 'components';
+
 import axios from "axios";
 import styles from "./auth.module.css";
 import { toast } from "react-toastify";
@@ -44,7 +46,7 @@ export const Login = (): JSX.Element => {
 
   return (
     <main>
-      <h2>Log In</h2>
+      <Text as="h2" size="xl" weight="bold">Log In</Text>
 
       <form className={ `ui form ${ styles.form }` } onSubmit={ handleSubmit }>
         <div className="field">
@@ -73,32 +75,27 @@ export const Login = (): JSX.Element => {
           </div>
         </div>
 
-        <div className="centered">
-          <button className="ui button" type="submit">
+        <div className={ styles.centeredBtn }>
+          <Button autoFocus type="submit" variant="primary">
             Log In
-          </button>
+          </Button>
         </div>
 
-        <div className="ui message">
-          <div className={ styles.messageItem }>
-            <p>Don&apos;t have an account, yet?</p>
-            <a href="/register" className="ui button">
+        <div className={ styles.optionsContainer }>
+          <div className={ styles.optionsItem }>
+            <Text as="p" size="sm">Don&apos;t have an account?</Text>
+            <Button link="/register" variant="tertiary">
               Register
-            </a>
+            </Button>
           </div>
-          <div className={ styles.messageItem }>
-            <p>Testing?</p>
-            <button className="ui button" onClick={ handleGuest }>
+          <div className={ styles.optionsItem }>
+            <Text as="p" size="sm">Testing?</Text>
+            <Button handleClick={ handleGuest } variant="tertiary">
               Use Guest Account
-            </button>
+            </Button>
           </div>
           { /* <p>Or Log In with</p>
                                 <div className="ui small buttons">
-                                    <button className="ui facebook button">
-                                        <i className="facebook icon"></i>
-                                        Facebook
-                                    </button>
-                                    <div className="or"></div>
                                     <button className="ui google plus button">
                                         <i className="google icon"></i>
                                         Google

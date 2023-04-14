@@ -2,7 +2,14 @@ import { ChangeEvent } from 'react';
 import { IProfileInput } from "./types";
 import styles from "./input.module.css";
 
-export const ProfileInput = ( { edit, handleChange, icon, label, name, value }: IProfileInput ): JSX.Element => (
+export const ProfileInput = ( {
+  edit,
+  handleChange,
+  icon,
+  label,
+  name,
+  value,
+}: IProfileInput ): JSX.Element => (
   <div className={ styles.field }>
     <label className={ styles.label } htmlFor={ name }>
       { icon && <i className={ `${ icon } icon` }></i> }

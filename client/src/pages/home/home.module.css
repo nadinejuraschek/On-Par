@@ -104,7 +104,7 @@
 
   .header {
     grid-column: 1 / 4;
-    grid-gap: 0;
+    grid-gap: 1.6rem;
   }
 
   .hours {

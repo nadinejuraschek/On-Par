@@ -38,7 +38,7 @@ exports.register = async (req, res) => {
     lastname: req.body.lastname,
     country: req.body.country,
     startDate: req.body.startDate,
-    endDate: dayjs(req.body.startDate).add(1, 'years'),
+    endDate: dayjs(req.body.startDate).add(1, 'years').toDate(),
     email: req.body.email,
     password: password,
   });
