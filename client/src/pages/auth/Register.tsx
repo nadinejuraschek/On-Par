@@ -1,8 +1,8 @@
 import * as dayjs from "dayjs";
 
+import { Button, DatePicker, Text } from "components";
 import { FormEvent, useState } from "react";
 
-import { DatePicker } from "components";
 import axios from "axios";
 import styles from "./auth.module.css";
 import { toast } from "react-toastify";
@@ -77,7 +77,7 @@ export const Register = (): JSX.Element => {
 
   return (
     <main>
-      <h2>Register</h2>
+      <Text as="h2" size="xl" weight="bold">Register</Text>
 
       <form className={ `ui form ${ styles.form }` } onSubmit={ handleSubmit }>
         { /* <div className='field'>
@@ -332,26 +332,27 @@ export const Register = (): JSX.Element => {
           </div>
         </div>
 
-        <div className="centered">
-          <button className="ui button" type="submit">
+        <div className={ styles.centeredBtn }>
+          <Button autoFocus type="submit" variant="primary">
             Register
-          </button>
+          </Button>
         </div>
 
-        <div className="ui message">
-          <div className={ styles.messageItem }>
-            <p>Already have an account?</p>
-            <a href="/login" className="ui button">
+        <div className={ styles.optionsContainer }>
+          <div className={ styles.optionsItem }>
+            <Text as="p" size="sm">Already have an account?</Text>
+            <Button link="/login" variant="tertiary">
               Log In
-            </a>
+            </Button>
           </div>
-          <div className={ styles.messageItem }>
-            <p>Testing?</p>
-            <button className="ui button" onClick={ handleGuest }>
+          <div className={ styles.optionsItem }>
+            <Text as="p" size="sm">Testing?</Text>
+            <Button handleClick={ handleGuest } variant="tertiary">
               Use Guest Account
-            </button>
+            </Button>
           </div>
         </div>
+
       </form>
     </main>
   );

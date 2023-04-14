@@ -20,16 +20,20 @@ export const Events = (): JSX.Element => {
     <div className={ styles.container }>
       <Text as="h3" size="lg" weight="bold">Events</Text>
       <div className={ styles.content }>
-        <Text as="h4" size="md" weight="bold">Today</Text>
-        <EventsList
-          emptyMessage="There are no holidays or events planned for today!"
-          list={[...currentHolidays, ...currentBirthdays]}
-        />
-        <Text as="h4" size="md" weight="bold">Later This Month</Text>
-        <EventsList
-          emptyMessage="Looks like you'll have lots of free time!"
-          list={[...remainingHolidaysThisMonth, ...upcomingBirthdays]}
-        />
+        <div className={ styles.listContent }>
+          <Text as="h4" size="md" weight="bold">Today</Text>
+          <EventsList
+            emptyMessage="There are no holidays or events planned for today!"
+            list={[...currentHolidays, ...currentBirthdays]}
+          />
+        </div>
+        <div className={ styles.listContent }>
+          <Text as="h4" size="md" weight="bold">Later This Month</Text>
+          <EventsList
+            emptyMessage="Looks like you'll have lots of free time!"
+            list={[...remainingHolidaysThisMonth, ...upcomingBirthdays]}
+          />
+        </div>
       </div>
     </div>
   );

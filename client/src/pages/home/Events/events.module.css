@@ -11,12 +11,18 @@
 .content {
   display: flex;
   flex-direction: column;
-  gap: 1.6rem;
+  gap: 2.4rem;
 
   overflow-y: auto;
 
   -ms-overflow-style: none;  /* Hide scrollbar for IE and Edge */
   scrollbar-width: none;  /* Hide scrollbar for Firefox */
+}
+
+.listContent {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }
 
 /* Hide scrollbar for Chrome, Safari and Opera */

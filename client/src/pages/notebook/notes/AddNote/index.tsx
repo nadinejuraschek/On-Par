@@ -63,11 +63,9 @@ export const AddNote = (): JSX.Element => {
             value={ newNote.text }
           />
         </div>
-        <div className={ styles.saveButton }>
-          <Button round type="submit" variant="primary">
-            <i className="plus icon"></i>
-          </Button>
-        </div>
+        <Button fullWidth type="submit" variant="primary">
+          Add Note
+        </Button>
       </form>
     </Card>
   );

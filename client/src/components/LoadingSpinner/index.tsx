@@ -1,6 +1,6 @@
-import styles from "./loading.module.css";
+import styles from "./loadingSpinner.module.css";
 
-export const Loading = (): JSX.Element => (
+export const LoadingSpinner = (): JSX.Element => (
   <div className={ styles.container }>
     <div className={ styles.spinner }>
       <div></div>

@@ -14,7 +14,9 @@ export const EventsList = ({ list, emptyMessage = '' }: IEventsList): JSX.Elemen
 
   return (
     <div className={styles.list}>
-      {list.map(event => <Event day={event.day} name={event.name} type={event.type} />)}
+      {list.map((event, index) => (
+        <Event day={event.day} key={index} name={event.name} type={event.type} />
+      ))}
     </div>
   )
 };

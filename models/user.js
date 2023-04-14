@@ -1,7 +1,7 @@
 // NPM PACKAGES
-const mongoose = require('mongoose'),
-  fs = require('fs'),
-  multer = require('multer');
+const mongoose = require('mongoose');
+  // fs = require('fs'),
+  // multer = require('multer');
 
 // SCHEMA SETUP
 const userSchema = new mongoose.Schema({

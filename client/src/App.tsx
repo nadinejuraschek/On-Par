@@ -65,7 +65,9 @@ export const App = (): JSX.Element => (
         element={
           <LayoutWithNavbar>
             <UserProvider>
-              <Home />
+              <WorkhourProvider>
+                <Home />
+              </WorkhourProvider>
             </UserProvider>
           </LayoutWithNavbar>
         }

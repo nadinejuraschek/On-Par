@@ -2,15 +2,50 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  gap: 1.6rem;
 
   height: 100%;
 }
 
-.developmentNotice {
-  color: #31313180;
-  margin-bottom: 0;
+.loadingProgressContainer {
+  height: 4rem;
+  width: 100%;
+
+  border-radius: 0.8rem;
+  overflow: hidden;
 }
 
-.featureNotice {
-  margin: 2rem 0;
+.progressContainer {
+  height: 4rem;
+  width: 100%;
+
+  background-color: var(--secondary_25);
+  border: 1px solid transparent;
+  border-radius: 0.8rem;
+  padding: 0 1rem;
+
+  overflow: hidden;
+
+  position: relative;
+
+  display: flex;
+  align-items: center;
+}
+
+.progress {
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  height: 4rem;
+
+  background: linear-gradient(to right, var(--secondary_50), var(--secondary_200));
+}
+
+.progress.red {
+  background: linear-gradient(to right, var(--error_50), var(--error_200));
+}
+
+.progressLabel {
+  z-index: 1;
 }

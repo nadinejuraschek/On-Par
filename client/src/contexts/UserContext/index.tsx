@@ -1,7 +1,6 @@
 import { createContext, useEffect, useState } from "react";
 
 import { IUserProvider } from "./types";
-import { Loading } from "../../components";
 import axios from "axios";
 import { toast } from "react-toastify";
 
@@ -21,10 +20,6 @@ export const UserProvider = ( { children }: IUserProvider ): JSX.Element => {
       // console.debug( "Error: ", error );
     });
   }, [] );
-
-  if ( !user ) {
-    return <Loading />;
-  }
 
   return (
     <UserContext.Provider value={ [user] }>

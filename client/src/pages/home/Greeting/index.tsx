@@ -1,34 +1,32 @@
-import { useEffect, useState } from "react";
-
 import { IGreeting } from "./types";
 import { Text } from "components";
 import blankProfile from "images/blankProfile.svg";
 import styles from "./greeting.module.css";
+import { useMemo } from "react";
 
 export const Greeting = ( { message, name }: IGreeting ): JSX.Element => {
   const month = new Date().getMonth() + 1;
   const day = new Date().getDate();
   const date = `${ month }/${ day }`;
   const time = new Date().getHours();
-  const [ greeting, setGreeting ] = useState('');
 
-  useEffect( () => {
+  const greeting = useMemo(() => {
     if ( date === "12/24" || date === "12/25" ) {
-      setGreeting( `Merry Christmas, ${ name }!` );
+      return `Merry Christmas, ${ name }!`;
     } else if ( date === "12/31" || date === "1/1" ) {
-      setGreeting( `Happy New Year, ${ name }!` );
+      return `Happy New Year, ${ name }!`;
     } else if ( time > 6 && time < 11 ) {
-      setGreeting( `Good morning, ${ name }!` );
+      return `Good morning, ${ name }!`;
     } else if ( time >= 11 && time < 15 ) {
-      setGreeting( `It's lunchtime, ${ name }!` );
+      return `It's lunchtime, ${ name }!`;
     } else if ( time >= 15 && time < 18 ) {
-      setGreeting( `Good afternoon, ${ name }!` );
+      return `Good afternoon, ${ name }!`;
     } else if ( time >= 18 && time < 23 ) {
-      setGreeting( `Good evening, ${ name }!` );
+      return `Good evening, ${ name }!`;
     } else {
-      setGreeting( `Up so late, ${ name }?` );
+      return `Up so late, ${ name }?`;
     }
-  }, [] );
+  }, [date, name, time]);
 
   return (
     <div className={ styles.greeting }>
