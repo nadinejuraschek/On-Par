@@ -52,7 +52,7 @@ export const NoteCard = ( { color, date, deleteNote, getNotes, noteid, text, tit
             handleClick={ () => deleteNote( noteid ) }
             variant="tertiary"
           >
-            <i className="close icon"></i>
+            <i className="trash icon"></i>
           </Button>
         </div>
       </div>
