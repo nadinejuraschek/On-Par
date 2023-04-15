@@ -50,6 +50,7 @@ export const Login = (): JSX.Element => {
         <Text as="h2" size="xl" weight="bold">Log In</Text>
         <form className={ styles.form } onSubmit={ handleSubmit }>
           <Input
+            fullWidth
             handleChange={(event) => setEmail( (event.target as HTMLInputElement).value )}
             icon="mail"
             label="E-Mail"
@@ -58,6 +59,7 @@ export const Login = (): JSX.Element => {
             value={email}
           />
           <Input
+            fullWidth
             handleChange={(event) => setPassword( (event.target as HTMLInputElement).value )}
             icon="lock"
             label="Password"

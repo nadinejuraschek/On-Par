@@ -2,9 +2,10 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  justify-content: center;
+  justify-content: flex-start;
   gap: 0.6rem;
 
+  height: 9rem;
   min-width: 20rem;
 }
 
@@ -20,6 +21,9 @@
 
 .input {
   padding: 0 1.2rem;
+}
+
+.input.fullWidth {
   width: 100%;
 }
 
@@ -83,6 +87,12 @@
 
 .error {
   border-color: var(--error_300);
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+  max-width: 100%;
 }
 
 .error:focus {

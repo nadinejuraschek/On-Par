@@ -82,6 +82,7 @@ export const Register = (): JSX.Element => {
         <Text as="h2" size="xl" weight="bold">Register</Text>
       <form className={ styles.form } onSubmit={ handleSubmit }>
         <Input
+          fullWidth
           handleChange={handleDateChange}
           icon="calendar alternate outline"
           label="Arrival Date"
@@ -107,23 +108,27 @@ export const Register = (): JSX.Element => {
           ) : null }
         </div> */}
 
-        <div className="two fields">
-        <Input
-          handleChange={event => setFirstname( (event.target as HTMLInputElement).value )}
-          icon="user"
-          label="First Name"
-          name="firstname"
-          placeholder="First Name"
-          value={firstname}
-        />
-        <Input
-          handleChange={event => setLastname( (event.target as HTMLInputElement).value )}
-          icon="user"
-          label="Last Name"
-          name="lastname"
-          placeholder="Last Name"
-          value={lastname}
-        />
+        <div className={ styles.twoFields }>
+          <Input
+            className={ styles.twoFieldsInput }
+            fullWidth
+            handleChange={event => setFirstname( (event.target as HTMLInputElement).value )}
+            icon="user"
+            label="First Name"
+            name="firstname"
+            placeholder="First Name"
+            value={firstname}
+          />
+          <Input
+            className={ styles.twoFieldsInput }
+            fullWidth
+            handleChange={event => setLastname( (event.target as HTMLInputElement).value )}
+            icon="user"
+            label="Last Name"
+            name="lastname"
+            placeholder="Last Name"
+            value={lastname}
+          />
         </div>
 
         <div className="field">
@@ -276,6 +281,7 @@ export const Register = (): JSX.Element => {
         </div>
 
         <Input
+          fullWidth
           handleChange={event => setEmail( (event.target as HTMLInputElement).value )}
           icon="mail"
           label="E-Mail"
@@ -285,6 +291,7 @@ export const Register = (): JSX.Element => {
         />
 
         <Input
+          fullWidth
           handleChange={event => setPassword( (event.target as HTMLInputElement).value )}
           icon="lock"
           label="Password"

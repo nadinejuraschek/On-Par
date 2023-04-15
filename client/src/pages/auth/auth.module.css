@@ -24,8 +24,19 @@
 .form {
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 1.2rem;
 
+  width: 100%;
+}
+
+.twoFields {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+}
+
+.twoFieldsInput {
   width: 100%;
 }
 
@@ -58,6 +69,14 @@
 
     max-width: 500px;
     width: 70%;
+  }
+
+  .twoFields {
+    flex-direction: row;
+  }
+
+  .twoFieldsInput {
+    width: calc(100% - 1rem);
   }
 }
 

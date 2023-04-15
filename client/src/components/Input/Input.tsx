@@ -6,6 +6,7 @@ import styles from "./input.module.css";
 export const Input = ( {
   className = '',
   error,
+  fullWidth = false,
   handleChange,
   icon,
   label,
@@ -21,7 +22,7 @@ export const Input = ( {
       </Text>
       <div className={ styles.iconInputWrapper }>
         <input
-          className={ `${ styles.input } ${ error && styles.error } ${ icon && styles.leftPadding }` }
+          className={ `${ styles.input } ${ error && styles.error } ${ fullWidth && styles.fullWidth } ${ icon && styles.leftPadding }` }
           name={ name }
           onChange={ handleChange }
           placeholder={ placeholder }
@@ -30,7 +31,7 @@ export const Input = ( {
         />
         { icon && <i className={ `${ icon } icon inputIcon` }></i> }
       </div>
-      { error && <Text as="p" color="--error_300" size="sm" >{ error }</Text> }
+      { error && <Text as="p" className={ styles.error} color="--error_300" size="xs" >{ error }</Text> }
     </div>
   );
 }

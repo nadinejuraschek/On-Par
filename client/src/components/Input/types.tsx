@@ -14,6 +14,7 @@ export interface IDateInput {
 export interface IInput {
   className?: string;
   error?: string;
+  fullWidth?: boolean;
   handleChange: (event: ChangeEvent) => void;
   icon?: string;
   label: string;
