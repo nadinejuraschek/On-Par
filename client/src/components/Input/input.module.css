@@ -12,8 +12,35 @@
   display: none;
 }
 
-.input {
+.iconInputWrapper {
+  position: relative;
+
   width: 100%;
+}
+
+.input {
+  padding: 0 1.2rem;
+  width: 100%;
+}
+
+.input.leftPadding {
+  padding-left: 4rem;
+}
+
+.iconInputWrapper i {
+  font-size: 1.6rem;
+  margin: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  height: 100%;
+  width: 4rem;
+
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 
 .input,
@@ -25,7 +52,6 @@
   box-shadow: var(--shadow_xs);
   font-size: 1.4rem;
   line-height: 2rem;
-  padding: 0 1.2rem;
   transition: color 0.1s ease, border-color 0.1s ease;
 
   height: 4rem;
