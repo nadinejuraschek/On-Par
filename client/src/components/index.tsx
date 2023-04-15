@@ -10,6 +10,7 @@ export * from "./Input";
 export * from "./List";
 export * from "./LoadingPlaceholder";
 export * from "./LoadingSpinner";
+export * from "./Modal";
 export * from "./Navbar";
 export * from "./ProgressRing";
 export * from "./Tabs";
