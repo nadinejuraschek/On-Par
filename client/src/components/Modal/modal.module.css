@@ -5,6 +5,8 @@
   left: 0;
   right: 0;
 
+  z-index: 100;
+
   backdrop-filter: blur(8px);
   background-color: var(--overlay);
   padding: 2.4rem;
@@ -58,7 +60,7 @@
 
 .closeButton:hover {
   background-color: var(--grey_50);
-  border-radius: 0.8rem;
+  border-radius: 100%;
   cursor: pointer;
 }
 

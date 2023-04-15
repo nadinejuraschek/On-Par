@@ -16,6 +16,10 @@
   gap: 0.8rem;
 }
 
+.btn i {
+  margin: 0;
+}
+
 .primary,
 .secondary {
   box-shadow: var(--shadow_xs);

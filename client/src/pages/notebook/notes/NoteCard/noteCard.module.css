@@ -43,17 +43,13 @@
 }
 
 .actions button {
-  background-color: #ffffff30;
-  border-color: #ffffff30;
-}
-
-.actions button:hover {
-  background-color: #ffffff50;
+  background-color: transparent;
   border-color: transparent;
 }
 
-.actions button i.icon {
-  margin: 0;
+.actions button:hover {
+  background-color: #ffffff4D;
+  border-color: #ffffff4D;
 }
 
 .body {}
@@ -63,4 +59,11 @@
   align-items: center;
   justify-content: flex-end;
   gap: 1rem;
+}
+
+@media only screen and (min-width: 900px) {
+  .note {
+    height: min-content;
+    width: calc(50% - 0.5rem);
+  }
 }
