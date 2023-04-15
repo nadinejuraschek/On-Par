@@ -1,6 +1,26 @@
 /********************************************
  LOGIN, REGISTER
 ********************************************/
+.main {
+  min-height: 100vh;
+  width: 100vw;
+}
+
+.formWrapper {
+  background-color: var(--white);
+  border-radius: 2rem;
+  filter: var(--shadow_sm);
+  padding: 2rem;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+
+  width: 100%;
+}
+
 .form {
   display: flex;
   flex-direction: column;
@@ -9,47 +29,37 @@
   width: 100%;
 }
 
-.centeredBtn {
+.divider {
+  position: relative;
+
+  height: 4rem;
+
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.optionsContainer {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-
-  background-color: var(--white);
-  border-radius: 20px;
-  filter: var(--shadow_sm);
-  padding: 2rem;
+.divider hr {
+  border: none;
+  border-top: 1px solid var(--grey_400);
+  width: 100%;
 }
 
-.optionsItem {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
+.dividerText {
+  position: absolute;
 
-  text-align: left;
+  background-color: var(--white);
+  padding: 0 1.6rem;
 }
 
 @media only screen and (min-width: 600px) {
-  .form {
-    width: 80%;
-  }
+  .formWrapper {
+    padding: 4rem;
 
-  .optionsItem {
-    height: 4rem;
-  }
-
-  .optionsItem p {
-    width: 160px;
+    max-width: 500px;
+    width: 70%;
   }
 }
 
 @media only screen and (min-width: 900px) {
-  .form {
-    width: 70%;
-  }
 }

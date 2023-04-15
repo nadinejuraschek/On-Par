@@ -1,4 +1,4 @@
-import { Button, Text } from 'components';
+import { Button, Input, Text } from 'components';
 
 import axios from "axios";
 import styles from "./auth.module.css";
@@ -45,64 +45,38 @@ export const Login = (): JSX.Element => {
   };
 
   return (
-    <main>
-      <Text as="h2" size="xl" weight="bold">Log In</Text>
-
-      <form className={ `ui form ${ styles.form }` } onSubmit={ handleSubmit }>
-        <div className="field">
-          <label htmlFor="email">E-Mail</label>
-          <div className="ui left icon input">
-            <i className="mail icon"></i>
-            <input
-              type="text"
-              name="email"
-              placeholder="E-Mail"
-              onChange={ event => setEmail( event.target.value ) }
-            />
-          </div>
-        </div>
-
-        <div className="field">
-          <label htmlFor="password">Password</label>
-          <div className="ui left icon input">
-            <i className="lock icon"></i>
-            <input
-              type="password"
-              name="password"
-              placeholder="Password"
-              onChange={ event => setPassword( event.target.value ) }
-            />
-          </div>
-        </div>
-
-        <div className={ styles.centeredBtn }>
+    <main className={ styles.main }>
+      <div className={ styles.formWrapper }>
+        <Text as="h2" size="xl" weight="bold">Log In</Text>
+        <form className={ styles.form } onSubmit={ handleSubmit }>
+          <Input
+            handleChange={(event) => setEmail( (event.target as HTMLInputElement).value )}
+            icon="mail"
+            label="E-Mail"
+            name="email"
+            placeholder="E-Mail"
+            value={email}
+          />
+          <Input
+            handleChange={(event) => setPassword( (event.target as HTMLInputElement).value )}
+            icon="lock"
+            label="Password"
+            name="password"
+            placeholder="Password"
+            type="password"
+            value={password}
+          />
           <Button autoFocus type="submit" variant="primary">
             Log In
           </Button>
-        </div>
-
-        <div className={ styles.optionsContainer }>
-          <div className={ styles.optionsItem }>
-            <Text as="p" size="sm">Don&apos;t have an account?</Text>
-            <Button link="/register" variant="tertiary">
-              Register
-            </Button>
+          <Button link="/register" variant="tertiary">Create an Account</Button>
+          <div className={ styles.divider }>
+            <hr />
+            <Text className={ styles.dividerText }>OR</Text>
           </div>
-          <div className={ styles.optionsItem }>
-            <Text as="p" size="sm">Testing?</Text>
-            <Button handleClick={ handleGuest } variant="tertiary">
-              Use Guest Account
-            </Button>
-          </div>
-          { /* <p>Or Log In with</p>
-                                <div className="ui small buttons">
-                                    <button className="ui google plus button">
-                                        <i className="google icon"></i>
-                                        Google
-                                    </button>
-                                </div> */ }
-        </div>
-      </form>
+          <Button handleClick={ handleGuest } variant="tertiary">Use Guest Account</Button>
+        </form>
+      </div>
     </main>
   );
 };
