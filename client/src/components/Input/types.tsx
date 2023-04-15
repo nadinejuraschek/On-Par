@@ -1,4 +1,4 @@
-import { ChangeEventHandler, Dispatch, SetStateAction } from 'react';
+import { ChangeEvent, Dispatch, SetStateAction } from 'react';
 
 import { Dayjs } from 'dayjs';
 
@@ -14,11 +14,13 @@ export interface IDateInput {
 export interface IInput {
   className?: string;
   error?: string;
-  handleChange: (value: string) => void;
+  fullWidth?: boolean;
+  handleChange: (event: ChangeEvent) => void;
   icon?: string;
   label: string;
   name: string;
   placeholder?: string;
+  type?: string;
   value: string;
 }
 

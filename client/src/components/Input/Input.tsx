@@ -6,28 +6,32 @@ import styles from "./input.module.css";
 export const Input = ( {
   className = '',
   error,
+  fullWidth = false,
   handleChange,
   icon,
   label,
   name,
   placeholder = "Type here...",
+  type = 'text',
   value,
-}: IInput ): JSX.Element => (
-  <div className={ `${className} ${styles.field}` }>
-    <Text as="label" htmlFor={ name } size="sm">
-      <>
-        { icon && <i className={ `${ icon } icon` }></i> }
+}: IInput ): JSX.Element => {
+  return (
+    <div className={ `${className} ${styles.field}` }>
+      <Text as="label" className={ styles.label } htmlFor={ name } size="sm">
         { label }
-      </>
-    </Text>
-    <input
-      className={ `${ styles.input } ${ error && styles.error }` }
-      name={ name }
-      onChange={ (event: ChangeEvent) => handleChange( (event.target as HTMLInputElement).value ) }
-      placeholder={ placeholder }
-      type="text"
-      value={ value }
-    />
-    { error && <Text as="p" color="--error_300" size="sm" >{ error }</Text> }
-  </div>
-);
+      </Text>
+      <div className={ styles.iconInputWrapper }>
+        <input
+          className={ `${ styles.input } ${ error && styles.error } ${ fullWidth && styles.fullWidth } ${ icon && styles.leftPadding }` }
+          name={ name }
+          onChange={ handleChange }
+          placeholder={ placeholder }
+          type={type}
+          value={ value }
+        />
+        { icon && <i className={ `${ icon } icon inputIcon` }></i> }
+      </div>
+      { error && <Text as="p" className={ styles.error} color="--error_300" size="xs" >{ error }</Text> }
+    </div>
+  );
+}

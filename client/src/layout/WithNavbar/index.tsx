@@ -1,7 +1,8 @@
 import { GatedComponent } from "auth/GatedComponent";
 import { Navbar } from "components";
+import { ReactNode } from 'react';
 
-export const LayoutWithNavbar = ({ children }) => {
+export const LayoutWithNavbar = ({ children }: { children: ReactNode }): JSX.Element => {
   return (
     <GatedComponent>
       <div className="layout">

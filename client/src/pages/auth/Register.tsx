@@ -1,6 +1,6 @@
 import * as dayjs from "dayjs";
 
-import { Button, DatePicker, Text } from "components";
+import { Button, DatePicker, Input, Text } from "components";
 import { FormEvent, useState } from "react";
 
 import axios from "axios";
@@ -66,51 +66,32 @@ export const Register = (): JSX.Element => {
       } );
   };
 
-  const handleDateChange = startDate => {
-    setStartDate( startDate );
-  };
+  const handleDateChange = (startDate) => setStartDate( startDate );
 
-  const toggleDatePicker = event => {
+  console.log(startDate)
+  console.log(dayjs(startDate).format('YYYY-MM-DD'))
+
+  /* const toggleDatePicker = event => {
     event.preventDefault();
     openDatePicker ? setOpenDatePicker( false ) : setOpenDatePicker( true );
-  };
+  }; */
 
   return (
-    <main>
-      <Text as="h2" size="xl" weight="bold">Register</Text>
-
-      <form className={ `ui form ${ styles.form }` } onSubmit={ handleSubmit }>
-        { /* <div className='field'>
-          <label>I am a</label>
-          <select
-            name='role'
-            onChange={event => setRole(event.target.value)}
-            className='ui fluid dropdown'
-          >
-            <option className='default text' value=''>
-              Choose One
-            </option>
-            <option value='Au Pair'>Au Pair</option>
-            <option value='Host Family'>Host Family Member</option>
-            <option value='Community Counselor'>Community Counselor</option>
-          </select>
-        </div> */ }
-
-        { /* <div className='field'>
-          <div className='two fields'> */ }
-        { /* <div className='field'>
-              <label>Your Host Family's ID</label>
-              <div className='ui left icon input'>
-                <i className='users icon'></i>
-                <input
-                  type='text'
-                  name='familyID'
-                  placeholder='Host Family ID'
-                  onChange={event => setFamilyID(event.target.value)}
-                />
-              </div>
-            </div> */ }
-        <div className="field">
+    <main className={ styles.main }>
+      <div className={ styles.formWrapper }>
+        <Text as="h2" size="xl" weight="bold">Register</Text>
+      <form className={ styles.form } onSubmit={ handleSubmit }>
+        <Input
+          fullWidth
+          handleChange={handleDateChange}
+          icon="calendar alternate outline"
+          label="Arrival Date"
+          name="startDate"
+          placeholder={dayjs(startDate).format('YYYY-MM-DD')}
+          type="date"
+          value={dayjs(startDate).format('YYYY-MM-DD')}
+        />
+        {/* <div className="field">
           <label htmlFor="startDate">Arrival Date</label>
           <div className="ui left icon input" onClick={ toggleDatePicker } role="presentation">
             <i className="calendar alternate outline icon"></i>
@@ -125,36 +106,29 @@ export const Register = (): JSX.Element => {
           { openDatePicker ? (
             <DatePicker startDate={ startDate } setStartDate={ setStartDate } />
           ) : null }
-        </div>
-        { /* </div>
-        </div> */ }
+        </div> */}
 
-        <div className="field">
-          <label htmlFor="firstname">Your Name</label>
-          <div className="two fields">
-            <div className="field">
-              <div className="ui left icon input">
-                <i className="user icon"></i>
-                <input
-                  type="text"
-                  name="firstname"
-                  placeholder="First Name"
-                  onChange={ event => setFirstname( event.target.value ) }
-                />
-              </div>
-            </div>
-            <div className="field">
-              <div className="ui left icon input">
-                <i className="user icon"></i>
-                <input
-                  type="text"
-                  name="lastname"
-                  placeholder="Last Name"
-                  onChange={ event => setLastname( event.target.value ) }
-                />
-              </div>
-            </div>
-          </div>
+        <div className={ styles.twoFields }>
+          <Input
+            className={ styles.twoFieldsInput }
+            fullWidth
+            handleChange={event => setFirstname( (event.target as HTMLInputElement).value )}
+            icon="user"
+            label="First Name"
+            name="firstname"
+            placeholder="First Name"
+            value={firstname}
+          />
+          <Input
+            className={ styles.twoFieldsInput }
+            fullWidth
+            handleChange={event => setLastname( (event.target as HTMLInputElement).value )}
+            icon="user"
+            label="Last Name"
+            name="lastname"
+            placeholder="Last Name"
+            value={lastname}
+          />
         </div>
 
         <div className="field">
@@ -306,54 +280,42 @@ export const Register = (): JSX.Element => {
           </select>
         </div>
 
-        <div className="field">
-          <label htmlFor="email">E-Mail</label>
-          <div className="ui left icon input">
-            <i className="envelope icon"></i>
-            <input
-              type="text"
-              name="email"
-              placeholder="E-Mail"
-              onChange={ event => setEmail( event.target.value ) }
-            />
-          </div>
-        </div>
+        <Input
+          fullWidth
+          handleChange={event => setEmail( (event.target as HTMLInputElement).value )}
+          icon="mail"
+          label="E-Mail"
+          name="email"
+          placeholder="E-Mail"
+          value={email}
+        />
 
-        <div className="field">
-          <label htmlFor="password">Password</label>
-          <div className="ui left icon input">
-            <i className="lock icon"></i>
-            <input
-              type="password"
-              name="password"
-              placeholder="Password"
-              onChange={ event => setPassword( event.target.value ) }
-            />
-          </div>
-        </div>
+        <Input
+          fullWidth
+          handleChange={event => setPassword( (event.target as HTMLInputElement).value )}
+          icon="lock"
+          label="Password"
+          name="password"
+          placeholder="Password"
+          type="password"
+          value={password}
+        />
 
-        <div className={ styles.centeredBtn }>
-          <Button autoFocus type="submit" variant="primary">
-            Register
-          </Button>
-        </div>
-
-        <div className={ styles.optionsContainer }>
-          <div className={ styles.optionsItem }>
-            <Text as="p" size="sm">Already have an account?</Text>
-            <Button link="/login" variant="tertiary">
-              Log In
-            </Button>
+        <Button autoFocus type="submit" variant="primary">
+          Register
+        </Button>
+        <Button link="/login" variant="tertiary">
+          Log In
+        </Button>
+        <div className={ styles.divider }>
+          <hr />
+          <Text className={ styles.dividerText }>OR</Text>
           </div>
-          <div className={ styles.optionsItem }>
-            <Text as="p" size="sm">Testing?</Text>
-            <Button handleClick={ handleGuest } variant="tertiary">
-              Use Guest Account
-            </Button>
-          </div>
-        </div>
-
+        <Button handleClick={ handleGuest } variant="tertiary">
+          Use Guest Account
+        </Button>
       </form>
+      </div>
     </main>
   );
 };

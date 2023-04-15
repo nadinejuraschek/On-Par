@@ -25,8 +25,8 @@ import {
   UserProvider,
   WorkhourProvider,
 } from "./contexts";
+import { LayoutGradient, LayoutWithNavbar } from "layout";
 
-import { LayoutWithNavbar } from "layout";
 import { ToastContainer } from "react-toastify";
 
 export const App = (): JSX.Element => (
@@ -35,8 +35,8 @@ export const App = (): JSX.Element => (
       { /* Landing Page */ }
       <Route path="/" element={ <Landing /> } />
       { /* Authentication */ }
-      <Route path="/login" element={ <Login /> } />
-      <Route path="/register" element={ <Register /> } />
+      <Route path="/login" element={ <LayoutGradient><Login /></LayoutGradient> } />
+      <Route path="/register" element={ <LayoutGradient><Register /></LayoutGradient> } />
 
       { /* Navbar Links */ }
       <Route

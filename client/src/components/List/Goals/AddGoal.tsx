@@ -1,5 +1,6 @@
 import { Input, Tabs } from "components";
 
+import { ChangeEvent } from 'react';
 import { IAddGoal } from "./types";
 import education from "images/education.svg";
 import personal from "images/personal.svg";
@@ -24,7 +25,7 @@ export const AddGoal = ( { handleText, handleType, text, type }: IAddGoal ): JSX
         name="goal"
         label="New Goal"
         value={ text }
-        handleChange={ handleText }
+        handleChange={ (event: ChangeEvent) => handleText((event.target as HTMLInputElement).value) }
       />
     </div>
   );
