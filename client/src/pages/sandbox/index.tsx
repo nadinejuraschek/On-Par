@@ -8,8 +8,8 @@ export const Sandbox = (): JSX.Element => {
 
   return (
     <div className={ styles.container }>
-      <DatePicker name="date" onChange={onValueChange} value={value} />
-      <Input fullWidth handleChange={() => console.log('')} label="Input" name="input" value="Input" />
+      <DatePicker fullWidth icon="calendar outline" label="Date" name="date" onChange={onValueChange} value={value} />
+      <Input fullWidth handleChange={() => console.log('')} icon="calendar outline" label="Input" name="input" value="Input" />
     </div>
   );
 }

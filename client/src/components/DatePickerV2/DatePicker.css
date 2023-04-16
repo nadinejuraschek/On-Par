@@ -55,7 +55,10 @@ REACT DATETIME PICKER
 
 .react-datetime-picker__inputGroup input:focus,
 .react-datetime-picker__inputGroup input:focus-visible,
-.react-datetime-picker__inputGroup input:active {
+.react-datetime-picker__inputGroup input:active,
+.react-datetime-picker__inputGroup select:focus,
+.react-datetime-picker__inputGroup select:focus-visible,
+.react-datetime-picker__inputGroup select:active {
   outline: none;
   background-color: var(--primary_50);
 }
