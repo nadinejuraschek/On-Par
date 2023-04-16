@@ -4,7 +4,7 @@ import 'react-clock/dist/Clock.css';
 import DateTimePicker from 'react-datetime-picker';
 import { IDatePicker } from './types';
 import { Text } from 'components';
-import styles from './datePicker.module.css';
+import styles from './datepicker.module.css';
 
 export const DatePicker = ({
   disabled = false,
