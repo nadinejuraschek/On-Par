@@ -1,38 +1,28 @@
 import * as dayjs from "dayjs";
 
-import { Button, Text } from "components";
-import { Date, Time } from "components/Input";
+import { Button, DatePicker, Text } from "components";
+import { FormEvent, useCallback } from 'react';
 
-import { FormEvent } from 'react';
 import axios from "axios";
 import styles from "../workhours.module.css";
 import { useState } from "react";
 
 export const AddHours = ( { updateWorkhours } ): JSX.Element => {
-  const today = dayjs();
-  const [start, setStart] = useState();
-  const [end, setEnd] = useState();
-  const [date, setDate] = useState( today );
+  const today = new Date();
+  const [date, setDate] = useState<Date>( today );
+  const [start, setStart] = useState<Date | undefined>( undefined );
+  const [end, setEnd] = useState<Date | undefined>( undefined );
 
-  const handleSubmit = (event: FormEvent): void => {
+  const handleSubmit = useCallback((event: FormEvent): void => {
     event.preventDefault();
 
-    const setTime = ( time: string ): dayjs.Dayjs => {
-      const hours = Number(time.split( ":" )[0]);
-      const minutes = Number(time.split( ":" )[1]);
-      const newTime = dayjs( date ).set( "hour", hours ).set( "minute", minutes );
-      return newTime;
-    };
-
-    const startTime = setTime( start );
-    const endTime = setTime( end );
-    const duration = dayjs( endTime ).diff( startTime, "minutes" );
+    const duration = dayjs( end ).diff( start, "minutes" );
 
     const newHours = {
       date: date,
       hours: [{
-        start: startTime,
-        end: endTime,
+        start: start,
+        end: end,
         duration: duration,
       }],
     };
@@ -43,25 +33,44 @@ export const AddHours = ( { updateWorkhours } ): JSX.Element => {
     } ).catch( err => {
       console.log( "Error: ", err );
     } );
-  };
+  }, [date, end, start]);
 
   return (
     <>
       <Text as="h3" size="lg" weight="bold">Add Hours</Text>
       <div className={ styles.addForm }>
-        <Date
-          date={ date }
-          name="date"
-          label="Date"
-          value={ date }
+        <DatePicker
+          format="MM/dd/yyyy"
+          fullWidth
+          handleChange={(selected: Date) => setDate(selected)}
           icon="calendar alternate outline"
-          handleChange={ setDate }
+          label="Date"
+          name="date"
+          value={date}
         />
-        <Time
-          start={ start }
-          handleStart={ setStart }
-          end={ end }
-          handleEnd={ setEnd }
+        <DatePicker
+          format="hh:mma"
+          fullWidth
+          handleChange={(selected: Date) => {
+            const newDate = date.setHours(selected.getHours(), selected.getMinutes());
+            setStart(new Date(newDate));
+          }}
+          icon="clock outline"
+          label="Start Time"
+          name="start"
+          value={start}
+        />
+        <DatePicker
+          format="hh:mma"
+          fullWidth
+          handleChange={(selected: Date) => {
+            const newDate = date.setHours(selected.getHours(), selected.getMinutes());
+            setEnd(new Date(newDate));
+          }}
+          icon="clock outline"
+          label="End Time"
+          name="end"
+          value={end}
         />
       </div>
       <Button fullWidth handleClick={ handleSubmit } variant="primary">

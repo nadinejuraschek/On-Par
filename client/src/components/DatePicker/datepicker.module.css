@@ -1,112 +1,40 @@
-.container {
-  background-color: var(--white);
-  border-radius: 0.28571429rem;
-  width: 300px;
-
-  position: absolute;
-  right: 0;
-  z-index: 100;
-}
-
-.month,
-.year {
-  background-image: linear-gradient(
-    to right bottom,
-    var(--secondary_200),
-    var(--secondary_500)
-  );
-  border-bottom: 1px solid lightgray;
-  color: var(--white);
-  font-weight: bold;
-  text-transform: uppercase;
-  height: 2.5em;
-  width: 100%;
-
+.field {
   display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 0.6rem;
+
+  height: 9rem;
+  min-width: 20rem;
 }
 
-.cell,
-.icon {
-  background-color: transparent;
-  border: none;
-}
+.iconInputWrapper {
+  position: relative;
 
-.icon i {
-  color: var(--white);
-}
-
-.month .icon {
-  cursor: pointer;
-  height: 1.5em;
-}
-
-.month .icon img {
-  object-fit: contain;
-  height: 100%;
   width: 100%;
 }
 
-.rowMiddle {
-  align-items: center;
-}
-.column {
-  flex-grow: 1;
-  flex-basis: 0;
-  max-width: 100%;
+.datePicker.fullWidth {
+  width: 100%;
 }
 
-/* Calendar */
-.calendar {
-  background: var(--white);
-  border: 1px solid lightgray;
-  border-radius: 0.28571429rem;
+.datePicker > div:first-child {
+  padding-left: 4rem;
 }
 
-.cell {
-  border-right: 1px solid lightgray;
-  color: gray;
-  cursor: pointer;
-  padding: 0.25em;
+.iconInputWrapper i {
+  font-size: 1.6rem;
+  margin: 0;
 
   display: flex;
   align-items: center;
   justify-content: center;
 
-  width: calc(100% / 7);
-}
+  height: 100%;
+  width: 4rem;
 
-.cell:hover {
-  background-color: rgb(196, 215, 255, 0.5);
-  color: gray;
-}
-
-.disabled {
-  background-color: #f6f6f6;
-  color: transparent;
-  pointer-events: none;
-}
-
-.selected {
-  background-color: rgb(253, 184, 183, 0.3);
-}
-
-.row {
-  display: flex;
-  border-bottom: 1px solid lightgray;
-}
-
-.row:last-child {
-  border-bottom: none;
-}
-
-.cell:last-child {
-  border-right: none;
-}
-
-.cell .number {
-  font-size: 16px;
+  position: absolute;
+  top: 0;
+  left: 0;
 }

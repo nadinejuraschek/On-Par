@@ -1,7 +1,6 @@
 export * from "./Button";
 export * from "./Card";
 export * from "./DatePicker";
-export * from "./DatePickerV2";
 export * from "./Event";
 export * from "./Features";
 export * from "./Filer";

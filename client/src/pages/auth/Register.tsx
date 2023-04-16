@@ -1,7 +1,5 @@
-import * as dayjs from "dayjs";
-
 import { Button, DatePicker, Input, Text } from "components";
-import { FormEvent, useState } from "react";
+import { FormEvent, MouseEvent, useCallback, useState } from "react";
 
 import axios from "axios";
 import styles from "./auth.module.css";
@@ -18,11 +16,9 @@ export const Register = (): JSX.Element => {
   const [email, setEmail] = useState( "" );
   const [password, setPassword] = useState( "" );
 
-  const [openDatePicker, setOpenDatePicker] = useState( false );
-
   const navigate = useNavigate();
 
-  const handleSubmit = (event: FormEvent): void => {
+  const handleSubmit = useCallback((event: FormEvent): void => {
     event.preventDefault();
 
     const newUser = {
@@ -48,9 +44,9 @@ export const Register = (): JSX.Element => {
         toast.error("Could not register user. Please try again later!");
         // console.debug( "Error when registering user: " + error.response );
       } );
-  };
+  }, [firstname, lastname, country, startDate, email, password]);
 
-  const handleGuest = event => {
+  const handleGuest = useCallback((event: MouseEvent) => {
     event.preventDefault();
     axios( {
       url: "/api/user/login",
@@ -64,49 +60,22 @@ export const Register = (): JSX.Element => {
         toast.error("Could not log in test user. Please try again later!");
         // console.debug( "Error: " + error.response );
       } );
-  };
-
-  const handleDateChange = (startDate) => setStartDate( startDate );
-
-  console.log(startDate)
-  console.log(dayjs(startDate).format('YYYY-MM-DD'))
-
-  /* const toggleDatePicker = event => {
-    event.preventDefault();
-    openDatePicker ? setOpenDatePicker( false ) : setOpenDatePicker( true );
-  }; */
+  }, []);
 
   return (
     <main className={ styles.main }>
       <div className={ styles.formWrapper }>
         <Text as="h2" size="xl" weight="bold">Register</Text>
       <form className={ styles.form } onSubmit={ handleSubmit }>
-        <Input
+        <DatePicker
+          format="MM/dd/yyyy"
           fullWidth
-          handleChange={handleDateChange}
+          handleChange={(startDate: Date) => setStartDate( startDate )}
           icon="calendar alternate outline"
           label="Arrival Date"
           name="startDate"
-          placeholder={dayjs(startDate).format('YYYY-MM-DD')}
-          type="date"
-          value={dayjs(startDate).format('YYYY-MM-DD')}
+          value={new Date(startDate)}
         />
-        {/* <div className="field">
-          <label htmlFor="startDate">Arrival Date</label>
-          <div className="ui left icon input" onClick={ toggleDatePicker } role="presentation">
-            <i className="calendar alternate outline icon"></i>
-            <input
-              type="text"
-              name="startDate"
-              placeholder={ dayjs().format( "DD/MM/YYYYY" ) }
-              onChange={ handleDateChange }
-              value={ dayjs( startDate ).format( "DD/MM/YYYY" ) }
-            />
-          </div>
-          { openDatePicker ? (
-            <DatePicker startDate={ startDate } setStartDate={ setStartDate } />
-          ) : null }
-        </div> */}
 
         <div className={ styles.twoFields }>
           <Input
