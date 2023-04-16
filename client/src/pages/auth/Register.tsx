@@ -1,7 +1,9 @@
-import { Button, DatePicker, Input, Text } from "components";
+import { Button, DatePicker, Input, Select, Text } from "components";
 import { FormEvent, MouseEvent, useCallback, useState } from "react";
 
+import { TSelectOption } from "components/Select/types";
 import axios from "axios";
+import { countrySelectOptions } from "data";
 import styles from "./auth.module.css";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
@@ -11,7 +13,7 @@ export const Register = (): JSX.Element => {
   // const [familyID, setFamilyID] = useState('');
   const [firstname, setFirstname] = useState( "" );
   const [lastname, setLastname] = useState( "" );
-  const [country, setCountry] = useState( "" );
+  const [country, setCountry] = useState<TSelectOption | undefined>(undefined);
   const [startDate, setStartDate] = useState( new Date() );
   const [email, setEmail] = useState( "" );
   const [password, setPassword] = useState( "" );
@@ -76,7 +78,6 @@ export const Register = (): JSX.Element => {
           name="startDate"
           value={new Date(startDate)}
         />
-
         <div className={ styles.twoFields }>
           <Input
             className={ styles.twoFieldsInput }
@@ -99,156 +100,14 @@ export const Register = (): JSX.Element => {
             value={lastname}
           />
         </div>
-
-        <div className="field">
-          <label htmlFor="country">Home Country</label>
-          <select
-            name="country"
-            onChange={ event => setCountry( event.target.value ) }
-            className="ui fluid dropdown"
-          >
-            <option className="default text">Select Country</option>
-            <option className="item" value="ar">
-              Argentina
-            </option>
-            <option className="item" value="au">
-              Australia
-            </option>
-            <option className="item" value="at">
-              Austria
-            </option>
-            <option className="item" value="bo">
-              Bolivia
-            </option>
-            <option className="item" value="ba">
-              Bosnia
-            </option>
-            <option className="item" value="br">
-              Brazil
-            </option>
-            <option className="item" value="ca">
-              Canada
-            </option>
-            <option className="item" value="cl">
-              Chile
-            </option>
-            <option className="item" value="cn">
-              China
-            </option>
-            <option className="item" value="co">
-              Colombia
-            </option>
-            <option className="item" value="cr">
-              Costa Rica
-            </option>
-            <option className="item" value="hr">
-              Croatia
-            </option>
-            <option className="item" value="cz">
-              Czech Republic
-            </option>
-            <option className="item" value="dk">
-              Denmark
-            </option>
-            <option className="item" value="ec">
-              Ecuador
-            </option>
-            <option className="item" value="sv">
-              El Salvador
-            </option>
-            <option className="item" value="ee">
-              Estonia
-            </option>
-            <option className="item" value="fi">
-              Finland
-            </option>
-            <option className="item" value="fr">
-              France
-            </option>
-            <option className="item" value="de">
-              Germany
-            </option>
-            <option className="item" value="gt">
-              Guatemala
-            </option>
-            <option className="item" value="hu">
-              Hungary
-            </option>
-            <option className="item" value="ie">
-              Ireland
-            </option>
-            <option className="item" value="il">
-              Israel
-            </option>
-            <option className="item" value="it">
-              Italy
-            </option>
-            <option className="item" value="lv">
-              Latvia
-            </option>
-            <option className="item" value="mx">
-              Mexico
-            </option>
-            <option className="item" value="nl">
-              Netherlands
-            </option>
-            <option className="item" value="nz">
-              New Zealand
-            </option>
-            <option className="item" value="pa">
-              Panama
-            </option>
-            <option className="item" value="pe">
-              Peru
-            </option>
-            <option className="item" value="pl">
-              Poland
-            </option>
-            <option className="item" value="pt">
-              Portugal
-            </option>
-            <option className="item" value="ru">
-              Russia
-            </option>
-            <option className="item" value="cs">
-              Serbia
-            </option>
-            <option className="item" value="rs">
-              Serbia
-            </option>
-            <option className="item" value="sk">
-              Slovakia
-            </option>
-            <option className="item" value="za">
-              South Africa
-            </option>
-            <option className="item" value="kr">
-              South Korea
-            </option>
-            <option className="item" value="es">
-              Spain
-            </option>
-            <option className="item" value="se">
-              Sweden
-            </option>
-            <option className="item" value="ch">
-              Switzerland
-            </option>
-            <option className="item" value="th">
-              Thailand
-            </option>
-            <option className="item" value="tr">
-              Turkey
-            </option>
-            <option className="item" value="ua">
-              Ukraine
-            </option>
-            <option className="item" value="gb">
-              United Kingdom
-            </option>
-          </select>
-        </div>
-
+        <Select
+          handleChange={(option: TSelectOption) => setCountry(option)}
+          icon="globe icon"
+          label="Home Country"
+          name="country"
+          options={countrySelectOptions}
+          value={country}
+        />
         <Input
           fullWidth
           handleChange={event => setEmail( (event.target as HTMLInputElement).value )}
@@ -258,7 +117,6 @@ export const Register = (): JSX.Element => {
           placeholder="E-Mail"
           value={email}
         />
-
         <Input
           fullWidth
           handleChange={event => setPassword( (event.target as HTMLInputElement).value )}
@@ -269,7 +127,6 @@ export const Register = (): JSX.Element => {
           type="password"
           value={password}
         />
-
         <Button autoFocus type="submit" variant="primary">
           Register
         </Button>
