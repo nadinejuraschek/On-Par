@@ -1,23 +1,13 @@
 import { ChangeEvent } from 'react';
 
-export interface IInput {
+export interface ITextarea {
   className?: string;
   error?: string;
   fullWidth?: boolean;
   handleChange: (event: ChangeEvent) => void;
-  icon?: string;
   label: string;
   name: string;
   placeholder?: string;
-  type?: string;
-  value: string;
-}
-
-export interface IProfileInput {
-  edit: boolean;
-  handleChange: (value: string) => void;
-  icon: string;
-  label: string;
-  name: string;
+  rows?: number;
   value: string;
 }

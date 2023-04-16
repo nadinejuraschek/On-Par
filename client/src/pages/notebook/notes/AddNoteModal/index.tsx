@@ -1,13 +1,11 @@
 import * as dayjs from "dayjs";
 
-import { Button, Input, Modal } from "components";
-import { ChangeEvent, FormEvent } from 'react';
-import { useContext, useState } from "react";
+import { Button, Input, Modal, Textarea } from "components";
+import { ChangeEvent, FormEvent, useCallback, useContext, useState } from 'react';
 
 import { IAddNoteModal } from './types';
 import { NoteContext } from "contexts";
 import axios from "axios";
-import styles from "./addNoteModal.module.css";
 import { toast } from 'react-toastify';
 
 export const AddNoteModal = ({ toggleModal }: IAddNoteModal): JSX.Element => {
@@ -15,7 +13,7 @@ export const AddNoteModal = ({ toggleModal }: IAddNoteModal): JSX.Element => {
   const { getNotes } = useContext( NoteContext );
   const [newNote, setNewNote] = useState( { date: currentDate, text: "", title: "" } );
 
-  const handleSubmit = (event: FormEvent): void => {
+  const handleSubmit = useCallback((event: FormEvent): void => {
     event.preventDefault();
     axios( {
       url: "/api/notes",
@@ -34,14 +32,14 @@ export const AddNoteModal = ({ toggleModal }: IAddNoteModal): JSX.Element => {
         toggleModal();
         setNewNote( { date: currentDate, text: "", title: "" } );
       });
-    };
+    }, [currentDate, newNote]);
 
-  const handleChange = (event: ChangeEvent): void => {
+  const handleChange = useCallback((event: ChangeEvent): void => {
     const target = event.target as HTMLInputElement;
     const name = target.name;
     const value = target.value;
     setNewNote( newNote => ( { ...newNote, [name]: value } ) )
-  };
+  }, []);
 
   // TODO: handleSubmit in form instead of button
   const addNoteModalActions = (
@@ -66,17 +64,14 @@ export const AddNoteModal = ({ toggleModal }: IAddNoteModal): JSX.Element => {
           placeholder="Title"
           value={ newNote.title }
         />
-        {/* TODO: replace with new Textarea component */}
-        <div className="field">
-          <textarea
-            className={ styles.textarea }
-            name="text"
-            onChange={ handleChange }
-            rows={3}
-            placeholder="Note"
-            value={ newNote.text }
-          />
-        </div>
+        <Textarea
+          fullWidth
+          label="Note"
+          name="text"
+          handleChange={ handleChange }
+          placeholder="Note"
+          value={ newNote.text }
+        />
       </form>
     </Modal>
   );

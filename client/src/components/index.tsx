@@ -15,4 +15,5 @@ export * from "./Navbar";
 export * from "./ProgressRing";
 export * from "./Tabs";
 export * from "./Text";
+export * from "./Textarea";
 export * from "./Timer";
