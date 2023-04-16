@@ -1,10 +1,8 @@
-import 'react-datetime-picker/dist/DateTimePicker.css';
-import 'react-calendar/dist/Calendar.css';
+import './DatePicker.css';
 import 'react-clock/dist/Clock.css';
 
 import DateTimePicker from 'react-datetime-picker';
 import { IDatePicker } from './types';
-import styles from './datePicker.module.css';
 
 export const DatePickerV2 = ({
   disabled = false,
@@ -15,7 +13,6 @@ export const DatePickerV2 = ({
 }: IDatePicker): JSX.Element => (
   <DateTimePicker
     calendarIcon={null}
-    className={ styles.datePicker }
     clearIcon={null}
     disabled={disabled}
     disableClock
