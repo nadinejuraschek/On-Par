@@ -32,7 +32,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "lint": "eslint .",
-    "lint:fix": "eslint -c .eslintrc.js --ext .js --ext .jsx . --fix"
+    "lint:fix": "eslint -c .eslintrc.js --ext .js --ext .jsx --ext .ts --ext .tsx --fix"
   },
   "browserslist": {
     "production": [

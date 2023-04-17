@@ -1,29 +1,30 @@
+import SelectComp, { Theme } from 'react-select';
+
 import { ISelect } from "./types"
-import SelectComp from 'react-select';
 import { Text } from "components";
 import styles from './select.module.css';
 
 const getSelectStyles = (icon = '') => {
   return {
-    control: (baseStyles) => ({
+    control: (baseStyles: { [key: string]: string }) => ({
       ...baseStyles,
       borderColor: 'var(--grey_300)',
       borderRadius: '0.8rem',
       boxShadow: 'var(--shadow_xs)',
       padding: icon ? '0 0 0 4rem' : '0 0 0 1.2rem',
     }),
-    singleValue: (baseStyles) => ({
+    singleValue: (baseStyles: { [key: string]: string }) => ({
       ...baseStyles,
       margin: 0,
     }),
-    valueContainer: (baseStyles) => ({
+    valueContainer: (baseStyles: { [key: string]: string }) => ({
       ...baseStyles,
       padding: 0,
     }),
   };
 };
 
-const selectTheme = (theme) => ({
+const selectTheme = (theme: Theme) => ({
   ...theme,
   colors: {
     ...theme.colors,
