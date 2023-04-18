@@ -1,29 +1,28 @@
 import * as dayjs from 'dayjs';
 
+import { Button, Goals as GoalsList, Text } from "components";
 import { GoalContext, UserContext } from "contexts";
-import { Goals as GoalsList, Text } from "components";
+import { useContext, useState } from "react";
 
 import styles from "./goals.module.css";
-import { useContext } from "react";
 
 export const Goals = (): JSX.Element => {
   const { nineMonths, sixMonths, threeMonths, twelveMonths } = useContext( GoalContext );
   /* @ts-ignore-next-line */
   const { user } = useContext( UserContext );
 
+  const [openModal, setOpenModal] = useState(false);
+
+  const toggleModal = () => setOpenModal(!openModal);
+
   const today = new Date();
   const durationDays = dayjs( today ).diff( user?.startDate, "days" );
   const inPercent = (durationDays/395)*100;
 
   return (
-    <main className={ styles.main }>
+    <main>
       <div className={ styles.layout }>
-      <div className={ styles.header }>
-        <Text as="h2" size="xl" weight="bold">Your Goals</Text>
-        {/* <Button handleClick={toggleModal} variant="primary">
-          <i className="plus icon"></i> Add Note
-        </Button> */}
-      </div>
+        <Text as="h2" className={ styles.header } size="xl" weight="bold">Your Goal</Text>
       <div className={ styles.progressContainer }>
         <div className={ styles.progress } style={{ width: `${inPercent}%` }} />
         <Text
@@ -34,8 +33,41 @@ export const Goals = (): JSX.Element => {
           <strong>{durationDays} days</strong>
         </Text>
       </div>
-      {/* <Text as="h2" className={ styles.header } size="xl" weight="bold">Your Goals</Text>
-
+      <div className={ styles.content }>
+        <div className={ styles.group }>
+          <div className={ styles.groupHeader}>
+            <Text as="h3" size="lg" weight="bold">3 Months</Text>
+            <Button handleClick={toggleModal} variant="primary">
+              <i className="plus icon"></i> Add Goal
+            </Button>
+          </div>
+        </div>
+        <div className={ styles.group }>
+          <div className={ styles.groupHeader}>
+            <Text as="h3" size="lg" weight="bold">6 Months</Text>
+            <Button handleClick={toggleModal} variant="primary">
+              <i className="plus icon"></i> Add Goal
+            </Button>
+          </div>
+        </div>
+        <div className={ styles.group }>
+          <div className={ styles.groupHeader}>
+            <Text as="h3" size="lg" weight="bold">9 Months</Text>
+            <Button handleClick={toggleModal} variant="primary">
+              <i className="plus icon"></i> Add Goal
+            </Button>
+          </div>
+        </div>
+        <div className={ styles.group }>
+          <div className={ styles.groupHeader}>
+            <Text as="h3" size="lg" weight="bold">12 Months</Text>
+            <Button handleClick={toggleModal} variant="primary">
+              <i className="plus icon"></i> Add Goal
+            </Button>
+          </div>
+        </div>
+      </div>
+      {/*
         <GoalsList className={ styles.three } month={ 3 } data={ threeMonths } />
 
         <GoalsList className={ styles.six } month={ 6 } data={ sixMonths } />
