@@ -127,7 +127,7 @@ export const Register = (): JSX.Element => {
           type="password"
           value={password}
         />
-        <Button autoFocus type="submit" variant="primary">
+        <Button type="submit" variant="primary">
           Register
         </Button>
         <Button link="/login" variant="tertiary">

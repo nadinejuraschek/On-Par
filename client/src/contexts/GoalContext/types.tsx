@@ -19,5 +19,7 @@ export type TGoal = {
   checked: boolean;
   month: number;
   text: string;
-  type: string;
+  type: TGoalType;
 }
+
+export type TGoalType = 'education' | 'personal' | 'travel' | undefined;

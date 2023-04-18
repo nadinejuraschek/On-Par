@@ -21,15 +21,13 @@ export const GoalItem = ( { handleCheck, item }: IGoalItem ): JSX.Element => {
   };
 
   return (
-    <>
-      <li className={ styles.item } onClick={ () => handleCheck( _id ) }>
-        <div className={ styles.icon }>
-          { renderIcon() }
-        </div>
-        <div className={ `${ checked ? styles.checked : "" }` }>
-          { text }
-        </div>
-      </li>
-    </>
+    <li className={ styles.item } onClick={ () => handleCheck( _id ) }>
+      <div className={ styles.icon }>
+        { renderIcon() }
+      </div>
+      <div className={ `${ checked ? styles.checked : "" }` }>
+        { text }
+      </div>
+    </li>
   );
 };

@@ -1,11 +1,11 @@
 import { AddButton, Card, CloseButton, Text } from "components";
-import { MouseEvent, useContext, useState } from "react";
+import { GOALTYPES, IGoalsList } from "./types";
+import { MouseEvent, useCallback, useContext, useMemo, useState } from "react";
+import { TGoal, TGoalType } from "contexts/GoalContext/types";
 
 import { AddGoal } from "./AddGoal";
 import { GoalContext } from "contexts";
 import { GoalItem } from "./GoalItem";
-import { IGoalsList } from "./types";
-import { TGoal } from "contexts/GoalContext/types";
 import axios from "axios";
 import styles from "./goals.module.css";
 import { toast } from "react-toastify";
@@ -14,14 +14,16 @@ export const Goals = ( { data, month }: IGoalsList ): JSX.Element => {
   const { checkGoal, getGoals } = useContext( GoalContext );
 
   const [openAddGoal, setOpenAddGoal] = useState( false );
-  const [type, setType] = useState( "personal" );
+  const [type, setType] = useState<TGoalType>( GOALTYPES.PERSONAL );
   const [text, setText] = useState( "" );
 
-  const education = data.filter( ({ type }: TGoal) => type === "education" );
-  const personal = data.filter( ({ type }: TGoal) => type === "personal" );
-  const travel = data.filter( ({ type }: TGoal) => type === "travel" );
+  const education: TGoal[] = useMemo(() => data.filter( ({ type }: TGoal) => type === GOALTYPES.EDUCATION ), [data]);
+  const personal: TGoal[] = useMemo(() => data.filter( ({ type }: TGoal) => type === GOALTYPES.PERSONAL ), [data]);
+  const travel: TGoal[] = useMemo(() => data.filter( ({ type }: TGoal) => type === GOALTYPES.TRAVEL ), [data]);
 
-  const handleCreate = (event: MouseEvent) => {
+  console.log('data: ', data);
+
+  const handleCreate = useCallback((event: MouseEvent) => {
     event.preventDefault();
 
     axios( {
@@ -37,15 +39,15 @@ export const Goals = ( { data, month }: IGoalsList ): JSX.Element => {
       .then( () => {
         toast.success("Your goal was added successfully!");
         setText( "" );
-        setType( "" );
-        setOpenAddGoal( false );
+        setType(undefined);
+        setOpenAddGoal(false);
         getGoals();
       } )
       .catch( () => {
         toast.error("Goal could not be added. Please try again later!");
         // console.debug( "Error when creating a goal: " + error );
       } );
-  };
+  }, [month, toast, text, type]);
 
   return (
     <Card className={ styles.container }>

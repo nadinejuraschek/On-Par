@@ -68,7 +68,7 @@ export const Login = (): JSX.Element => {
             type="password"
             value={password}
           />
-          <Button autoFocus type="submit" variant="primary">
+          <Button type="submit" variant="primary">
             Log In
           </Button>
           <Button link="/register" variant="tertiary">Create an Account</Button>

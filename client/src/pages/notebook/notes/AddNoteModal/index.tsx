@@ -45,7 +45,7 @@ export const AddNoteModal = ({ toggleModal }: IAddNoteModal): JSX.Element => {
   const addNoteModalActions = (
     <>
       <Button fullWidth handleClick={toggleModal}>Cancel</Button>
-      <Button autoFocus handleClick={handleSubmit} fullWidth type="submit" variant="primary">Save</Button>
+      <Button handleClick={handleSubmit} fullWidth type="submit" variant="primary">Save</Button>
     </>
   );
 

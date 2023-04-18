@@ -4,3 +4,9 @@ export interface ICountdown {
   setMessage: (value: string) => void;
   startDate: string;
 }
+
+export enum COUNTDOWN_TABS {
+  DAYS = 0,
+  WEEKS = 1,
+  MONTHS = 2,
+}

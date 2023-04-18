@@ -1,4 +1,4 @@
-import { TGoal } from "contexts/GoalContext/types";
+import { TGoal, TGoalType } from "contexts/GoalContext/types";
 
 export interface IGoalsList {
   className?: string;
@@ -13,7 +13,13 @@ export interface IGoalItem {
 
 export interface IAddGoal {
   handleText: (value: string) => void;
-  handleType: (value: string) => void;
+  handleType: (value: TGoalType) => void;
   text: string;
-  type: string;
+  type: TGoalType;
+}
+
+export enum GOALTYPES {
+  EDUCATION = 'education',
+  PERSONAL = 'personal',
+  TRAVEL = 'travel',
 }

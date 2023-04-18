@@ -142,9 +142,11 @@ export const App = (): JSX.Element => (
         path="/notebook/goals"
         element={
           <LayoutWithNavbar>
-            <GoalProvider>
-              <Goals />
-            </GoalProvider>
+            <UserProvider>
+              <GoalProvider>
+                <Goals />
+              </GoalProvider>
+            </UserProvider>
           </LayoutWithNavbar>
         }
       />

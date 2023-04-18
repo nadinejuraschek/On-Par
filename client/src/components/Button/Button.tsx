@@ -4,7 +4,6 @@ import styles from "./button.module.css";
 
 export const Button = ({
   align = "alignCenter",
-  autoFocus = false,
   children,
   className = "",
   disabled = false,
@@ -20,7 +19,6 @@ export const Button = ({
     return (
       <Link
         aria-label={ label }
-        autoFocus={autoFocus}
         className={ `${ className } ${ styles.btn } ${ styles[variant] } ${ disabled && styles.disabled } ${ align && styles[align] } ${ round && styles.round } ${ fullWidth && styles.fullWidth }` }
         to={ link }
       >
@@ -31,7 +29,6 @@ export const Button = ({
 
   return (
     <button
-      autoFocus={autoFocus}
       className={ `${ className } ${ styles.btn } ${ styles[variant] } ${ disabled && styles.disabled } ${ align && styles[align] } ${ round && styles.round } ${ fullWidth && styles.fullWidth }` }
       onClick={ handleClick }
       type={ type }
