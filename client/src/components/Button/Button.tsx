@@ -12,6 +12,7 @@ export const Button = ({
   label = "",
   link,
   round = false,
+  square = false,
   type = 'button',
   variant = "secondary",
 }: IButton): JSX.Element => {
@@ -19,7 +20,7 @@ export const Button = ({
     return (
       <Link
         aria-label={ label }
-        className={ `${ className } ${ styles.btn } ${ styles[variant] } ${ disabled && styles.disabled } ${ align && styles[align] } ${ round && styles.round } ${ fullWidth && styles.fullWidth }` }
+        className={ `${ className } ${ styles.btn } ${ styles[variant] } ${ disabled ? styles.disabled : '' } ${ align ? styles[align] : '' } ${ round ? styles.round : '' } ${ fullWidth ? styles.fullWidth : '' } ${ square ? styles.square : '' }` }
         to={ link }
       >
         { children }
@@ -29,7 +30,7 @@ export const Button = ({
 
   return (
     <button
-      className={ `${ className } ${ styles.btn } ${ styles[variant] } ${ disabled && styles.disabled } ${ align && styles[align] } ${ round && styles.round } ${ fullWidth && styles.fullWidth }` }
+      className={ `${ className } ${ styles.btn } ${ styles[variant] } ${ disabled ? styles.disabled : '' } ${ align ? styles[align] : '' } ${ round ? styles.round : '' } ${ fullWidth ? styles.fullWidth : '' } ${ square ? styles.square : '' }` }
       onClick={ handleClick }
       type={ type }
     >

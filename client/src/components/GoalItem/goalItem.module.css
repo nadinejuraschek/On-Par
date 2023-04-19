@@ -1,0 +1,59 @@
+.item {
+  background-color: var(--grey_50);
+  border: 1px solid var(--grey_100);
+  border-radius: 0.8rem;
+  box-shadow: var(--shadow_xs);
+  overflow: hidden;
+
+  list-style-type: none;
+}
+
+.item:not(:last-child) {
+  margin-bottom: 1rem;
+}
+
+.item.unchecked {
+  cursor: pointer;
+}
+
+.item.checked {
+  opacity: 0.4;
+}
+
+.education {
+  background-color: var(--warning_50);
+  color: var(--warning_500);
+}
+
+.personal {
+  background-color: var(--tertiary_50);
+  color: var(--tertiary_500);
+}
+
+.travel {
+  background-color: var(--secondary_50);
+  color: var(--secondary_500);
+}
+
+.icon {
+  height: 1rem;
+  width: 1rem;
+}
+
+.label.checked {
+  text-decoration: line-through;
+}
+
+.body {
+  padding: 1.4rem;
+
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.badges {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+}

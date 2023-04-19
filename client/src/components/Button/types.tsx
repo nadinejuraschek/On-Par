@@ -12,6 +12,7 @@ export interface IButton {
   label?: string;
   link?: string;
   round?: boolean;
+  square?: boolean;
   type?: 'button' | 'submit';
   variant?: TVariant;
 }
