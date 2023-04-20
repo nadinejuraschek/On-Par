@@ -6,7 +6,7 @@ export const Badge = ({ className = '', icon, label }: IBadge): JSX.Element => {
   return (
     <div className={ `${styles.badge} ${className}` }>
       {icon && icon}
-      <Text size="sm">{label}</Text>
+      <Text size="xs">{label}</Text>
     </div>
   );
 }
