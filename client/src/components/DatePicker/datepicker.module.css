@@ -9,13 +9,13 @@
   min-width: 20rem;
 }
 
-.iconInputWrapper {
-  position: relative;
-
+.field.fullWidth {
   width: 100%;
 }
 
-.datePicker.fullWidth {
+.iconInputWrapper {
+  position: relative;
+
   width: 100%;
 }
 

@@ -1,6 +1,7 @@
 import { Button, Select, Text } from "components";
-import { useContext, useMemo, useState } from "react";
+import { useCallback, useContext, useMemo, useState } from "react";
 
+import { AddGoalModal } from "./AddGoalModal";
 import { GoalContext } from "contexts";
 import { GoalsList } from './List';
 import styles from "./goals.module.css";
@@ -17,7 +18,15 @@ export const Goals = (): JSX.Element => {
     { label: 'Travel', value: 'travel' },
   ]), []);
 
-  const toggleModal = () => setOpenModal(!openModal);
+  const toggleModal = useCallback(() => setOpenModal(!openModal), [openModal]);
+
+  const renderAddGoalModal = useMemo(() => {
+    if (!openModal) {
+      return null;
+    }
+
+    return <AddGoalModal toggleModal={toggleModal} />;
+  }, [openModal, toggleModal]);
 
   return (
     <main>
@@ -62,6 +71,7 @@ export const Goals = (): JSX.Element => {
           />
         </div>
       </div>
+      {renderAddGoalModal}
     </main>
   );
 };

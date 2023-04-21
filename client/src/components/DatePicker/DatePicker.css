@@ -4,6 +4,7 @@ REACT DATETIME PICKER
 .react-datetime-picker {
   display: inline-flex;
   position: relative;
+  width: 100%;
 }
 
 .react-datetime-picker,

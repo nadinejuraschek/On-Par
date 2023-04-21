@@ -21,10 +21,10 @@ export const DatePicker = ({
     <Text as="label" className={ styles.label } htmlFor={ name } size="sm">
       { label }
     </Text>
-    <div className={ styles.iconInputWrapper }>
+    <div className={ `${styles.iconInputWrapper} ${ fullWidth ? styles.fullWidth : '' }` }>
       <DateTimePicker
         calendarIcon={null}
-        className={ `${ error && styles.error } ${ fullWidth && styles.fullWidth } ${ icon && styles.datePicker }` }
+        className={ `${ error ? styles.error : '' } ${ icon ? styles.datePicker : '' }` }
         clearIcon={null}
         disabled={disabled}
         disableClock
