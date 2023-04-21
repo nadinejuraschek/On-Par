@@ -1,6 +1,10 @@
 import { Theme } from 'react-select';
 
 export const getSelectStyles = (icon = '') => ({
+  container: (baseStyles: { [key: string]: string }) => ({
+    ...baseStyles,
+    width: '100%',
+  }),
   control: (baseStyles: { [key: string]: string }) => ({
     ...baseStyles,
     borderColor: 'var(--grey_300)',

@@ -1,14 +1,19 @@
-import { GoalItem, Text } from 'components';
+import { GoalItem, LoadingPlaceholder, Text } from 'components';
 
 import { IGoalsList } from './types';
 import styles from './goalsList.module.css';
 import { useMemo } from 'react';
 
-export const GoalsList = ({ items, title }: IGoalsList): JSX.Element => {
+export const GoalsList = ({ filter, items, loading, title }: IGoalsList): JSX.Element => {
   const renderItems = useMemo(() => {
     if (!items) return null;
 
-    return items.map((item, index) => (
+    return items.filter((item) => {
+      if (!filter) {
+        return item;
+      }
+      return filter?.value === item.type;
+    }).map((item, index) => (
       <GoalItem
         checked={item.checked}
         handleCheck={() => {}}
@@ -17,7 +22,11 @@ export const GoalsList = ({ items, title }: IGoalsList): JSX.Element => {
         type={item.type}
       />
     ));
-  }, [items]);
+  }, [filter, items]);
+
+  if (loading) {
+    return <LoadingPlaceholder />;
+  }
 
   return (
     <div className={ styles.group }>

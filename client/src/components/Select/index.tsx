@@ -9,6 +9,7 @@ import { useMemo } from 'react';
 export const Select = ({
   className = '',
   clearable = false,
+  defaultValue,
   disabled = false,
   error,
   handleChange,
@@ -26,7 +27,7 @@ export const Select = ({
     <SelectComp
       className={ styles.select }
       classNamePrefix="selectInput"
-      defaultValue={options[0]}
+      defaultValue={defaultValue}
       isDisabled={disabled}
       isLoading={loading}
       isClearable={clearable}
