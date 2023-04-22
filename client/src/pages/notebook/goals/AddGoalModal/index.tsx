@@ -1,19 +1,48 @@
 import { Button, DatePicker, Modal, Textarea, ToggleGroup } from 'components';
-import { ChangeEvent, useCallback, useMemo, useState } from 'react';
+import { ChangeEvent, useCallback, useContext, useMemo, useState } from 'react';
 
+import { GoalContext } from 'contexts';
 import { IAddGoalModal } from './types';
+import axios from "axios";
 import styles from './addGoalModal.module.css';
+import { toast } from "react-toastify";
 
 export const AddGoalModal = ({ toggleModal }: IAddGoalModal): JSX.Element => {
+  const { getGoals } = useContext(GoalContext);
+
   const [newGoal, setNewGoal] = useState({
     dueDate: undefined,
-    goal: undefined,
+    text: undefined,
     type: undefined,
   });
 
   const handleSubmit = useCallback(() => {
-
-  }, []);
+    axios( {
+      url: "/api/goals",
+      method: "POST",
+      data: {
+        dueDate: newGoal.dueDate,
+        type: newGoal.type,
+        text: newGoal.text,
+        checked: false,
+      },
+    } )
+      .then( () => {
+        toast.success("Your goal was added successfully!");
+        getGoals();
+      } )
+      .catch( () => {
+        toast.error("Goal could not be added. Please try again later!");
+        // console.debug( "Error when creating a goal: " + error );
+      } ).finally(() => {
+        setNewGoal({
+          dueDate: undefined,
+          text: undefined,
+          type: undefined,
+        });
+        toggleModal();
+      });
+  }, [getGoals, newGoal]);
 
   // TODO: handleSubmit in form instead of button
   const actions = useMemo(() => (
@@ -52,10 +81,10 @@ export const AddGoalModal = ({ toggleModal }: IAddGoalModal): JSX.Element => {
         <Textarea
           fullWidth
           label="Goal"
-          name="goal"
+          name="text"
           handleChange={handleInput}
           placeholder="Goal"
-          value={ newGoal.goal }
+          value={ newGoal.text }
         />
         <DatePicker
           format="MM/dd/yyyy"

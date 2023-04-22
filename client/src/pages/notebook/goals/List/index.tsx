@@ -16,6 +16,7 @@ export const GoalsList = ({ filter, items, loading, title }: IGoalsList): JSX.El
     }).map((item, index) => (
       <GoalItem
         checked={item.checked}
+        dueDate={item?.dueDate}
         handleCheck={() => {}}
         key={index}
         label={item.text}

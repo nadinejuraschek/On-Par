@@ -17,7 +17,8 @@ export interface IGoalProvider {
 export type TGoal = {
   _id: string;
   checked: boolean;
-  month: number;
+  dueDate?: string;
+  month?: number;
   text: string;
   type: TGoalType;
 }
