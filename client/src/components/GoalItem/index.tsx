@@ -1,13 +1,38 @@
 import * as dayjs from 'dayjs';
 
-import { Badge, Text } from 'components';
+import { Badge, Button, Text } from 'components';
+import { useContext, useMemo } from 'react';
 
+import { GoalContext } from 'contexts';
 import { IGoalItem } from './types';
 import { getGoalIcon } from './utils';
 import styles from './goalItem.module.css';
-import { useMemo } from 'react';
 
-export const GoalItem = ({ checked, dueDate, handleCheck, label, type = 'personal' }: IGoalItem): JSX.Element => {
+export const GoalItem = ({
+  checkable = true,
+  checked,
+  deletable = true,
+  dueDate,
+  editable = true,
+  id,
+  label,
+  type = 'personal',
+}: IGoalItem): JSX.Element => {
+  const { checkGoal } = useContext(GoalContext);
+
+  const renderActions = useMemo(() => {
+    if (checked) return null;
+
+    return (
+      <div className={ styles.overlay }>
+        {checkable && <Button handleClick={() => checkGoal(id)} square><i className="check icon" /></Button>}
+        {/* editable && <Button square><i className="edit icon" /></Button> */}
+        {/* deletable && <Button square><i className="trash icon" /></Button> */}
+      </div>
+    );
+  }, [checkable, checked, deletable, editable]);
+
+
   const badgeIcon = useMemo(() => (
     <>
       {/* @ts-ignore-next-line */}
@@ -32,6 +57,7 @@ export const GoalItem = ({ checked, dueDate, handleCheck, label, type = 'persona
           {dueDate && <Badge label={dayjs(dueDate).format('MM/DD/YYYY')} />}
         </div>
       </div>
+      {renderActions}
     </li>
   );
 }

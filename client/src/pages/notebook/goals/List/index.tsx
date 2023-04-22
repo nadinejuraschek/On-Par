@@ -13,12 +13,15 @@ export const GoalsList = ({ filter, items, loading, title }: IGoalsList): JSX.El
         return item;
       }
       return filter?.value === item.type;
-    }).map((item, index) => (
+    }).map((item) => (
       <GoalItem
+        checkable
         checked={item.checked}
+        deletable
         dueDate={item?.dueDate}
-        handleCheck={() => {}}
-        key={index}
+        editable
+        key={item._id}
+        id={item._id}
         label={item.text}
         type={item.type}
       />
