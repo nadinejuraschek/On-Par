@@ -18,7 +18,7 @@ export const GoalItem = ({
   label,
   type = 'personal',
 }: IGoalItem): JSX.Element => {
-  const { checkGoal } = useContext(GoalContext);
+  const { checkGoal, deleteGoal } = useContext(GoalContext);
 
   const renderActions = useMemo(() => {
     if (checked) return null;
@@ -27,7 +27,7 @@ export const GoalItem = ({
       <div className={ styles.overlay }>
         {checkable && <Button handleClick={() => checkGoal(id)} square><i className="check icon" /></Button>}
         {/* editable && <Button square><i className="edit icon" /></Button> */}
-        {/* deletable && <Button square><i className="trash icon" /></Button> */}
+        {deletable && <Button handleClick={() => deleteGoal(id)} square><i className="trash icon" /></Button>}
       </div>
     );
   }, [checkable, checked, deletable, editable]);
@@ -41,10 +41,7 @@ export const GoalItem = ({
   ), [type]);
 
   return (
-    <li
-      className={ `${ styles.item } ${ checked ? styles.checked : styles.unchecked }` }
-      // onClick={ () => handleCheck( _id ) }
-      >
+    <li className={ `${ styles.item } ${ checked ? styles.checked : styles.unchecked }` }>
       <div className={ styles.body }>
         <Text
           className={ `${ styles.label } ${ checked ? styles.checked : styles.unchecked }` }
