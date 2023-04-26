@@ -7,7 +7,7 @@ import { GoalsList } from './List';
 import styles from "./goals.module.css";
 
 export const Goals = (): JSX.Element => {
-  const { completeGoals, incompleteGoals, loadingGoals } = useContext( GoalContext );
+  const { completeGoals, loadingGoals, thisMonthGoals, upcomingGoals } = useContext( GoalContext );
 
   const [openModal, setOpenModal] = useState(false);
   const [filter, setFilter] = useState(undefined);
@@ -53,15 +53,15 @@ export const Goals = (): JSX.Element => {
         <div className={ styles.content }>
           <GoalsList
             filter={filter}
-            items={incompleteGoals}
+            items={thisMonthGoals}
             loading={loadingGoals}
-            title="To Do"
+            title="This Month"
           />
           <GoalsList
             filter={filter}
-            items={incompleteGoals}
+            items={upcomingGoals}
             loading={loadingGoals}
-            title="Upcoming"
+            title="Upcoming / Overdue"
           />
           <GoalsList
             filter={filter}

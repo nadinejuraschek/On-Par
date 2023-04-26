@@ -3,7 +3,8 @@ import { ReactNode } from "react";
 export interface IGoalContext {
   completeGoals: TGoal[];
   goals: TGoal[];
-  incompleteGoals: TGoal[];
+  thisMonthGoals: TGoal[];
+  upcomingGoals: TGoal[];
   loadingGoals: boolean;
   getGoals?: () => void;
   checkGoal?: (id: string) => void;

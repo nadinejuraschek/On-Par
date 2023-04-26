@@ -23,6 +23,7 @@ export const GoalsList = ({ filter, items, loading, title }: IGoalsList): JSX.El
         key={item._id}
         id={item._id}
         label={item.text}
+        text={item.text}
         type={item.type}
       />
     ));

@@ -3,44 +3,38 @@ import { ChangeEvent, useCallback, useContext, useMemo, useState } from 'react';
 
 import { GoalContext } from 'contexts';
 import { IAddGoalModal } from './types';
+import { TGoalType } from 'contexts/GoalContext/types';
 import axios from "axios";
 import styles from './addGoalModal.module.css';
 import { toast } from "react-toastify";
 
-export const AddGoalModal = ({ toggleModal }: IAddGoalModal): JSX.Element => {
+export const EditGoalModal = ({ checked, dueDate, id, text, toggleModal, type }: IAddGoalModal): JSX.Element => {
   const { getGoals } = useContext(GoalContext);
 
-  const [newGoal, setNewGoal] = useState({
-    dueDate: undefined,
-    text: undefined,
-    type: undefined,
+  const [updatedGoal, setUpdatedGoal] = useState({
+    checked,
+    dueDate: dueDate ? new Date(dueDate) : new Date(),
+    text,
+    type,
   });
 
   const handleSubmit = useCallback(() => {
     axios( {
-      url: "/api/goals",
-      method: "POST",
-      data: {
-        ...newGoal,
-        checked: false,
-      },
+      url: `/api/goals/${id}`,
+      method: "PUT",
+      data: updatedGoal,
     } )
       .then( () => {
-        toast.success("Your goal was added successfully!");
+        toast.success("Your goal was updated successfully!");
         getGoals();
       } )
       .catch( () => {
-        toast.error("Goal could not be added. Please try again later!");
+        toast.error("Goal could not be updated. Please try again later!");
         // console.debug( "Error when creating a goal: " + error );
       } ).finally(() => {
-        setNewGoal({
-          dueDate: undefined,
-          text: undefined,
-          type: undefined,
-        });
         toggleModal();
       });
-  }, [getGoals, newGoal]);
+  }, [getGoals, id, updatedGoal]);
 
   // TODO: handleSubmit in form instead of button
   const actions = useMemo(() => (
@@ -60,21 +54,21 @@ export const AddGoalModal = ({ toggleModal }: IAddGoalModal): JSX.Element => {
     const target = event.target as HTMLInputElement;
     const name = target.name;
     const value = target.value;
-    setNewGoal( prev => ( { ...prev, [name]: value } ) )
+    setUpdatedGoal( prev => ( { ...prev, [name]: value } ) )
   }, []);
 
   return (
     <Modal
       actions={actions}
       handleClose={toggleModal}
-      title="New Goal"
+      title="Edit Goal"
     >
       <form className={ styles.form }>
         <ToggleGroup
-          handleChange={(val: string) => setNewGoal((prev) => ({ ...prev, type: val }))}
+          handleChange={(val: TGoalType) => setUpdatedGoal((prev) => ({ ...prev, type: val }))}
           name="type"
           options={toggleOptions}
-          value={newGoal.type}
+          value={updatedGoal.type}
         />
         <Textarea
           fullWidth
@@ -82,15 +76,15 @@ export const AddGoalModal = ({ toggleModal }: IAddGoalModal): JSX.Element => {
           name="text"
           handleChange={handleInput}
           placeholder="Goal"
-          value={ newGoal.text }
+          value={updatedGoal.text}
         />
         <DatePicker
           format="MM/dd/yyyy"
           fullWidth
-          handleChange={(date: Date) => setNewGoal((prev) => ({ ...prev, dueDate: date }))}
+          handleChange={(date: Date) => setUpdatedGoal((prev) => ({ ...prev, dueDate: date }))}
           label="Due Date"
           name="dueDate"
-          value={newGoal.dueDate}
+          value={updatedGoal.dueDate}
         />
       </form>
     </Modal>

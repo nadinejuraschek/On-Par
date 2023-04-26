@@ -8,6 +8,8 @@
   list-style-type: none;
 
   position: relative;
+
+  height: min-content;
 }
 
 .item:not(:last-child) {
@@ -20,6 +22,11 @@
 
 .item.checked {
   opacity: 0.4;
+}
+
+.item.overdue {
+  background-color: var(--tertiary_25);
+  border-color: var(--error_300);
 }
 
 .education {

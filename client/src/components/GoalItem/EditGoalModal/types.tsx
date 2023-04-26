@@ -1,13 +1,10 @@
 import { TGoalType } from "contexts/GoalContext/types";
 
-export interface IGoalItem {
-  checkable?: boolean;
+export interface IAddGoalModal {
   checked: boolean;
-  deletable?: boolean;
   dueDate?: string;
-  editable?: boolean;
   id: string;
-  label: string;
   text: string;
   type: TGoalType;
+  toggleModal: () => void;
 }

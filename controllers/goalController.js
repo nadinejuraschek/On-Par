@@ -4,7 +4,10 @@ const db = require('../models/db');
 // READ
 exports.getGoals = async (req, res) => {
   await db.User.findById(req.user)
-    .populate('goals')
+    .populate({
+      path: 'goals',
+      options: { sort: { dueDate: 1 }}
+    })
     .then(goals => {
       res.status(200).json(goals);
     })

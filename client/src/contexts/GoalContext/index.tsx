@@ -7,14 +7,16 @@ import { toast } from "react-toastify";
 export const GoalContext = createContext<IGoalContext>({
   completeGoals: [],
   goals: [],
-  incompleteGoals: [],
+  thisMonthGoals: [],
+  upcomingGoals: [],
   loadingGoals: false,
 });
 
 export const GoalProvider = ({ children }: IGoalProvider): JSX.Element => {
   const [goals, setGoals] = useState( [] );
   const [completeGoals, setCompleteGoals] = useState( [] );
-  const [incompleteGoals, setIncompleteGoals] = useState( [] );
+  const [thisMonthGoals, setThisMonthGoals] = useState( [] );
+  const [upcomingGoals, setUpcomingGoals] = useState( [] );
   const [loadingGoals, setLoadingGoals] = useState(false);
 
   useEffect( () => {
@@ -29,8 +31,16 @@ export const GoalProvider = ({ children }: IGoalProvider): JSX.Element => {
     } ).then( res => {
       const allGoals = res.data.goals;
       setGoals(allGoals);
-      setIncompleteGoals( allGoals.filter( ({ checked }: TGoal) => !checked ) );
-      setCompleteGoals( allGoals.filter( ({ checked }: TGoal) => checked ) );
+
+      const goalsCompleted = allGoals.filter( ({ checked }: TGoal) => checked );
+      const goalsIncomplete = allGoals.filter( ({ checked }: TGoal) => !checked );
+
+      const goalsThisMonth = goalsIncomplete.filter( ({ dueDate }: TGoal) => new Date(dueDate).getMonth() === new Date().getMonth());
+      const goalsUpcoming = goalsIncomplete.filter( ({ dueDate }: TGoal) => new Date(dueDate).getMonth() !== new Date().getMonth());
+
+      setThisMonthGoals( goalsThisMonth );
+      setUpcomingGoals( goalsUpcoming );
+      setCompleteGoals( goalsCompleted );
     } ).catch( () => {
       toast.error("Could not fetch goals. Please try again later!");
       // console.debug( 'Error when fetching goals: ', err );
@@ -61,7 +71,8 @@ export const GoalProvider = ({ children }: IGoalProvider): JSX.Element => {
     <GoalContext.Provider value={ {
       goals,
       completeGoals,
-      incompleteGoals,
+      thisMonthGoals,
+      upcomingGoals,
       loadingGoals,
       getGoals,
       checkGoal,
