@@ -9,7 +9,7 @@ import { Events } from "./Events";
 import { Greeting } from "./Greeting";
 import { LoadingSpinner } from "components";
 import { Quicklinks } from "./Quicklinks";
-import { Reminders } from "./Reminders";
+import { Goals } from "./Goals";
 import { UserContext } from "contexts";
 import { WorkhourSummary } from "./WorkhourSummary";
 import axios from "axios";
@@ -20,7 +20,7 @@ dayjs.extend(isSameOrAfter);
 
 export const Home = (): JSX.Element => {
   /* @ts-ignore-next-line */
-  const [user] = useContext( UserContext );
+  const { user } = useContext( UserContext );
   const [message, setMessage] = useState( "" );
 
   const navigate = useNavigate();
@@ -75,7 +75,7 @@ export const Home = (): JSX.Element => {
               </Card>
 
               <Card className={ styles.reminders }>
-                <Reminders />
+                <Goals />
               </Card>
 
               <Card className={ styles.countdown }>

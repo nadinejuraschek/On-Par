@@ -1,7 +1,7 @@
 import * as dayjs from "dayjs";
 
 import { Button, Input, Modal, Textarea } from "components";
-import { ChangeEvent, FormEvent, useCallback, useContext, useState } from 'react';
+import { ChangeEvent, FormEvent, useCallback, useContext, useMemo, useState } from 'react';
 
 import { IAddNoteModal } from './types';
 import { NoteContext } from "contexts";
@@ -42,12 +42,12 @@ export const AddNoteModal = ({ toggleModal }: IAddNoteModal): JSX.Element => {
   }, []);
 
   // TODO: handleSubmit in form instead of button
-  const addNoteModalActions = (
+  const addNoteModalActions = useMemo(() => (
     <>
       <Button fullWidth handleClick={toggleModal}>Cancel</Button>
-      <Button autoFocus handleClick={handleSubmit} fullWidth type="submit" variant="primary">Save</Button>
+      <Button handleClick={handleSubmit} fullWidth type="submit" variant="primary">Save</Button>
     </>
-  );
+  ), [handleSubmit, toggleModal]);
 
   return (
     <Modal

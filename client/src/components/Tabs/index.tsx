@@ -28,5 +28,11 @@ export const Tabs = ({
     });
   }, [activeTab, handleClick, tabs, variant]);
 
-  return <div className={ `${ styles.tabs } ${ styles[variant] } ${ fullWidth && styles.fullWidth } ${ spaceBetween && styles.spaceBetween }` }>{ renderTabs }</div>;
+  return (
+    <div
+      className={ `${ styles.tabs } ${ styles[variant] } ${ fullWidth && styles.fullWidth } ${ spaceBetween && styles.spaceBetween }` }
+    >
+      { renderTabs }
+    </div>
+  );
 }

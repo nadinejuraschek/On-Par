@@ -3,14 +3,17 @@ import { GroupBase, OptionsOrGroups } from 'react-select';
 export interface ISelect {
   className?: string;
   clearable?: boolean;
+  defaultValue?: TSelectOption;
   disabled?: boolean;
   error?: string;
   handleChange: (option: TSelectOption) => void;
   icon?: string;
-  label: string;
+  label?: string;
   loading?: boolean;
   name: string;
+  onlyInput?: boolean;
   options: OptionsOrGroups<unknown, GroupBase<unknown>>;
+  placeholder?: string;
   searchable?: boolean;
   value: TSelectOption;
 }

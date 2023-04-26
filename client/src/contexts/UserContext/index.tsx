@@ -22,7 +22,7 @@ export const UserProvider = ( { children }: IUserProvider ): JSX.Element => {
   }, [] );
 
   return (
-    <UserContext.Provider value={ [user] }>
+    <UserContext.Provider value={ { user } }>
       { children }
     </UserContext.Provider>
   );

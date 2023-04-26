@@ -4,7 +4,6 @@ import { TVariant } from "types";
 
 export interface IButton {
   align?: "alignCenter" | "alignStart" | "alignEnd";
-  autoFocus?: boolean;
   children: ReactNode;
   className?: string;
   disabled?: boolean;
@@ -13,6 +12,7 @@ export interface IButton {
   label?: string;
   link?: string;
   round?: boolean;
+  square?: boolean;
   type?: 'button' | 'submit';
   variant?: TVariant;
 }

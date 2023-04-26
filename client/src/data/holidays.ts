@@ -9,7 +9,7 @@ const currentYear = new Date().getFullYear();
 
 /* https://gist.github.com/johndyer/0dffbdd98c2046f41180c051f378f343 */
 const getEaster = () => {
-	var f = Math.floor,
+	const f = Math.floor,
 		// Golden Number - 1
 		G = currentYear % 19,
 		C = f(currentYear / 100),

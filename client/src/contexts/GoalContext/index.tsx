@@ -4,33 +4,47 @@ import { createContext, useEffect, useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
 
-export const GoalContext = createContext<IGoalContext>({});
+export const GoalContext = createContext<IGoalContext>({
+  completeGoals: [],
+  goals: [],
+  thisMonthGoals: [],
+  upcomingGoals: [],
+  loadingGoals: false,
+});
 
 export const GoalProvider = ({ children }: IGoalProvider): JSX.Element => {
-  // const [goals, setGoals] = useState([]);
-  const [threeMonths, setThreeMonths] = useState( [] );
-  const [sixMonths, setSixMonths] = useState( [] );
-  const [nineMonths, setNineMonths] = useState( [] );
-  const [twelveMonths, setTwelveMonths] = useState( [] );
+  const [goals, setGoals] = useState( [] );
+  const [completeGoals, setCompleteGoals] = useState( [] );
+  const [thisMonthGoals, setThisMonthGoals] = useState( [] );
+  const [upcomingGoals, setUpcomingGoals] = useState( [] );
+  const [loadingGoals, setLoadingGoals] = useState(false);
 
   useEffect( () => {
     getGoals();
   }, [] );
 
   const getGoals = (): void => {
+    setLoadingGoals(true);
     axios( {
       url: "/api/user/:id/goals",
       method: "GET",
     } ).then( res => {
       const allGoals = res.data.goals;
-      setThreeMonths( allGoals.filter( ({ month }: TGoal) => month === 3 ) );
-      setSixMonths( allGoals.filter( ({ month }: TGoal) => month === 6 ) );
-      setNineMonths( allGoals.filter( ({ month }: TGoal) => month === 9 ) );
-      setTwelveMonths( allGoals.filter( ({ month }: TGoal) => month === 12 ) );
+      setGoals(allGoals);
+
+      const goalsCompleted = allGoals.filter( ({ checked }: TGoal) => checked );
+      const goalsIncomplete = allGoals.filter( ({ checked }: TGoal) => !checked );
+
+      const goalsThisMonth = goalsIncomplete.filter( ({ dueDate }: TGoal) => new Date(dueDate).getMonth() === new Date().getMonth());
+      const goalsUpcoming = goalsIncomplete.filter( ({ dueDate }: TGoal) => new Date(dueDate).getMonth() !== new Date().getMonth());
+
+      setThisMonthGoals( goalsThisMonth );
+      setUpcomingGoals( goalsUpcoming );
+      setCompleteGoals( goalsCompleted );
     } ).catch( () => {
       toast.error("Could not fetch goals. Please try again later!");
       // console.debug( 'Error when fetching goals: ', err );
-    } );
+    } ).finally(() => setLoadingGoals(false));
   };
 
   const checkGoal = (goalid: string): void => {
@@ -54,7 +68,16 @@ export const GoalProvider = ({ children }: IGoalProvider): JSX.Element => {
   };
 
   return (
-    <GoalContext.Provider value={ { threeMonths, sixMonths, nineMonths, twelveMonths, getGoals, checkGoal, deleteGoal } }>
+    <GoalContext.Provider value={ {
+      goals,
+      completeGoals,
+      thisMonthGoals,
+      upcomingGoals,
+      loadingGoals,
+      getGoals,
+      checkGoal,
+      deleteGoal,
+    } }>
       { children }
     </GoalContext.Provider>
   );

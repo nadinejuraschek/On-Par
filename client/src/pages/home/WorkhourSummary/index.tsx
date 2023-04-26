@@ -7,7 +7,7 @@ import styles from "./workhour.module.css";
 enum WORKHOUR_TABS {
   DAY = 0,
   WEEK = 1,
-};
+}
 
 export const WorkhourSummary = (): JSX.Element => {
   const [activeTab, setActiveTab] = useState(WORKHOUR_TABS.DAY);

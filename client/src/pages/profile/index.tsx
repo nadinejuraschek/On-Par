@@ -14,10 +14,6 @@ export const Profile = (): JSX.Element => {
   const [user] = useContext( UserContext );
   // const daysNum = dayjs(new Date()).diff(user.startDate, 'days');
 
-  if (!user) {
-    return <LoadingSpinner />;
-  }
-
   const [email, setEmail] = useState( user?.email );
   const [birthday, setBirthday] = useState( user?.birthday || "" );
   const [location, setLocation] = useState( user?.location || "" );
@@ -50,6 +46,10 @@ export const Profile = (): JSX.Element => {
       <Button handleClick={ toggleEdit } variant="primary">Edit</Button>
     );
   }, [edit, handleEdit, toggleEdit]);
+
+  if (!user) {
+    return <LoadingSpinner />;
+  }
 
   return (
     <main>

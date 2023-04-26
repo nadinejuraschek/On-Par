@@ -1,16 +1,10 @@
 import * as dayjs from "dayjs";
 
+import { COUNTDOWN_TABS, ICountdown } from "./types";
 import { ProgressRing, Tabs } from "components";
 import { useEffect, useMemo, useState } from "react";
 
-import { ICountdown } from "./types";
 import styles from "./countdown.module.css";
-
-enum COUNTDOWN_TABS {
-  DAYS = 0,
-  WEEKS = 1,
-  MONTHS = 2,
-};
 
 export const Countdown = ( { setMessage, startDate }: ICountdown ): JSX.Element => {
   const [tab, setTab] = useState( COUNTDOWN_TABS.DAYS );

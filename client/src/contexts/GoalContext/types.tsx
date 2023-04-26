@@ -1,10 +1,11 @@
 import { ReactNode } from "react";
 
 export interface IGoalContext {
-  threeMonths?: TGoal[];
-  sixMonths?: TGoal[];
-  nineMonths?: TGoal[];
-  twelveMonths?: TGoal[];
+  completeGoals: TGoal[];
+  goals: TGoal[];
+  thisMonthGoals: TGoal[];
+  upcomingGoals: TGoal[];
+  loadingGoals: boolean;
   getGoals?: () => void;
   checkGoal?: (id: string) => void;
   deleteGoal?: (id: string) => void;
@@ -17,7 +18,10 @@ export interface IGoalProvider {
 export type TGoal = {
   _id: string;
   checked: boolean;
-  month: number;
+  dueDate?: string;
+  month?: number;
   text: string;
-  type: string;
+  type: TGoalType;
 }
+
+export type TGoalType = 'education' | 'personal' | 'travel';

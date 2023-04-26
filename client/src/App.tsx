@@ -66,7 +66,9 @@ export const App = (): JSX.Element => (
           <LayoutWithNavbar>
             <UserProvider>
               <WorkhourProvider>
-                <Home />
+                <GoalProvider>
+                  <Home />
+                </GoalProvider>
               </WorkhourProvider>
             </UserProvider>
           </LayoutWithNavbar>
@@ -142,9 +144,11 @@ export const App = (): JSX.Element => (
         path="/notebook/goals"
         element={
           <LayoutWithNavbar>
-            <GoalProvider>
-              <Goals />
-            </GoalProvider>
+            <UserProvider>
+              <GoalProvider>
+                <Goals />
+              </GoalProvider>
+            </UserProvider>
           </LayoutWithNavbar>
         }
       />

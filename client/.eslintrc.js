@@ -27,7 +27,7 @@ module.exports = {
   root: true, // For configuration cascading.
   rules: {
     indent: [
-      "error", 2,
+      "warn", 2,
     ],
     quotes: [
       "warn", "double",
@@ -56,7 +56,7 @@ module.exports = {
       },
     ],
     "react/jsx-indent": [
-      "error",
+      "warn",
       2,
       {
         checkAttributes: true,
@@ -64,7 +64,7 @@ module.exports = {
       },
     ],
     "react/jsx-indent-props": [
-      "error", 2,
+      "warn", 2,
     ],
     "import/order": [
       "warn",
@@ -83,6 +83,8 @@ module.exports = {
         ],
       },
     ],
+    "jsx-a11y/no-static-element-interactions": "warn",
+    "jsx-a11y/no-noninteractive-element-interactions": "warn",
     "template-curly-spacing": [ "warn", "always" ],
     "no-multiple-empty-lines": [ "warn", { "max": 2 }],
     "implicit-arrow-linebreak": [ "warn", "beside" ],

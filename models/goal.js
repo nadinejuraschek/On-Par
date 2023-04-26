@@ -3,7 +3,7 @@ const   mongoose = require('mongoose');
 
 // SCHEMA SETUP
 const goalSchema = new mongoose.Schema({
-    month: Number,
+    dueDate: Date,
     type: String,
     text: String,
     checked: Boolean

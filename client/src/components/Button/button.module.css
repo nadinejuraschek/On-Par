@@ -35,7 +35,9 @@
 
 .btn.round {
   border-radius: 50%;
+}
 
+.btn.round, .btn.square {
   min-width: 4rem;
   width: 4rem;
 }

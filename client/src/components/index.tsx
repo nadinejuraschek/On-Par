@@ -1,6 +1,8 @@
+export * from "./Badge";
 export * from "./Button";
 export * from "./Card";
 export * from "./DatePicker";
+export * from "./GoalItem";
 export * from "./Event";
 export * from "./Features";
 export * from "./Filer";
@@ -18,3 +20,4 @@ export * from "./Tabs";
 export * from "./Text";
 export * from "./Textarea";
 export * from "./Timer";
+export * from "./ToggleGroup";
