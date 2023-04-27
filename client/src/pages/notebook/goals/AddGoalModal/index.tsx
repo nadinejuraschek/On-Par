@@ -40,7 +40,7 @@ export const AddGoalModal = ({ toggleModal }: IAddGoalModal): JSX.Element => {
         });
         toggleModal();
       });
-  }, [getGoals, newGoal]);
+  }, [getGoals, newGoal, toggleModal]);
 
   // TODO: handleSubmit in form instead of button
   const actions = useMemo(() => (
@@ -60,7 +60,7 @@ export const AddGoalModal = ({ toggleModal }: IAddGoalModal): JSX.Element => {
     const target = event.target as HTMLInputElement;
     const name = target.name;
     const value = target.value;
-    setNewGoal( prev => ( { ...prev, [name]: value } ) )
+    setNewGoal( prev => ( { ...prev, [name]: value } ) );
   }, []);
 
   return (

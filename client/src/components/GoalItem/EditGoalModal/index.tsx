@@ -34,7 +34,7 @@ export const EditGoalModal = ({ checked, dueDate, id, text, toggleModal, type }:
       } ).finally(() => {
         toggleModal();
       });
-  }, [getGoals, id, updatedGoal]);
+  }, [getGoals, id, toggleModal, updatedGoal]);
 
   // TODO: handleSubmit in form instead of button
   const actions = useMemo(() => (

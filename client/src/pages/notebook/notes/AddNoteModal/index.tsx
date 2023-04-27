@@ -32,7 +32,7 @@ export const AddNoteModal = ({ toggleModal }: IAddNoteModal): JSX.Element => {
         toggleModal();
         setNewNote( { date: currentDate, text: "", title: "" } );
       });
-    }, [currentDate, newNote]);
+    }, [currentDate, getNotes, newNote, toggleModal]);
 
   const handleChange = useCallback((event: ChangeEvent): void => {
     const target = event.target as HTMLInputElement;

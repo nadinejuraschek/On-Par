@@ -41,7 +41,19 @@ export const Select = ({
       theme={selectTheme}
       value={value}
     />
-  ), [clearable, disabled, handleChange, icon, loading, name, options, searchable, value]);
+  ), [
+    clearable,
+    defaultValue,
+    disabled,
+    handleChange,
+    icon,
+    loading,
+    name,
+    options,
+    placeholder,
+    searchable,
+    value,
+  ]);
 
   if (onlyInput) {
     return selectInput;

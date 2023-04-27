@@ -20,7 +20,7 @@ export const Sidenav = ({ toggleSidenav }: ISidenav): JSX.Element => {
         />
       );
     });
-  }, []);
+  }, [toggleSidenav]);
 
   return (
     <>

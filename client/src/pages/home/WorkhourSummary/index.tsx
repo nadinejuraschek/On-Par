@@ -4,9 +4,9 @@ import { useContext, useMemo, useState } from "react";
 import { WorkhourContext } from "contexts";
 import styles from "./workhour.module.css";
 
-enum WORKHOUR_TABS {
-  DAY = 0,
-  WEEK = 1,
+const WORKHOUR_TABS = {
+  DAY: 0,
+  WEEK: 1,
 }
 
 export const WorkhourSummary = (): JSX.Element => {

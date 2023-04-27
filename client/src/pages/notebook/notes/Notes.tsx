@@ -21,7 +21,7 @@ export const Notes = (): JSX.Element => {
     }
 
     return <AddNoteModal toggleModal={toggleModal} />;
-  }, [openAddNoteModal]);
+  }, [openAddNoteModal, toggleModal]);
 
   return (
     <main className={ styles.main }>

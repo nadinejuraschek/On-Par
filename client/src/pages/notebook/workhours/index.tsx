@@ -5,9 +5,9 @@ import { AddHours } from "./components/AddHours";
 import { WorkhourContext } from "contexts";
 import styles from "./workhours.module.css";
 
-enum WORKHOURS_TABS {
-  WEEKLY = 0,
-  DAILY = 1,
+const WORKHOURS_TABS = {
+  WEEKLY: 0,
+  DAILY: 1,
 }
 
 export const Workhours = (): JSX.Element => {

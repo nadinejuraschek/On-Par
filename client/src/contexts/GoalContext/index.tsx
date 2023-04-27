@@ -1,5 +1,5 @@
 import { IGoalContext, IGoalProvider, TGoal } from "./types";
-import { createContext, useEffect, useState } from "react";
+import { createContext, useCallback, useEffect, useState } from "react";
 
 import axios from "axios";
 import { toast } from "react-toastify";
@@ -7,9 +7,9 @@ import { toast } from "react-toastify";
 export const GoalContext = createContext<IGoalContext>({
   completeGoals: [],
   goals: [],
+  loadingGoals: false,
   thisMonthGoals: [],
   upcomingGoals: [],
-  loadingGoals: false,
 });
 
 export const GoalProvider = ({ children }: IGoalProvider): JSX.Element => {
@@ -19,11 +19,7 @@ export const GoalProvider = ({ children }: IGoalProvider): JSX.Element => {
   const [upcomingGoals, setUpcomingGoals] = useState( [] );
   const [loadingGoals, setLoadingGoals] = useState(false);
 
-  useEffect( () => {
-    getGoals();
-  }, [] );
-
-  const getGoals = (): void => {
+  const getGoals = useCallback((): void => {
     setLoadingGoals(true);
     axios( {
       url: "/api/user/:id/goals",
@@ -45,9 +41,9 @@ export const GoalProvider = ({ children }: IGoalProvider): JSX.Element => {
       toast.error("Could not fetch goals. Please try again later!");
       // console.debug( 'Error when fetching goals: ', err );
     } ).finally(() => setLoadingGoals(false));
-  };
+  }, []);
 
-  const checkGoal = (goalid: string): void => {
+  const checkGoal = useCallback((goalid: string): void => {
     axios.put( "/api/goals/" + goalid, { checked: true } )
       .then( () => {
         getGoals();
@@ -55,9 +51,9 @@ export const GoalProvider = ({ children }: IGoalProvider): JSX.Element => {
       .catch( () => {
         // console.debug( "Error when checking off goal: " + error );
       } );
-  };
+  }, [getGoals]);
 
-  const deleteGoal = (goalid: string): void => {
+  const deleteGoal = useCallback((goalid: string): void => {
     axios.delete( "/api/goals/" + goalid ).then( () => {
       toast.success("The goal has been deleted successfully!");
       getGoals();
@@ -65,7 +61,11 @@ export const GoalProvider = ({ children }: IGoalProvider): JSX.Element => {
       toast.error("The goal could not be deleted. Please try again later!");
       // console.debug('Error when deleting a goal: ', error);
     });
-  };
+  }, [getGoals]);
+
+  useEffect( () => {
+    getGoals();
+  }, [getGoals] );
 
   return (
     <GoalContext.Provider value={ {
