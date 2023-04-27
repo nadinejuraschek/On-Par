@@ -46,7 +46,7 @@ export const Register = (): JSX.Element => {
         toast.error("Could not register user. Please try again later!");
         // console.debug( "Error when registering user: " + error.response );
       } );
-  }, [firstname, lastname, country, startDate, email, password]);
+  }, [firstname, lastname, country, startDate, email, navigate, password]);
 
   const handleGuest = useCallback((event: MouseEvent) => {
     event.preventDefault();
@@ -62,7 +62,7 @@ export const Register = (): JSX.Element => {
         toast.error("Could not log in test user. Please try again later!");
         // console.debug( "Error: " + error.response );
       } );
-  }, []);
+  }, [navigate]);
 
   return (
     <main className={ styles.main }>

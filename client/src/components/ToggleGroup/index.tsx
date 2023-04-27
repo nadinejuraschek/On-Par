@@ -34,7 +34,7 @@ export const ToggleGroup = ({
         </div>
       );
     });
-  }, [options]);
+  }, [handleChange, options, value]);
 
   return (
     <div className={ `${className} ${styles.field} ${label ? styles.withLabel : ''}` }>

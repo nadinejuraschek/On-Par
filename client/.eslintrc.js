@@ -108,6 +108,8 @@ module.exports = {
     "arrow-spacing": [ "warn", { "before": true, "after": true }],
     "block-spacing": [ "warn", "always" ],
     "comma-dangle": [ "warn", "always-multiline" ],
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "error",
   },
   settings: {
     react: {

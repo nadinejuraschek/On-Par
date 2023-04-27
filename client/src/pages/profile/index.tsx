@@ -37,7 +37,7 @@ export const Profile = (): JSX.Element => {
       console.log( "Error: ", err );
       setEdit( false );
     } );
-  }, []);
+  }, [birthday, email, familyID, location, phone, user]);
 
   const renderEditButton = useMemo(() => {
     return edit ? (

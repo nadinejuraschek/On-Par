@@ -33,7 +33,7 @@ export const AddHours = ( { updateWorkhours } ): JSX.Element => {
     } ).catch( err => {
       console.log( "Error: ", err );
     } );
-  }, [date, end, start]);
+  }, [date, end, start, updateWorkhours]);
 
   return (
     <>

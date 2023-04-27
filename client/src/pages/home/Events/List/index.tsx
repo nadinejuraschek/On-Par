@@ -3,7 +3,7 @@ import { Event, Text } from 'components';
 import { IEventsList } from './types';
 import styles from './eventsList.module.css';
 
-export const EventsList = ({ list, emptyMessage = '' }: IEventsList): JSX.Element => {
+export const EventsList = ({ emptyMessage = '', list }: IEventsList): JSX.Element => {
   if (list.length === 0) {
     return (
       <div className={styles.empty}>

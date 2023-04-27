@@ -2,14 +2,14 @@ import * as dayjs from "dayjs";
 import * as isSameOrAfter from 'dayjs/plugin/isSameOrAfter'
 
 import { Button, Card, Resources as ResourcesList, Text } from "components";
-import { useContext, useState } from "react";
+import { useCallback, useContext, useState } from "react";
 
 import { Countdown } from "./Countdown";
 import { Events } from "./Events";
+import { Goals } from "./Goals";
 import { Greeting } from "./Greeting";
 import { LoadingSpinner } from "components";
 import { Quicklinks } from "./Quicklinks";
-import { Goals } from "./Goals";
 import { UserContext } from "contexts";
 import { WorkhourSummary } from "./WorkhourSummary";
 import axios from "axios";
@@ -25,14 +25,14 @@ export const Home = (): JSX.Element => {
 
   const navigate = useNavigate();
 
-  const handleLogout = () => {
+  const handleLogout = useCallback(() => {
     axios( {
       url: "/api/user/signout",
       method: "POST",
     } ).then( () => {
       navigate( "/login" );
     } );
-  };
+  }, [navigate]);
 
   if (!user) {
     return <LoadingSpinner />;
@@ -81,8 +81,6 @@ export const Home = (): JSX.Element => {
               <Card className={ styles.countdown }>
                 <Countdown
                   startDate={ user.startDate }
-                  endDate={ user.endDate }
-                  message={ message }
                   setMessage={ setMessage }
                 />
               </Card>
