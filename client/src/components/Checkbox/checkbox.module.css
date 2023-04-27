@@ -1,0 +1,19 @@
+.field {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.error {
+  border-color: var(--error_300);
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+  max-width: 100%;
+}
+
+.error:focus {
+  box-shadow: var(--shadow_xs_focused_error);
+}

@@ -47,8 +47,7 @@
   left: 0;
 }
 
-.input,
-.profileInput {
+.input{
   background-color: var(--white);
   border: 1px solid var(--grey_300);
   border-radius: 0.8rem;
@@ -60,8 +59,7 @@
   height: 4rem;
 }
 
-.input::placeholder,
-.profileInput::placeholder {
+.input::placeholder {
   color: var(--grey_500);
 }
 
@@ -70,10 +68,7 @@
 .iconInput:focus-visible,
 .input:active,
 .input:focus,
-.input:focus-visible,
-.profileInput:active,
-.profileInput:focus,
-.profileInput:focus-visible {
+.input:focus-visible {
   box-shadow: var(--shadow_xs_focused);
   outline: transparent;
 }
@@ -95,9 +90,4 @@
 
 .error:focus {
   box-shadow: var(--shadow_xs_focused_error);
-}
-
-.profileInput {
-  font-size: 12px;
-  width: 125px;
 }

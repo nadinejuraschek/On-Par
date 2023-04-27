@@ -1,14 +1,10 @@
 import { ChangeEvent } from 'react';
 
-export interface IInput {
+export interface ICheckbox {
   className?: string;
   error?: string;
-  fullWidth?: boolean;
   handleChange: (event: ChangeEvent) => void;
-  icon?: string;
   label: string;
   name: string;
-  placeholder?: string;
-  type?: string;
   value: string;
 }

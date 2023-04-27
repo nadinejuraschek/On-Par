@@ -17,7 +17,6 @@ export const WorkhourProvider = ( { children }: IWorkhourProvider ): JSX.Element
       url: "/api/user/:id/workhours",
       method: "GET",
     } ).then( res => {
-      console.log('AAAA')
       setWorkhours( res.data.workhours );
     } ).catch( () => {
       toast.error("Could not fetch workhours. Please try again later!");
