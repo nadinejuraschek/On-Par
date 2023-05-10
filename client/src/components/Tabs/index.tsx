@@ -22,7 +22,7 @@ export const Tabs = ({
           key={ `tab_${ value }` }
           onClick={ disabled ? () => {} : () => handleClick(value) }
         >
-          <Text color={ isActive ? "--primary_700" : "--grey_500" } size="md">{ label }</Text>
+          <Text className={`${styles.tabText} ${isActive && styles.active}`} size="md">{ label }</Text>
         </div>
       );
     });

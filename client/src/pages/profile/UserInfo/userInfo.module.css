@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 2rem;
+  gap: 2.4rem;
 
   padding: 1rem 0;
 
@@ -31,15 +31,22 @@
   gap: 1rem;
 }
 
-.info {}
-
-.settingsField {
+.info {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: 1fr;
-  grid-gap: 2rem;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto;
+  grid-gap: 1.4rem;
+}
 
-  width: 100%;
+.permissions {
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+}
+
+.profileActions {
+  display: flex;
+  justify-content: flex-end;
 }
 
 @media only screen and (min-width: 600px) {
@@ -47,13 +54,13 @@
     gap: 3rem;
   }
 
+  .info {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
   .imageContainer {
     height: 14rem;
     width: 14rem;
-  }
-
-  .settingsField {
-    gap: 3rem;
   }
 }
 
@@ -65,9 +72,5 @@
   .imageContainer {
     height: 16rem;
     width: 16rem;
-  }
-
-  .settingsField {
-    gap: 4rem;
   }
 }

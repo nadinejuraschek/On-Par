@@ -35,8 +35,20 @@
   bottom: -1px;
 }
 
+.tab.active {
+  color: var(--primary_700);
+}
+
 .tab.disabled {
   cursor: not-allowed;
+}
+
+.tabText {
+  color: var(--grey_700);
+}
+
+.tab.disabled .tabText {
+  color: var(--grey_400) !important;
 }
 
 .tab.primary {

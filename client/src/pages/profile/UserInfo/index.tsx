@@ -1,4 +1,4 @@
-import { Button, Checkbox, DatePicker, Input, Modal, Select } from 'components';
+import { Button, Checkbox, DatePicker, Input, Modal, Text } from 'components';
 import { ChangeEvent, useCallback, useMemo, useState } from 'react';
 
 import blankPic from "images/blankProfile.svg";
@@ -66,12 +66,11 @@ export const UserInfo = ({ user }: { user: any }): JSX.Element => {
             { /* <Filer /> */ }
           </div>
           <div className={ styles.avatarActions }>
-            <Button handleClick={ () => {} }>Choose Image</Button>
-            <Button handleClick={ () => {} } variant="danger">Remove Image</Button>
+            <Button disabled handleClick={ () => {} }>Choose Image</Button>
+            <Button disabled handleClick={ () => {} } variant="danger">Remove Image</Button>
           </div>
         </div>
           <div className={ styles.info }>
-            <div className={ styles.settingsField }>
               <Input
                 fullWidth
                 handleChange={(e: ChangeEvent) => handleInputChange(e, "firstname")}
@@ -79,8 +78,6 @@ export const UserInfo = ({ user }: { user: any }): JSX.Element => {
                 name="firstname"
                 value={userInfo.firstname}
               />
-            </div>
-            <div className={ styles.settingsField }>
               <Input
                 fullWidth
                 handleChange={(e: ChangeEvent) => handleInputChange(e, "lastname")}
@@ -88,24 +85,17 @@ export const UserInfo = ({ user }: { user: any }): JSX.Element => {
                 name="lastname"
                 value={userInfo.lastname}
               />
-              <Checkbox
-                handleChange={() => {}}
-                label="Share last name with other users?"
-                name="privateLastName"
-                value={userInfo.privateLastName}
-              />
-            </div>
-            <div className={ styles.settingsField }>
-              {/* <Select
+            {/*
+              <Select
+                disabled
                 fullWidth
                 handleChange={(e: ChangeEvent) => handleInputChange(e, "country")}
                 label="Home country"
                 name="country"
                 value={userInfo.country}
               /> */}
-            </div>
-            <div className={ styles.settingsField }>
               <Input
+                disabled
                 fullWidth
                 handleChange={(e: ChangeEvent) => handleInputChange(e, "email")}
                 label="E-Mail"
@@ -113,43 +103,34 @@ export const UserInfo = ({ user }: { user: any }): JSX.Element => {
                 type="email"
                 value={userInfo.email}
               />
-              <Checkbox
-                handleChange={() => {}}
-                label="Share e-mail with other users?"
-                name="privateEmail"
-                value={userInfo.privateEmail}
-              />
-            </div>
-            <div className={ styles.settingsField }>
-              <Input
-                fullWidth
-                handleChange={(e: ChangeEvent) => handleInputChange(e, "phone")}
-                label="Phone"
-                name="phone"
-                type="tel"
-                value={userInfo.phone}
-              />
-              <Checkbox
-                handleChange={() => {}}
-                label="Share phone with other users?"
-                name="privatePhone"
-                value={userInfo.phone}
-              />
-            </div>
-            <div className={ styles.settingsField }>
               <DatePicker
+                format="MM/dd/yyyy"
                 handleChange={(date: Date) => setUserInfo((prev) => ({ ...prev, birthday: date }))}
                 label="Birthday"
                 name="birthday"
                 value={userInfo.birthday}
               />
+          </div>
+          <div className={styles.permissions}>
+            <Text size="lg" weight="bold">Sharing Permissions</Text>
+            <Checkbox
+                handleChange={() => {}}
+                label="Others can see my last name"
+                name="privateLastName"
+                value={userInfo.privateLastName}
+              />
               <Checkbox
                 handleChange={() => {}}
-                label="Share birthday with other users?"
+                label="Others can see my e-mail"
+                name="privateEmail"
+                value={userInfo.privateEmail}
+              />
+              <Checkbox
+                handleChange={() => {}}
+                label="Others can see my birthday"
                 name="privateBirthday"
                 value={userInfo.birthday}
               />
-            </div>
           </div>
         <div className={ styles.profileActions }>
           <Button handleClick={ () => {} } variant="primary">Save Changes</Button>

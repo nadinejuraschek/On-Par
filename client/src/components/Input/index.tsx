@@ -6,6 +6,7 @@ import { useEffect } from 'react';
 
 export const Input = ( {
   className = '',
+  disabled = false,
   error,
   fullWidth = false,
   handleChange,
@@ -29,7 +30,8 @@ export const Input = ( {
       </Text>
       <div className={ styles.iconInputWrapper }>
         <input
-          className={ `${ styles.input } ${ error && styles.error } ${ fullWidth && styles.fullWidth } ${ icon && styles.leftPadding }` }
+          className={ `${ styles.input } ${ error && styles.error } ${ fullWidth && styles.fullWidth } ${ icon && styles.leftPadding } ${ disabled && styles.disabled}` }
+          disabled={disabled}
           name={ name }
           onChange={ handleChange }
           placeholder={ placeholder }

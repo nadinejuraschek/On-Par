@@ -2,6 +2,7 @@ import { ChangeEvent } from 'react';
 
 export interface IInput {
   className?: string;
+  disabled?: boolean;
   error?: string;
   fullWidth?: boolean;
   handleChange: (event: ChangeEvent) => void;
