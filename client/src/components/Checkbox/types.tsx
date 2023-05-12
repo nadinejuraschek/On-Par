@@ -6,5 +6,5 @@ export interface ICheckbox {
   handleChange: (event: ChangeEvent) => void;
   label: string;
   name: string;
-  value: string;
+  value: boolean;
 }

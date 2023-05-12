@@ -14,10 +14,10 @@ export const Checkbox = ({
     <div className={ `${className} ${styles.field}` }>
       <input
         className={ `${ styles.input } ${ error && styles.error }` }
+        checked={value}
         name={ name }
         onChange={ handleChange }
         type="checkbox"
-        value={ value }
       />
       <Text as="label" className={ styles.label } htmlFor={ name } size="sm">
         { label }
