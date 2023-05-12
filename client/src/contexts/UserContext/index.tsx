@@ -17,7 +17,6 @@ export const UserProvider = ( { children }: IUserProvider ): JSX.Element => {
       setUser( res.data );
     } ).catch( () => {
       toast.error("Could not find the user information. Please try again later!");
-      // console.debug( "Error: ", error );
     });
   }, [] );
 

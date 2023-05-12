@@ -1,3 +1,5 @@
+import * as dayjs from 'dayjs';
+
 import { Button, Checkbox, DatePicker, Input, Text } from 'components';
 import { ChangeEvent, useCallback, useState } from 'react';
 
@@ -67,68 +69,75 @@ export const UserInfo = ({ user }: { user: TUser }): JSX.Element => {
           <Button disabled handleClick={ () => {} } variant="danger">Remove Image</Button>
         </div>
       </div>
-        <div className={ styles.info }>
-          <Input
-            fullWidth
-            handleChange={(e: ChangeEvent) => handleInputChange(e, "firstname")}
-            label="First Name"
-            name="firstname"
-            value={userInfo.firstname}
-          />
-          <Input
-            fullWidth
-            handleChange={(e: ChangeEvent) => handleInputChange(e, "lastname")}
-            label="Last Name"
-            name="lastname"
-            value={userInfo.lastname}
-          />
-          {/*
-            <Select
-              disabled
-              fullWidth
-              handleChange={(e: ChangeEvent) => handleInputChange(e, "country")}
-              label="Home country"
-              name="country"
-              value={userInfo.country}
-            /> */}
-          <Input
+      <div className={styles.extensionInfo}>
+        Arrival Date: {dayjs(user.startDate).format('MMM DD, YYYY')}
+        End Date: {dayjs(user.endDate).format('MMM DD, YYYY')}
+        Year: {dayjs(user?.startDate).diff(new Date(), 'year') + 1}
+
+        Thinking of extending your au pair experience? <Button variant="tertiary">Extension Requirements</Button>
+      </div>
+      <div className={ styles.info }>
+        <Input
+          fullWidth
+          handleChange={(e: ChangeEvent) => handleInputChange(e, "firstname")}
+          label="First Name"
+          name="firstname"
+          value={userInfo.firstname}
+        />
+        <Input
+          fullWidth
+          handleChange={(e: ChangeEvent) => handleInputChange(e, "lastname")}
+          label="Last Name"
+          name="lastname"
+          value={userInfo.lastname}
+        />
+        {/*
+          <Select
             disabled
             fullWidth
-            handleChange={(e: ChangeEvent) => handleInputChange(e, "email")}
-            label="E-Mail"
-            name="email"
-            type="email"
-            value={userInfo.email}
-          />
-          <DatePicker
-            format="MM/dd/yyyy"
-            handleChange={(date: Date) => setUserInfo((prev) => ({ ...prev, birthday: date }))}
-            label="Birthday"
-            name="birthday"
-            value={userInfo.birthday}
-          />
-        </div>
-        <div className={styles.permissions}>
-          <Text size="lg" weight="bold">Sharing Permissions</Text>
-          <Checkbox
-            handleChange={(e: ChangeEvent) => handleCheckboxChange(e, 'shareLastName')}
-            label="Others can see my last name"
-            name="shareLastName"
-            value={userInfo.permissions.shareLastName}
-          />
-          <Checkbox
-            handleChange={(e: ChangeEvent) => handleCheckboxChange(e, 'shareEmail')}
-            label="Others can see my e-mail"
-            name="shareEmail"
-            value={userInfo.permissions.shareEmail}
-          />
-          <Checkbox
-            handleChange={(e: ChangeEvent) => handleCheckboxChange(e, 'shareBirthday')}
-            label="Others can see my birthday"
-            name="shareBirthday"
-            value={userInfo.permissions.shareBirthday}
-          />
-        </div>
+            handleChange={(e: ChangeEvent) => handleInputChange(e, "country")}
+            label="Home country"
+            name="country"
+            value={userInfo.country}
+          /> */}
+        <Input
+          disabled
+          fullWidth
+          handleChange={(e: ChangeEvent) => handleInputChange(e, "email")}
+          label="E-Mail"
+          name="email"
+          type="email"
+          value={userInfo.email}
+        />
+        <DatePicker
+          format="MM/dd/yyyy"
+          handleChange={(date: Date) => setUserInfo((prev) => ({ ...prev, birthday: date }))}
+          label="Birthday"
+          name="birthday"
+          value={userInfo.birthday}
+        />
+      </div>
+      <div className={styles.permissions}>
+        <Text size="lg" weight="bold">Sharing Permissions</Text>
+        <Checkbox
+          handleChange={(e: ChangeEvent) => handleCheckboxChange(e, 'shareLastName')}
+          label="Others can see my last name"
+          name="shareLastName"
+          value={userInfo.permissions.shareLastName}
+        />
+        <Checkbox
+          handleChange={(e: ChangeEvent) => handleCheckboxChange(e, 'shareEmail')}
+          label="Others can see my e-mail"
+          name="shareEmail"
+          value={userInfo.permissions.shareEmail}
+        />
+        <Checkbox
+          handleChange={(e: ChangeEvent) => handleCheckboxChange(e, 'shareBirthday')}
+          label="Others can see my birthday"
+          name="shareBirthday"
+          value={userInfo.permissions.shareBirthday}
+        />
+      </div>
       <div className={ styles.profileActions }>
         <Button handleClick={handleEdit} loading={updating} variant="primary">Save Changes</Button>
       </div>

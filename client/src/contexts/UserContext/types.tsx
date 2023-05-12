@@ -9,6 +9,7 @@ export type TUser = {
   birthday?: Date;
   country: string;
   email: string;
+  endDate: string;
   familyID?: string;
   firstname: string;
   lastname: string;
@@ -19,4 +20,5 @@ export type TUser = {
     shareLastName: boolean;
   };
   role?: string;
+  startDate: string;
 };
