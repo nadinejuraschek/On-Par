@@ -8,7 +8,7 @@ export interface ITabs {
   handleClick: Dispatch<SetStateAction<number | string>>;
   spaceBetween?: boolean;
   tabs: TTab[];
-  variant: TVariant;
+  variant?: TVariant;
 }
 
 export type TTab = {

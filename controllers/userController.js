@@ -27,11 +27,11 @@ exports.getUserById = async (req, res) => {
 };
 
 exports.register = async (req, res) => {
-  req.body.email = req.body.email.toLowerCase();
   // has the password
   const password = await bcrypt.hash(req.body.password, 10);
   // create user in database
   const user = await db.User.create({
+    birthday: req.body.birthday,
     role: req.body.role,
     familyID: req.body.familyID,
     firstname: req.body.firstname,
@@ -39,8 +39,13 @@ exports.register = async (req, res) => {
     country: req.body.country,
     startDate: req.body.startDate,
     endDate: dayjs(req.body.startDate).add(1, 'years').toDate(),
-    email: req.body.email,
+    email: req.body.email.toLowerCase(),
     password: password,
+    permissions: {
+      shareBirthday: false,
+      shareEmail: false,
+      shareLastName: false,
+    },
   });
   //create cookie for user
   const token = jwt.sign({ id: user.id }, process.env.APP_SECRET);

@@ -1,6 +1,7 @@
 import { IButton } from "./types";
 import { Link } from "react-router-dom";
 import styles from "./button.module.css";
+import { useMemo } from 'react';
 
 export const Button = ({
   align = "alignCenter",
@@ -11,11 +12,20 @@ export const Button = ({
   handleClick,
   label = "",
   link,
+  loading = false,
   round = false,
   square = false,
   type = 'button',
   variant = "secondary",
 }: IButton): JSX.Element => {
+  const renderLabel = useMemo(() => {
+    if (loading) {
+      return <div className={styles.loader} />;
+    }
+
+    return children;
+  }, [children, loading]);
+
   if (link) {
     return (
       <Link
@@ -23,7 +33,7 @@ export const Button = ({
         className={ `${ className } ${ styles.btn } ${ styles[variant] } ${ disabled ? styles.disabled : '' } ${ align ? styles[align] : '' } ${ round ? styles.round : '' } ${ fullWidth ? styles.fullWidth : '' } ${ square ? styles.square : '' }` }
         to={ link }
       >
-        { children }
+        { renderLabel }
       </Link>
     );
   }
@@ -34,7 +44,7 @@ export const Button = ({
       onClick={ handleClick }
       type={ type }
     >
-      { children }
+      { renderLabel }
     </button>
   );
 };

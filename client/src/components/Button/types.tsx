@@ -11,6 +11,7 @@ export interface IButton {
   handleClick?: (() => void) | ((event: MouseEvent) => void);
   label?: string;
   link?: string;
+  loading?: boolean;
   round?: boolean;
   square?: boolean;
   type?: 'button' | 'submit';

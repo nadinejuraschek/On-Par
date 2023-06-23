@@ -16,7 +16,10 @@ const userSchema = new mongoose.Schema({
   role: String,
   country: String,
 
-  familyID: String,
+  familyID: {
+    type: String,
+    unique: true,
+  },
 
   startDate: Object,
   endDate: Object,
@@ -28,27 +31,15 @@ const userSchema = new mongoose.Schema({
 
   profileImage: { img: { data: Buffer, contentType: String } },
 
-  contact: {
-    phone: {
-      type: Number
-    },
-    facebook: {
-      type: String
-    },
-    instagram: {
-      type: String
-    },
-    twitter: {
-      type: String
-    },
-    snapchat: {
-      type: String
-    }
-  },
-
   birthday: Object,
 
   location: String,
+
+  permissions: {
+    shareBirthday: Boolean,
+    shareEmail: Boolean,
+    shareLastName: Boolean,
+  }
 });
 
 module.exports = mongoose.model('User', userSchema);

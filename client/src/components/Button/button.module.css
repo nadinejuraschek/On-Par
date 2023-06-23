@@ -182,3 +182,28 @@
   border-color: var(--warning_25);
   color: var(--warning_300);
 }
+
+/********************************************
+ LOADING STATE
+********************************************/
+.loader {
+  display: inline-block;
+
+  height: 1.4rem;
+  width: 1.4rem;
+
+  animation: rotation 1s linear infinite;
+  border: 0.2rem solid var(--white);
+  border-bottom-color: transparent;
+  border-radius: 50%;
+  box-sizing: border-box;
+}
+
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
