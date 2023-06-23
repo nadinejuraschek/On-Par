@@ -26,7 +26,7 @@
   },
   "homepage": "https://github.com/nadinejuraschek/APIA_Project#readme",
   "dependencies": {
-    "axios": "^0.21.4",
+    "axios": "^1.4.0",
     "bcryptjs": "^2.4.3",
     "concurrently": "^8.2.0",
     "cookie-parser": "^1.4.6",
