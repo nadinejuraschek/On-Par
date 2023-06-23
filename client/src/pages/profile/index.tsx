@@ -46,7 +46,7 @@ export const Profile = (): JSX.Element => {
   return (
     <main className={ styles.main }>
       <Text as="h2" size="xl" weight="bold">Your Profile</Text>
-      <Tabs activeTab={activeTab} fullWidth handleClick={setActiveTab} tabs={tabs} />
+      <Tabs activeTab={activeTab} fullWidth handleClick={setActiveTab} tabs={tabs} variant="secondary" />
       {renderContent}
     </main>
   );

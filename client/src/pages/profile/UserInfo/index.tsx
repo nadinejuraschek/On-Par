@@ -1,7 +1,7 @@
 import * as dayjs from 'dayjs';
 
 import { Button, Checkbox, DatePicker, Input, Text } from 'components';
-import { ChangeEvent, useCallback, useState } from 'react';
+import { ChangeEvent, useCallback, useMemo, useState } from 'react';
 
 import { TUser } from 'contexts/UserContext/types';
 import axios from 'axios';
@@ -13,15 +13,15 @@ export const UserInfo = ({ user }: { user: TUser }): JSX.Element => {
   const [updating, setUpdating] = useState(false);
 
   const [userInfo, setUserInfo] = useState({
-    birthday: user?.birthday || undefined,
-    email: user?.email || undefined,
-    firstname: user?.firstname || undefined,
-    lastname: user?.lastname || undefined,
-    location: user?.location || undefined,
+    birthday: user.birthday || undefined,
+    email: user.email,
+    firstname: user.firstname,
+    lastname: user.lastname,
+    location: user.location || undefined,
     permissions: {
-      shareBirthday: user?.permissions?.shareBirthday || false,
-      shareEmail: user?.permissions?.shareEmail || false,
-      shareLastName: user?.permissions?.shareLastName || false,
+      shareBirthday: user?.permissions.shareBirthday || false,
+      shareEmail: user?.permissions.shareEmail || false,
+      shareLastName: user?.permissions.shareLastName || false,
     },
   });
 
@@ -69,15 +69,30 @@ export const UserInfo = ({ user }: { user: TUser }): JSX.Element => {
           <Button disabled handleClick={ () => {} } variant="danger">Remove Image</Button>
         </div>
       </div>
-      <div className={styles.extensionInfo}>
-        Arrival Date: {dayjs(user.startDate).format('MMM DD, YYYY')}
-        End Date: {dayjs(user.endDate).format('MMM DD, YYYY')}
-        Year: {dayjs(user?.startDate).diff(new Date(), 'year') + 1}
-
-        Thinking of extending your au pair experience? <Button variant="tertiary">Extension Requirements</Button>
+      <div className={styles.permissions}>
+        <Text size="lg" weight="bold">Sharing Permissions</Text>
+        <Checkbox
+          handleChange={(e: ChangeEvent) => handleCheckboxChange(e, 'shareLastName')}
+          label="Others can see my last name"
+          name="shareLastName"
+          value={userInfo.permissions.shareLastName}
+        />
+        <Checkbox
+          handleChange={(e: ChangeEvent) => handleCheckboxChange(e, 'shareEmail')}
+          label="Others can see my e-mail"
+          name="shareEmail"
+          value={userInfo.permissions.shareEmail}
+        />
+        <Checkbox
+          handleChange={(e: ChangeEvent) => handleCheckboxChange(e, 'shareBirthday')}
+          label="Others can see my birthday"
+          name="shareBirthday"
+          value={userInfo.permissions.shareBirthday}
+        />
       </div>
       <div className={ styles.info }>
         <Input
+          disabled
           fullWidth
           handleChange={(e: ChangeEvent) => handleInputChange(e, "firstname")}
           label="First Name"
@@ -85,6 +100,7 @@ export const UserInfo = ({ user }: { user: TUser }): JSX.Element => {
           value={userInfo.firstname}
         />
         <Input
+          disabled
           fullWidth
           handleChange={(e: ChangeEvent) => handleInputChange(e, "lastname")}
           label="Last Name"
@@ -92,7 +108,7 @@ export const UserInfo = ({ user }: { user: TUser }): JSX.Element => {
           value={userInfo.lastname}
         />
         {/*
-          <Select
+          <Input
             disabled
             fullWidth
             handleChange={(e: ChangeEvent) => handleInputChange(e, "country")}
@@ -116,27 +132,28 @@ export const UserInfo = ({ user }: { user: TUser }): JSX.Element => {
           name="birthday"
           value={userInfo.birthday}
         />
-      </div>
-      <div className={styles.permissions}>
-        <Text size="lg" weight="bold">Sharing Permissions</Text>
-        <Checkbox
-          handleChange={(e: ChangeEvent) => handleCheckboxChange(e, 'shareLastName')}
-          label="Others can see my last name"
-          name="shareLastName"
-          value={userInfo.permissions.shareLastName}
+        <Input
+          className={styles.extensionInput}
+          disabled
+          fullWidth
+          handleChange={() => {}}
+          label="Arrival Date"
+          name="startDate"
+          value={dayjs(user.startDate).format('MMM DD, YYYY')}
         />
-        <Checkbox
-          handleChange={(e: ChangeEvent) => handleCheckboxChange(e, 'shareEmail')}
-          label="Others can see my e-mail"
-          name="shareEmail"
-          value={userInfo.permissions.shareEmail}
+        <Input
+          className={styles.extensionInput}
+          disabled
+          fullWidth
+          handleChange={() => {}}
+          label="End Date"
+          name="endDate"
+          value={dayjs(user.endDate).format('MMM DD, YYYY')}
         />
-        <Checkbox
-          handleChange={(e: ChangeEvent) => handleCheckboxChange(e, 'shareBirthday')}
-          label="Others can see my birthday"
-          name="shareBirthday"
-          value={userInfo.permissions.shareBirthday}
-        />
+        <div className={styles.extensionInfo}>
+          <Text size="md">Thinking of extending your au pair experience?</Text>
+          <Button link="/resources" variant="secondary">Read Extension Requirements</Button>
+        </div>
       </div>
       <div className={ styles.profileActions }>
         <Button handleClick={handleEdit} loading={updating} variant="primary">Save Changes</Button>

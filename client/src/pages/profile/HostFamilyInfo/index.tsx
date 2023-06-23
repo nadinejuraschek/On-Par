@@ -9,13 +9,13 @@ export const HostFamilyInfo = (): JSX.Element => {
       <Text as="h3" size="lg" weight="bold">Host Family Info</Text>
       <div className={ styles.familyInfo }>
         <div>
-              {/* <Input
-                handleChange={ setFamilyID }
-                icon="id card outline"
-                label="Host Family ID"
-                name="familyID"
-                value={ familyID }
-              /> */}
+          {/* <Input
+            handleChange={ setFamilyID }
+            icon="id card outline"
+            label="Host Family ID"
+            name="familyID"
+            value={ familyID }
+          /> */}
           <PeopleList data={ mockHostParents } label="Host Parents" />
         </div>
         <PeopleList data={ mockHostChildren } label="Host Children" />

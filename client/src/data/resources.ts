@@ -13,85 +13,133 @@ import traveling from "images/traveling.svg";
 
 export const resources = [
   {
-    icon: tax,
-    label: "Paying Taxes",
-    link: "/resources/tax",
-    active: true,
+    title: "Au Pair Program",
+    type: "program",
+    resources: [
+      {
+        icon: rule,
+        label: "Au Pair Rules",
+        active: false,
+      },
+      {
+        icon: documents,
+        label: "Host Family Interview Preparation",
+        active: false,
+      },
+      {
+        icon: documents,
+        label: "Your J-1 Visa",
+        active: false,
+      },
+      {
+        icon: extension,
+        label: "Extension",
+        active: false,
+      },
+      {
+        icon: documents,
+        label: "Travel Month",
+        active: false,
+      },
+    ],
   },
   {
-    icon: childcare,
-    label: "Childcare Activities",
-    active: false,
+    title: "Childcare",
+    type: "childcare",
+    resources: [
+      {
+        icon: childcare,
+        label: "Childcare Activities",
+        active: false,
+      },
+      {
+        icon: firstAid,
+        label: "First Aid",
+        active: false,
+      },
+    ],
   },
   {
-    icon: app,
-    label: "Great Apps to Try",
-    active: false,
+    title: "Living in the USA",
+    type: "life",
+    resources: [
+      {
+        icon: englishLanguage,
+        label: "Improve your English Skills",
+        active: false,
+      },
+      {
+        icon: documents,
+        label: "Apply for your SSN (Social Security Number)",
+        active: false,
+      },
+      {
+        icon: driversLicense,
+        label: "Get your Driver's License",
+        active: false,
+      },
+    ],
   },
   {
-    icon: traveling,
-    label: "Traveling",
-    active: false,
+    title: "Emergency",
+    type: "emergency",
+    resources: [
+      {
+        icon: emergencyphone,
+        label: "Emergency Numbers",
+        link: "/resources/emergencynumbers",
+        active: true,
+      },
+    ],
   },
   {
-    icon: education,
-    label: "Education",
-    active: false,
+    title: "Education",
+    type: "education",
+    resources: [
+      {
+        icon: education,
+        label: "Education Requirements",
+        active: false,
+      },
+    ],
   },
   {
-    icon: emergencyphone,
-    label: "Emergency Numbers",
-    link: "/resources/emergencynumbers",
-    active: true,
+    title: "Finances",
+    type: "finance",
+    resources: [
+      {
+        icon: tax,
+        label: "Pay Taxes",
+        link: "/resources/tax",
+        active: true,
+      },
+    ],
   },
   {
-    icon: firstAid,
-    label: "First Aid",
-    active: false,
+    title: "Travel",
+    type: "travel",
+    resources: [
+      {
+        icon: traveling,
+        label: "Travel Information",
+        active: false,
+      },
+    ],
   },
   {
-    icon: englishLanguage,
-    label: "Improving your English Skills",
-    active: false,
-  },
-  {
-    icon: rule,
-    label: "Au Pair Rules",
-    active: false,
-  },
-  {
-    icon: extension,
-    label: "Extending",
-    active: false,
-  },
-  {
-    icon: driversLicense,
-    label: "Getting your Driver's License",
-    active: false,
-  },
-  {
-    icon: documents,
-    label: "Travel Month",
-    active: false,
-  },
-  {
-    icon: documents,
-    label: "Adding Your Experience to Your Resume / CV",
-    active: false,
-  },
-  {
-    icon: documents,
-    label: "Host Family Interview Preparation",
-    active: false,
-  },
-  {
-    icon: documents,
-    label: "Your J-1 Visa",
-    active: false,
-  },
-  {
-    icon: documents,
-    label: "Apply for your SSN",
-    active: false,
+    title: "Other",
+    type: "other",
+    resources: [
+      {
+        icon: documents,
+        label: "Add Your Experience to Your Resume / CV",
+        active: false,
+      },
+      {
+        icon: app,
+        label: "Great Apps to Try",
+        active: false,
+      },
+    ],
   },
 ];

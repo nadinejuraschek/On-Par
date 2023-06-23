@@ -21,12 +21,13 @@ export const Tabs = ({
           className={ `${ styles.tab } ${ styles[variant] } ${ isActive && styles.active } ${ disabled && styles.disabled }` }
           key={ `tab_${ value }` }
           onClick={ disabled ? () => {} : () => handleClick(value) }
+          style={{ width: fullWidth ? `calc(100% / ${tabs.length}` : 'auto' }}
         >
           <Text className={`${styles.tabText} ${isActive && styles.active}`} size="md">{ label }</Text>
         </div>
       );
     });
-  }, [activeTab, handleClick, tabs, variant]);
+  }, [activeTab, fullWidth, handleClick, tabs, variant]);
 
   return (
     <div

@@ -18,7 +18,7 @@ export const DatePicker = ({
   value,
 }: IDatePicker): JSX.Element => (
   <div className={ styles.field }>
-    <Text as="label" className={ styles.label } htmlFor={ name } size="sm">
+    <Text as="label" className={ styles.label } htmlFor={ name } size="sm" weight="bold">
       { label }
     </Text>
     <div className={ `${styles.iconInputWrapper} ${ fullWidth ? styles.fullWidth : '' }` }>
