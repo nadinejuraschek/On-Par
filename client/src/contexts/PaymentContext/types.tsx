@@ -12,7 +12,7 @@ export interface IPaymentProvider {
 
 export type TPayment = {
   _id: string;
-  date: string;
+  date: Date | null;
   late: boolean;
   paid: boolean;
   week: number;

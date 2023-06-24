@@ -29,14 +29,15 @@ exports.getUserById = async (req, res) => {
 exports.register = async (req, res) => {
   // has the password
   const password = await bcrypt.hash(req.body.password, 10);
+
   // create user in database
   const user = await db.User.create({
     birthday: req.body.birthday,
     role: req.body.role,
-    familyID: req.body.familyID,
+    familyID: Math.floor(Math.random() * 90000) + 10000,
     firstname: req.body.firstname,
     lastname: req.body.lastname,
-    country: req.body.country,
+    country: req.body.country.value,
     startDate: req.body.startDate,
     endDate: dayjs(req.body.startDate).add(1, 'years').toDate(),
     email: req.body.email.toLowerCase(),
@@ -47,12 +48,40 @@ exports.register = async (req, res) => {
       shareLastName: false,
     },
   });
-  //create cookie for user
-  const token = jwt.sign({ id: user.id }, process.env.APP_SECRET);
+
+  // create cookie for user
+  const token = jwt.sign({ id: user._id }, process.env.APP_SECRET);
   res.cookie('token', token, {
     httpOnly: true,
     maxAge: 1000 * 60 * 60 * 24 * 365, // 1 year cookie
   });
+
+  // create empty payment entries for the whole year
+  const createPaymentEntries = () => {
+    return Array(52).fill({
+      paid: false,
+      date: null,
+      late: false,
+    }).map((entry, i) => ({...entry, week: i + 1}));
+  };
+
+  db.Payment.insertMany(createPaymentEntries())
+    .then(insertedPayment => {
+      const paymentIds = insertedPayment.map((payment) => payment._id);
+      db.User.findByIdAndUpdate(
+        { _id: user._id },
+        { $push: { payments: paymentIds } },
+        (err, success) => {
+          if (err) {
+            console.log('Error: ' + err);
+          }
+        }
+      );
+    })
+    .catch(err => {
+      res.status(500).json({ error: err.message });
+    });
+
   res.json(user);
 };
 
@@ -72,6 +101,7 @@ exports.login = async (req, res) => {
     httpOnly: true,
     maxAge: 1000 * 60 * 60 * 24 * 365,
   });
+
   res.json(user);
 };
 

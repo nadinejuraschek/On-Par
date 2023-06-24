@@ -134,9 +134,11 @@ export const App = (): JSX.Element => (
         path="/notebook/payments"
         element={
           <LayoutWithNavbar>
-            <PaymentProvider>
-              <Payments />
-            </PaymentProvider>
+            <UserProvider>
+              <PaymentProvider>
+                <Payments />
+              </PaymentProvider>
+            </UserProvider>
           </LayoutWithNavbar>
         }
       />

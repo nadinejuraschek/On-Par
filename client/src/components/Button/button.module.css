@@ -38,8 +38,8 @@
 }
 
 .btn.round, .btn.square {
-  min-width: 4rem;
-  width: 4rem;
+  min-width: 3rem;
+  width: 3rem;
 }
 
 .btn.fullWidth {
