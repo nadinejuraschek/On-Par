@@ -37,7 +37,7 @@
 
 .listHeader, .listItem {
   display: grid;
-  grid-template-columns: 4rem 4rem repeat(2, 1fr) 7rem;
+  grid-template-columns: 4rem 4rem 1fr 9rem;
   grid-gap: 1rem;
   align-items: center;
 }
@@ -60,6 +60,10 @@
 
 .due {
   grid-column: 4 / 5;
+}
+
+.itemDue, .due {
+  display: none;
 }
 
 .list {
@@ -100,6 +104,11 @@
   justify-content: center;
 }
 
+.itemDue {
+  align-items: center;
+  justify-content: flex-end;
+}
+
 .lateBadge {
   background-color: var(--error_25);
 }
@@ -109,7 +118,7 @@
   gap: 1rem;
   justify-self: flex-end;
 
-  padding-right: 1rem;
+  padding: 0 1rem;
 }
 
 .actionButton {
@@ -120,5 +129,12 @@
   padding: 0;
 }
 
-@media only screen and (min-width: 900px) {
+@media only screen and (min-width: 600px) {
+  .listHeader, .listItem {
+    grid-template-columns: 4rem 4rem repeat(2, 1fr) 9rem;
+  }
+
+  .itemDue, .due {
+    display: flex;
+  }
 }
