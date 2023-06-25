@@ -1,8 +1,9 @@
-// DATABASE
-const db = require('../models/db');
+import { Request, Response } from 'express';
+
+import db from '../models/db';
 
 // READ
-exports.getPayments = async (req, res) => {
+const getPayments = async (req: Request, res: Response) => {
   await db.User.findById(req.user)
     .populate('payments')
     .then(payments => {
@@ -14,15 +15,15 @@ exports.getPayments = async (req, res) => {
 };
 
 // CREATE
-exports.create = async (req, res) => {
+const createPayment = async (req: Request, res: Response) => {
   await db.Payment.create(req.body)
     .then(insertedPayment => {
       db.User.findByIdAndUpdate(
         { _id: req.user },
         { $push: { payments: insertedPayment._id } },
-        (error, success) => {
-          if (error) {
-            console.log('Error: ' + error);
+        (err: any) => {
+          if (err) {
+            console.log('Error: ' + err);
           } else {
             res.json('Success!');
           }
@@ -35,7 +36,7 @@ exports.create = async (req, res) => {
 };
 
 // UPDATE
-exports.update = async (req, res) => {
+const updatePayment = async (req: Request, res: Response) => {
   await db.Payment.findByIdAndUpdate(req.params.paymentid, req.body)
     .then(updatedPayment => {
       res.status(200).json(updatedPayment);
@@ -46,9 +47,9 @@ exports.update = async (req, res) => {
 };
 
 // DELETE
-exports.delete = async (req, res) => {
+const deletePayment = async (req: Request, res: Response) => {
   await db.Payment.findByIdAndRemove(req.params.paymentid)
-    .then(deletedPayment => {
+    .then(() => {
       res
         .status(200)
         .json({ message: 'Payment has been deleted successfully!' });
@@ -56,4 +57,11 @@ exports.delete = async (req, res) => {
     .catch(err => {
       res.status(500).json({ error: err.message });
     });
+};
+
+export const paymentController = {
+  createPayment,
+  deletePayment,
+  getPayments,
+  updatePayment,
 };

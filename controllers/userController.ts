@@ -1,13 +1,12 @@
-// NPM PACKAGES
-const bcrypt = require('bcryptjs'),
-  dayjs = require('dayjs'),
-  jwt = require('jsonwebtoken');
+import { Request, Response } from 'express';
 
-// DATABASE
-const db = require('../models/db');
+import bcrypt from 'bcryptjs';
+import dayjs from 'dayjs';
+import db from '../models/db';
+import jwt from 'jsonwebtoken';
 
 // READ
-exports.getUser = async (req, res) => {
+const getUser = async (req: Request, res: Response) => {
   await db.User.findById(req.user)
     .then(user => {
       res.status(200).json(user);
@@ -17,7 +16,7 @@ exports.getUser = async (req, res) => {
     });
 };
 
-exports.getUserById = async (req, res) => {
+const getUserById = async (req: Request, res: Response) => {
   await db.User.findById({ _id: req.params.id })
     .then(user => {
       res.status(200).json(user);
@@ -26,7 +25,7 @@ exports.getUserById = async (req, res) => {
     });
 };
 
-exports.register = async (req, res) => {
+const registerUser = async (req: Request, res: Response) => {
   // has the password
   const password = await bcrypt.hash(req.body.password, 10);
 
@@ -49,8 +48,10 @@ exports.register = async (req, res) => {
     },
   });
 
+  console.log('process.env.APP_SECRET: ', process.env.APP_SECRET);
+
   // create cookie for user
-  const token = jwt.sign({ id: user._id }, process.env.APP_SECRET);
+  const token = jwt.sign({ id: user._id }, process.env.APP_SECRET || '');
   res.cookie('token', token, {
     httpOnly: true,
     maxAge: 1000 * 60 * 60 * 24 * 365, // 1 year cookie
@@ -71,7 +72,7 @@ exports.register = async (req, res) => {
       db.User.findByIdAndUpdate(
         { _id: user._id },
         { $push: { payments: paymentIds } },
-        (err, success) => {
+        (err: any) => {
           if (err) {
             console.log('Error: ' + err);
           }
@@ -85,7 +86,7 @@ exports.register = async (req, res) => {
   res.json(user);
 };
 
-exports.login = async (req, res) => {
+const loginUser = async (req: Request, res: Response) => {
   const user = await db.User.findOne({ email: req.body.email });
   if (!user) {
     res.json({ message: 'No User found.' });
@@ -96,7 +97,7 @@ exports.login = async (req, res) => {
     res.json({ message: 'Entered e-mail and password do not match!' });
     return;
   }
-  const token = jwt.sign({ id: user.id }, process.env.APP_SECRET);
+  const token = jwt.sign({ id: user.id }, process.env.APP_SECRET || '');
   res.cookie('token', token, {
     httpOnly: true,
     maxAge: 1000 * 60 * 60 * 24 * 365,
@@ -105,13 +106,13 @@ exports.login = async (req, res) => {
   res.json(user);
 };
 
-exports.signout = (req, res) => {
+const signoutUser = (req: Request, res: Response) => {
   res.clearCookie('token');
   res.json('User is signed out.');
 };
 
 // UPDATE
-exports.update = async (req, res) => {
+const updateUser = async (req: Request, res: Response) => {
   await db.User.findByIdAndUpdate(req.params.id, req.body)
     .then(updatedUser => {
       res.status(200).json(updatedUser);
@@ -122,12 +123,22 @@ exports.update = async (req, res) => {
 };
 
 // DELETE
-exports.delete = async (req, res) => {
+const deleteUser = async (req: Request, res: Response) => {
   await db.User.findByIdAndRemove(req.params.id)
-    .then(deletedUser => {
+    .then(() => {
       res.status(200).json({ message: 'User has been deleted successfully!' });
     })
     .catch(err => {
       res.status(500).json({ error: err.message });
     });
+};
+
+export const userController = {
+  loginUser,
+  deleteUser,
+  getUser,
+  getUserById,
+  registerUser,
+  signoutUser,
+  updateUser,
 };

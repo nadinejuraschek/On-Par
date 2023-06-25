@@ -1,9 +1,10 @@
-// DATABASE
-const db = require('../models/db'),
-  dayjs = require('dayjs');
+import { Request, Response } from 'express';
+
+import dayjs from 'dayjs';
+import db from '../models/db';
 
 // READ
-exports.getHours = async (req, res) => {
+const getWorkhours = async (req: Request, res: Response) => {
   await db.User.findById(req.user)
     .populate('workhours')
     .then(workhours => {
@@ -15,7 +16,7 @@ exports.getHours = async (req, res) => {
 };
 
 // CREATE
-exports.create = async (req, res) => {
+const createWorkhour = async (req: Request, res: Response) => {
   const { date, dateFormat, hours } = req.body;
 
   const workitem = await db.Workhour.findOne({ dateFormat: dateFormat});
@@ -31,9 +32,9 @@ exports.create = async (req, res) => {
         db.User.findByIdAndUpdate(
           { _id: req.user },
           { $push: { workhours: insertedWorkhour._id } },
-          (error, success) => {
-            if (error) {
-              console.log('Error: ' + error);
+          (err: any) => {
+            if (err) {
+              console.log('Error: ' + err);
             } else {
               res.json('Success!');
             }
@@ -60,7 +61,7 @@ exports.create = async (req, res) => {
 };
 
 // UPDATE
-exports.update = async (req, res) => {
+const updateWorkhour = async (req: Request, res: Response) => {
   await db.Workhour.findByIdAndUpdate(
     { _id: req.params.workhourid },
     { $push: { hours: req.body } }
@@ -74,9 +75,9 @@ exports.update = async (req, res) => {
 };
 
 // DELETE
-exports.delete = async (req, res) => {
+const deleteWorkhour = async (req: Request, res: Response) => {
   await db.Workhour.findByIdAndRemove(req.params.workhourid)
-    .then(deletedWorkhour => {
+    .then(() => {
       res
         .status(200)
         .json({ message: 'Workhours have been deleted successfully!' });
@@ -84,4 +85,11 @@ exports.delete = async (req, res) => {
     .catch(err => {
       res.status(500).json({ error: err.message });
     });
+};
+
+export const workhourController = {
+  createWorkhour,
+  deleteWorkhour,
+  getWorkhours,
+  updateWorkhour,
 };
