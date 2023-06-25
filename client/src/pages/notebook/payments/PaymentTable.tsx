@@ -16,11 +16,11 @@ export const PaymentTable = (): JSX.Element => {
   const sortedPayments = useMemo(() => {
     return payments.sort((a, b) => a.week - b.week).filter((payment) => (
       payment.week <= currentWeekNum
-    ));
+    )).reverse();
   }, [currentWeekNum, payments]);
 
   const renderEntries = useMemo(() => {
-    return sortedPayments.sort((a, b) => a.week - b.week).map( payment => (
+    return sortedPayments.map( payment => (
       <PaymentEntry
         currentWeekNum={currentWeekNum}
         key={ payment._id }

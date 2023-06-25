@@ -69,15 +69,6 @@ export const Register = (): JSX.Element => {
       <div className={ styles.formWrapper }>
         <Text as="h2" size="xl" weight="bold">Register</Text>
       <form className={ styles.form } onSubmit={ handleSubmit }>
-        <DatePicker
-          format="MM/dd/yyyy"
-          fullWidth
-          handleChange={(startDate: Date) => setStartDate( startDate )}
-          icon="calendar alternate outline"
-          label="Arrival Date"
-          name="startDate"
-          value={new Date(startDate)}
-        />
         <div className={ styles.twoFields }>
           <Input
             className={ styles.twoFieldsInput }
@@ -100,14 +91,27 @@ export const Register = (): JSX.Element => {
             value={lastname}
           />
         </div>
-        <Select
-          handleChange={(option: TSelectOption) => setCountry(option)}
-          icon="globe icon"
-          label="Home Country"
-          name="country"
-          options={countrySelectOptions}
-          value={country}
-        />
+        <div className={ styles.twoFields }>
+          <DatePicker
+            className={ styles.twoFieldsInput }
+            format="MM/dd/yyyy"
+            fullWidth
+            handleChange={(startDate: Date) => setStartDate( startDate )}
+            icon="calendar alternate outline"
+            label="Arrival Date"
+            name="startDate"
+            value={new Date(startDate)}
+          />
+          <Select
+            className={ styles.twoFieldsInput }
+            handleChange={(option: TSelectOption) => setCountry(option)}
+            icon="globe icon"
+            label="Home Country"
+            name="country"
+            options={countrySelectOptions}
+            value={country}
+          />
+        </div>
         <Input
           fullWidth
           handleChange={event => setEmail( (event.target as HTMLInputElement).value )}

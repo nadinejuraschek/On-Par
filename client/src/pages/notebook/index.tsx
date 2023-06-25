@@ -7,7 +7,6 @@ export const Notebook = (): JSX.Element => (
   <main>
     <div className={ styles.layout }>
       <Text as="h2" className={ styles.header } size="xl" weight="bold">Notebook</Text>
-
       {
         notebookFeatures.map( ( feature, index ) => (
           <FeatureCard
@@ -19,7 +18,6 @@ export const Notebook = (): JSX.Element => (
           />
         ) )
       }
-
     </div>
   </main>
 );

@@ -2,7 +2,7 @@
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: min-content 1fr;
-  grid-gap: 1rem;
+  grid-gap: 2rem;
 
   height: 100%;
   width: 100%;
