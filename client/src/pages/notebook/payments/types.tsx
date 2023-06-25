@@ -1,7 +1,7 @@
 import { TPayment } from "contexts/PaymentContext/types";
 
 export interface IPaymentEntry {
-  deletePayment: any;
+  currentWeekNum: number;
   payment: TPayment;
   paymentid: string;
 }

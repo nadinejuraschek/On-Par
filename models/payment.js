@@ -5,7 +5,7 @@ const   mongoose = require('mongoose');
 const paymentSchema = new mongoose.Schema({
     week: Number,
     paid: Boolean,
-    date: String,
+    date: Date,
     late: Boolean
 });
 

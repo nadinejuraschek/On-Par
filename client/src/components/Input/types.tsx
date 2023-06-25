@@ -7,7 +7,7 @@ export interface IInput {
   fullWidth?: boolean;
   handleChange: (event: ChangeEvent) => void;
   icon?: string;
-  label: string;
+  label?: string;
   name: string;
   placeholder?: string;
   type?: string;

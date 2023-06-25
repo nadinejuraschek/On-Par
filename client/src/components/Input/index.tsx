@@ -1,8 +1,9 @@
+import { useEffect, useMemo } from 'react';
+
 import { IInput } from "./types";
 import { Text } from "../Text";
 import styles from "./input.module.css";
 import { useDebounce } from 'usehooks-ts';
-import { useEffect } from 'react';
 
 export const Input = ( {
   className = '',
@@ -23,11 +24,19 @@ export const Input = ( {
     // Triggers when "debouncedValue" changes
   }, [debouncedValue]);
 
-  return (
-    <div className={ `${className} ${styles.field}` }>
+  const renderLabel = useMemo(() => {
+    if (!label) return null;
+
+    return (
       <Text as="label" className={ styles.label } htmlFor={ name } size="sm" weight="bold">
         { label }
       </Text>
+    );
+  }, [label, name]);
+
+  return (
+    <div className={ `${className} ${styles.field}` }>
+      { renderLabel }
       <div className={ styles.iconInputWrapper }>
         <input
           className={ `${ styles.input } ${ error && styles.error } ${ fullWidth && styles.fullWidth } ${ icon && styles.leftPadding } ${ disabled && styles.disabled}` }
