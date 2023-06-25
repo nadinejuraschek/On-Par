@@ -1,8 +1,9 @@
-// DATABASE
-const db = require('../models/db');
+import { Request, Response } from 'express';
+
+import db from '../models/db';
 
 // READ
-exports.getGoals = async (req, res) => {
+const getGoals = async (req: Request, res: Response) => {
   await db.User.findById(req.user)
     .populate({
       path: 'goals',
@@ -16,7 +17,7 @@ exports.getGoals = async (req, res) => {
     });
 };
 
-exports.getSingleGoal = async (req, res) => {
+const getSingleGoal = async (req: Request, res: Response) => {
   await db.Goal.findById(req.params.goalId)
     .then(goal => {
       res.status(200).json(goal);
@@ -27,7 +28,7 @@ exports.getSingleGoal = async (req, res) => {
 };
 
 // CREATE
-exports.create = async (req, res) => {
+const createGoal = async (req: Request, res: Response) => {
   await db.Goal.create(req.body)
     .then(insertedGoal => {
       db.User.findByIdAndUpdate(
@@ -48,7 +49,7 @@ exports.create = async (req, res) => {
 };
 
 // UPDATE
-exports.update = async (req, res) => {
+const updateGoal = async (req: Request, res: Response) => {
   await db.Goal.findByIdAndUpdate(req.params.goalid, req.body)
     .then(updatedGoal => {
       res.status(200).json(updatedGoal);
@@ -59,7 +60,7 @@ exports.update = async (req, res) => {
 };
 
 // DELETE
-exports.delete = async (req, res) => {
+const deleteGoal = async (req: Request, res: Response) => {
   await db.Goal.findByIdAndRemove(req.params.goalid)
     .then(deletedGoal => {
       res.status(200).json({ message: 'Goal has been deleted successfully!' });
@@ -67,4 +68,12 @@ exports.delete = async (req, res) => {
     .catch(err => {
       res.status(500).json({ error: err.message });
     });
+};
+
+export const goalController = {
+  createGoal,
+  deleteGoal,
+  getGoals,
+  getSingleGoal,
+  updateGoal,
 };

@@ -1,8 +1,9 @@
-// DATABASE
-const db = require('../models/db');
+import { Request, Response } from 'express';
+
+import db from '../models/db';
 
 // READ
-exports.getNotes = async (req, res) => {
+const getNotes = async (req: Request, res: Response) => {
   await db.User.findById(req.user)
     .populate('notes')
     .then(notes => {
@@ -13,10 +14,10 @@ exports.getNotes = async (req, res) => {
     });
 };
 
-exports.getSingleNote = async (req, res) => {
+const getSingleNote = async (req: Request, res: Response) => {
   await db.Note.findById(req.params.noteid)
     .then(note => {
-      res.status(200).json(data);
+      res.status(200).json(note);
     })
     .catch(err => {
       res.status(500).json({ error: err.message });
@@ -24,7 +25,7 @@ exports.getSingleNote = async (req, res) => {
 };
 
 // CREATE
-exports.create = async (req, res) => {
+const createNote = async (req: Request, res: Response) => {
   await db.Note.create(req.body)
     .then(insertedNote => {
       db.User.findByIdAndUpdate(
@@ -45,7 +46,7 @@ exports.create = async (req, res) => {
 };
 
 // UPDATE
-exports.update = async (req, res) => {
+const updateNote = async (req: Request, res: Response) => {
   await db.Note.findByIdAndUpdate(req.params.noteid, req.body)
     .then(updatedNote => {
       res.status(200).json(updatedNote);
@@ -56,7 +57,7 @@ exports.update = async (req, res) => {
 };
 
 // DELETE
-exports.delete = async (req, res) => {
+const deleteNote = async (req: Request, res: Response) => {
   await db.Note.findByIdAndRemove(req.params.noteid)
     .then(deletedNote => {
       res.status(200).json({ message: "Note has been deleted successfully!"});
@@ -64,4 +65,12 @@ exports.delete = async (req, res) => {
     .catch(err => {
       res.status(500).json({ error: err.message });
     })
+};
+
+export const noteController = {
+  createNote,
+  deleteNote,
+  getNotes,
+  getSingleNote,
+  updateNote,
 };
