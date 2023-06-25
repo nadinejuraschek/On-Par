@@ -3,7 +3,6 @@ import { useMemo, useState } from "react";
 import { NavLinkComp as NavLink } from "./NavLink";
 import { Sidenav } from "./Sidenav";
 import { Text } from "components";
-import { UserProvider } from "contexts/UserContext";
 import close from "images/close.svg";
 import menu from "images/menu.svg";
 import { navLinks } from "data";
@@ -50,12 +49,10 @@ export const Navbar = (): JSX.Element => {
           <Text as="h1" className={ styles.logoText } color="--primary_700" size="xl">On Par</Text>
         </a>
 
-        <UserProvider>
-          { renderLinks }
-          <div className={ styles.footer }>
-            <p>© { new Date().getFullYear() }</p>
-          </div>
-        </UserProvider>
+        { renderLinks }
+        <div className={ styles.footer }>
+          <p>© { new Date().getFullYear() }</p>
+        </div>
       </nav>
     </>
   );

@@ -2,13 +2,12 @@ import * as dayjs from "dayjs";
 import * as isSameOrAfter from 'dayjs/plugin/isSameOrAfter'
 
 import { Button, Card, Resources as ResourcesList, Text } from "components";
-import { useCallback, useContext, useState } from "react";
+import { useCallback, useContext, useMemo, useState } from "react";
 
 import { Countdown } from "./Countdown";
 import { Events } from "./Events";
 import { Goals } from "./Goals";
 import { Greeting } from "./Greeting";
-import { LoadingSpinner } from "components";
 import { Quicklinks } from "./Quicklinks";
 import { UserContext } from "contexts";
 import { WorkhourSummary } from "./WorkhourSummary";
@@ -19,7 +18,6 @@ import { useNavigate } from "react-router-dom";
 dayjs.extend(isSameOrAfter);
 
 export const Home = (): JSX.Element => {
-  /* @ts-ignore-next-line */
   const { user } = useContext( UserContext );
   const [message, setMessage] = useState( "" );
 
@@ -34,18 +32,17 @@ export const Home = (): JSX.Element => {
     } );
   }, [navigate]);
 
-  if (!user) {
+  /* if (!user) {
     return <LoadingSpinner />;
-  }
+  } */
 
-  const currentDate = dayjs( new Date() );
-  const hasCompletedYear = dayjs(currentDate).isSameOrAfter(user.endDate);
+  const hasCompletedYear = useMemo(() => dayjs(new Date()).isSameOrAfter(user?.endDate), [user]);
 
   return (
     <main>
       <div className={ styles.grid }>
         <Card className={ styles.header }>
-          <Greeting message={ message } name={ user.firstname } />
+          <Greeting message={ message } name={ user?.firstname } />
           <div className={ styles.buttons }>
             <Button link="/profile" variant="secondary">Profile</Button>
             <Button handleClick={ handleLogout } variant="secondary">Log Out</Button>
@@ -80,7 +77,7 @@ export const Home = (): JSX.Element => {
 
               <Card className={ styles.countdown }>
                 <Countdown
-                  startDate={ user.startDate }
+                  startDate={ user?.startDate }
                   setMessage={ setMessage }
                 />
               </Card>

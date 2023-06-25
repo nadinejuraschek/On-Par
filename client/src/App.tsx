@@ -8,19 +8,9 @@ import { Router } from 'router';
 import { ToastContainer } from "react-toastify";
 
 export const App = (): JSX.Element => {
-  const { loading } = useContext(UserContext);
-
-  const renderContent = useMemo(() => {
-    if (loading) return <LoadingSpinner />;
-
-    return <Router />;
-  }, [loading]);
-
   return (
     <>
-      <UserProvider>
-        {renderContent}
-      </UserProvider>
+      <Router />
       <ToastContainer
         closeButton
         closeOnClick
