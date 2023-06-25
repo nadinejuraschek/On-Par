@@ -10,9 +10,16 @@ export type TResource = {
 };
 
 export type TPayment = {
+  _id?: string;
   date: Date | null;
-  _id: string;
   late: boolean;
   paid: boolean;
   week: number;
+};
+
+export type TNote = {
+  _id?: string;
+  date: string;
+  text: string;
+  title: string;
 };

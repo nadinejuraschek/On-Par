@@ -2,12 +2,11 @@ import { useEffect, useState } from 'react';
 
 import { TPayment } from 'types';
 import axios from "axios";
+import { toast } from 'react-toastify';
 
 export function usePayments() {
-  const [error, setError] = useState(undefined);
   const [loading, setLoading] = useState(false);
   const [payments, setPayments] = useState<TPayment[]>([]);
-  const [success, setSuccess] = useState(undefined);
 
   useEffect(() => {
     getPayments();
@@ -19,16 +18,16 @@ export function usePayments() {
       url: "/api/user/:id/payments",
       method: "GET",
     }).then( res => setPayments(res.data.payments))
-      .catch( () => setError("Could not fetch payments. Please try again later!"))
+      .catch( () => toast.error("Could not fetch payments. Please try again later!"))
       .finally(() => setLoading(false));
   };
 
   const deletePayment = async (paymentid: string) => {
     setLoading(true);
     await axios.delete( "/api/payments/" + paymentid ).then( () => {
-      setSuccess("The payment has been deleted successfully!");
+      toast.success("The payment has been deleted successfully!");
       getPayments();
-    }).catch(() => setError("Could not delete the payment. Please try again later!"))
+    }).catch(() => toast.error("Could not delete the payment. Please try again later!"))
       .finally(() => setLoading(false));
   };
 
@@ -37,19 +36,17 @@ export function usePayments() {
     await axios
       .put('/api/payments/' + paymentid, updatedPayment)
       .then(() => {
-        setSuccess('');
+        toast.success('The payment has been updated successfully!');
         getPayments();
       })
-      .catch(() => setError(''))
+      .catch(() => toast.error("Could not update the payment. Please try again later!"))
       .finally(() => setLoading(false));
   }
 
   return {
-    delete: deletePayment,
-    edit: editPayment,
-    error,
+    deletePayment,
+    editPayment,
     loading,
     payments,
-    success,
   };
 }

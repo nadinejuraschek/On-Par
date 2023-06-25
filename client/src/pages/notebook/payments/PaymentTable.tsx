@@ -12,7 +12,7 @@ import { usePayments } from 'hooks';
 export const PaymentTable = (): JSX.Element => {
   const { user } = useContext( UserContext );
 
-  const { edit, error, loading, payments } = usePayments();
+  const { editPayment, loading, payments } = usePayments();
 
   const currentWeekNum = useMemo(() => dayjs(new Date()).diff(dayjs(user?.startDate), 'week'), [user]);
 
@@ -25,21 +25,16 @@ export const PaymentTable = (): JSX.Element => {
   const renderEntries = useMemo(() => {
     return sortedPayments.map( payment => (
       <PaymentEntry
-        editPayment={edit}
+        editPayment={editPayment}
         key={ payment._id }
         paymentid={ payment._id }
         payment={ payment }
       />
     ));
-  }, [edit, sortedPayments]);
+  }, [editPayment, sortedPayments]);
 
   if (loading) {
     return <LoadingSpinner />;
-  }
-
-  if (error) {
-    toast.error(error);
-    return null;
   }
 
   return (

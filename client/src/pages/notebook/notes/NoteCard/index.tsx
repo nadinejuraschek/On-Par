@@ -2,29 +2,33 @@ import { Button, Card, Text } from "components";
 import { useCallback, useMemo, useState } from "react";
 
 import { INoteCard } from "./types";
-import axios from "axios";
+import { TNote } from "types";
 import styles from "./noteCard.module.css";
-import { toast } from "react-toastify";
 
-export const NoteCard = ( { color, date, deleteNote, getNotes, noteid, text, title = '' }: INoteCard ): JSX.Element => {
-  const [updatedNote, setUpdatedNote] = useState( {} );
+export const NoteCard = ( {
+  color,
+  date,
+  deleteNote,
+  editNote,
+  noteid,
+  text,
+  title = '',
+}: INoteCard ): JSX.Element => {
+  const [updatedNote, setUpdatedNote] = useState<TNote>({
+    date,
+    text,
+    title,
+  });
   const [showEditForm, setShowEditForm] = useState( false );
 
   const toggleEditForm = useCallback(() => setShowEditForm(!showEditForm), [showEditForm]);
 
   const handleEdit = useCallback(event => {
     event.preventDefault();
-    axios
-      .put( "/api/notes/" + noteid, updatedNote )
-      .then( res => {
-        getNotes();
-        showEditForm ? setShowEditForm( false ) : setShowEditForm( true );
-      } )
-      .catch( () => {
-        toast.error("Could not edit the note. Please try again later!");
-        // console.debug( "Error when editing a note: " + error.response );
-      } );
-  }, [getNotes, noteid, showEditForm, updatedNote]);
+    editNote(noteid, updatedNote, () => {
+      showEditForm ? setShowEditForm( false ) : setShowEditForm( true );
+    });
+  }, [editNote, noteid, showEditForm, updatedNote]);
 
   const handleChange = useCallback(event => {
     const name = event.target.name;
@@ -67,7 +71,8 @@ export const NoteCard = ( { color, date, deleteNote, getNotes, noteid, text, tit
           name="title"
           type="text"
           onChange={ handleChange }
-          placeholder={ title }
+          // placeholder={ title }
+          value={updatedNote.title}
         />
       </div>
       <div className="field">
@@ -75,14 +80,19 @@ export const NoteCard = ( { color, date, deleteNote, getNotes, noteid, text, tit
           name="text"
           onChange={ handleChange }
           rows={3}
-          placeholder={ text }
+          // placeholder={ text }
+          value={updatedNote.text}
         />
       </div>
       <div className={ styles.editActions }>
         <Button
           handleClick={ () => {
             setShowEditForm(false);
-            setUpdatedNote({});
+            setUpdatedNote({
+              date,
+              text,
+              title,
+            });
           } }
         >
           Cancel
@@ -90,7 +100,7 @@ export const NoteCard = ( { color, date, deleteNote, getNotes, noteid, text, tit
         <Button type="submit" variant="primary">Save</Button>
       </div>
     </form>
-  ), [handleChange, handleEdit, text, title]);
+  ), [date, handleChange, handleEdit, text, title, updatedNote]);
 
   return (
     <Card className={ `${ styles.note } ${ styles[color] }` }>
