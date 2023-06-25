@@ -1,7 +1,7 @@
-import { TPayment } from "contexts/PaymentContext/types";
+import { TPayment } from 'types';
 
 export interface IPaymentEntry {
-  currentWeekNum: number;
+  editPayment: (paymentid: string, updatedPayment: TPayment) => Promise<void>;
   payment: TPayment;
   paymentid: string;
 }

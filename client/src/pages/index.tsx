@@ -9,7 +9,7 @@ export * from "./landing/Landing";
 export * from "./notebook";
 export * from "./notebook/goals/Goals";
 export * from "./notebook/notes/Notes";
-export * from "./notebook/payments/Payments";
+export * from "./notebook/payments";
 export * from "./notebook/workhours";
 export * from "./profile";
 export * from "./resources/emergencyNumbers";

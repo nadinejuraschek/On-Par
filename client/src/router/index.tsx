@@ -19,7 +19,6 @@ import {
 import {
   GoalProvider,
   NoteProvider,
-  PaymentProvider,
   WorkhourProvider,
 } from "contexts";
 import { LayoutGradient, LayoutWithNavbar } from "layout";
@@ -126,9 +125,7 @@ export const Router = (): JSX.Element => {
           path="/notebook/payments"
           element={
             <LayoutWithNavbar>
-                <PaymentProvider>
-                  <Payments />
-                </PaymentProvider>
+              <Payments />
             </LayoutWithNavbar>
           }
         />

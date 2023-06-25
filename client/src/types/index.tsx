@@ -8,3 +8,11 @@ export type TResource = {
   link?: string;
   active: boolean;
 };
+
+export type TPayment = {
+  date: Date | null;
+  _id: string;
+  late: boolean;
+  paid: boolean;
+  week: number;
+};
