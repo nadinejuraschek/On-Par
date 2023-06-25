@@ -11,24 +11,24 @@ export const PaymentTable = (): JSX.Element => {
   const { payments } = useContext( PaymentContext );
   const { user } = useContext( UserContext );
 
-  const sortedPayments = useMemo(() => {
-    const today = new Date();
-    const currentWeekNum = dayjs(today).diff(dayjs(user?.startDate), 'week');
+  const currentWeekNum = useMemo(() => dayjs(new Date()).diff(dayjs(user?.startDate), 'week'), [user]);
 
+  const sortedPayments = useMemo(() => {
     return payments.sort((a, b) => a.week - b.week).filter((payment) => (
       payment.week <= currentWeekNum
     ));
-  }, [payments, user]);
+  }, [currentWeekNum, payments]);
 
   const renderEntries = useMemo(() => {
     return sortedPayments.sort((a, b) => a.week - b.week).map( payment => (
       <PaymentEntry
+        currentWeekNum={currentWeekNum}
         key={ payment._id }
         paymentid={ payment._id }
         payment={ payment }
       />
     ));
-  }, [sortedPayments]);
+  }, [currentWeekNum, sortedPayments]);
 
   return (
     <Card className={ styles.container }>
@@ -36,7 +36,8 @@ export const PaymentTable = (): JSX.Element => {
         <div className={ styles.icon }></div>
         <div className={ styles.week }>Week</div>
         <div className={ styles.date }>Paid On</div>
-        <div className={ styles.late }></div>
+        <div className={ styles.due }></div>
+        <div className={ styles.actions }></div>
       </div>
       <div className={ styles.list }>
         {renderEntries}

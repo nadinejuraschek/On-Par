@@ -1,18 +1,26 @@
 import * as dayjs from 'dayjs';
+import * as duration from 'dayjs/plugin/duration';
+import * as isSameOrBefore from 'dayjs/plugin/isSameOrBefore';
 
 import { Badge, Button, DatePicker } from 'components';
+import { PaymentContext, UserContext } from 'contexts';
 import { useCallback, useContext, useMemo, useState } from 'react';
 
 import { IPaymentEntry } from "./types";
-import { PaymentContext } from 'contexts';
 import axios from 'axios';
 import styles from "./payments.module.css";
 
+dayjs.extend(duration);
+dayjs.extend(isSameOrBefore);
+
 export const PaymentEntry = ( {
+  // currentWeekNum,
   payment,
   paymentid,
 }: IPaymentEntry ): JSX.Element => {
   const { getPayments } = useContext(PaymentContext);
+  const { user } = useContext(UserContext);
+
   const [showEdit, setShowEdit] = useState(false);
   const [updatedPayment, setUpdatedPayment] = useState(payment);
 
@@ -20,6 +28,7 @@ export const PaymentEntry = ( {
 
   const handleEdit = useCallback((event) => {
     event.preventDefault();
+
     axios
       .put('/api/payments/' + paymentid, updatedPayment)
       .then(res => {
@@ -32,8 +41,12 @@ export const PaymentEntry = ( {
   }, [getPayments, paymentid, showEdit, updatedPayment]);
 
   const handleDateChange = useCallback((selected: Date) => {
-    setUpdatedPayment(updatedPayment => ({ ...updatedPayment, date: selected }));
-  }, []);
+    const dateInWeek = dayjs(user.startDate).add(dayjs.duration({'weeks': week}));
+    const endOfWeek = dayjs(dateInWeek).endOf('week');
+    const isPaymentOnTime = dayjs(selected).isSameOrBefore(endOfWeek);
+
+    setUpdatedPayment(updatedPayment => ({ ...updatedPayment, date: selected, late: !isPaymentOnTime }));
+  }, [user, week]);
 
   const renderWarningIcon = useMemo(() => {
     if (date) return null;
@@ -47,6 +60,7 @@ export const PaymentEntry = ( {
 
     return (
       <DatePicker
+        className={ styles.inlineInput }
         format="MM/dd/yyyy"
         handleChange={handleDateChange}
         name="date"
@@ -59,6 +73,8 @@ export const PaymentEntry = ( {
     if (!late) return null;
     return <Badge className={ styles.lateBadge } icon={<i className="clock outline icon"></i>} label="Paid Late" />;
   }, [late]);
+
+  const renderButtonIcon = useMemo(() => showEdit ? <i className="checkmark icon"></i> : <i className="edit outline icon"></i>, [showEdit]);
 
   return (
     <div className={ `${ styles.listItem } ${
@@ -87,18 +103,7 @@ export const PaymentEntry = ( {
           square
           variant="tertiary"
         >
-          <i className="edit outline icon"></i>
-        </Button>
-        <Button
-          className={ styles.actionButton }
-          handleClick={ (event) => {
-            handleDateChange(new Date());
-            handleEdit(event);
-          } }
-          square
-          variant="tertiary"
-        >
-          <i className="checkmark icon"></i>
+          {renderButtonIcon}
         </Button>
       </div>
     </div>
