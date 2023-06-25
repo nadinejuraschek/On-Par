@@ -31,9 +31,9 @@ const createNote = async (req: Request, res: Response) => {
       db.User.findByIdAndUpdate(
         { _id: req.user },
         { $push: { notes: insertedNote._id } },
-        (error, success) => {
-          if (error) {
-            console.log('Error: ' + error);
+        (err: any) => {
+          if (err) {
+            console.log('Error: ' + err);
           } else {
             res.json('Success!');
           }
@@ -59,7 +59,7 @@ const updateNote = async (req: Request, res: Response) => {
 // DELETE
 const deleteNote = async (req: Request, res: Response) => {
   await db.Note.findByIdAndRemove(req.params.noteid)
-    .then(deletedNote => {
+    .then(() => {
       res.status(200).json({ message: "Note has been deleted successfully!"});
     })
     .catch(err => {

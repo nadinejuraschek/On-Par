@@ -48,6 +48,8 @@ const registerUser = async (req: Request, res: Response) => {
     },
   });
 
+  console.log('process.env.APP_SECRET: ', process.env.APP_SECRET);
+
   // create cookie for user
   const token = jwt.sign({ id: user._id }, process.env.APP_SECRET || '');
   res.cookie('token', token, {
@@ -70,7 +72,7 @@ const registerUser = async (req: Request, res: Response) => {
       db.User.findByIdAndUpdate(
         { _id: user._id },
         { $push: { payments: paymentIds } },
-        (err) => {
+        (err: any) => {
           if (err) {
             console.log('Error: ' + err);
           }

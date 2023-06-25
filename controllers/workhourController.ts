@@ -32,9 +32,9 @@ const createWorkhour = async (req: Request, res: Response) => {
         db.User.findByIdAndUpdate(
           { _id: req.user },
           { $push: { workhours: insertedWorkhour._id } },
-          (error, success) => {
-            if (error) {
-              console.log('Error: ' + error);
+          (err: any) => {
+            if (err) {
+              console.log('Error: ' + err);
             } else {
               res.json('Success!');
             }
@@ -77,7 +77,7 @@ const updateWorkhour = async (req: Request, res: Response) => {
 // DELETE
 const deleteWorkhour = async (req: Request, res: Response) => {
   await db.Workhour.findByIdAndRemove(req.params.workhourid)
-    .then(deletedWorkhour => {
+    .then(() => {
       res
         .status(200)
         .json({ message: 'Workhours have been deleted successfully!' });

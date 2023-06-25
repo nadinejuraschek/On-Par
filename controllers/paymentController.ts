@@ -21,9 +21,9 @@ const createPayment = async (req: Request, res: Response) => {
       db.User.findByIdAndUpdate(
         { _id: req.user },
         { $push: { payments: insertedPayment._id } },
-        (error, success) => {
-          if (error) {
-            console.log('Error: ' + error);
+        (err: any) => {
+          if (err) {
+            console.log('Error: ' + err);
           } else {
             res.json('Success!');
           }
@@ -49,7 +49,7 @@ const updatePayment = async (req: Request, res: Response) => {
 // DELETE
 const deletePayment = async (req: Request, res: Response) => {
   await db.Payment.findByIdAndRemove(req.params.paymentid)
-    .then(deletedPayment => {
+    .then(() => {
       res
         .status(200)
         .json({ message: 'Payment has been deleted successfully!' });
