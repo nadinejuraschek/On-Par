@@ -1,16 +1,19 @@
 import { Button, Input, Text } from 'components';
+import { useContext, useState } from "react";
 
+import { UserContext } from 'contexts';
 import axios from "axios";
 import styles from "./auth.module.css";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
 
 export const Login = (): JSX.Element => {
+  const navigate = useNavigate();
+
+  const { user } = useContext(UserContext);
+
   const [email, setEmail] = useState( "" );
   const [password, setPassword] = useState( "" );
-
-  const navigate = useNavigate();
 
   const handleSubmit = event => {
     event.preventDefault();
@@ -43,6 +46,10 @@ export const Login = (): JSX.Element => {
         // console.debug( "Error: " + error.response );
       } );
   };
+
+  if (user) {
+    navigate('/home');
+  }
 
   return (
     <main className={ styles.main }>

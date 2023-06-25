@@ -1,7 +1,8 @@
 import { Button, DatePicker, Input, Select, Text } from "components";
-import { FormEvent, MouseEvent, useCallback, useState } from "react";
+import { FormEvent, MouseEvent, useCallback, useContext, useState } from "react";
 
 import { TSelectOption } from "components/Select/types";
+import { UserContext } from 'contexts';
 import axios from "axios";
 import { countrySelectOptions } from "data";
 import styles from "./auth.module.css";
@@ -9,6 +10,10 @@ import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
 export const Register = (): JSX.Element => {
+  const navigate = useNavigate();
+
+  const { user } = useContext(UserContext);
+
   // const [role, setRole] = useState('');
   // const [familyID, setFamilyID] = useState('');
   const [firstname, setFirstname] = useState( "" );
@@ -17,8 +22,6 @@ export const Register = (): JSX.Element => {
   const [startDate, setStartDate] = useState( new Date() );
   const [email, setEmail] = useState( "" );
   const [password, setPassword] = useState( "" );
-
-  const navigate = useNavigate();
 
   const handleSubmit = useCallback((event: FormEvent): void => {
     event.preventDefault();
@@ -63,6 +66,10 @@ export const Register = (): JSX.Element => {
         // console.debug( "Error: " + error.response );
       } );
   }, [navigate]);
+
+  if (user) {
+    navigate('/home');
+  }
 
   return (
     <main className={ styles.main }>
