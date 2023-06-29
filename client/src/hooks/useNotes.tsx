@@ -42,7 +42,7 @@ export function useNotes() {
 
   const deleteNote = async (noteid: string) => {
     setLoading(true);
-    await axios.delete(  "/api/notes/" + noteid ).then( () => {
+    await axios.delete(`/api/notes/${noteid}`).then( () => {
       toast.success("The note has been deleted successfully!");
       getNotes();
     }).catch(() => toast.error("Could not delete the note. Please try again later!"))
@@ -52,7 +52,7 @@ export function useNotes() {
   const editNote = async (noteid: string, updatedNote: TNote, callback?: () => void) => {
     setLoading(true);
     await axios
-      .put('/api/notes' + noteid, updatedNote)
+      .put(`/api/notes/${noteid}`, updatedNote)
       .then(() => {
         toast.success('The note has been updated successfully!');
         getNotes();

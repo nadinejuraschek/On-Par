@@ -31,17 +31,11 @@ const getSingleGoal = async (req: Request, res: Response) => {
 const createGoal = async (req: Request, res: Response) => {
   await db.Goal.create(req.body)
     .then(insertedGoal => {
-      db.User.findByIdAndUpdate(
+      db.User.findOneAndUpdate(
         { _id: req.user },
-        { $push: { goals: insertedGoal._id } },
-        (error, success) => {
-          if (error) {
-            console.log('Error: ' + error);
-          } else {
-            res.json('Success!');
-          }
-        }
-      );
+        { $push: { goals: insertedGoal._id } })
+        .then(() => res.json('Success!'))
+        .catch((error) => console.log('Error: ' + error));
     })
     .catch(err => {
       res.status(500).json({ error: err.message });
@@ -50,7 +44,7 @@ const createGoal = async (req: Request, res: Response) => {
 
 // UPDATE
 const updateGoal = async (req: Request, res: Response) => {
-  await db.Goal.findByIdAndUpdate(req.params.goalid, req.body)
+  await db.Goal.findOneAndUpdate({ _id: req.params.goalid }, req.body)
     .then(updatedGoal => {
       res.status(200).json(updatedGoal);
     })
