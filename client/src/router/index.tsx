@@ -1,6 +1,5 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import {
-  Dev,
   EmergencyNumbers,
   Goals,
   Home,
@@ -28,25 +27,6 @@ export const Router = (): JSX.Element => {
         <Route path="/login" element={ <LayoutGradient><Login /></LayoutGradient> } />
         <Route path="/register" element={ <LayoutGradient><Register /></LayoutGradient> } />
 
-        { /* Navbar Links */ }
-        <Route
-          path="/profile"
-          element={
-            <LayoutWithNavbar>
-              <Profile />
-            </LayoutWithNavbar>
-          }
-        />
-
-        <Route
-          path="/resources/emergencynumbers"
-          element={
-            <LayoutWithNavbar>
-              <EmergencyNumbers />
-            </LayoutWithNavbar>
-          }
-        />
-
         { /* Home */ }
         <Route
           path="/home"
@@ -57,41 +37,17 @@ export const Router = (): JSX.Element => {
           }
         />
 
-        { /* Home Sections */ }
+        { /* Profile */ }
         <Route
-          path="/messages"
+          path="/profile"
           element={
             <LayoutWithNavbar>
-              <Dev />
+              <Profile />
             </LayoutWithNavbar>
           }
         />
-        <Route
-          path="/notebook"
-          element={
-            <LayoutWithNavbar>
-              <Notebook />
-            </LayoutWithNavbar>
-          }
-        />
-        <Route
-          path="/hostfamily"
-          element={
-            <LayoutWithNavbar>
-              <Dev />
-              { /* <HostFamily /> */ }
-            </LayoutWithNavbar>
-          }
-        />
-        <Route
-          path="/cluster"
-          element={
-            <LayoutWithNavbar>
-              <Dev />
-              { /* <Cluster /> */ }
-            </LayoutWithNavbar>
-          }
-        />
+
+        { /* Resources */ }
         <Route
           path="/resources"
           element={
@@ -100,8 +56,24 @@ export const Router = (): JSX.Element => {
             </LayoutWithNavbar>
           }
         />
+        <Route
+          path="/resources/emergencynumbers"
+          element={
+            <LayoutWithNavbar>
+              <EmergencyNumbers />
+            </LayoutWithNavbar>
+          }
+        />
 
         { /* Notebook Sections */ }
+        <Route
+          path="/notebook"
+          element={
+            <LayoutWithNavbar>
+              <Notebook />
+            </LayoutWithNavbar>
+          }
+        />
         <Route
           path="/notebook/workhours"
           element={
@@ -146,27 +118,47 @@ export const Router = (): JSX.Element => {
         />
 
         { /* HostFamily Sections */ }
-        <Route
+        {/* <Route
           path="/hostfamily/calendar"
           element={
             <LayoutWithNavbar>
-              <Dev />
-              { /* <CalendarView /> */ }
+              <CalendarView />
             </LayoutWithNavbar>
           }
-        />
+        /> */}
+
+        { /* Other */ }
+        {/* <Route
+          path="/messages"
+          element={
+            <LayoutWithNavbar>
+              <Dev />
+            </LayoutWithNavbar>
+          }
+        /> */}
+        {/* <Route
+          path="/hostfamily"
+          element={
+            <LayoutWithNavbar>
+              <HostFamily />
+            </LayoutWithNavbar>
+          }
+        /> */}
+        {/* <Route
+          path="/cluster"
+          element={
+            <LayoutWithNavbar>
+              <Cluster />
+            </LayoutWithNavbar>
+          }
+        /> */}
 
         { /* Dev Sandbox */ }
-        <Route
-          path="/sandbox"
-          element={
-            <Sandbox />
-          }
-        />
+        <Route path="/sandbox" element={<Sandbox />} />
 
         { /* Error Page */ }
         { /* <Route path='*' component={ WrongTurn } /> */ }
       </Routes>
-  </BrowserRouter>
+    </BrowserRouter>
   );
 }

@@ -2,7 +2,7 @@ import { Button, DatePicker, Input, Select, Text } from "components";
 import { FormEvent, MouseEvent, useCallback, useContext, useState } from "react";
 
 import { TSelectOption } from "components/Select/types";
-import { UserContext } from 'contexts';
+import { UserContext } from "contexts";
 import axios from "axios";
 import { countrySelectOptions } from "data";
 import styles from "./auth.module.css";

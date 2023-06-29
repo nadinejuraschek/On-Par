@@ -58,7 +58,7 @@ import styles from "./landing.module.css";
                                         <img className="feature-icon" alt="Cluster" src={friends} />
                                     </div>
                                     <p className="landing-col-header centered">
-                                        Get to Know 
+                                        Get to Know
                                         <br/>
                                         Your Cluster
                                     </p>

@@ -1,5 +1,6 @@
 import { IPeopleList } from "./types";
 import { PeopleItem } from "./PeopleItem";
+import { TPerson } from "./types";
 import styles from "./people.module.css";
 
 export const PeopleList = ( { data, label }: IPeopleList ): JSX.Element => (
@@ -9,7 +10,7 @@ export const PeopleList = ( { data, label }: IPeopleList ): JSX.Element => (
     </label>
     <ul className={ styles.list }>
       {
-        data.map( ( person, index ) => <PeopleItem key={ index } person={ person } /> )
+        data.map( ( person: TPerson, index: number ) => <PeopleItem key={ index } person={ person } /> )
       }
     </ul>
   </div>

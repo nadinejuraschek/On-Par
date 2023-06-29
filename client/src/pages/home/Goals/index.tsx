@@ -1,13 +1,15 @@
-import { Button, GoalItem, Text } from "components";
+import { Button, GoalItem, LoadingSpinner, Text } from "components";
 
 import styles from "./goals.module.css";
 import { useGoals } from "hooks";
 import { useMemo } from "react";
 
 export const Goals = (): JSX.Element => {
-  const { thisMonthGoals } = useGoals();
+  const { loading, thisMonthGoals } = useGoals();
 
   const renderGoals = useMemo(() => {
+    if (loading) return <LoadingSpinner />;
+
     return thisMonthGoals.slice(0, 3).map((item) => (
       <GoalItem
         checked={item.checked}
@@ -21,7 +23,7 @@ export const Goals = (): JSX.Element => {
         type={item.type}
       />
     ));
-  }, [thisMonthGoals]);
+  }, [loading, thisMonthGoals]);
 
   return (
     <div className={ styles.container }>

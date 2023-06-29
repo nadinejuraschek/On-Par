@@ -17,7 +17,7 @@ export const Profile = (): JSX.Element => {
   /* @ts-ignore-next-line */
   const { user } = useContext( UserContext );
 
-  const [activeTab, setActiveTab] = useState(PROFILE_TABS.PROFILE);
+  const [ activeTab, setActiveTab ] = useState(PROFILE_TABS.PROFILE);
 
   const renderContent = useMemo(() => {
     switch (activeTab) {
@@ -37,10 +37,10 @@ export const Profile = (): JSX.Element => {
   }
 
   const tabs = [
-    { label: 'Profile', value: PROFILE_TABS.PROFILE },
-    { disabled: true, label: 'Password', value: PROFILE_TABS.PASSWORD },
-    { disabled: true, label: 'Host Family', value: PROFILE_TABS.HOST_FAMILY },
-    { disabled: true, label: 'Cluster', value: PROFILE_TABS.CLUSTER },
+    { label: "Profile", value: PROFILE_TABS.PROFILE },
+    { disabled: true, label: "Password", value: PROFILE_TABS.PASSWORD },
+    { disabled: true, label: "Host Family", value: PROFILE_TABS.HOST_FAMILY },
+    { disabled: true, label: "Cluster", value: PROFILE_TABS.CLUSTER },
   ];
 
   return (

@@ -42,19 +42,6 @@ module.exports = {
     "object-curly-spacing": [
       "warn", "always",
     ],
-    "react/jsx-curly-spacing": [
-      "warn",
-      {
-        allowMultiline: true,
-        children: {
-          when: "always",
-        },
-        spacing: {
-          objectLiterals: "always",
-        },
-        when: "always",
-      },
-    ],
     "react/jsx-indent": [
       "warn",
       2,
@@ -85,7 +72,6 @@ module.exports = {
     ],
     "jsx-a11y/no-static-element-interactions": "warn",
     "jsx-a11y/no-noninteractive-element-interactions": "warn",
-    "template-curly-spacing": [ "warn", "always" ],
     "no-multiple-empty-lines": [ "warn", { "max": 2 }],
     "implicit-arrow-linebreak": [ "warn", "beside" ],
     "comma-style": [ "warn", "last" ],
@@ -101,9 +87,6 @@ module.exports = {
     "default-case": 1,
     "default-case-last": 1,
     "prefer-const": 1,
-    "array-bracket-spacing": [
-      "warn", "always", { "singleValue": false, "objectsInArrays": false },
-    ],
     "array-element-newline": [ "warn", { "multiline": true, "minItems": 4 }],
     "arrow-spacing": [ "warn", { "before": true, "after": true }],
     "block-spacing": [ "warn", "always" ],

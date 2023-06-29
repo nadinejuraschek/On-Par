@@ -17,15 +17,9 @@ export const WorkhourSummary = (): JSX.Element => {
     { label: "This Week", value: WORKHOUR_TABS.WEEK }
   ];
 
-  const { todayWorkhours } = useWorkhours();
+  const { loading, todayWorkhours } = useWorkhours();
 
   const renderDailyProgress = useMemo(() => {
-    if (!todayWorkhours) {
-      <div className={ styles.loadingProgressContainer }>
-        <LoadingPlaceholder />
-      </div>
-    }
-
     const inPercent = (todayWorkhours/600)*100;
     const inHours = todayWorkhours/60;
 
@@ -60,10 +54,20 @@ export const WorkhourSummary = (): JSX.Element => {
     </div>
   ), []);
 
+  const renderContent = useMemo(() => {
+    if (loading) {
+      <div className={ styles.loadingProgressContainer }>
+        <LoadingPlaceholder />
+      </div>
+    }
+
+    return activeTab === WORKHOUR_TABS.DAY ? renderDailyProgress : renderWeeklyProgress;
+  }, [activeTab, loading, renderDailyProgress, renderWeeklyProgress]);
+
   return (
     <div className={ styles.container }>
       <Tabs activeTab={ activeTab } handleClick={ setActiveTab }  tabs={ tabs } variant="secondary" />
-      { activeTab === WORKHOUR_TABS.DAY ? renderDailyProgress : renderWeeklyProgress }
+      { renderContent }
       <Button link="/notebook/workhours" variant="primary">Go to Workhours Log</Button>
     </div>
   );
