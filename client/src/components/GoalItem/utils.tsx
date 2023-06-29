@@ -1,4 +1,4 @@
-import { TGoalType } from 'contexts/GoalContext/types';
+import { TGoalType } from 'types';
 import education from "images/education.svg";
 import personal from "images/personal.svg";
 import travel from "images/travel.svg";

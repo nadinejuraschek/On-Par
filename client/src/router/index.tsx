@@ -16,11 +16,9 @@ import {
   Tax,
   Workhours,
 } from "pages";
-import {
-  GoalProvider,
-  WorkhourProvider,
-} from "contexts";
 import { LayoutGradient, LayoutWithNavbar } from "layout";
+
+import { WorkhourProvider } from "contexts";
 
 export const Router = (): JSX.Element => {
   return (
@@ -37,7 +35,7 @@ export const Router = (): JSX.Element => {
           path="/profile"
           element={
             <LayoutWithNavbar>
-                <Profile />
+              <Profile />
             </LayoutWithNavbar>
           }
         />
@@ -56,11 +54,9 @@ export const Router = (): JSX.Element => {
           path="/home"
           element={
             <LayoutWithNavbar>
-                <WorkhourProvider>
-                  <GoalProvider>
-                    <Home />
-                  </GoalProvider>
-                </WorkhourProvider>
+              <WorkhourProvider>
+                <Home />
+              </WorkhourProvider>
             </LayoutWithNavbar>
           }
         />
@@ -132,9 +128,7 @@ export const Router = (): JSX.Element => {
           path="/notebook/goals"
           element={
             <LayoutWithNavbar>
-                <GoalProvider>
-                  <Goals />
-                </GoalProvider>
+              <Goals />
             </LayoutWithNavbar>
           }
         />

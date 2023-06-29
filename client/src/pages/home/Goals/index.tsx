@@ -1,10 +1,11 @@
 import { Button, GoalItem, Text } from "components";
+
 import styles from "./goals.module.css";
-import { useContext, useMemo } from "react";
-import { GoalContext } from "contexts";
+import { useGoals } from "hooks";
+import { useMemo } from "react";
 
 export const Goals = (): JSX.Element => {
-  const { thisMonthGoals } = useContext(GoalContext);
+  const { thisMonthGoals } = useGoals();
 
   const renderGoals = useMemo(() => {
     return thisMonthGoals.slice(0, 3).map((item) => (

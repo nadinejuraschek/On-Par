@@ -1,8 +1,8 @@
-import { TGoalType } from "contexts/GoalContext/types";
+import { TGoalType } from "types";
 
 export interface IAddGoalModal {
   checked: boolean;
-  dueDate?: string;
+  dueDate?: Date;
   id: string;
   text: string;
   type: TGoalType;

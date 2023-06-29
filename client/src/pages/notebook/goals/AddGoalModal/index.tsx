@@ -1,14 +1,12 @@
 import { Button, DatePicker, Modal, Textarea, ToggleGroup } from 'components';
-import { ChangeEvent, useCallback, useContext, useMemo, useState } from 'react';
+import { ChangeEvent, useCallback, useMemo, useState } from 'react';
 
-import { GoalContext } from 'contexts';
 import { IAddGoalModal } from './types';
-import axios from "axios";
 import styles from './addGoalModal.module.css';
-import { toast } from "react-toastify";
+import { useGoals } from 'hooks';
 
 export const AddGoalModal = ({ toggleModal }: IAddGoalModal): JSX.Element => {
-  const { getGoals } = useContext(GoalContext);
+  const { createGoal } = useGoals();
 
   const [newGoal, setNewGoal] = useState({
     dueDate: undefined,
@@ -17,30 +15,15 @@ export const AddGoalModal = ({ toggleModal }: IAddGoalModal): JSX.Element => {
   });
 
   const handleSubmit = useCallback(() => {
-    axios( {
-      url: "/api/goals",
-      method: "POST",
-      data: {
-        ...newGoal,
-        checked: false,
-      },
-    } )
-      .then( () => {
-        toast.success("Your goal was added successfully!");
-        getGoals();
-      } )
-      .catch( () => {
-        toast.error("Goal could not be added. Please try again later!");
-        // console.debug( "Error when creating a goal: " + error );
-      } ).finally(() => {
-        setNewGoal({
+    createGoal(newGoal, () => {
+      setNewGoal({
           dueDate: undefined,
           text: undefined,
           type: undefined,
         });
         toggleModal();
-      });
-  }, [getGoals, newGoal, toggleModal]);
+    });
+  }, [createGoal, newGoal, toggleModal]);
 
   // TODO: handleSubmit in form instead of button
   const actions = useMemo(() => (
