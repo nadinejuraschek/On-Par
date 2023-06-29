@@ -1,13 +1,13 @@
 import { Button, Select, Text } from "components";
-import { useCallback, useContext, useMemo, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 
 import { AddGoalModal } from "./AddGoalModal";
-import { GoalContext } from "contexts";
 import { GoalsList } from './List';
 import styles from "./goals.module.css";
+import { useGoals } from "hooks";
 
 export const Goals = (): JSX.Element => {
-  const { completeGoals, loadingGoals, thisMonthGoals, upcomingGoals } = useContext( GoalContext );
+  const { completeGoals, loading, thisMonthGoals, upcomingGoals } = useGoals();
 
   const [openModal, setOpenModal] = useState(false);
   const [filter, setFilter] = useState(undefined);
@@ -20,10 +20,41 @@ export const Goals = (): JSX.Element => {
 
   const toggleModal = useCallback(() => setOpenModal(!openModal), [openModal]);
 
+  const renderThisMonthGoals = useMemo(() => {
+    return (
+      <GoalsList
+        filter={filter}
+        items={thisMonthGoals}
+        loading={loading}
+        title="This Month"
+      />
+    );
+  }, [thisMonthGoals, filter, loading]);
+
+  const renderUpcomingGoals = useMemo(() => {
+    return (
+      <GoalsList
+        filter={filter}
+        items={upcomingGoals}
+        loading={loading}
+        title="Upcoming / Overdue"
+      />
+    );
+  }, [upcomingGoals, filter, loading]);
+
+  const renderCompletedGoals = useMemo(() => {
+    return (
+      <GoalsList
+        filter={filter}
+        items={completeGoals}
+        loading={loading}
+        title="Completed"
+      />
+    );
+  }, [completeGoals, filter, loading]);
+
   const renderAddGoalModal = useMemo(() => {
-    if (!openModal) {
-      return null;
-    }
+    if (!openModal) return null;
 
     return <AddGoalModal toggleModal={toggleModal} />;
   }, [openModal, toggleModal]);
@@ -51,24 +82,9 @@ export const Goals = (): JSX.Element => {
           </div>
         </div>
         <div className={ styles.content }>
-          <GoalsList
-            filter={filter}
-            items={thisMonthGoals}
-            loading={loadingGoals}
-            title="This Month"
-          />
-          <GoalsList
-            filter={filter}
-            items={upcomingGoals}
-            loading={loadingGoals}
-            title="Upcoming / Overdue"
-          />
-          <GoalsList
-            filter={filter}
-            items={completeGoals}
-            loading={loadingGoals}
-            title="Completed"
-          />
+          {renderThisMonthGoals}
+          {renderUpcomingGoals}
+          {renderCompletedGoals}
         </div>
       </div>
       {renderAddGoalModal}

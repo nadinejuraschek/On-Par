@@ -27,18 +27,14 @@ const getSingleNote = async (req: Request, res: Response) => {
 // CREATE
 const createNote = async (req: Request, res: Response) => {
   await db.Note.create(req.body)
-    .then(insertedNote => {
-      db.User.findByIdAndUpdate(
+    .then(async (insertedNote) => {
+      await db.User.findOneAndUpdate(
         { _id: req.user },
-        { $push: { notes: insertedNote._id } },
-        (err: any) => {
-          if (err) {
-            console.log('Error: ' + err);
-          } else {
-            res.json('Success!');
-          }
-        }
-      );
+        { $push: { notes: insertedNote._id } })
+        .then(() => {
+          res.json('Success!')
+        })
+        .catch((err) => console.log('Error: ' + err));
     })
     .catch(err => {
       res.status(500).json({ error: err.message });
@@ -47,7 +43,7 @@ const createNote = async (req: Request, res: Response) => {
 
 // UPDATE
 const updateNote = async (req: Request, res: Response) => {
-  await db.Note.findByIdAndUpdate(req.params.noteid, req.body)
+  await db.Note.findOneAndUpdate({ _id: req.params.noteid }, req.body)
     .then(updatedNote => {
       res.status(200).json(updatedNote);
     })

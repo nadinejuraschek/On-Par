@@ -1,9 +1,10 @@
+import { TNote } from "types";
+
 export interface INoteCard {
   color: string;
   date: string;
-  deleteNote: any;
-  editNote: any;
-  getNotes: any;
+  deleteNote: (noteid: string) => void;
+  editNote: (noteid: string, updatedNote: TNote, callback?: () => void) => void;
   noteid: string;
   text: string;
   title: string;

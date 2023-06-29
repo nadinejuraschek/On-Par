@@ -1,27 +1,45 @@
-import { Button, Text } from "components";
-import { useCallback, useContext, useMemo, useState } from "react";
+import { Button, LoadingSpinner, Text } from "components";
+import { useCallback, useMemo, useState } from "react";
 
 import { AddNoteModal } from "./AddNoteModal";
 import { NoteCard } from "./NoteCard";
-import { NoteContext } from "contexts";
 import { Suggestions } from "./Suggestions";
-import { TNote } from "contexts/NoteContext/types";
+import { TNote } from "types";
 import styles from "./notes.module.css";
+import { useNotes } from "hooks";
 
 export const Notes = (): JSX.Element => {
   const [openAddNoteModal, setOpenAddNoteModal] = useState(false);
 
-  const { deleteNote, editNote, getNotes, notes } = useContext( NoteContext );
+  const { createNote, deleteNote, editNote, loading, notes } = useNotes();
 
   const toggleModal = useCallback(() => setOpenAddNoteModal(!openAddNoteModal), [openAddNoteModal]);
 
   const renderAddNoteModal = useMemo(() => {
-    if (!openAddNoteModal) {
-      return null;
-    }
+    if (!openAddNoteModal) return null;
 
-    return <AddNoteModal toggleModal={toggleModal} />;
-  }, [openAddNoteModal, toggleModal]);
+    return <AddNoteModal createNote={createNote} toggleModal={toggleModal} />;
+  }, [createNote, openAddNoteModal, toggleModal]);
+
+  const renderNotes = useMemo(() => {
+    if (loading) return <LoadingSpinner />;
+
+    return notes.map((note: TNote, index: number) => {
+      const color = index % 3 === 0 ? "warning" : index % 2 === 0 ? "secondary" : "tertiary";
+      const { _id, date, text, title } = note;
+        return (
+          <NoteCard
+            color={ color }
+            key={ _id }
+            noteid={ _id }
+            date={ date }
+            text={ text }
+            title={ title }
+            deleteNote={deleteNote}
+            editNote={ editNote }
+          />
+        )});
+  }, [deleteNote, editNote, loading, notes]);
 
   return (
     <main className={ styles.main }>
@@ -34,22 +52,7 @@ export const Notes = (): JSX.Element => {
         </div>
         <Suggestions />
         <div className={ styles.list }>
-          { notes.map( (note: TNote, index: number) => {
-            const color = index % 3 === 0 ? "warning" : index % 2 === 0 ? "secondary" : "tertiary";
-            const { _id, date, text, title } = note;
-            return (
-              <NoteCard
-                color={ color }
-                key={ _id }
-                noteid={ _id }
-                date={ date }
-                text={ text }
-                title={ title }
-                deleteNote={ deleteNote }
-                editNote={ editNote }
-                getNotes={ getNotes }
-              />
-            )} ) }
+          { renderNotes }
         </div>
       </div>
       {renderAddNoteModal}

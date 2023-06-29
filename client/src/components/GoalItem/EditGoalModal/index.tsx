@@ -1,15 +1,20 @@
 import { Button, DatePicker, Modal, Textarea, ToggleGroup } from 'components';
-import { ChangeEvent, useCallback, useContext, useMemo, useState } from 'react';
+import { ChangeEvent, useCallback, useMemo, useState } from 'react';
 
-import { GoalContext } from 'contexts';
 import { IAddGoalModal } from './types';
-import { TGoalType } from 'contexts/GoalContext/types';
-import axios from "axios";
+import { TGoalType } from 'types';
 import styles from './addGoalModal.module.css';
-import { toast } from "react-toastify";
+import { useGoals } from "hooks";
 
-export const EditGoalModal = ({ checked, dueDate, id, text, toggleModal, type }: IAddGoalModal): JSX.Element => {
-  const { getGoals } = useContext(GoalContext);
+export const EditGoalModal = ({
+  checked,
+  dueDate,
+  id,
+  text,
+  toggleModal,
+  type,
+}: IAddGoalModal): JSX.Element => {
+  const { editGoal } = useGoals();
 
   const [updatedGoal, setUpdatedGoal] = useState({
     checked,
@@ -19,22 +24,8 @@ export const EditGoalModal = ({ checked, dueDate, id, text, toggleModal, type }:
   });
 
   const handleSubmit = useCallback(() => {
-    axios( {
-      url: `/api/goals/${id}`,
-      method: "PUT",
-      data: updatedGoal,
-    } )
-      .then( () => {
-        toast.success("Your goal was updated successfully!");
-        getGoals();
-      } )
-      .catch( () => {
-        toast.error("Goal could not be updated. Please try again later!");
-        // console.debug( "Error when creating a goal: " + error );
-      } ).finally(() => {
-        toggleModal();
-      });
-  }, [getGoals, id, toggleModal, updatedGoal]);
+    editGoal(id, updatedGoal, toggleModal);
+  }, [editGoal, id, toggleModal, updatedGoal]);
 
   // TODO: handleSubmit in form instead of button
   const actions = useMemo(() => (

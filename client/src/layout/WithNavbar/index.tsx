@@ -1,17 +1,16 @@
-import { GatedComponent } from "auth/GatedComponent";
 import { Navbar } from "components";
 import { ReactNode } from 'react';
+import { UserProvider } from 'contexts';
 
 export const LayoutWithNavbar = ({ children }: { children: ReactNode }): JSX.Element => {
   return (
-    <GatedComponent>
+    <UserProvider>
       <div className="layout">
         <Navbar />
         <div className="page-container">
           { children }
         </div>
-        { /* <Footer /> */ }
       </div>
-    </GatedComponent>
+    </UserProvider>
   );
 }

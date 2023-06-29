@@ -1,4 +1,4 @@
-import { TGoal } from 'contexts/GoalContext/types';
+import { TGoal } from 'types';
 
 export interface IGoalsList {
   filter?: { label: string; value: 'education' | 'personal' | 'travel'; };

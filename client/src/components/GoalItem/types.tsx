@@ -1,10 +1,10 @@
-import { TGoalType } from "contexts/GoalContext/types";
+import { TGoalType } from "types";
 
 export interface IGoalItem {
   checkable?: boolean;
   checked: boolean;
   deletable?: boolean;
-  dueDate?: string;
+  dueDate?: Date;
   editable?: boolean;
   id: string;
   label: string;

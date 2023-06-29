@@ -1,15 +1,18 @@
 import * as dayjs from 'dayjs';
 
-import { PaymentContext, UserContext } from "contexts";
+import { Card, LoadingSpinner } from "components";
 import { useContext, useMemo } from "react";
 
-import { Card } from "components";
 import { PaymentEntry } from "./PaymentEntry";
+import { UserContext } from "contexts";
 import styles from "./payments.module.css";
+import { toast } from 'react-toastify';
+import { usePayments } from 'hooks';
 
 export const PaymentTable = (): JSX.Element => {
-  const { payments } = useContext( PaymentContext );
   const { user } = useContext( UserContext );
+
+  const { editPayment, loading, payments } = usePayments();
 
   const currentWeekNum = useMemo(() => dayjs(new Date()).diff(dayjs(user?.startDate), 'week'), [user]);
 
@@ -22,13 +25,17 @@ export const PaymentTable = (): JSX.Element => {
   const renderEntries = useMemo(() => {
     return sortedPayments.map( payment => (
       <PaymentEntry
-        currentWeekNum={currentWeekNum}
+        editPayment={editPayment}
         key={ payment._id }
         paymentid={ payment._id }
         payment={ payment }
       />
     ));
-  }, [currentWeekNum, sortedPayments]);
+  }, [editPayment, sortedPayments]);
+
+  if (loading) {
+    return <LoadingSpinner />;
+  }
 
   return (
     <Card className={ styles.container }>

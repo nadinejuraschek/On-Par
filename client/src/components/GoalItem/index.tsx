@@ -1,13 +1,13 @@
 import * as dayjs from 'dayjs';
 
 import { Badge, Button, Modal, Text } from 'components';
-import { useCallback, useContext, useMemo, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 
 import { EditGoalModal } from './EditGoalModal';
-import { GoalContext } from 'contexts';
 import { IGoalItem } from './types';
 import { getGoalIcon } from './utils';
 import styles from './goalItem.module.css';
+import { useGoals } from 'hooks';
 
 export const GoalItem = ({
   checkable = true,
@@ -23,7 +23,7 @@ export const GoalItem = ({
   const [openDeleteConfirm, setOpenDeleteConfirm] = useState(false);
   const [openEditModal, setOpenEditModal] = useState(false);
 
-  const { checkGoal, deleteGoal } = useContext(GoalContext);
+  const { checkGoal, deleteGoal } = useGoals();
 
   const closeModal = useCallback(() => {
     setOpenDeleteConfirm(false);
@@ -60,7 +60,13 @@ export const GoalItem = ({
     const actions = (
       <>
         <Button fullWidth handleClick={closeModal}>Cancel</Button>
-        <Button fullWidth handleClick={() => deleteGoal(id)} variant="danger">Delete</Button>
+        <Button
+          fullWidth
+          handleClick={() => deleteGoal(id, () => setOpenDeleteConfirm(false))}
+          variant="danger"
+        >
+          Delete
+        </Button>
       </>
     );
 
