@@ -18,7 +18,6 @@ import {
 } from "pages";
 import {
   GoalProvider,
-  NoteProvider,
   WorkhourProvider,
 } from "contexts";
 import { LayoutGradient, LayoutWithNavbar } from "layout";
@@ -143,9 +142,7 @@ export const Router = (): JSX.Element => {
           path="/notebook/notes"
           element={
             <LayoutWithNavbar>
-              <NoteProvider>
-                <Notes />
-              </NoteProvider>
+              <Notes />
             </LayoutWithNavbar>
           }
         />

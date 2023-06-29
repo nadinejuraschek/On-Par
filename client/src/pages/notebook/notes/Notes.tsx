@@ -4,7 +4,7 @@ import { useCallback, useMemo, useState } from "react";
 import { AddNoteModal } from "./AddNoteModal";
 import { NoteCard } from "./NoteCard";
 import { Suggestions } from "./Suggestions";
-import { TNote } from "contexts/NoteContext/types";
+import { TNote } from "types";
 import styles from "./notes.module.css";
 import { useNotes } from "hooks";
 

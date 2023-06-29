@@ -4,8 +4,9 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "build-dist": "./node_modules/typescript/bin/tsc",
-    "build": "./node_modules/typescript/bin/tsc && cd client && npm run build",
+    "build-dist": "npm run clean-dist && ./node_modules/typescript/bin/tsc",
+    "build": "npm run clean-dist && ./node_modules/typescript/bin/tsc && cd client && npm run build",
+    "clean-dist": "del-cli ./dist",
     "install-client": "cd client && npm install",
     "start": "node ./dist/server.js",
     "client": "cd client && npm start",
