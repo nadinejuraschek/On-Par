@@ -20,6 +20,11 @@ export type TGoal = {
   type: TGoalType;
 }
 
+export type TWorkhour = {
+  dateFormat: string;
+  total: number;
+}
+
 export type TPayment = {
   _id?: string;
   date: Date | null;

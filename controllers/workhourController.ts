@@ -28,18 +28,12 @@ const createWorkhour = async (req: Request, res: Response) => {
       hours: hours,
       total: hours[0].duration,
     })
-      .then(insertedWorkhour => {
-        db.User.findByIdAndUpdate(
+      .then(async insertedWorkhour => {
+        await db.User.findOneAndUpdate(
           { _id: req.user },
           { $push: { workhours: insertedWorkhour._id } },
-          (err: any) => {
-            if (err) {
-              console.log('Error: ' + err);
-            } else {
-              res.json('Success!');
-            }
-          }
-        );
+        ).then(() => res.json('Success!'))
+        .catch((err) => console.log('Error: ' + err));
       })
       .catch(err => {
         res.status(500).json({ error: err.message });
@@ -56,13 +50,12 @@ const createWorkhour = async (req: Request, res: Response) => {
       .catch(err => {
         res.status(500).json({ error: err.message });
       });
-    await db.Workhour.findOneAndUpdate
   };
 };
 
 // UPDATE
 const updateWorkhour = async (req: Request, res: Response) => {
-  await db.Workhour.findByIdAndUpdate(
+  await db.Workhour.findOneAndUpdate(
     { _id: req.params.workhourid },
     { $push: { hours: req.body } }
     )

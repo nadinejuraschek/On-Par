@@ -3,21 +3,22 @@ import * as dayjs from "dayjs";
 import { Button, DatePicker, Text } from "components";
 import { FormEvent, useCallback } from 'react';
 
-import axios from "axios";
 import styles from "../workhours.module.css";
 import { useState } from "react";
+import { useWorkhours } from "hooks";
 
-export const AddHours = ( { updateWorkhours } ): JSX.Element => {
+export const AddHours = (): JSX.Element => {
   const today = new Date();
   const [date, setDate] = useState<Date>( today );
   const [start, setStart] = useState<Date | undefined>( undefined );
   const [end, setEnd] = useState<Date | undefined>( undefined );
 
+  const { createWorkhours } = useWorkhours();
+
   const handleSubmit = useCallback((event: FormEvent): void => {
     event.preventDefault();
 
     const duration = dayjs( end ).diff( start, "minutes" );
-
     const newHours = {
       date: date,
       hours: [{
@@ -27,13 +28,8 @@ export const AddHours = ( { updateWorkhours } ): JSX.Element => {
       }],
     };
 
-    axios.post( "/api/workhours", newHours ).then( workhours => {
-      // console.log("Hours have been added successfully!", workhours);
-      updateWorkhours();
-    } ).catch( err => {
-      console.log( "Error: ", err );
-    } );
-  }, [date, end, start, updateWorkhours]);
+    createWorkhours(newHours);
+  }, [createWorkhours, date, end, start]);
 
   return (
     <>

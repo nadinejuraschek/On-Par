@@ -1,9 +1,9 @@
 import { Card, Tabs, Text, Timer, WeeklyHours as WeeklyList } from "components";
-import { useContext, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 
 import { AddHours } from "./components/AddHours";
-import { WorkhourContext } from "contexts";
 import styles from "./workhours.module.css";
+import { useWorkhours } from "hooks";
 
 const WORKHOURS_TABS = {
   WEEKLY: 0,
@@ -12,14 +12,14 @@ const WORKHOURS_TABS = {
 
 export const Workhours = (): JSX.Element => {
   const [tab, setTab] = useState( WORKHOURS_TABS.WEEKLY );
-  const { getWorkhours, todayHours, workhours } = useContext( WorkhourContext );
+  const { todayWorkhours, workhours } = useWorkhours();
 
   const tabs = [
     { label: "Weekly", value: WORKHOURS_TABS.WEEKLY },
     { disabled: true, label: "Daily", value: WORKHOURS_TABS.DAILY },
   ];
 
-  const renderTimes = useMemo(() => <Timer time={ todayHours } />, [todayHours]);
+  const renderTimes = useMemo(() => <Timer time={ todayWorkhours } />, [todayWorkhours]);
 
   return (
     <main>
@@ -35,7 +35,7 @@ export const Workhours = (): JSX.Element => {
           {renderTimes}
         </Card>
         <Card className={ styles.addContainer }>
-          <AddHours updateWorkhours={ getWorkhours } />
+          <AddHours />
         </Card>
         <Card className={ styles.reminder }>
           <Text size="sm">

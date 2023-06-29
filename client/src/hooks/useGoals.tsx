@@ -73,10 +73,10 @@ export function useGoals() {
       });
   };
 
-  const editGoal = async (goalId: string, updatedNote: Omit<TGoal, '_id'>, callback?: () => void) => {
+  const editGoal = async (goalId: string, updatedGoal: Omit<TGoal, '_id'>, callback?: () => void) => {
     setLoading(true);
     await axios
-      .put(`/api/goals/${goalId}`, updatedNote)
+      .put(`/api/goals/${goalId}`, updatedGoal)
       .then(() => {
         toast.success('The goal has been updated successfully!');
         getGoals();

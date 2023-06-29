@@ -1,8 +1,8 @@
 import { Button, LoadingPlaceholder, Tabs, Text } from "components";
-import { useContext, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 
-import { WorkhourContext } from "contexts";
 import styles from "./workhour.module.css";
+import { useWorkhours } from "hooks";
 
 const WORKHOUR_TABS = {
   DAY: 0,
@@ -17,17 +17,17 @@ export const WorkhourSummary = (): JSX.Element => {
     { label: "This Week", value: WORKHOUR_TABS.WEEK }
   ];
 
-  const { todayHours } = useContext( WorkhourContext );
+  const { todayWorkhours } = useWorkhours();
 
   const renderDailyProgress = useMemo(() => {
-    if (!todayHours) {
+    if (!todayWorkhours) {
       <div className={ styles.loadingProgressContainer }>
         <LoadingPlaceholder />
       </div>
     }
 
-    const inPercent = (todayHours/600)*100;
-    const inHours = todayHours/60;
+    const inPercent = (todayWorkhours/600)*100;
+    const inHours = todayWorkhours/60;
 
     return (
       <div className={ styles.progressContainer }>
@@ -44,7 +44,7 @@ export const WorkhourSummary = (): JSX.Element => {
         </Text>
       </div>
     );
-  }, [todayHours]);
+  }, [todayWorkhours]);
 
   // TODO: calculate weekly hours
   const renderWeeklyProgress = useMemo(() => (

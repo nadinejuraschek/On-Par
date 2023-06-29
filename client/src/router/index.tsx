@@ -18,8 +18,6 @@ import {
 } from "pages";
 import { LayoutGradient, LayoutWithNavbar } from "layout";
 
-import { WorkhourProvider } from "contexts";
-
 export const Router = (): JSX.Element => {
   return (
     <BrowserRouter>
@@ -54,9 +52,7 @@ export const Router = (): JSX.Element => {
           path="/home"
           element={
             <LayoutWithNavbar>
-              <WorkhourProvider>
-                <Home />
-              </WorkhourProvider>
+              <Home />
             </LayoutWithNavbar>
           }
         />
@@ -110,9 +106,7 @@ export const Router = (): JSX.Element => {
           path="/notebook/workhours"
           element={
             <LayoutWithNavbar>
-              <WorkhourProvider>
-                <Workhours />
-              </WorkhourProvider>
+              <Workhours />
             </LayoutWithNavbar>
           }
         />
