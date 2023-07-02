@@ -44,7 +44,6 @@ export const Profile = (): JSX.Element => {
 
   return (
     <div className={ styles.grid }>
-      <Text as="h2" size="xl" weight="bold">Your Profile</Text>
       <Tabs activeTab={activeTab} fullWidth handleClick={setActiveTab} tabs={tabs} variant="secondary" />
       {renderContent}
     </div>

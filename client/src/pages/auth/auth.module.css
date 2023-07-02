@@ -1,11 +1,6 @@
 /********************************************
  LOGIN, REGISTER
 ********************************************/
-.main {
-  min-height: 100vh;
-  width: 100vw;
-}
-
 .formWrapper {
   background-color: var(--white);
   border-radius: 2rem;
@@ -18,7 +13,7 @@
   justify-content: center;
   gap: 2rem;
 
-  width: 100%;
+  width: calc(100% - 4rem);
 }
 
 .form {
@@ -78,7 +73,4 @@
   .twoFieldsInput {
     width: calc(100% - 1rem);
   }
-}
-
-@media only screen and (min-width: 900px) {
 }

@@ -1,4 +1,4 @@
-import { Button, LoadingSpinner, Text } from "components";
+import { Button, LoadingSpinner } from "components";
 import { useCallback, useMemo, useState } from "react";
 
 import { AddNoteModal } from "./AddNoteModal";
@@ -44,13 +44,12 @@ export const Notes = (): JSX.Element => {
   return (
     <>
       <div className={ styles.grid }>
+        <Suggestions />
         <div className={ styles.header }>
-          <Text as="h2" size="xl" weight="bold">Notes</Text>
           <Button handleClick={toggleModal} variant="primary">
             <i className="plus icon"></i> Add Note
           </Button>
         </div>
-        <Suggestions />
         <div className={ styles.list }>
           { renderNotes }
         </div>

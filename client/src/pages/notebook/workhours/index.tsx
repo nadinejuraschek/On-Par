@@ -23,7 +23,6 @@ export const Workhours = (): JSX.Element => {
 
   return (
     <div className={ styles.layout }>
-      <Text as="h2" className={ styles.header } size="xl" weight="bold">Your Workhours</Text>
       <div className={ styles.tabsWrapper }>
         <Tabs activeTab={ tab } fullWidth handleClick={ setTab } tabs={ tabs } variant="secondary" />
       </div>

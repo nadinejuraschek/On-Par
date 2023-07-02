@@ -1,4 +1,4 @@
-import { Button, Select, Text } from "components";
+import { Button, Select } from "components";
 import { useCallback, useMemo, useState } from "react";
 
 import { AddGoalModal } from "./AddGoalModal";
@@ -62,24 +62,21 @@ export const Goals = (): JSX.Element => {
   return (
     <>
       <div className={ styles.layout }>
-        <div className={ styles.header }>
-          <Text as="h2" size="xl" weight="bold">Your Goals</Text>
-          <div className={ styles.actions }>
-            <div className={ styles.filter }>
-              <Select
-                clearable
-                handleChange={(selectedFilter) => setFilter(selectedFilter)}
-                name="filter"
-                onlyInput
-                options={filterOptions}
-                placeholder="Filter by"
-                value={filter}
-              />
-            </div>
-            <Button handleClick={toggleModal} variant="primary">
-              <i className="plus icon"></i> Add Goal
-            </Button>
+        <div className={ styles.actions }>
+          <div className={ styles.filter }>
+            <Select
+              clearable
+              handleChange={(selectedFilter) => setFilter(selectedFilter)}
+              name="filter"
+              onlyInput
+              options={filterOptions}
+              placeholder="Filter by"
+              value={filter}
+            />
           </div>
+          <Button className={styles.addButton} handleClick={toggleModal} variant="primary">
+            <i className="plus icon"></i> Add Goal
+          </Button>
         </div>
         <div className={ styles.content }>
           {renderThisMonthGoals}

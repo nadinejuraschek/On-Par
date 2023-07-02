@@ -72,9 +72,8 @@ export const Register = (): JSX.Element => {
   }
 
   return (
-    <main className={ styles.main }>
-      <div className={ styles.formWrapper }>
-        <Text as="h2" size="xl" weight="bold">Register</Text>
+    <div className={ styles.formWrapper }>
+      <Text as="h2" size="xl" weight="bold">Register</Text>
       <form className={ styles.form } onSubmit={ handleSubmit }>
         <div className={ styles.twoFields }>
           <Input
@@ -152,7 +151,6 @@ export const Register = (): JSX.Element => {
           Use Guest Account
         </Button>
       </form>
-      </div>
-    </main>
+    </div>
   );
 };

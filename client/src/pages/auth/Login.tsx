@@ -52,40 +52,38 @@ export const Login = (): JSX.Element => {
   }
 
   return (
-    <main className={ styles.main }>
-      <div className={ styles.formWrapper }>
-        <Text as="h2" size="xl" weight="bold">Log In</Text>
-        <form className={ styles.form } onSubmit={ handleSubmit }>
-          <Input
-            fullWidth
-            handleChange={(event) => setEmail( (event.target as HTMLInputElement).value )}
-            icon="mail"
-            label="E-Mail"
-            name="email"
-            placeholder="E-Mail"
-            value={email}
-          />
-          <Input
-            fullWidth
-            handleChange={(event) => setPassword( (event.target as HTMLInputElement).value )}
-            icon="lock"
-            label="Password"
-            name="password"
-            placeholder="Password"
-            type="password"
-            value={password}
-          />
-          <Button type="submit" variant="primary">
-            Log In
-          </Button>
-          <Button link="/register" variant="tertiary">Create an Account</Button>
-          <div className={ styles.divider }>
-            <hr />
-            <Text className={ styles.dividerText }>OR</Text>
-          </div>
-          <Button handleClick={ handleGuest } variant="tertiary">Use Guest Account</Button>
-        </form>
-      </div>
-    </main>
+    <div className={ styles.formWrapper }>
+      <Text as="h2" size="xl" weight="bold">Log In</Text>
+      <form className={ styles.form } onSubmit={ handleSubmit }>
+        <Input
+          fullWidth
+          handleChange={(event) => setEmail( (event.target as HTMLInputElement).value )}
+          icon="mail"
+          label="E-Mail"
+          name="email"
+          placeholder="E-Mail"
+          value={email}
+        />
+        <Input
+          fullWidth
+          handleChange={(event) => setPassword( (event.target as HTMLInputElement).value )}
+          icon="lock"
+          label="Password"
+          name="password"
+          placeholder="Password"
+          type="password"
+          value={password}
+        />
+        <Button type="submit" variant="primary">
+          Log In
+        </Button>
+        <Button link="/register" variant="tertiary">Create an Account</Button>
+        <div className={ styles.divider }>
+          <hr />
+          <Text className={ styles.dividerText }>OR</Text>
+        </div>
+        <Button handleClick={ handleGuest } variant="tertiary">Use Guest Account</Button>
+      </form>
+    </div>
   );
 };

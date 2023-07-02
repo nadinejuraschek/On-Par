@@ -9,12 +9,11 @@
 
 .header {
   grid-column: 1 / -1;
-  grid-row: 1 / 2;
+  grid-row: 2 / 3;
 
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 2rem;
+  justify-content: flex-end;
 }
 
 .list {

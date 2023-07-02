@@ -1,14 +1,23 @@
-import { Navbar } from "components";
-import { ReactNode } from 'react';
-import { UserProvider } from 'contexts';
+import { Navbar, Text } from "components";
 
-export const LayoutWithNavbar = ({ children }: { children: ReactNode }): JSX.Element => {
+import { ILayoutWithNavbar } from './types';
+import { UserProvider } from 'contexts';
+import { useMemo } from 'react';
+
+export const LayoutWithNavbar = ({ children, headerTitle }: ILayoutWithNavbar): JSX.Element => {
+  const renderHeader = useMemo(() => {
+    if (!headerTitle) return null;
+
+    return <Text as="h2" size="xl" weight="bold">{headerTitle}</Text>;
+  }, [headerTitle]);
+
   return (
     <UserProvider>
       <div className="layout">
         <Navbar />
         <div className="page-container">
           <main>
+            { renderHeader }
             { children }
           </main>
         </div>

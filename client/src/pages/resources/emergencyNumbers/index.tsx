@@ -1,6 +1,4 @@
-import { Text } from "components";
 import { emergencyNumbers } from "data";
-import styles from "./emergencyNumbers.module.css";
 import { useMemo } from "react";
 
 export const EmergencyNumbers = (): JSX.Element => {
@@ -23,16 +21,13 @@ export const EmergencyNumbers = (): JSX.Element => {
   }, [contentRows]);
 
   return (
-    <div className={ styles.layout }>
-      <Text as="h2" size="xl" weight="bold">Emergency Numbers</Text>
-      <table className="ui selectable celled table" style={ { borderRadius: "2rem", filter: "drop-shadow(0 1px 3px #10182810) drop-shadow(0 1px 2px #10182806)", height: "100%", overflow: "hidden" } }>
-        <thead>
-          { renderHeaderRows }
-        </thead>
-        <tbody>
-          { renderContentRows }
-        </tbody>
-      </table>
-    </div>
+    <table className="ui selectable celled table" style={ { borderRadius: "2rem", filter: "drop-shadow(0 1px 3px #10182810) drop-shadow(0 1px 2px #10182806)", height: "100%", overflow: "hidden" } }>
+      <thead>
+        { renderHeaderRows }
+      </thead>
+      <tbody>
+        { renderContentRows }
+      </tbody>
+    </table>
   );
 };
