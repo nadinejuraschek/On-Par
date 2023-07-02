@@ -60,7 +60,7 @@ export const Goals = (): JSX.Element => {
   }, [openModal, toggleModal]);
 
   return (
-    <main>
+    <>
       <div className={ styles.layout }>
         <div className={ styles.header }>
           <Text as="h2" size="xl" weight="bold">Your Goals</Text>
@@ -88,6 +88,6 @@ export const Goals = (): JSX.Element => {
         </div>
       </div>
       {renderAddGoalModal}
-    </main>
+    </>
   );
 };

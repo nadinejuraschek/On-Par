@@ -23,11 +23,9 @@ export const Tax = (): JSX.Element => {
   ) ), [contentRows]);
 
   return (
-    <main>
-      <div className={ styles.layout }>
-        { renderHeader }
-        { renderContentRows }
-      </div>
-    </main>
+    <div className={ styles.layout }>
+      { renderHeader }
+      { renderContentRows }
+    </div>
   );
 };

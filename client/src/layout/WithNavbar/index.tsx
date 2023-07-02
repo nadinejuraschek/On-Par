@@ -8,7 +8,9 @@ export const LayoutWithNavbar = ({ children }: { children: ReactNode }): JSX.Ele
       <div className="layout">
         <Navbar />
         <div className="page-container">
-          { children }
+          <main>
+            { children }
+          </main>
         </div>
       </div>
     </UserProvider>

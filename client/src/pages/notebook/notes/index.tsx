@@ -42,7 +42,7 @@ export const Notes = (): JSX.Element => {
   }, [deleteNote, editNote, loading, notes]);
 
   return (
-    <main className={ styles.main }>
+    <>
       <div className={ styles.grid }>
         <div className={ styles.header }>
           <Text as="h2" size="xl" weight="bold">Notes</Text>
@@ -56,6 +56,6 @@ export const Notes = (): JSX.Element => {
         </div>
       </div>
       {renderAddNoteModal}
-    </main>
+    </>
   );
 };
