@@ -135,14 +135,6 @@ nav a.header.item {
   font-size: 2rem;
 }
 
-footer.ui .vertical .segment {
-  padding: 1rem;
-}
-
-.copyright {
-  font-size: 0.9rem;
-}
-
 .layout {
   display: grid;
   grid-template-columns: 1fr;
@@ -164,8 +156,9 @@ main {
 
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  /* align-items: center; */
+  /* justify-content: center; */
+  gap: 3rem;
 
   overflow: auto;
 }

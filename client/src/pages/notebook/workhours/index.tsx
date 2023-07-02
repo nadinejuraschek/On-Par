@@ -22,28 +22,25 @@ export const Workhours = (): JSX.Element => {
   const renderTimes = useMemo(() => <Timer time={ todayWorkhours } />, [todayWorkhours]);
 
   return (
-    <main>
-      <div className={ styles.layout }>
-        <Text as="h2" className={ styles.header } size="xl" weight="bold">Your Workhours</Text>
-        <div className={ styles.tabsWrapper }>
-          <Tabs activeTab={ tab } fullWidth handleClick={ setTab } tabs={ tabs } variant="secondary" />
-        </div>
-        <Card className={ styles.tracker }>
-          <WeeklyList data={ workhours } />
-        </Card>
-        <Card className={ styles.timer }>
-          {renderTimes}
-        </Card>
-        <Card className={ styles.addContainer }>
-          <AddHours />
-        </Card>
-        <Card className={ styles.reminder }>
-          <Text size="sm">
-            <strong>Reminder:</strong><br />
-            You should be working a maximum of <strong>10h a day</strong> and <strong>45h per week</strong>.
-          </Text>
-        </Card>
+    <div className={ styles.layout }>
+      <div className={ styles.tabsWrapper }>
+        <Tabs activeTab={ tab } fullWidth handleClick={ setTab } tabs={ tabs } variant="secondary" />
       </div>
-    </main>
+      <Card className={ styles.tracker }>
+        <WeeklyList data={ workhours } />
+      </Card>
+      <Card className={ styles.timer }>
+        {renderTimes}
+      </Card>
+      <Card className={ styles.addContainer }>
+        <AddHours />
+      </Card>
+      <Card className={ styles.reminder }>
+        <Text size="sm">
+          <strong>Reminder:</strong><br />
+          You should be working a maximum of <strong>10h a day</strong> and <strong>45h per week</strong>.
+        </Text>
+      </Card>
+    </div>
   );
 };

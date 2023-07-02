@@ -14,7 +14,6 @@ const PROFILE_TABS = {
 }
 
 export const Profile = (): JSX.Element => {
-  /* @ts-ignore-next-line */
   const { user } = useContext( UserContext );
 
   const [ activeTab, setActiveTab ] = useState(PROFILE_TABS.PROFILE);
@@ -44,10 +43,9 @@ export const Profile = (): JSX.Element => {
   ];
 
   return (
-    <main className={ styles.main }>
-      <Text as="h2" size="xl" weight="bold">Your Profile</Text>
+    <div className={ styles.grid }>
       <Tabs activeTab={activeTab} fullWidth handleClick={setActiveTab} tabs={tabs} variant="secondary" />
       {renderContent}
-    </main>
+    </div>
   );
 };

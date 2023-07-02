@@ -10,7 +10,6 @@ export const Tax = (): JSX.Element => {
 
   const renderHeader = useMemo(() => headerRows.cells.map( ( cell, index ) => (
     <Fragment key={ index }>
-      <Text as="h3" size="xl" className={ styles.header } weight="bold">{ cell.title }</Text>
       <p className={ styles.info } dangerouslySetInnerHTML={ createMarkup( cell.text ) } />
     </Fragment>
   ) ), [headerRows]);
@@ -23,11 +22,9 @@ export const Tax = (): JSX.Element => {
   ) ), [contentRows]);
 
   return (
-    <main>
-      <div className={ styles.layout }>
-        { renderHeader }
-        { renderContentRows }
-      </div>
-    </main>
+    <div className={ styles.layout }>
+      { renderHeader }
+      { renderContentRows }
+    </div>
   );
 };

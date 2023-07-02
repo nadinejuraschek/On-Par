@@ -41,7 +41,7 @@ export const Router = (): JSX.Element => {
         <Route
           path="/profile"
           element={
-            <LayoutWithNavbar>
+            <LayoutWithNavbar headerTitle="Profile">
               <Profile />
             </LayoutWithNavbar>
           }
@@ -51,7 +51,7 @@ export const Router = (): JSX.Element => {
         <Route
           path="/resources"
           element={
-            <LayoutWithNavbar>
+            <LayoutWithNavbar headerTitle="Resources">
               <Resources />
             </LayoutWithNavbar>
           }
@@ -59,7 +59,7 @@ export const Router = (): JSX.Element => {
         <Route
           path="/resources/emergencynumbers"
           element={
-            <LayoutWithNavbar>
+            <LayoutWithNavbar headerTitle="Emergency Numbers">
               <EmergencyNumbers />
             </LayoutWithNavbar>
           }
@@ -69,7 +69,7 @@ export const Router = (): JSX.Element => {
         <Route
           path="/notebook"
           element={
-            <LayoutWithNavbar>
+            <LayoutWithNavbar headerTitle="Notebook">
               <Notebook />
             </LayoutWithNavbar>
           }
@@ -77,7 +77,7 @@ export const Router = (): JSX.Element => {
         <Route
           path="/notebook/workhours"
           element={
-            <LayoutWithNavbar>
+            <LayoutWithNavbar headerTitle="Workhours">
               <Workhours />
             </LayoutWithNavbar>
           }
@@ -85,7 +85,7 @@ export const Router = (): JSX.Element => {
         <Route
           path="/notebook/payments"
           element={
-            <LayoutWithNavbar>
+            <LayoutWithNavbar headerTitle="Payments">
               <Payments />
             </LayoutWithNavbar>
           }
@@ -93,7 +93,7 @@ export const Router = (): JSX.Element => {
         <Route
           path="/notebook/goals"
           element={
-            <LayoutWithNavbar>
+            <LayoutWithNavbar headerTitle="Goals">
               <Goals />
             </LayoutWithNavbar>
           }
@@ -101,7 +101,7 @@ export const Router = (): JSX.Element => {
         <Route
           path="/notebook/notes"
           element={
-            <LayoutWithNavbar>
+            <LayoutWithNavbar headerTitle="Notes">
               <Notes />
             </LayoutWithNavbar>
           }
@@ -111,7 +111,7 @@ export const Router = (): JSX.Element => {
         <Route
           path="/resources/tax"
           element={
-            <LayoutWithNavbar>
+            <LayoutWithNavbar headerTitle="Paying Taxes">
               <Tax />
             </LayoutWithNavbar>
           }

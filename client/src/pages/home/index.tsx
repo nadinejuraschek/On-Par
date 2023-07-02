@@ -32,62 +32,56 @@ export const Home = (): JSX.Element => {
     } );
   }, [navigate]);
 
-  /* if (!user) {
-    return <LoadingSpinner />;
-  } */
-
   const hasCompletedYear = useMemo(() => dayjs(new Date()).isSameOrAfter(user?.endDate), [user]);
 
   return (
-    <main>
-      <div className={ styles.grid }>
-        <Card className={ styles.header }>
-          <Greeting message={ message } name={ user?.firstname } />
-          <div className={ styles.buttons }>
-            <Button link="/profile" variant="secondary">Profile</Button>
-            <Button handleClick={ handleLogout } variant="secondary">Log Out</Button>
-          </div>
-        </Card>
+    <div className={ styles.grid }>
+      <Card className={ styles.header }>
+        <Greeting message={ message } name={ user?.firstname } />
+        <div className={ styles.buttons }>
+          <Button link="/profile" variant="secondary">Profile</Button>
+          <Button handleClick={ handleLogout } variant="secondary">Log Out</Button>
+        </div>
+      </Card>
 
-        {hasCompletedYear ? (
-            <>
-              <Card className={ styles.complete }>
-                <Text size="xl" weight="bold">Congrats!</Text>
-                <Text size="lg" weight="bold">You finished your au pair experience!</Text>
-              </Card>
+      {hasCompletedYear ? (
+        <>
+          <Card className={ styles.complete }>
+            <Text size="xl" weight="bold">Congrats!</Text>
+            <Text size="lg" weight="bold">You finished your au pair experience!</Text>
+          </Card>
 
-              <Card className={ styles.resources }>
-                <Text size="lg" weight="bold">Helpful Resources</Text>
-                <ResourcesList />
-              </Card>
-            </>
-          ) : (
-            <>
-              <Card className={ styles.hours }>
-                <WorkhourSummary />
-              </Card>
+          <Card className={ styles.resources }>
+            <Text size="lg" weight="bold">Helpful Resources</Text>
+            <ResourcesList />
+          </Card>
+        </>
+      ) : (
+        <>
+          <Card className={ styles.hours }>
+            <WorkhourSummary />
+          </Card>
 
-              <Card className={ styles.today }>
-                <Events />
-              </Card>
+          <Card className={ styles.today }>
+            <Events />
+          </Card>
 
-              <Card className={ styles.reminders }>
-                <Goals />
-              </Card>
+          <Card className={ styles.reminders }>
+            <Goals />
+          </Card>
 
-              <Card className={ styles.countdown }>
-                <Countdown
-                  startDate={ user?.startDate }
-                  setMessage={ setMessage }
-                />
-              </Card>
+          <Card className={ styles.countdown }>
+            <Countdown
+              startDate={ user?.startDate }
+              setMessage={ setMessage }
+            />
+          </Card>
 
-              <Card className={ styles.misc }>
-                <Quicklinks />
-              </Card>
-            </>
-          )}
-      </div>
-    </main>
+          <Card className={ styles.misc }>
+            <Quicklinks />
+          </Card>
+        </>
+      )}
+    </div>
   );
 };
