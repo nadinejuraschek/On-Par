@@ -6,7 +6,9 @@
   "include": ["src"],
   "eslint.validate": [
     "javascript",
-    "javascriptreact"
+    "javascriptreact",
+    "typescript",
+    "typescriptreact"
   ],
   "files": ["global.d.ts"]
 }
