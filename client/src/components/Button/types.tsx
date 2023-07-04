@@ -17,11 +17,3 @@ export interface IButton {
   type?: 'button' | 'submit';
   variant?: TVariant;
 }
-
-export interface IAddButton {
-  handleClick: any;
-}
-
-export interface ICloseButton {
-  handleClick: () => void;
-}
