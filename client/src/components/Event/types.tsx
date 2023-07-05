@@ -1,4 +1,5 @@
 export interface IEvent {
+  className?: string;
   day: number;
   name: string;
   type?: TEventType;
@@ -13,3 +14,7 @@ export type TEvent = {
 };
 
 export type TEventType = 'birthday' | 'holiday';
+
+export interface IStyledEvent {
+  birthday: boolean;
+}

@@ -1,6 +1,7 @@
+import { Field, Group, Toggle } from './styled';
+
 import { IToggleGroup } from "./types";
 import { Text } from 'components';
-import styles from './toggleGroup.module.css';
 import { useMemo } from "react";
 
 export const ToggleGroup = ({
@@ -12,15 +13,31 @@ export const ToggleGroup = ({
   options,
   value,
 }: IToggleGroup): JSX.Element => {
+  const renderLabel = useMemo(() => {
+    if (!label) return null;
+
+    return (
+      <Text as="label" htmlFor={ name } size="sm">
+        { label }
+      </Text>
+    );
+  }, [label, name]);
+
+  const renderError = useMemo(() => {
+    if (!error) return null;
+
+    return <Text as="p" color="--error_300" size="xs" >{ error }</Text>;
+  }, [error]);
+
   const renderToggles = useMemo(() => {
     return options.map((option, index) => {
       // TODO: implement icon
       const isSelected = value === option.value;
       return (
-        <div
-          className={ `${styles.toggle} ${isSelected ? styles.selected : ''}` }
+        <Toggle
           key={index}
           onClick={() => handleChange(option.value)}
+          isSelected={isSelected}
         >
           {option.label && (
             <Text
@@ -31,22 +48,18 @@ export const ToggleGroup = ({
               {option.label}
             </Text>
           )}
-        </div>
+        </Toggle>
       );
     });
   }, [handleChange, options, value]);
 
   return (
-    <div className={ `${className} ${styles.field} ${label ? styles.withLabel : ''}` }>
-      {label && (
-        <Text as="label" className={ styles.label } htmlFor={ name } size="sm">
-          { label }
-        </Text>
-      )}
-      <div className={ styles.group }>
+    <Field className={className} withLabel={Boolean(label)}>
+      {renderLabel}
+      <Group>
         {renderToggles}
-      </div>
-      { error && <Text as="p" className={ styles.error} color="--error_300" size="xs" >{ error }</Text> }
-    </div>
+      </Group>
+      {renderError}
+    </Field>
   );
 }

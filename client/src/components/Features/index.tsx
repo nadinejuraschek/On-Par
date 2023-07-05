@@ -1,13 +1,13 @@
-import { Card } from "components";
+import { StyledCard, StyledImage, Title } from './styled';
+
 import { IFeatureCard } from "./types";
-import styles from "./features.module.css";
+import { Link } from 'react-router-dom';
 
 export const FeatureCard = ( { header, icon, link, title }: IFeatureCard ): JSX.Element => (
-  <a href={ link }>
-    <Card className={ styles.container } withHover>
-      {/* @ts-ignore-next-line */}
-      <img src={ icon } className={ styles.icon } alt={ title } />
-      <p className={ styles.title }>{ header }</p>
-    </Card>
-  </a>
+  <Link to={ link }>
+    <StyledCard withHover>
+      <StyledImage alt={ title } src={ icon } />
+      <Title>{ header }</Title>
+    </StyledCard>
+  </Link>
 );

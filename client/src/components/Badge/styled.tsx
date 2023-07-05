@@ -1,4 +1,6 @@
-.badge {
+import styled from 'styled-components';
+
+export const StyledBadge = styled.div`
   background-color: var(--grey_100);
   border-radius: 0.8rem;
   padding: 0.4rem 0.8rem;
@@ -8,4 +10,4 @@
   gap: 0.8rem;
 
   width: max-content;
-}
+`;

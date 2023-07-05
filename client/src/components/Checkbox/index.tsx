@@ -1,6 +1,8 @@
+import { ErrorText, Field, StyledCheckbox } from './styled';
+
 import { ICheckbox } from './types';
 import { Text } from 'components';
-import styles from './checkbox.module.css';
+import { useMemo } from 'react';
 
 export const Checkbox = ({
   className = '',
@@ -10,19 +12,26 @@ export const Checkbox = ({
   name,
   value,
 }: ICheckbox): JSX.Element => {
+  const renderError = useMemo(() => {
+    if (!error) return null;
+
+    return (
+      <ErrorText as="p" color="--error_300" size="xs" >{ error }</ErrorText>
+    );
+  }, [error]);
+
   return (
-    <div className={ `${className} ${styles.field}` }>
-      <input
-        className={ `${ styles.input } ${ error && styles.error }` }
+    <Field className={className}>
+      <StyledCheckbox
         checked={value}
         name={ name }
         onChange={ handleChange }
         type="checkbox"
       />
-      <Text as="label" className={ styles.label } htmlFor={ name } size="sm">
+      <Text as="label" htmlFor={ name } size="sm">
         { label }
       </Text>
-      { error && <Text as="p" className={ styles.error} color="--error_300" size="xs" >{ error }</Text> }
-    </div>
+      {renderError}
+    </Field>
   );
-}
+};

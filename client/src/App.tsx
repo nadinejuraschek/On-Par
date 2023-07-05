@@ -5,11 +5,12 @@ import { useContext, useMemo } from 'react';
 
 import { LoadingSpinner } from 'components';
 import { Router } from 'router';
+import { ThemeProvider } from 'styled-components';
 import { ToastContainer } from "react-toastify";
 
 export const App = (): JSX.Element => {
   return (
-    <>
+    <ThemeProvider theme={{}}>
       <Router />
       <ToastContainer
         closeButton
@@ -20,6 +21,6 @@ export const App = (): JSX.Element => {
         theme="colored"
         toastClassName="toast"
       />
-    </>
+    </ThemeProvider>
   )
 };

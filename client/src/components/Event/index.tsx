@@ -1,14 +1,13 @@
+import { Date, StyledEvent } from './styled';
+
 import { IEvent } from './types';
 import { Text } from '../Text';
-import styles from './event.module.css';
 
-export const Event = ({ day, name, type = 'holiday' }: IEvent): JSX.Element => {
-  return (
-    <div className={`${styles.event} ${type === 'birthday' && styles.birthday}`}>
-      <div className={styles.date}>
-        <Text color="--grey_500" size="lg" weight="bold">{day}</Text>
-      </div>
-      <Text size="sm" weight="bold">{name}</Text>
-    </div>
-  );
-}
+export const Event = ({ className = '', day, name, type = 'holiday' }: IEvent): JSX.Element => (
+  <StyledEvent className={className} birthday={type === 'birthday'}>
+    <Date>
+      <Text color="--grey_500" size="lg" weight="bold">{day}</Text>
+    </Date>
+    <Text size="sm" weight="bold">{name}</Text>
+  </StyledEvent>
+);
