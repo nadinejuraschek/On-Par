@@ -1,17 +1,18 @@
 import * as dayjs from 'dayjs';
 
-import { Badge, Button, Modal, Text } from 'components';
+import { Badge, Button, Modal } from 'components';
+import { BadgesWrapper, ItemBody, Label, Overlay, StyledIcon, StyledItem } from './styled';
 import { useCallback, useMemo, useState } from 'react';
 
 import { EditGoalModal } from './EditGoalModal';
 import { IGoalItem } from './types';
 import { getGoalIcon } from './utils';
-import styles from './goalItem.module.css';
 import { useGoals } from 'hooks';
 
 export const GoalItem = ({
   checkable = true,
   checked,
+  className = '',
   deletable = true,
   dueDate,
   editable = true,
@@ -30,11 +31,13 @@ export const GoalItem = ({
     setOpenEditModal(false);
   }, []);
 
+  const isOverdue = useMemo(() => !checked && dayjs().isAfter(dayjs(dueDate)), [checked, dueDate]);
+
   const renderActions = useMemo(() => {
     if (checked) return null;
 
     return (
-      <div className={ styles.overlay }>
+      <Overlay>
         {checkable && (
           <Button handleClick={() => checkGoal(id)} square>
             <i className="check icon" />
@@ -50,9 +53,20 @@ export const GoalItem = ({
             <i className="trash icon" />
           </Button>
         )}
-      </div>
+      </Overlay>
     );
   }, [checkable, checked, checkGoal, deletable, editable, id]);
+
+  const renderBadges = useMemo(() => {
+    const badgeIcon = <StyledIcon alt={`${type}_icon`} src={getGoalIcon(type)} />;
+
+    return (
+      <BadgesWrapper>
+        <Badge icon={badgeIcon} label={type.toUpperCase()} variant={type} />
+        {dueDate && <Badge label={dayjs(dueDate).format('MM/DD/YYYY')} />}
+      </BadgesWrapper>
+    );
+  }, [dueDate, type]);
 
   const renderDeleteConfirmModal = useMemo(() => {
     if (!openDeleteConfirm) return null;
@@ -85,33 +99,24 @@ export const GoalItem = ({
     );
   }, [checked, dueDate, id, openEditModal, text, closeModal, type]);
 
-
-  const badgeIcon = useMemo(() => (
-    <>
-      {/* @ts-ignore-next-line */}
-      <img className={ styles.icon } alt={`${type}_icon`} src={getGoalIcon(type)} />
-    </>
-  ), [type]);
-
-  const isOverdue = useMemo(() => !checked && dayjs().isAfter(dayjs(dueDate)), [checked, dueDate]);
-
   return (
-    <li className={ `${ styles.item } ${ checked ? styles.checked : styles.unchecked } ${ isOverdue ? styles.overdue : ''}` }>
-      <div className={ styles.body }>
-        <Text
-          className={ `${ styles.label } ${ checked ? styles.checked : styles.unchecked }` }
+    <StyledItem
+      className={className}
+      isChecked={checked}
+      isOverdue={isOverdue}
+    >
+      <ItemBody>
+        <Label
+          isChecked={checked}
           size="md"
         >
           { label }
-        </Text>
-        <div className={ styles.badges }>
-          <Badge className={ styles[type] } icon={badgeIcon} label={type.toUpperCase()} />
-          {dueDate && <Badge label={dayjs(dueDate).format('MM/DD/YYYY')} />}
-        </div>
-      </div>
+        </Label>
+        {renderBadges}
+      </ItemBody>
       {renderActions}
       {renderDeleteConfirmModal}
       {renderEditModal}
-    </li>
+    </StyledItem>
   );
 }

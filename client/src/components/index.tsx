@@ -8,7 +8,6 @@ export * from "./Event";
 export * from "./Features";
 export * from "./Filer";
 export * from "./Flag";
-export * from "./Footer";
 export * from "./Input";
 export * from "./List";
 export * from "./LoadingPlaceholder";
