@@ -5,6 +5,7 @@ export interface IText {
   children: ReactNode;
   className?: string;
   color?: string;
+  disabled?: boolean;
   htmlFor?: string;
   size?: TSize;
   weight?: TWeight;

@@ -29,15 +29,11 @@ export const GoalsList = ({ filter, items, loading, title }: IGoalsList): JSX.El
     ));
   }, [filter, items]);
 
-  if (loading) {
-    return <LoadingPlaceholder />;
-  }
+  if (loading) return <LoadingPlaceholder />;
 
   return (
     <div className={ styles.group }>
-      <div className={ styles.groupHeader}>
-        <Text as="h3" size="lg" weight="bold">{ title }</Text>
-      </div>
+      <Text as="h3" size="lg" weight="bold">{ title }</Text>
       <ul className={ styles.list }>
         {renderItems}
       </ul>

@@ -48,4 +48,8 @@ export const StyledText = styled.div<IText>`
   font-weight: ${({ weight }) => weight === 'bold' ? 600 : 500};
 
   ${({ size }) => getSize(size)};
+
+  &[disabled] {
+    color: var(--grey_400);
+  }
 `;

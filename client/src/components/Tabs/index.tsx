@@ -1,11 +1,10 @@
 import { ITabs, TTab } from "./types";
-
-import { Text } from "../Text";
-import styles from "./tabs.module.css";
+import { Tab, Tabbar, TabText } from "./styled";
 import { useMemo } from "react";
 
 export const Tabs = ({
   activeTab,
+  className = '',
   fullWidth = false,
   handleClick,
   spaceBetween = false,
@@ -17,23 +16,33 @@ export const Tabs = ({
       const { disabled = false, label, value } = tab;
       const isActive = value === (activeTab || tabs[0].value);
       return (
-        <div
-          className={ `${ styles.tab } ${ styles[variant] } ${ isActive && styles.active } ${ disabled && styles.disabled }` }
+        <Tab
+          active={isActive}
+          disabled={disabled}
           key={ `tab_${ value }` }
           onClick={ disabled ? () => {} : () => handleClick(value) }
           style={{ width: fullWidth ? `calc(100% / ${tabs.length}` : 'auto' }}
+          variant={variant}
         >
-          <Text className={`${styles.tabText} ${isActive && styles.active}`} size="md">{ label }</Text>
-        </div>
+          <TabText
+            disabled={disabled}
+            size="md"
+          >
+            { label }
+          </TabText>
+        </Tab>
       );
     });
   }, [activeTab, fullWidth, handleClick, tabs, variant]);
 
   return (
-    <div
-      className={ `${ styles.tabs } ${ styles[variant] } ${ fullWidth && styles.fullWidth } ${ spaceBetween && styles.spaceBetween }` }
+    <Tabbar
+      className={className}
+      fullWidth={fullWidth}
+      spaceBetween={spaceBetween}
+      variant={variant}
     >
       { renderTabs }
-    </div>
+    </Tabbar>
   );
 }

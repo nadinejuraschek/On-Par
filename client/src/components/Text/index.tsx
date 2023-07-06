@@ -6,6 +6,7 @@ export const Text = ({
   children,
   className = "",
   color = "--grey_700",
+  disabled = false,
   htmlFor = "",
   size = "md",
   weight = "regular",
@@ -14,6 +15,7 @@ export const Text = ({
     as={as}
     className={className}
     color={color}
+    disabled={disabled}
     htmlFor={htmlFor}
     size={size}
     weight={weight}
