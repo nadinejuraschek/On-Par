@@ -1,8 +1,8 @@
-import styles from "./loadingSpinner.module.css";
+import { Container, Spinner } from './styled';
 
 export const LoadingSpinner = (): JSX.Element => (
-  <div className={ styles.container }>
-    <div className={ styles.spinner }>
+  <Container>
+    <Spinner>
       <div></div>
       <div></div>
       <div></div>
@@ -15,6 +15,6 @@ export const LoadingSpinner = (): JSX.Element => (
       <div></div>
       <div></div>
       <div></div>
-    </div>
-  </div>
+    </Spinner>
+  </Container>
 );

@@ -1,7 +1,7 @@
-import styles from "./loadingPlaceholder.module.css";
+import { AnimatedBackground, Placeholder } from './styled';
 
 export const LoadingPlaceholder = (): JSX.Element => (
-  <div className={ styles.placeholder }>
-    <div className={ styles.animatedBackground } />
-  </div>
+  <Placeholder>
+    <AnimatedBackground />
+  </Placeholder>
 );

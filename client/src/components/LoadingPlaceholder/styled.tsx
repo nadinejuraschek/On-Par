@@ -1,25 +1,27 @@
-@keyframes placeHolderShimmer {
-  0%{
+import styled, { keyframes } from 'styled-components';
+
+const placeHolderShimmer = keyframes`
+  0% {
     background-position: -300px 0
   }
-  100%{
+  100% {
     background-position: 300px 0
   }
-}
+`;
 
-.placeholder {
+export const Placeholder = styled.div`
   background-color: var(--grey_50);
   margin: 0 auto;
 
   height: 100%;
   width: 100%;
-}
+`;
 
-.animatedBackground {
+export const AnimatedBackground = styled.div`
   animation-duration: 1.25s;
   animation-fill-mode: forwards;
   animation-iteration-count: infinite;
-  animation-name: placeHolderShimmer;
+  animation-name: ${placeHolderShimmer};
   animation-timing-function: linear;
 
   background: var(--grey_800);
@@ -29,4 +31,4 @@
   height: 100%;
 
   position: relative;
-}
+`;
