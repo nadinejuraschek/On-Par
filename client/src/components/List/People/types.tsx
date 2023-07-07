@@ -3,10 +3,6 @@ export interface IPeopleList {
   label: string;
 }
 
-export interface IPeopleItem {
-  person: TPerson;
-}
-
 export type TPerson = {
   birthday: string;
   country: string;

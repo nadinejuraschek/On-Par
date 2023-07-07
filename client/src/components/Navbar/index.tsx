@@ -1,11 +1,10 @@
-import { Footer, Logo, LogoText, MenuButton, NavDesktop, NavMobile } from "./styled";
-import { useCallback, useMemo, useState } from "react";
-
-import { NavLinkComp as NavLink } from "./NavLink";
-import { Sidenav } from "./Sidenav";
+import { navLinks } from "data";
 import close from "images/close.svg";
 import menu from "images/menu.svg";
-import { navLinks } from "data";
+import { useCallback, useMemo, useState } from "react";
+import { NavLinkComp as NavLink } from "./NavLink";
+import { Sidenav } from "./Sidenav";
+import { Footer, Logo, LogoText, MenuButton, NavDesktop, NavMobile } from "./styled";
 
 export const Navbar = (): JSX.Element => {
   const [openSidenav, setOpenSidenav] = useState( false );

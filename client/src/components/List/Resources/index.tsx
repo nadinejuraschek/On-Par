@@ -3,19 +3,8 @@ import { useCallback, useMemo } from "react";
 
 import { TResource } from "types";
 import { resources } from "data";
-import styles from "./resources.module.css";
-
-const sortResources = (resources: TResource[]) => resources.sort((a, b) => {
-  if (a.label < b.label) {
-    return -1;
-  }
-
-  if (a.label > b.label) {
-    return 1;
-  }
-
-  return 0;
-});
+import { sortResources } from "./utils";
+import { Group, List, StyledIcon, Wrapper } from "./styled";
 
 export const Resources = (): JSX.Element => {
   const renderItems = useCallback((items: TResource[]) => {
@@ -24,10 +13,10 @@ export const Resources = (): JSX.Element => {
       const { active, icon, label, link } = item;
       return (
         <Button align="alignStart" disabled={ !active } link={ link } key={ `resource_${ label }` }>
-          <div className={ styles.icon }>
+          <StyledIcon>
             {/* @ts-ignore-next-line */}
             <img src={ icon } alt={ label } />
-          </div>
+          </StyledIcon>
           { label }
         </Button>
       );
@@ -37,19 +26,17 @@ export const Resources = (): JSX.Element => {
   const renderGroupedResources = useMemo(() => {
     return resources.map((item) => {
       return (
-        <div className={styles.group} key={item.type}>
+        <Group key={item.type}>
           <Text size="md" weight="bold">{item.title}</Text>
-          <div className={ styles.list }>
-          {renderItems(item.resources)}
-          </div>
-        </div>
+          <List>{renderItems(item.resources)}</List>
+        </Group>
       );
     });
   }, [renderItems]);
 
   return (
-    <div className={styles.wrapper}>
+    <Wrapper>
       { renderGroupedResources }
-    </div>
+    </Wrapper>
   );
 };
