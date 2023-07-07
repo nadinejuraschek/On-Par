@@ -1,24 +1,27 @@
-import { useMemo, useState } from "react";
+import { Footer, Logo, LogoText, MenuButton, NavDesktop, NavMobile } from "./styled";
+import { useCallback, useMemo, useState } from "react";
 
 import { NavLinkComp as NavLink } from "./NavLink";
 import { Sidenav } from "./Sidenav";
-import { Text } from "components";
 import close from "images/close.svg";
 import menu from "images/menu.svg";
 import { navLinks } from "data";
-import styles from "./nav.module.css";
 
 export const Navbar = (): JSX.Element => {
   const [openSidenav, setOpenSidenav] = useState( false );
 
-  const toggleSidenav = () => setOpenSidenav( !openSidenav );
+  const toggleSidenav = useCallback(() => setOpenSidenav( !openSidenav ), [openSidenav]);
 
-  const renderMenuButton = ( icon ) => (
-    <button className={ styles.menuIcon } onClick={ toggleSidenav }>
-      {/* @ts-ignore-next-line */}
-      <img src={ icon === "close" ? close : menu } alt={ icon === "close" ? "Close Menu" : "Open Menu" } />
-    </button>
-  );
+  const renderMenuButton = useMemo(() => {
+    const icon = openSidenav ? close : menu;
+
+    return (
+      <MenuButton handleClick={ toggleSidenav } square variant="tertiary">
+        {/* @ts-ignore-next-line */}
+        <img alt="Toggle Menu" src={icon} />
+      </MenuButton>
+    );
+  }, [openSidenav, toggleSidenav]);
 
   const renderLinks = useMemo(() => {
     return navLinks.map(link => {
@@ -34,26 +37,29 @@ export const Navbar = (): JSX.Element => {
     });
   }, []);
 
+  const renderSidenav = useMemo(() => {
+    if (!openSidenav) return null;
+
+    return <Sidenav toggleSidenav={toggleSidenav} />;
+  }, [openSidenav, toggleSidenav]);
+
   return (
     <>
-      <nav className={ styles.navMobile }>
-        <a className={ styles.logo } href="/home">
-          <Text as="h1" className={ styles.logoText } color="--primary_700" size="xl">On Par</Text>
-        </a>
-        { openSidenav ? renderMenuButton( "close" ) : renderMenuButton( "menu" ) }
-      </nav>
-      { openSidenav && <Sidenav toggleSidenav={toggleSidenav} /> }
+      <NavMobile>
+        <Logo to="/home">
+          <LogoText as="h1" size="xl">On Par</LogoText>
+        </Logo>
+        { renderMenuButton }
+      </NavMobile>
+      { renderSidenav }
 
-      <nav className={ styles.navDesktop }>
-        <a className={ styles.logo } href="/home">
-          <Text as="h1" className={ styles.logoText } color="--primary_700" size="xl">On Par</Text>
-        </a>
-
+      <NavDesktop>
+        <Logo to="/home">
+          <LogoText as="h1" size="xl">On Par</LogoText>
+        </Logo>
         { renderLinks }
-        <div className={ styles.footer }>
-          <p>© { new Date().getFullYear() }</p>
-        </div>
-      </nav>
+        <Footer>© { new Date().getFullYear() }</Footer>
+      </NavDesktop>
     </>
   );
 };
