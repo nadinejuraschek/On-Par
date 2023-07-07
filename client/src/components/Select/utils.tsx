@@ -11,8 +11,8 @@ export const getSelectStyles = (icon = '') => ({
     borderRadius: '0.8rem',
     boxShadow: 'var(--shadow_xs)',
     height: '4rem',
-    padding: icon ? '0 0 0 4rem' : '0 0 0 1.2rem',
     minHeight: '4rem',
+    padding: icon ? '0 0 0 4rem' : '0 0 0 1.2rem',
   }),
   singleValue: (baseStyles: { [key: string]: string }) => ({
     ...baseStyles,

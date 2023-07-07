@@ -1,9 +1,8 @@
+import { ErrorText, Field, IconInputWrapper, StyledIcon, StyledSelect } from "./styled";
 import { getSelectStyles, selectTheme } from './utils';
 
 import { ISelect } from "./types"
-import SelectComp from 'react-select';
 import { Text } from "components";
-import styles from './select.module.css';
 import { useMemo } from 'react';
 
 export const Select = ({
@@ -24,8 +23,7 @@ export const Select = ({
   value,
 }: ISelect): JSX.Element => {
   const selectInput = useMemo(() => (
-    <SelectComp
-      className={ styles.select }
+    <StyledSelect
       classNamePrefix="selectInput"
       defaultValue={defaultValue}
       isDisabled={disabled}
@@ -55,22 +53,40 @@ export const Select = ({
     value,
   ]);
 
+  const renderLabel = useMemo(() => {
+    if (!label) return null;
+
+    return (
+      <Text as="label" htmlFor={ name } size="sm" weight="bold">
+        { label }
+      </Text>
+    );
+  }, [label, name]);
+
+  const renderIcon = useMemo(() => {
+    if (!icon) return null;
+
+    return <StyledIcon className={ `${ icon } icon` } />;
+  }, [icon]);
+
+  const renderError = useMemo(() => {
+    if (!error) return null;
+
+    return <ErrorText as="p" color="--error_300" size="xs" >{ error }</ErrorText>;
+  }, [error]);
+
   if (onlyInput) {
     return selectInput;
   }
 
   return (
-    <div className={ `${className} ${styles.field}` }>
-      {label && (
-        <Text as="label" className={ styles.label } htmlFor={ name } size="sm" weight="bold">
-          { label }
-        </Text>
-      )}
-      <div className={ styles.iconInputWrapper }>
-        {selectInput}
-        { icon && <i className={ `${ icon } icon inputIcon` }></i> }
-      </div>
-      { error && <Text as="p" className={ styles.error} color="--error_300" size="xs" >{ error }</Text> }
-    </div>
+    <Field className={className} hasError={error}>
+      { renderLabel }
+      <IconInputWrapper>
+        { selectInput }
+        { renderIcon }
+      </IconInputWrapper>
+      { renderError }
+    </Field>
   );
 };

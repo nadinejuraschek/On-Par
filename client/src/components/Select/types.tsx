@@ -19,3 +19,7 @@ export interface ISelect {
 }
 
 export type TSelectOption = { label: string, value: string };
+
+export interface IStyledField {
+  hasError: boolean;
+}
