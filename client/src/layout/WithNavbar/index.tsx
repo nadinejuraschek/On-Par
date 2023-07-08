@@ -1,5 +1,5 @@
 import { Navbar, Text } from "components";
-
+import { StyledLayout, StyledView } from "./styled";
 import { ILayoutWithNavbar } from './types';
 import { UserProvider } from 'contexts';
 import { useMemo } from 'react';
@@ -13,15 +13,15 @@ export const LayoutWithNavbar = ({ children, headerTitle }: ILayoutWithNavbar): 
 
   return (
     <UserProvider>
-      <div className="layout">
+      <StyledLayout>
         <Navbar />
-        <div className="page-container">
+        <StyledView>
           <main>
             { renderHeader }
             { children }
           </main>
-        </div>
-      </div>
+        </StyledView>
+      </StyledLayout>
     </UserProvider>
   );
 }

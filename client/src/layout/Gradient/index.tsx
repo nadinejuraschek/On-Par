@@ -1,8 +1,7 @@
-import { ReactNode } from 'react';
-import styles from './gradient.module.css';
+import { PropsWithChildren } from 'react';
 
-export const LayoutGradient = ({ children }: { children: ReactNode }): JSX.Element => (
-  <div className={ styles.gradient }>
+export const LayoutGradient = ({ children }: PropsWithChildren): JSX.Element => (
+  <div className="gradient">
     { children }
   </div>
 );

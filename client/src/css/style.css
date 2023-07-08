@@ -104,30 +104,30 @@
   --overlay_white: #f9fafb66;
 }
 
+/****************************************************************************
+ PAGE LAYOUT
+****************************************************************************/
 html {
   font-size: 10px;
 }
 
-/****************************************************************************
- PAGE LAYOUT
-****************************************************************************/
 body {
   font-family: var(--font_regular);
   background-color: var(--white);
   color: var(--grey_800);
 }
 
-.layout {
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: 70px calc(100vh - 70px);
-}
+.gradient {
+  background-image: url(../images/gradient.svg);
+  background-repeat: no-repeat;
+  background-size: cover;
 
-.page-container {
-  grid-column: 1 / -1;
-  grid-row: 2 / 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-  overflow: auto;
+  min-height: 100vh;
+  width: 100vw;
 }
 
 main {
@@ -160,40 +160,6 @@ img {
   main {
     height: 100vh;
     padding: 40px;
-  }
-
-  .layout {
-    background-image: linear-gradient(to bottom, #b9c87940, var(--white));
-    display: grid;
-    grid-template-columns: 150px auto;
-
-    position: relative;
-  }
-
-  .layout::before {
-    content: '';
-
-    background-image: linear-gradient(
-      to bottom,
-      var(--primary_50),
-      var(--white)
-    );
-
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: -1;
-
-    height: 50vh;
-    width: 100%;
-  }
-
-  .page-container {
-    background-color: var(--grey_25);
-    border-radius: 40px 0 0 0;
-    grid-column: 2 / 3;
-    grid-row: 1 / -1;
-    width: calc(100vw - 150px);
   }
 }
 
