@@ -1,8 +1,8 @@
-import styles from "./sandbox.module.css";
+import { Container } from "./styled";
 
 export const Sandbox = (): JSX.Element => {
   return (
-    <div className={ styles.container }>
-    </div>
+    <Container>
+    </Container>
   );
 }

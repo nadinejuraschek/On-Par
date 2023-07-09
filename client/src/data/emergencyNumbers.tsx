@@ -4,7 +4,7 @@ export const emergencyNumbers = {
   headerRows: [
     {
       cells: [
-        { value: "" },
+        { value: "Contact" },
         { value: "Number" },
         { value: "When to Call" },
       ]
