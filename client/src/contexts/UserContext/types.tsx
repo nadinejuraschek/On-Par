@@ -4,6 +4,12 @@ export interface IUserProvider {
   children: ReactNode;
 }
 
+export type TUserPermissions = {
+  shareBirthday: boolean;
+    shareEmail: boolean;
+    shareLastName: boolean;
+};
+
 export type TUser = {
   _id: string;
   birthday?: Date;
@@ -14,11 +20,7 @@ export type TUser = {
   firstname: string;
   lastname: string;
   location?: string;
-  permissions: {
-    shareBirthday: boolean;
-    shareEmail: boolean;
-    shareLastName: boolean;
-  };
+  permissions: TUserPermissions;
   role?: string;
   startDate: string;
 };

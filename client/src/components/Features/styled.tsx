@@ -1,7 +1,7 @@
-import { Card } from 'components';
-import { Text } from '../Text';
+import { Card } from "components";
+import styled from "styled-components";
+import { Text } from "../Text";
 
-import styled from 'styled-components';
 
 export const StyledCard = styled(Card)`
   text-align: center;

@@ -1,7 +1,7 @@
-import styled, { css } from 'styled-components';
+import styled, { css } from "styled-components";
 
-import { IStyledTextarea } from './types';
-import { Text } from '../Text';
+import { IStyledTextarea } from "./types";
+import { Text } from "../Text";
 
 export const Field = styled.div`
   display: flex;
@@ -24,7 +24,7 @@ export const StyledTextarea = styled.textarea<IStyledTextarea>`
   padding: 0.8rem 1.2rem;
   transition: color 0.1s ease, border-color 0.1s ease;
 
-  width: ${({ fullWidth }) => fullWidth ? '100%' : 'auto'};
+  width: ${({ fullWidth }) => fullWidth ? "100%" : "auto"};
 
   &::placeholder {
     color: var(--grey_500);

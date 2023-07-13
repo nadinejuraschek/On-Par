@@ -1,5 +1,5 @@
-import { Text } from "../../Text";
 import styled from "styled-components";
+import { Text } from "../../Text";
 
 export const SideNavMobile = styled.div`
   background-color: var(--grey_25);

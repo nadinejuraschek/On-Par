@@ -1,5 +1,5 @@
-import { IStyledHeader } from './types';
-import styled from 'styled-components';
+import styled from "styled-components";
+import { IStyledHeader } from "./types";
 
 export const StyledModal = styled.div`
   background-color: var(--white);
@@ -49,7 +49,7 @@ export const Overlay = styled.div`
 export const Header = styled.div<IStyledHeader>`
   display: flex;
   align-items: center;
-  justify-content: ${({ hasTitle }) => hasTitle ? 'space-between' : 'flex-end'};
+  justify-content: ${({ hasTitle }) => hasTitle ? "space-between" : "flex-end"};
   gap: 2rem;
 
   height: 4rem;

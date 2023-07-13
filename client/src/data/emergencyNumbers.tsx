@@ -4,10 +4,8 @@ export const emergencyNumbers = {
   headerRows: [
     {
       cells: [
-        { value: "Contact" },
-        { value: "Number" },
-        { value: "When to Call" },
-      ]
+        { value: "Contact" }, { value: "Number" }, { value: "When to Call" },
+      ],
     },
   ],
   contentRows: [
@@ -23,9 +21,9 @@ export const emergencyNumbers = {
               <li>legal trouble</li>
               <li>serious medical issue</li>
             </ul>
-          )
+          ),
         },
-      ]
+      ],
     },
     {
       cells: [
@@ -41,30 +39,24 @@ export const emergencyNumbers = {
               <li>Elevator Rescue</li>
               <li>Beach or Water - Related Emergency</li>
             </ul>
-          )
+          ),
         },
-      ]
+      ],
     },
     {
       cells: [
-        { value: "Local Police Department" },
-        { value: "" },
-        { value: "Non-Emergency Situation that requires help from a police officer." },
-      ]
+        { value: "Local Police Department" }, { value: "" }, { value: "Non-Emergency Situation that requires help from a police officer." },
+      ],
     },
     {
       cells: [
-        { value: "Poison Control" },
-        { value: "+1 (800) 222-1222" },
-        { value: "Reaches the American Association of Poison Control." },
-      ]
+        { value: "Poison Control" }, { value: "+1 (800) 222-1222" }, { value: "Reaches the American Association of Poison Control." },
+      ],
     },
     {
       cells: [
-        { value: "Animal Poison Control" },
-        { value: "+1 (888) 426-4435" },
-        { value: "Reaches the ASPCA Animal Poison Control Center. Call if the family's pet may have ingested a poisonous substance." },
-      ]
+        { value: "Animal Poison Control" }, { value: "+1 (888) 426-4435" }, { value: "Reaches the ASPCA Animal Poison Control Center. Call if the family's pet may have ingested a poisonous substance." },
+      ],
     },
   ],
 };

@@ -1,13 +1,11 @@
 import { PeopleList, Text } from 'components';
 import { mockHostChildren, mockHostParents } from "data";
 
-import styles from './hostFamilyInfo.module.css';
-
 export const HostFamilyInfo = (): JSX.Element => {
   return (
-    <div className={ styles.hostfamily }>
+    <div>
       <Text as="h3" size="lg" weight="bold">Host Family Info</Text>
-      <div className={ styles.familyInfo }>
+      <div>
         <div>
           {/* <Input
             handleChange={ setFamilyID }

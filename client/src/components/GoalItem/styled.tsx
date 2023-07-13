@@ -1,7 +1,7 @@
-import { IStyledItem, IStyledLabel } from './types';
-import styled, { css } from 'styled-components';
+import styled, { css } from "styled-components";
+import { IStyledItem, IStyledLabel } from "./types";
 
-import { Text } from '../Text';
+import { Text } from "../Text";
 
 export const Overlay = styled.div`
   display: none;
@@ -29,7 +29,7 @@ export const StyledItem = styled.li<IStyledItem>`
   box-shadow: var(--shadow_xs);
   opacity: ${({ isChecked }) => isChecked ? 0.4 : 1};
   overflow: hidden;
-  cursor: ${({ isChecked }) => isChecked ? 'unset' : 'pointer'};
+  cursor: ${({ isChecked }) => isChecked ? "unset" : "pointer"};
 
   list-style-type: none;
 
@@ -71,5 +71,5 @@ export const StyledIcon = styled.img`
 `;
 
 export const Label = styled(Text)<IStyledLabel>`
-  text-decoration: ${({ isChecked }) => isChecked ? 'line-through' : 'unset'};
+  text-decoration: ${({ isChecked }) => isChecked ? "line-through" : "unset"};
 `;

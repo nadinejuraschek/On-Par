@@ -1,6 +1,6 @@
-import { IStyledInput } from './types';
-import { Text } from '../Text';
-import styled from 'styled-components';
+import styled from "styled-components";
+import { IStyledInput } from "./types";
+import { Text } from "../Text";
 
 export const Field = styled.div`
   display: flex;
@@ -32,11 +32,11 @@ export const StyledInput = styled.input<IStyledInput>`
   font-size: 1.4rem;
   line-height: 2rem;
   padding: 0 1.2rem;
-  padding-left: ${({ hasIcon }) => hasIcon ? '4rem' : '1.2rem'};
+  padding-left: ${({ hasIcon }) => hasIcon ? "4rem" : "1.2rem"};
   transition: color 0.1s ease, border-color 0.1s ease;
 
   height: 4rem;
-  width: ${({ fullWidth }) => fullWidth ? '100%' : 'auto'};
+  width: ${({ fullWidth }) => fullWidth ? "100%" : "auto"};
 
   &::placeholder {
     color: var(--grey_500);

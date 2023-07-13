@@ -1,3 +1,6 @@
 node_modules
 public
 .eslintrc.js
+.gitignore
+.env
+global.d.ts

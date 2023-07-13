@@ -1,7 +1,7 @@
+import SelectComp from "react-select";
 import styled, { css } from "styled-components";
 
 import { IStyledField } from "./types";
-import SelectComp from 'react-select';
 import { Text } from "../Text";
 
 export const Field = styled.div<IStyledField>`

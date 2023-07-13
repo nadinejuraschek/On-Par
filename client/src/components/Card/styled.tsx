@@ -1,6 +1,6 @@
-import styled, { css } from 'styled-components';
+import styled, { css } from "styled-components";
 
-import { ICard } from './types';
+import { ICard } from "./types";
 
 export const StyledCard = styled.div<ICard>`
   background-color: var(--white);

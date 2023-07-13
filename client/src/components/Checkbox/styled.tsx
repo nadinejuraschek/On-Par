@@ -1,5 +1,5 @@
-import { Text } from '../Text';
-import styled from 'styled-components';
+import styled from "styled-components";
+import { Text } from "../Text";
 
 export const Field = styled.div`
   display: flex;
@@ -8,7 +8,7 @@ export const Field = styled.div`
 `;
 
 export const StyledCheckbox = styled.input.attrs({
-  type: 'checkbox',
+  type: "checkbox",
 })`
   appearance: none;
   background-color: var(--primary_25);

@@ -1,7 +1,7 @@
 import styled from "styled-components";
+import { IStyledHours } from "./types";
 import { Button } from "../../../Button";
 import { Text } from "../../../Text";
-import { IStyledHours } from "./types";
 
 export const StyledItem = styled.li`
   display: grid;
@@ -14,8 +14,8 @@ export const StyledItem = styled.li`
 `;
 
 export const Hours = styled(Text)<IStyledHours>`
-  color: ${({ isOvertime }) => isOvertime ? 'var(--error_600)' : '#2c662d'};
-  font-weight: ${({ isOvertime }) => isOvertime ? 'bold' : 'normal'};
+  color: ${({ isOvertime }) => isOvertime ? "var(--error_600)" : "#2c662d"};
+  font-weight: ${({ isOvertime }) => isOvertime ? "bold" : "normal"};
   width: 3rem;
 `;
 

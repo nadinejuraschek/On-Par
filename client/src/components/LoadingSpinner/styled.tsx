@@ -1,4 +1,4 @@
-import styled, { keyframes } from 'styled-components';
+import styled, { keyframes } from "styled-components";
 
 const spinner = keyframes`
   0%, 20%, 80%, 100% {

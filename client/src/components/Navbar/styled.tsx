@@ -1,7 +1,7 @@
-import { Button } from "../Button";
 import { Link } from "react-router-dom";
+import styled from "styled-components";
+import { Button } from "../Button";
 import { Text } from "../Text";
-import styled from 'styled-components';
 
 export const NavMobile = styled.nav`
   background-color: var(--primary_50);
