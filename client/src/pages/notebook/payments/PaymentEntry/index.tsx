@@ -1,13 +1,11 @@
 import * as dayjs from 'dayjs';
 import * as duration from 'dayjs/plugin/duration';
 import * as isSameOrBefore from 'dayjs/plugin/isSameOrBefore';
-
-import { Badge, Button, DatePicker } from 'components';
+import { Button } from 'components';
 import { useCallback, useContext, useMemo, useState } from 'react';
-
+import { Actions, Badges, Date, ItemIcon, LateBadge, ListItem, StyledDatePicker, Week } from './styled';
 import { IPaymentEntry } from "./types";
 import { UserContext } from 'contexts';
-import styles from "./payments.module.css";
 
 dayjs.extend(duration);
 dayjs.extend(isSameOrBefore);
@@ -51,8 +49,7 @@ export const PaymentEntry = ( {
     }
 
     return (
-      <DatePicker
-        className={ styles.inlineInput }
+      <StyledDatePicker
         format="MM/dd/yyyy"
         handleChange={handleDateChange}
         name="date"
@@ -63,28 +60,19 @@ export const PaymentEntry = ( {
 
   const renderBadges = useMemo(() => {
     if (!late) return null;
-    return <Badge className={ styles.lateBadge } icon={<i className="clock outline icon"></i>} label="Paid Late" />;
+    return <LateBadge icon={<i className="clock outline icon"></i>} label="Paid Late" />;
   }, [late]);
 
   const renderButtonIcon = useMemo(() => showEdit ? <i className="checkmark icon"></i> : <i className="edit outline icon"></i>, [showEdit]);
 
   return (
-    <div className={ `${ styles.listItem } ${
-        late ? styles.paidLate : ""
-      }` }>
-      <div className={ styles.itemIcon }>
-        { renderWarningIcon }
-      </div>
-      <div className={ styles.itemWeek }>{ week }</div>
-      <div className={ styles.itemDate }>
-        { renderDateColumn }
-      </div>
-      <div className={ styles.itemDue }>
-        {renderBadges}
-      </div>
-      <div className={ styles.actions }>
+    <ListItem paidLate={late}>
+      <ItemIcon>{ renderWarningIcon }</ItemIcon>
+      <Week>{ week }</Week>
+      <Date>{ renderDateColumn }</Date>
+      <Badges>{renderBadges}</Badges>
+      <Actions>
         <Button
-          className={ styles.actionButton }
           handleClick={(event) => {
             if (!showEdit) {
               setShowEdit(!showEdit);
@@ -97,7 +85,7 @@ export const PaymentEntry = ( {
         >
           {renderButtonIcon}
         </Button>
-      </div>
-    </div>
+      </Actions>
+    </ListItem>
   );
 };

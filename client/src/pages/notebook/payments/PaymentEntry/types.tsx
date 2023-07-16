@@ -5,3 +5,7 @@ export interface IPaymentEntry {
   payment: TPayment;
   paymentid: string;
 }
+
+export interface IStyledListItem {
+  paidLate: boolean;
+}

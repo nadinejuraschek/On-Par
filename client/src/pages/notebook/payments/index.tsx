@@ -1,11 +1,9 @@
 import * as dayjs from 'dayjs';
-
-import { Card, LoadingSpinner } from "components";
+import { LoadingSpinner } from "components";
 import { useContext, useMemo } from "react";
-
+import { CardContainer, List, ListHeader, ListHeaderCol } from "./styled";
 import { PaymentEntry } from "./PaymentEntry";
 import { UserContext } from "contexts";
-import styles from "./payments.module.css";
 import { usePayments } from 'hooks';
 
 export const Payments = (): JSX.Element => {
@@ -37,17 +35,17 @@ export const Payments = (): JSX.Element => {
   }
 
   return (
-    <Card className={ styles.container }>
-      <div className={ styles.listHeader }>
-        <div className={ styles.icon }></div>
-        <div className={ styles.week }>Week</div>
-        <div className={ styles.date }>Paid On</div>
-        <div className={ styles.due }></div>
-        <div className={ styles.actions }></div>
-      </div>
-      <div className={ styles.list }>
+    <CardContainer>
+      <ListHeader>
+        <ListHeaderCol></ListHeaderCol>
+        <ListHeaderCol>Week</ListHeaderCol>
+        <ListHeaderCol>Paid On</ListHeaderCol>
+        <ListHeaderCol></ListHeaderCol>
+        <ListHeaderCol></ListHeaderCol>
+      </ListHeader>
+      <List>
         {renderEntries}
-      </div>
-    </Card>
+      </List>
+    </CardContainer>
   );
 };
