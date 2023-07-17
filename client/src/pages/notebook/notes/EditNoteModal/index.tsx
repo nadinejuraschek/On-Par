@@ -1,40 +1,37 @@
-import * as dayjs from "dayjs";
 import { Button, Input, Modal, Textarea } from "components";
 import { ChangeEvent, FormEvent, useCallback, useMemo, useState } from 'react';
-import { IAddNoteModal } from './types';
+import { IEditNoteModal } from './types';
 
-export const AddNoteModal = ({ createNote, toggleModal }: IAddNoteModal): JSX.Element => {
-  const currentDate = dayjs().format("MMMM D, YYYY");
-  const [newNote, setNewNote] = useState( { date: currentDate, text: "", title: "" } );
+export const EditNoteModal = ({
+  editNote,
+  handleEditCancel,
+  note,
+}: IEditNoteModal): JSX.Element => {
+  const [updatedNote, setUpdatedNote] = useState(note);
 
   const handleSubmit = useCallback((event: FormEvent): void => {
     event.preventDefault();
 
-    createNote(newNote, () => {
-      toggleModal();
-      setNewNote( { date: currentDate, text: "", title: "" } );
-    });
-    }, [createNote, currentDate, newNote, toggleModal]);
+    editNote(note._id, updatedNote, handleEditCancel);
+    }, [editNote, handleEditCancel, note, updatedNote]);
 
   const handleChange = useCallback((event: ChangeEvent): void => {
     const target = event.target as HTMLInputElement;
-    const name = target.name;
-    const value = target.value;
-    setNewNote( newNote => ( { ...newNote, [name]: value } ) )
+    setUpdatedNote( (prev) => ( { ...prev, [target.name]: target.value } ) )
   }, []);
 
   // TODO: move submit to form instead of button
   const addNoteModalActions = useMemo(() => (
     <>
-      <Button fullWidth handleClick={toggleModal}>Cancel</Button>
+      <Button fullWidth handleClick={handleEditCancel}>Cancel</Button>
       <Button fullWidth handleClick={handleSubmit} type="submit" variant="primary">Save</Button>
     </>
-  ), [handleSubmit, toggleModal]);
+  ), [handleEditCancel, handleSubmit]);
 
   return (
     <Modal
       actions={addNoteModalActions}
-      handleClose={toggleModal}
+      handleClose={handleEditCancel}
       title="New Note"
     >
       <form>
@@ -44,7 +41,7 @@ export const AddNoteModal = ({ createNote, toggleModal }: IAddNoteModal): JSX.El
           name="title"
           handleChange={ handleChange }
           placeholder="Title"
-          value={ newNote.title }
+          value={ updatedNote.title }
         />
         <Textarea
           fullWidth
@@ -52,7 +49,7 @@ export const AddNoteModal = ({ createNote, toggleModal }: IAddNoteModal): JSX.El
           name="text"
           handleChange={ handleChange }
           placeholder="Note"
-          value={ newNote.text }
+          value={ updatedNote.text }
         />
       </form>
     </Modal>

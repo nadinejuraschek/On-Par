@@ -1,60 +1,84 @@
 import { Button, LoadingSpinner } from "components";
 import { useCallback, useMemo, useState } from "react";
-
+import { Grid, Header, List } from "./styled";
 import { AddNoteModal } from "./AddNoteModal";
+import { EditNoteModal } from "./EditNoteModal";
 import { NoteCard } from "./NoteCard";
 import { Suggestions } from "./Suggestions";
 import { TNote } from "types";
-import styles from "./notes.module.css";
 import { useNotes } from "hooks";
 
 export const Notes = (): JSX.Element => {
   const [openAddNoteModal, setOpenAddNoteModal] = useState(false);
+  const [openEditNoteModal, setOpenEditNoteModal] = useState(false);
+  const [originalNote, setOriginalNote] = useState<TNote | null>(null);
 
   const { createNote, deleteNote, editNote, loading, notes } = useNotes();
 
-  const toggleModal = useCallback(() => setOpenAddNoteModal(!openAddNoteModal), [openAddNoteModal]);
+  const handleOpenEdit = useCallback((note: TNote) => {
+    setOpenEditNoteModal(true);
+    setOriginalNote(note);
+  }, []);
+
+  const handleEditCancel = useCallback(() => {
+    setOpenEditNoteModal(false);
+    setOriginalNote(null);
+  }, []);
 
   const renderAddNoteModal = useMemo(() => {
     if (!openAddNoteModal) return null;
 
-    return <AddNoteModal createNote={createNote} toggleModal={toggleModal} />;
-  }, [createNote, openAddNoteModal, toggleModal]);
+    return (
+      <AddNoteModal
+        createNote={createNote}
+        toggleModal={() => setOpenAddNoteModal(!openAddNoteModal)}
+      />
+    );
+  }, [createNote, openAddNoteModal]);
+
+  const renderEditNoteModal = useMemo(() => {
+    if (!openEditNoteModal) return null;
+
+    return (
+      <EditNoteModal
+        editNote={editNote}
+        handleEditCancel={handleEditCancel}
+        note={originalNote}
+      />
+    );
+  }, [editNote, handleEditCancel, openEditNoteModal, originalNote]);
 
   const renderNotes = useMemo(() => {
     if (loading) return <LoadingSpinner />;
 
     return notes.map((note: TNote, index: number) => {
-      const color = index % 3 === 0 ? "warning" : index % 2 === 0 ? "secondary" : "tertiary";
-      const { _id, date, text, title } = note;
+      const color = index % 3 === 0 ? "yellow" : index % 2 === 0 ? "blue" : "pink";
         return (
           <NoteCard
             color={ color }
-            key={ _id }
-            noteid={ _id }
-            date={ date }
-            text={ text }
-            title={ title }
             deleteNote={deleteNote}
-            editNote={ editNote }
+            handleOpenEdit={handleOpenEdit}
+            key={ note._id }
+            note={note}
           />
         )});
-  }, [deleteNote, editNote, loading, notes]);
+  }, [deleteNote, handleOpenEdit, loading, notes]);
 
   return (
     <>
-      <div className={ styles.grid }>
+      <Grid>
         <Suggestions />
-        <div className={ styles.header }>
-          <Button handleClick={toggleModal} variant="primary">
+        <Header>
+          <Button handleClick={() => setOpenAddNoteModal(true)} variant="primary">
             <i className="plus icon"></i> Add Note
           </Button>
-        </div>
-        <div className={ styles.list }>
+        </Header>
+        <List>
           { renderNotes }
-        </div>
-      </div>
+        </List>
+      </Grid>
       {renderAddNoteModal}
+      {renderEditNoteModal}
     </>
   );
 };
