@@ -1,9 +1,8 @@
-import { Button, Select } from "components";
+import { Select } from "components";
 import { useCallback, useMemo, useState } from "react";
-
+import { Actions, Content, Filter, Layout, StyledButton } from "./styled";
 import { AddGoalModal } from "./AddGoalModal";
 import { GoalsList } from './List';
-import styles from "./goals.module.css";
 import { useGoals } from "hooks";
 
 export const Goals = (): JSX.Element => {
@@ -61,9 +60,9 @@ export const Goals = (): JSX.Element => {
 
   return (
     <>
-      <div className={ styles.layout }>
-        <div className={ styles.actions }>
-          <div className={ styles.filter }>
+      <Layout>
+        <Actions>
+          <Filter>
             <Select
               clearable
               handleChange={(selectedFilter) => setFilter(selectedFilter)}
@@ -73,17 +72,17 @@ export const Goals = (): JSX.Element => {
               placeholder="Filter by"
               value={filter}
             />
-          </div>
-          <Button className={styles.addButton} handleClick={toggleModal} variant="primary">
+          </Filter>
+          <StyledButton handleClick={toggleModal} variant="primary">
             <i className="plus icon"></i> Add Goal
-          </Button>
-        </div>
-        <div className={ styles.content }>
+          </StyledButton>
+        </Actions>
+        <Content>
           {renderThisMonthGoals}
           {renderUpcomingGoals}
           {renderCompletedGoals}
-        </div>
-      </div>
+        </Content>
+      </Layout>
       {renderAddGoalModal}
     </>
   );

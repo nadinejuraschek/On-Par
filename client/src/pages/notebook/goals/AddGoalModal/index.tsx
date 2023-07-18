@@ -1,8 +1,7 @@
 import { Button, DatePicker, Modal, Textarea, ToggleGroup } from 'components';
 import { ChangeEvent, useCallback, useMemo, useState } from 'react';
-
 import { IAddGoalModal } from './types';
-import styles from './addGoalModal.module.css';
+import { Form } from './styled';
 import { useGoals } from 'hooks';
 
 export const AddGoalModal = ({ toggleModal }: IAddGoalModal): JSX.Element => {
@@ -29,7 +28,7 @@ export const AddGoalModal = ({ toggleModal }: IAddGoalModal): JSX.Element => {
   const actions = useMemo(() => (
     <>
       <Button fullWidth handleClick={toggleModal}>Cancel</Button>
-      <Button handleClick={handleSubmit} fullWidth type="submit" variant="primary">Save</Button>
+      <Button fullWidth handleClick={handleSubmit} type="submit" variant="primary">Save</Button>
     </>
   ), [handleSubmit, toggleModal]);
 
@@ -52,7 +51,7 @@ export const AddGoalModal = ({ toggleModal }: IAddGoalModal): JSX.Element => {
       handleClose={toggleModal}
       title="New Goal"
     >
-      <form className={ styles.form }>
+      <Form>
         <ToggleGroup
           handleChange={(val: string) => setNewGoal((prev) => ({ ...prev, type: val }))}
           name="type"
@@ -75,7 +74,7 @@ export const AddGoalModal = ({ toggleModal }: IAddGoalModal): JSX.Element => {
           name="dueDate"
           value={newGoal.dueDate}
         />
-      </form>
+      </Form>
     </Modal>
   );
 }

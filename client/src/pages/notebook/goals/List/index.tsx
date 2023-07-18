@@ -1,7 +1,6 @@
 import { GoalItem, LoadingPlaceholder, Text } from 'components';
-
 import { IGoalsList } from './types';
-import styles from './goalsList.module.css';
+import { Group, List } from './styled';
 import { useMemo } from 'react';
 
 export const GoalsList = ({ filter, items, loading, title }: IGoalsList): JSX.Element => {
@@ -32,11 +31,11 @@ export const GoalsList = ({ filter, items, loading, title }: IGoalsList): JSX.El
   if (loading) return <LoadingPlaceholder />;
 
   return (
-    <div className={ styles.group }>
+    <Group>
       <Text as="h3" size="lg" weight="bold">{ title }</Text>
-      <ul className={ styles.list }>
+      <List>
         {renderItems}
-      </ul>
-    </div>
+      </List>
+    </Group>
   );
 }
