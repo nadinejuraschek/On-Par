@@ -1,16 +1,16 @@
 import { IGreeting } from "./types";
 import { Text } from "components";
 import blankProfile from "images/blankProfile.svg";
-import styles from "./greeting.module.css";
+import { Message, ProfileImage, Wrapper } from "./styled";
 import { useMemo } from "react";
 
 export const Greeting = ( { message, name }: IGreeting ): JSX.Element => {
-  const month = new Date().getMonth() + 1;
-  const day = new Date().getDate();
-  const date = `${ month }/${ day }`;
-  const time = new Date().getHours();
-
   const greeting = useMemo(() => {
+    const month = new Date().getMonth() + 1;
+    const day = new Date().getDate();
+    const date = `${ month }/${ day }`;
+    const time = new Date().getHours();
+
     if ( date === "12/24" || date === "12/25" ) {
       return `Merry Christmas, ${ name }!`;
     } else if ( date === "12/31" || date === "1/1" ) {
@@ -26,16 +26,16 @@ export const Greeting = ( { message, name }: IGreeting ): JSX.Element => {
     } else {
       return `Up so late, ${ name }?`;
     }
-  }, [date, name, time]);
+  }, [name]);
 
   return (
-    <div className={ styles.greeting }>
+    <Wrapper>
       {/* @ts-ignore-next-line */}
-      <img className={ styles.profile } src={ blankProfile } alt={ name } />
-      <div className={ styles.messages }>
+      <ProfileImage src={ blankProfile } alt={ name } />
+      <Message>
         <Text as="h2" size="lg" weight="bold">{ greeting }</Text>
         <Text as="h4" size="md">{ message }</Text>
-      </div>
-    </div>
+      </Message>
+    </Wrapper>
   );
 };

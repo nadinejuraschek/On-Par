@@ -1,6 +1,5 @@
 import { Button, GoalItem, LoadingSpinner, Text } from "components";
-
-import styles from "./goals.module.css";
+import { Wrapper } from "./styled";
 import { useGoals } from "hooks";
 import { useMemo } from "react";
 
@@ -26,10 +25,10 @@ export const Goals = (): JSX.Element => {
   }, [loading, thisMonthGoals]);
 
   return (
-    <div className={ styles.container }>
+    <Wrapper>
       <Text as="h3" size="lg" weight="bold">Goals</Text>
-      <div className={ styles.list }>{renderGoals}</div>
+      <div>{renderGoals}</div>
       <Button link="/notebook/goals" variant="primary">Go to Goals</Button>
-    </div>
+    </Wrapper>
   );
 };

@@ -1,9 +1,8 @@
 import * as dayjs from "dayjs";
-
 import { ProgressRing, Tabs } from "components";
 import { useEffect, useMemo, useState } from "react";
-
-import styles from "./countdown.module.css";
+import { Content, Wrapper } from "./styled";
+import { ICountdown } from "./types";
 
 export const COUNTDOWN_TABS = {
   DAYS: 0,
@@ -14,22 +13,19 @@ export const COUNTDOWN_TABS = {
 export const Countdown = ( {
   setMessage,
   startDate,
-}: {
-  setMessage: (message: string) => void;
-  startDate?: string;
-} ): JSX.Element => {
+}: ICountdown ): JSX.Element => {
   const [tab, setTab] = useState( COUNTDOWN_TABS.DAYS );
 
-  const tabs = [
+  const currentDate = useMemo(() => dayjs( new Date() ), []);
+  const daysPassed = useMemo(() => currentDate.diff( startDate, "days" ), [currentDate, startDate]);
+  const weeksPassed = useMemo(() => currentDate.diff( startDate, "weeks" ), [currentDate, startDate]);
+  const monthsPassed = useMemo(() => currentDate.diff( startDate, "months" ), [currentDate, startDate]);
+
+  const tabs = useMemo(() => ([
     { label: "Days", value: COUNTDOWN_TABS.DAYS },
     { label: "Weeks", value: COUNTDOWN_TABS.WEEKS },
     { label: "Months", value: COUNTDOWN_TABS.MONTHS },
-  ];
-
-  const currentDate = dayjs( new Date() );
-  const daysPassed = currentDate.diff( startDate, "days" );
-  const weeksPassed = currentDate.diff( startDate, "weeks" );
-  const monthsPassed = currentDate.diff( startDate, "months" );
+  ]), []);
 
   useEffect( () => {
     if ( daysPassed === 0 || daysPassed === 1 ) {
@@ -74,15 +70,15 @@ export const Countdown = ( {
   }, [daysPassed, monthsPassed, tab, weeksPassed]);
 
   return (
-    <div className={ styles.container }>
-      <div className={ styles.body }>
+    <Wrapper>
+      <Content>
         <ProgressRing
           radius={60}
           stroke={4}
           progress={ progress }
           label={ progressLabel }
         />
-      </div>
+      </Content>
       <Tabs
         activeTab={ tab }
         fullWidth
@@ -91,6 +87,6 @@ export const Countdown = ( {
         tabs={ tabs }
         variant="secondary"
       />
-    </div>
+    </Wrapper>
   );
 };
