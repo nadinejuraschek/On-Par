@@ -1,6 +1,5 @@
 import { Button, Text } from "components";
 import { useCallback, useMemo } from "react";
-
 import { TResource } from "types";
 import { resources } from "data";
 import { sortResources } from "./utils";

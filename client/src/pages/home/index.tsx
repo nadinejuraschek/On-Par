@@ -1,9 +1,19 @@
 import * as dayjs from "dayjs";
 import * as isSameOrAfter from 'dayjs/plugin/isSameOrAfter'
-
-import { Button, Card, Resources as ResourcesList, Text } from "components";
+import { Button, Resources as ResourcesList, Text } from "components";
 import { useCallback, useContext, useMemo, useState } from "react";
-
+import {
+  ButtonsWrapper,
+  CompletedYearCard,
+  CountdownCard,
+  Grid,
+  HeaderCard,
+  HoursCard,
+  MiscCard,
+  RemindersCard,
+  ResourcesCard,
+  TodayCard,
+} from "./styled";
 import { Countdown } from "./Countdown";
 import { Events } from "./Events";
 import { Goals } from "./Goals";
@@ -12,7 +22,6 @@ import { Quicklinks } from "./Quicklinks";
 import { UserContext } from "contexts";
 import { WorkhourSummary } from "./WorkhourSummary";
 import axios from "axios";
-import styles from "./home.module.css";
 import { useNavigate } from "react-router-dom";
 
 dayjs.extend(isSameOrAfter);
@@ -34,54 +43,62 @@ export const Home = (): JSX.Element => {
 
   const hasCompletedYear = useMemo(() => dayjs(new Date()).isSameOrAfter(user?.endDate), [user]);
 
-  return (
-    <div className={ styles.grid }>
-      <Card className={ styles.header }>
-        <Greeting message={ message } name={ user?.firstname } />
-        <div className={ styles.buttons }>
-          <Button link="/profile" variant="secondary">Profile</Button>
-          <Button handleClick={ handleLogout } variant="secondary">Log Out</Button>
-        </div>
-      </Card>
-
-      {hasCompletedYear ? (
+  const renderContent = useMemo(() => {
+    if (hasCompletedYear) {
+      return (
         <>
-          <Card className={ styles.complete }>
+          <CompletedYearCard>
             <Text size="xl" weight="bold">Congrats!</Text>
             <Text size="lg" weight="bold">You finished your au pair experience!</Text>
-          </Card>
+          </CompletedYearCard>
 
-          <Card className={ styles.resources }>
+          <ResourcesCard>
             <Text size="lg" weight="bold">Helpful Resources</Text>
             <ResourcesList />
-          </Card>
+          </ResourcesCard>
         </>
-      ) : (
-        <>
-          <Card className={ styles.hours }>
-            <WorkhourSummary />
-          </Card>
+      );
+    }
 
-          <Card className={ styles.today }>
-            <Events />
-          </Card>
+    return (
+      <>
+        <HoursCard>
+          <WorkhourSummary />
+        </HoursCard>
 
-          <Card className={ styles.reminders }>
-            <Goals />
-          </Card>
+        <TodayCard>
+          <Events />
+        </TodayCard>
 
-          <Card className={ styles.countdown }>
-            <Countdown
-              startDate={ user?.startDate }
-              setMessage={ setMessage }
-            />
-          </Card>
+        <RemindersCard>
+          <Goals />
+        </RemindersCard>
 
-          <Card className={ styles.misc }>
-            <Quicklinks />
-          </Card>
-        </>
-      )}
-    </div>
+        <CountdownCard>
+          <Countdown
+            startDate={ user?.startDate }
+            setMessage={ setMessage }
+          />
+        </CountdownCard>
+
+        <MiscCard>
+          <Quicklinks />
+        </MiscCard>
+      </>
+    );
+  }, [hasCompletedYear, user]);
+
+  return (
+    <Grid>
+      <HeaderCard>
+        <Greeting message={ message } name={ user?.firstname } />
+        <ButtonsWrapper>
+          <Button link="/profile" variant="secondary">Profile</Button>
+          <Button handleClick={ handleLogout } variant="secondary">Log Out</Button>
+        </ButtonsWrapper>
+      </HeaderCard>
+
+      {renderContent}
+    </Grid>
   );
 };
