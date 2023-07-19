@@ -1,4 +1,8 @@
-.flexCentered {
+import styled from "styled-components";
+import { Text } from "components";
+import { IStyledSection } from "./types";
+
+export const StyledMain = styled.main`
   margin: auto;
 
   display: flex;
@@ -6,9 +10,9 @@
   gap: 4rem;
 
   height: unset;
-}
+`;
 
-.section {
+export const StyledSection = styled.section<IStyledSection>`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -20,21 +24,23 @@
 
   height: 70vh;
   width: 100%;
-}
 
-.brand {
+  background-color: ${({ color }) => color && color};
+`;
+
+export const Brand = styled.span`
   font-family: var(--font_brand);
   font-size: 2.4rem;
-}
+`;
 
-.title {
+export const Title = styled(Text)`
   display: flex;
   gap: 1.4rem;
-}
+`;
 
-.subtitle {
+export const Subtitle = styled(Text)`
   font-size: 4rem;
   line-height: 5rem;
 
   max-width: 60%;
-}
+`;
