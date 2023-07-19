@@ -1,7 +1,7 @@
-/********************************************
- LOGIN, REGISTER
-********************************************/
-.formWrapper {
+import styled from "styled-components";
+import { Text } from "components";
+
+export const FormWrapper = styled.div`
   background-color: var(--white);
   border-radius: 2rem;
   filter: var(--shadow_sm);
@@ -14,28 +14,35 @@
   gap: 2rem;
 
   width: calc(100% - 4rem);
-}
 
-.form {
+  @media only screen and (min-width: 600px) {
+    padding: 4rem;
+
+    max-width: 500px;
+    width: 70%;
+  }
+`;
+
+export const Form = styled.form`
   display: flex;
   flex-direction: column;
   gap: 1.2rem;
 
   width: 100%;
-}
+`;
 
-.twoFields {
+export const FieldPair = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 2rem;
-}
 
-.twoFieldsInput {
-  width: 100%;
-}
+  @media only screen and (min-width: 600px) {
+    flex-direction: row;
+  }
+`;
 
-.divider {
+export const Divider = styled.div`
   position: relative;
 
   height: 4rem;
@@ -43,34 +50,17 @@
   display: flex;
   align-items: center;
   justify-content: center;
-}
 
-.divider hr {
-  border: none;
-  border-top: 1px solid var(--grey_400);
-  width: 100%;
-}
+  hr {
+    border: none;
+    border-top: 1px solid var(--grey_400);
+    width: 100%;
+  }
+`;
 
-.dividerText {
+export const DividerText = styled(Text)`
   position: absolute;
 
   background-color: var(--white);
   padding: 0 1.6rem;
-}
-
-@media only screen and (min-width: 600px) {
-  .formWrapper {
-    padding: 4rem;
-
-    max-width: 500px;
-    width: 70%;
-  }
-
-  .twoFields {
-    flex-direction: row;
-  }
-
-  .twoFieldsInput {
-    width: calc(100% - 1rem);
-  }
-}
+`;

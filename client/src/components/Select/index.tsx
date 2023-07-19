@@ -11,6 +11,7 @@ export const Select = ({
   defaultValue,
   disabled = false,
   error,
+  fullWidth = false,
   handleChange,
   icon,
   label,
@@ -80,7 +81,7 @@ export const Select = ({
   }
 
   return (
-    <Field className={className} hasError={error}>
+    <Field className={className} fullWidth={fullWidth} hasError={error}>
       { renderLabel }
       <IconInputWrapper>
         { selectInput }

@@ -36,7 +36,7 @@ export const DatePicker = ({
   }, [error]);
 
   return (
-    <div className={ `${styles.field} ${className ? className : ''}` }>
+    <div className={ `${styles.field} ${className ? className : ''} ${ fullWidth ? styles.fullWidth : '' }` }>
       {renderLabel}
       <div className={ `${styles.iconInputWrapper} ${ fullWidth ? styles.fullWidth : '' }` }>
         <DateTimePicker

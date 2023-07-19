@@ -35,7 +35,7 @@ export const Input = ( {
   }, [label, name]);
 
   return (
-    <Field className={className}>
+    <Field className={className} fullWidth={fullWidth}>
       { renderLabel }
       <IconInputWrapper>
         <StyledInput

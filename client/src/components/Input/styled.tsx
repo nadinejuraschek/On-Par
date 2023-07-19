@@ -1,8 +1,8 @@
 import styled from "styled-components";
-import { IStyledInput } from "./types";
+import { IStyledField, IStyledInput } from "./types";
 import { Text } from "../Text";
 
-export const Field = styled.div`
+export const Field = styled.div<IStyledField>`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -11,6 +11,8 @@ export const Field = styled.div`
 
   height: 9rem;
   min-width: 20rem;
+
+  width: ${({ fullWidth }) => fullWidth ? "100%" : "auto"};
 `;
 
 export const IconInputWrapper = styled.div`

@@ -14,6 +14,8 @@ export const Field = styled.div<IStyledField>`
   height: 9rem;
   min-width: 20rem;
 
+  width: ${({ fullWidth }) => fullWidth ? "100%" : "auto"};
+
   ${({ hasError }) => hasError && css`
     border-color: var(--error_300);
 

@@ -6,6 +6,7 @@ export interface ISelect {
   defaultValue?: TSelectOption;
   disabled?: boolean;
   error?: string;
+  fullWidth?: boolean;
   handleChange: (option: TSelectOption) => void;
   icon?: string;
   label?: string;
@@ -21,5 +22,6 @@ export interface ISelect {
 export type TSelectOption = { label: string, value: string };
 
 export interface IStyledField {
+  fullWidth: boolean;
   hasError: boolean;
 }

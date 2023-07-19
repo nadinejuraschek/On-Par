@@ -14,6 +14,10 @@ export interface IInput {
   value: string;
 }
 
+export interface IStyledField {
+  fullWidth: boolean;
+}
+
 export interface IStyledInput {
   fullWidth: boolean;
   hasError: boolean;

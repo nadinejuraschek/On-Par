@@ -1,11 +1,16 @@
 import { Button, DatePicker, Input, Select, Text } from "components";
 import { FormEvent, MouseEvent, useCallback, useContext, useState } from "react";
-
+import {
+  Divider,
+  DividerText,
+  FieldPair,
+  Form,
+  FormWrapper,
+} from "./styled";
 import { TSelectOption } from "components/Select/types";
 import { UserContext } from "contexts";
 import axios from "axios";
 import { countrySelectOptions } from "data";
-import styles from "./auth.module.css";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
@@ -72,12 +77,11 @@ export const Register = (): JSX.Element => {
   }
 
   return (
-    <div className={ styles.formWrapper }>
+    <FormWrapper>
       <Text as="h2" size="xl" weight="bold">Register</Text>
-      <form className={ styles.form } onSubmit={ handleSubmit }>
-        <div className={ styles.twoFields }>
+      <Form onSubmit={ handleSubmit }>
+        <FieldPair>
           <Input
-            className={ styles.twoFieldsInput }
             fullWidth
             handleChange={event => setFirstname( (event.target as HTMLInputElement).value )}
             icon="user"
@@ -87,7 +91,6 @@ export const Register = (): JSX.Element => {
             value={firstname}
           />
           <Input
-            className={ styles.twoFieldsInput }
             fullWidth
             handleChange={event => setLastname( (event.target as HTMLInputElement).value )}
             icon="user"
@@ -96,10 +99,9 @@ export const Register = (): JSX.Element => {
             placeholder="Last Name"
             value={lastname}
           />
-        </div>
-        <div className={ styles.twoFields }>
+        </FieldPair>
+        <FieldPair>
           <DatePicker
-            className={ styles.twoFieldsInput }
             format="MM/dd/yyyy"
             fullWidth
             handleChange={(startDate: Date) => setStartDate( startDate )}
@@ -109,7 +111,7 @@ export const Register = (): JSX.Element => {
             value={new Date(startDate)}
           />
           <Select
-            className={ styles.twoFieldsInput }
+            fullWidth
             handleChange={(option: TSelectOption) => setCountry(option)}
             icon="globe icon"
             label="Home Country"
@@ -117,7 +119,7 @@ export const Register = (): JSX.Element => {
             options={countrySelectOptions}
             value={country}
           />
-        </div>
+        </FieldPair>
         <Input
           fullWidth
           handleChange={event => setEmail( (event.target as HTMLInputElement).value )}
@@ -143,14 +145,14 @@ export const Register = (): JSX.Element => {
         <Button link="/login" variant="tertiary">
           Log In
         </Button>
-        <div className={ styles.divider }>
+        <Divider>
           <hr />
-          <Text className={ styles.dividerText }>OR</Text>
-          </div>
+          <DividerText>OR</DividerText>
+          </Divider>
         <Button handleClick={ handleGuest } variant="tertiary">
           Use Guest Account
         </Button>
-      </form>
-    </div>
+      </Form>
+    </FormWrapper>
   );
 };

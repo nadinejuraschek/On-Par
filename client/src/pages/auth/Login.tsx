@@ -1,9 +1,8 @@
 import { Button, Input, Text } from 'components';
 import { useContext, useState } from "react";
-
+import { Divider, DividerText, Form, FormWrapper } from "./styled";
 import { UserContext } from 'contexts';
 import axios from "axios";
-import styles from "./auth.module.css";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
@@ -52,9 +51,9 @@ export const Login = (): JSX.Element => {
   }
 
   return (
-    <div className={ styles.formWrapper }>
+    <FormWrapper>
       <Text as="h2" size="xl" weight="bold">Log In</Text>
-      <form className={ styles.form } onSubmit={ handleSubmit }>
+      <Form onSubmit={ handleSubmit }>
         <Input
           fullWidth
           handleChange={(event) => setEmail( (event.target as HTMLInputElement).value )}
@@ -78,12 +77,12 @@ export const Login = (): JSX.Element => {
           Log In
         </Button>
         <Button link="/register" variant="tertiary">Create an Account</Button>
-        <div className={ styles.divider }>
+        <Divider>
           <hr />
-          <Text className={ styles.dividerText }>OR</Text>
-        </div>
+          <DividerText>OR</DividerText>
+        </Divider>
         <Button handleClick={ handleGuest } variant="tertiary">Use Guest Account</Button>
-      </form>
-    </div>
+      </Form>
+    </FormWrapper>
   );
 };
