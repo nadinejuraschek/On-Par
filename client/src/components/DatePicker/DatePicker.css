@@ -171,9 +171,10 @@ REACT CALENDAR
 .react-calendar {
   background-color: var(--white);
   border: none;
-  border-radius: 0.8rem;
+  border-radius: 0.8rem !important;
   filter: var(--shadow_sm);
   font-family: var(--font_regular);
+  overflow: hidden;
 
   width: 25rem;
 }
@@ -256,6 +257,10 @@ REACT CALENDAR
 
   height: 2.6rem;
   width: 4rem;
+}
+
+.react-calendar__month-view__weekdays__weekday abbr {
+  text-decoration: none;
 }
 
 .react-calendar__month-view__weekNumbers .react-calendar__tile {

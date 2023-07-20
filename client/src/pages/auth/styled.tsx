@@ -62,5 +62,5 @@ export const DividerText = styled(Text)`
   position: absolute;
 
   background-color: var(--white);
-  padding: 0 1.6rem;
+  padding: 0 1.6rem !important;
 `;

@@ -49,6 +49,8 @@ export const StyledText = styled.div<IText>`
 
   ${({ size }) => getSize(size)};
 
+  color: ${({ color }) => color && `var(${color})`};
+
   &[disabled] {
     color: var(--grey_400);
   }

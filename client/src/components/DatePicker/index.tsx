@@ -1,11 +1,9 @@
 import './DatePicker.css';
 import 'react-clock/dist/Clock.css';
-
-import DateTimePicker from 'react-datetime-picker';
 import { IDatePicker } from './types';
 import { Text } from 'components';
-import styles from './datepicker.module.css';
 import { useMemo } from 'react';
+import { Field, IconInputWrapper, StyledDateTimePicker } from './styled';
 
 export const DatePicker = ({
   className = '',
@@ -23,7 +21,7 @@ export const DatePicker = ({
     if (!label) return null;
 
     return (
-      <Text as="label" className={ styles.label } htmlFor={ name } size="sm" weight="bold">
+      <Text as="label" htmlFor={ name } size="sm" weight="bold">
         { label }
       </Text>
     );
@@ -32,20 +30,21 @@ export const DatePicker = ({
   const renderError = useMemo(() => {
     if (!error) return null;
 
-    return <Text as="p" className={ styles.error} color="--error_300" size="xs" >{ error }</Text>;
+    return <Text as="p" color="--error_300" size="xs" >{ error }</Text>;
   }, [error]);
 
   return (
-    <div className={ `${styles.field} ${className ? className : ''} ${ fullWidth ? styles.fullWidth : '' }` }>
+    <Field className={className} fullWidth={fullWidth}>
       {renderLabel}
-      <div className={ `${styles.iconInputWrapper} ${ fullWidth ? styles.fullWidth : '' }` }>
-        <DateTimePicker
+      <IconInputWrapper>
+        <StyledDateTimePicker
           calendarIcon={null}
-          className={ `${ error ? styles.error : '' } ${ icon ? styles.datePicker : '' }` }
           clearIcon={null}
           disabled={disabled}
           disableClock
           format={format}
+          hasError={error}
+          hasIcon={icon}
           locale="en-US"
           name={name}
           onChange={handleChange}
@@ -53,8 +52,8 @@ export const DatePicker = ({
           value={value}
         />
         { icon && <i className={`${icon} icon`}></i> }
-      </div>
+      </IconInputWrapper>
       { renderError }
-    </div>
+    </Field>
   );
 };
