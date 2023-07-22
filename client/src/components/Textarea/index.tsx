@@ -1,8 +1,9 @@
+import { ErrorText, Field, StyledTextarea } from './styled';
+import { useEffect, useMemo } from 'react';
+
 import { ITextarea } from "./types";
 import { Text } from "components";
-import styles from "./textarea.module.css";
 import { useDebounce } from 'usehooks-ts';
-import { useEffect } from 'react';
 
 export const Textarea = ({
   className = '',
@@ -21,20 +22,27 @@ export const Textarea = ({
     // Triggers when "debouncedValue" changes
   }, [debouncedValue]);
 
+  const renderError = useMemo(() => {
+    if (!error) return null;
+
+    return <ErrorText as="p" color="--error_300" size="xs" >{ error }</ErrorText>;
+  }, [error]);
+
   return (
-    <div className={ `${className} ${styles.field}` }>
-      <Text as="label" className={ styles.label } htmlFor={ name } size="sm" weight="bold">
+    <Field className={className}>
+      <Text as="label" htmlFor={ name } size="sm" weight="bold">
         { label }
       </Text>
-      <textarea
-        className={ `${ styles.input } ${ error && styles.error } ${ fullWidth && styles.fullWidth }` }
+      <StyledTextarea
+        fullWidth={fullWidth}
+        hasError={error}
         name={ name }
         onChange={ handleChange }
         placeholder={ placeholder }
         rows={rows}
         value={ value }
       />
-      { error && <Text as="p" className={ styles.error} color="--error_300" size="xs" >{ error }</Text> }
-    </div>
+      { renderError }
+    </Field>
   );
 };

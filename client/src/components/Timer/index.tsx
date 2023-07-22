@@ -1,7 +1,7 @@
+import { Container } from './styled';
 import { ITimer } from "./types";
 import { ProgressRing } from "../ProgressRing";
 import { TimeUtils } from "utils";
-import styles from "./timer.module.css";
 import { useMemo } from 'react';
 
 export const Timer = ( { time }: ITimer ): JSX.Element => {
@@ -13,8 +13,8 @@ export const Timer = ( { time }: ITimer ): JSX.Element => {
   }, [time]);
 
   return (
-    <div className={ styles.container }>
+    <Container>
       <ProgressRing radius={ 65 } stroke={ 4 } progress={ progress } label={ hours } />
-    </div>
+    </Container>
   );
 };

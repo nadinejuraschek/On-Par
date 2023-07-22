@@ -1,11 +1,14 @@
 import { TNote } from "types";
 
 export interface INoteCard {
-  color: string;
-  date: string;
+  color: TStyledNoteColor;
   deleteNote: (noteid: string) => void;
-  editNote: (noteid: string, updatedNote: TNote, callback?: () => void) => void;
-  noteid: string;
-  text: string;
-  title: string;
+  handleOpenEdit: (note: TNote) => void;
+  note: TNote;
 }
+
+export interface IStyledNote {
+  color: TStyledNoteColor;
+}
+
+export type TStyledNoteColor = 'blue' | 'pink' | 'yellow';

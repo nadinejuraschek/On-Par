@@ -1,10 +1,9 @@
-import { LoadingSpinner, Tabs, Text } from "components";
+import { LoadingSpinner, Tabs } from "components";
 import { useContext, useMemo, useState } from "react";
-
 import { HostFamilyInfo } from "./HostFamilyInfo";
 import { UserContext } from "contexts";
 import { UserInfo } from "./UserInfo";
-import styles from "./profile.module.css";
+import { Grid } from "./styled";
 
 const PROFILE_TABS = {
   PROFILE: 0,
@@ -43,9 +42,9 @@ export const Profile = (): JSX.Element => {
   ];
 
   return (
-    <div className={ styles.grid }>
+    <Grid>
       <Tabs activeTab={activeTab} fullWidth handleClick={setActiveTab} tabs={tabs} variant="secondary" />
       {renderContent}
-    </div>
+    </Grid>
   );
 };

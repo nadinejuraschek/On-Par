@@ -37,7 +37,7 @@ const minToH = (time: number): string => {
   const roundedH = Math.floor(h);
   const min = (h - roundedH) * 60;
   const roundedMin = ("0" + Math.round(min)).slice(-2);
-  return `${roundedH}:${roundedMin}`;
+  return `${("0"+roundedH).slice(-2)}:${roundedMin}`;
 };
 
 const minToHandMin = (time: number): string => {

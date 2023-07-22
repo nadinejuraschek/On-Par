@@ -11,3 +11,8 @@ export interface ITextarea {
   rows?: number;
   value: string;
 }
+
+export interface IStyledTextarea {
+  fullWidth: boolean;
+  hasError: boolean;
+}

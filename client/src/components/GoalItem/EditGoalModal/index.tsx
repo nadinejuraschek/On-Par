@@ -1,9 +1,9 @@
 import { Button, DatePicker, Modal, Textarea, ToggleGroup } from 'components';
 import { ChangeEvent, useCallback, useMemo, useState } from 'react';
 
+import { Form } from './styled';
 import { IAddGoalModal } from './types';
 import { TGoalType } from 'types';
-import styles from './addGoalModal.module.css';
 import { useGoals } from "hooks";
 
 export const EditGoalModal = ({
@@ -54,7 +54,7 @@ export const EditGoalModal = ({
       handleClose={toggleModal}
       title="Edit Goal"
     >
-      <form className={ styles.form }>
+      <Form>
         <ToggleGroup
           handleChange={(val: TGoalType) => setUpdatedGoal((prev) => ({ ...prev, type: val }))}
           name="type"
@@ -77,7 +77,7 @@ export const EditGoalModal = ({
           name="dueDate"
           value={updatedGoal.dueDate}
         />
-      </form>
+      </Form>
     </Modal>
   );
 }

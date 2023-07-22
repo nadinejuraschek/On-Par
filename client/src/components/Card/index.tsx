@@ -1,8 +1,11 @@
 import { ICard } from "./types";
-import styles from "./card.module.css";
+import { StyledCard } from './styled';
 
 export const Card = ( { children, className = "", withHover = false }: ICard ): JSX.Element => (
-  <div className={ `${ className } ${ styles.card } ${ withHover && styles.hover }` }>
+  <StyledCard
+    className={className}
+    $withHover={withHover}
+  >
     { children }
-  </div>
+  </StyledCard>
 );

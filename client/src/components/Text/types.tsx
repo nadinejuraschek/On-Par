@@ -5,6 +5,7 @@ export interface IText {
   children: ReactNode;
   className?: string;
   color?: string;
+  disabled?: boolean;
   htmlFor?: string;
   size?: TSize;
   weight?: TWeight;
@@ -12,6 +13,6 @@ export interface IText {
 
 type TElement = "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "p" | "span" | "label" | "div";
 
-type TSize = "xs" | "sm" | "md" | "lg" | "xl";
+export type TSize = "xs" | "sm" | "md" | "lg" | "xl" | "xxl";
 
 type TWeight = "bold" | "regular";

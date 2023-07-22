@@ -1,28 +1,42 @@
-import { IModal } from './types';
-import { Text } from 'components';
-import styles from './modal.module.css';
+import { Body, Footer, Header, Overlay, StyledModal } from "./styled";
+import { Button, Text } from 'components';
 
-export const Modal = ({ actions, children, handleClose, title = '' }: IModal): JSX.Element => {
+import { IModal } from './types';
+import { useMemo } from "react";
+
+export const Modal = ({
+  actions,
+  children,
+  className = '',
+  handleClose,
+  title = '',
+}: IModal): JSX.Element => {
+  const renderTitle = useMemo(() => {
+    if (!title) return null;
+
+    return <Text size="lg" weight="bold">{title}</Text>;
+  }, [title]);
+
+  const renderFooter = useMemo(() => {
+    if (!actions) return null;
+
+    return <Footer>{actions}</Footer>;
+  }, [actions]);
+
   return (
-    <div className={ styles.overlay }>
-      <div className={ styles.modal }>
-        <button className={ styles.closeButton } type="button" onClick={handleClose}>
-          <i className="close icon"></i>
-        </button>
-        {title && (
-          <div className={ styles.header }>
-            <Text size="lg" weight="bold">{title}</Text>
-          </div>
-        )}
-        <div className={ styles.body }>
+    <Overlay>
+      <StyledModal className={className}>
+        <Header hasTitle={title}>
+          { renderTitle }
+          <Button handleClick={handleClose} square variant="tertiary">
+            <i className="close icon"></i>
+          </Button>
+        </Header>
+        <Body>
           { children }
-        </div>
-        {actions && (
-          <div className={ styles.footer }>
-            {actions}
-          </div>
-        )}
-      </div>
-    </div>
+        </Body>
+        { renderFooter }
+      </StyledModal>
+    </Overlay>
   );
 };

@@ -1,33 +1,34 @@
 import { emergencyNumbers } from "data";
 import { useMemo } from "react";
+import { StyledTable, StyledTBody, StyledTd, StyledTh, StyledTHead, StyledTr } from "./styled";
 
 export const EmergencyNumbers = (): JSX.Element => {
   const { contentRows, headerRows } = emergencyNumbers;
 
   const renderHeaderRows = useMemo(() => {
     return headerRows.map( ( row, index ) => (
-      <tr key={ index }>
-        { row.cells.map( ( cell, index ) => <th key={ index }>{ cell.value }</th> ) }
-      </tr>
+      <StyledTr key={ index }>
+        { row.cells.map( ( cell, index ) => <StyledTh key={ index }>{ cell.value }</StyledTh> ) }
+      </StyledTr>
     ) );
   }, [headerRows]);
 
   const renderContentRows = useMemo(() => {
     return contentRows.map( ( row, index ) => (
-      <tr key={ index }>
-        { row.cells.map( ( cell, index ) => <td key={ index }>{ cell.value }</td> ) }
-      </tr>
+      <StyledTr key={ index }>
+        { row.cells.map( ( cell, index ) => <StyledTd key={ index }>{ cell.value }</StyledTd> ) }
+      </StyledTr>
     ) );
   }, [contentRows]);
 
   return (
-    <table className="ui selectable celled table" style={ { borderRadius: "2rem", filter: "drop-shadow(0 1px 3px #10182810) drop-shadow(0 1px 2px #10182806)", height: "100%", overflow: "hidden" } }>
-      <thead>
+    <StyledTable>
+      <StyledTHead>
         { renderHeaderRows }
-      </thead>
-      <tbody>
+      </StyledTHead>
+      <StyledTBody>
         { renderContentRows }
-      </tbody>
-    </table>
+      </StyledTBody>
+    </StyledTable>
   );
 };

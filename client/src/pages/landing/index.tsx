@@ -1,6 +1,5 @@
-import { Button, Text } from "components";
-
-import styles from "./landing.module.css";
+import { Button } from "components";
+import { Brand, StyledMain, StyledSection, Subtitle, Title } from "./styled";
 
 /* <div className="custom-container landing-container">
       <div className="ui stackable grid">
@@ -72,17 +71,17 @@ import styles from "./landing.module.css";
 
 export const Landing = (): JSX.Element => {
   return (
-    <main className={ styles.flexCentered }>
-      <section className={ styles.section } style={ { backgroundColor: "var(--primary_50)" } }>
-        <Text as="h1" className={ styles.title } size="lg"><span className={ styles.brand }>On Par</span>|<span>The Au Pair&apos;s Assistant</span></Text>
-        <Text as="h2" className={ styles.subtitle } size="xl" weight="bold">Because taking care of kids is hard enough.</Text>
+    <StyledMain>
+      <StyledSection color="var(--primary_50)">
+        <Title as="h1" size="lg"><Brand>On Par</Brand>|<span>The Au Pair&apos;s Assistant</span></Title>
+        <Subtitle as="h2" weight="bold">Because taking care of kids is hard enough.</Subtitle>
         <Button link="/home" variant="primary">
           Get Started
           <i className="right arrow icon"></i>
         </Button>
-      </section>
-      <section className={ styles.section } style={ { backgroundColor: "var(--secondary_50)" } }></section>
-      <section className={ styles.section } style={ { backgroundColor: "var(--tertiary_50)" } }></section>
-    </main>
+      </StyledSection>
+      <StyledSection color="var(--secondary_50)"></StyledSection>
+      <StyledSection color="var(--tertiary_50)"></StyledSection>
+    </StyledMain>
   );
 };

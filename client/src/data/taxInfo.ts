@@ -3,15 +3,15 @@ export const taxInfo = {
     cells: [
       {
         title: "Paxing Taxes",
-        text: "The following information may help simplify the tax paying process. Keep in mind that <strong> On Par is not a certified tax advisor </strong>and that you might still need to contact a professional to receive personalized help."
+        text: "The following information may help simplify the tax paying process. Keep in mind that <strong> On Par is not a certified tax advisor </strong>and that you might still need to contact a professional to receive personalized help.",
       },
-    ]
+    ],
   },
   contentRows: {
     cells: [
       {
         title: "What Are Taxes?",
-        text: "The U.S. government and some states take a portion of what people earn in the U.S., so called taxes, to pay for national, local, or state services and facilities. <br /> Federal taxes are to be paid to a federal government agency called IRS (Internal Revenue Service) and state taxes to a state tax agency. Make sure to ask for help if you can not find out where to pay or send your taxes to! Your host family or LCC would be a great first resource."
+        text: "The U.S. government and some states take a portion of what people earn in the U.S., so called taxes, to pay for national, local, or state services and facilities. <br /> Federal taxes are to be paid to a federal government agency called IRS (Internal Revenue Service) and state taxes to a state tax agency. Make sure to ask for help if you can not find out where to pay or send your taxes to! Your host family or LCC would be a great first resource.",
       },
       {
         title: "Is It Necessary for Me to Pay Taxes?",
@@ -28,7 +28,7 @@ export const taxInfo = {
       {
         title: "When Do I Have to Pay?",
         text: "Usually, the deadline is April 15th. In rare case, such as the COVID19 pandemic, the deadline might be different. Don&apos;t worry, your au pair agency will be able to offer updates and guidance.",
-      }
-    ]
+      },
+    ],
   },
 };

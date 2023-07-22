@@ -1,0 +1,34 @@
+import styled, { keyframes } from "styled-components";
+
+const placeHolderShimmer = keyframes`
+  0% {
+    background-position: -300px 0
+  }
+  100% {
+    background-position: 300px 0
+  }
+`;
+
+export const Placeholder = styled.div`
+  background-color: var(--grey_50);
+  margin: 0 auto;
+
+  height: 100%;
+  width: 100%;
+`;
+
+export const AnimatedBackground = styled.div`
+  animation-duration: 1.25s;
+  animation-fill-mode: forwards;
+  animation-iteration-count: infinite;
+  animation-name: ${placeHolderShimmer};
+  animation-timing-function: linear;
+
+  background: var(--grey_800);
+  background: linear-gradient(to right, var(--grey_100) 10%, var(--grey_200) 18%, var(--grey_100) 33%);
+  background-size: 800px 104px;
+
+  height: 100%;
+
+  position: relative;
+`;

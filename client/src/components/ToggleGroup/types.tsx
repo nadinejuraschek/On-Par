@@ -13,3 +13,11 @@ export type TToggle = {
   label?: string;
   value: string;
 }
+
+export interface IField {
+  withLabel: boolean;
+}
+
+export interface IToggle {
+  isSelected: boolean;
+}

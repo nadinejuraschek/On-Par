@@ -104,48 +104,30 @@
   --overlay_white: #f9fafb66;
 }
 
+/****************************************************************************
+ PAGE LAYOUT
+****************************************************************************/
 html {
   font-size: 10px;
 }
 
-/****************************************************************************
- PAGE LAYOUT
-****************************************************************************/
 body {
   font-family: var(--font_regular);
   background-color: var(--white);
   color: var(--grey_800);
 }
 
-button {
-  cursor: pointer;
-  font-family: var(--font_regular);
-}
+.gradient {
+  background-image: url(../images/gradient.svg);
+  background-repeat: no-repeat;
+  background-size: cover;
 
-nav {
-  height: 4rem;
-}
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-nav.ui.menu {
-  background-color: var(--white);
-}
-
-nav a.header.item {
-  font-family: var(--font_brand);
-  font-size: 2rem;
-}
-
-.layout {
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: 70px calc(100vh - 70px);
-}
-
-.page-container {
-  grid-column: 1 / -1;
-  grid-row: 2 / 3;
-
-  overflow: auto;
+  min-height: 100vh;
+  width: 100vw;
 }
 
 main {
@@ -156,8 +138,6 @@ main {
 
   display: flex;
   flex-direction: column;
-  /* align-items: center; */
-  /* justify-content: center; */
   gap: 3rem;
 
   overflow: auto;
@@ -169,316 +149,15 @@ img {
   width: 100%;
 }
 
-.wrapper,
-.wrapper-two,
-.wrapper-scroll {
-  display: flex;
-  align-items: center;
-  margin-top: 4rem;
-  margin-bottom: 2rem;
-}
-.wrapper-scroll {
-  /* overflow: scroll; */
-}
-.block {
-  margin: auto;
-  width: 90%;
-}
-
-.pageheader {
-  font-size: 2.5rem;
-  font-weight: 800;
-  margin: 3rem 2rem;
-  text-align: center;
-}
-
-.custom-container {
-  margin: 2rem;
-  padding: 1rem;
-}
-.centered {
-  text-align: center;
-}
-.list-space {
-  display: inline-block;
-}
-.list-check {
-  margin: 0 1rem;
-}
-.button-container {
-  margin: 1rem;
-}
-.ui .button {
-  background-color: var(--primary_500);
-  color: var(--white);
-}
-.ui .button:hover {
-  background-color: var(--primary_600);
-  color: var(--white);
-}
-.ui .card.feature-card,
-.ui .card.note-card,
-.ui .card.landing-card {
-  border-radius: 2rem;
-  -webkit-box-shadow: 0px 4px 8px 0px #46637350;
-  -moz-box-shadow: 0px 4px 8px 0px #46637350;
-  box-shadow: 0px 4px 8px 0px #46637350;
-  padding: 1rem;
-}
-.ui .card.feature-card {
-  background-color: var(--primary_500);
-  background-image: linear-gradient(
-    to right bottom,
-    var(--primary_200),
-    var(--primary_500)
-  );
-}
-.ui .card.feature-card:hover {
-  background-color: var(--secondary_500);
-  background-image: linear-gradient(
-    to right bottom,
-    var(--secondary_200),
-    var(--secondary_500)
-  );
-}
-.ui .card.note-card,
-.ui .card.goal-card {
-  padding: 2rem;
-}
-.ui .header.feature-header {
-  color: var(--white);
-}
-.feature-icon {
-  margin-top: 1rem;
-  height: 8rem;
-}
-.add-container {
-  margin: 3rem auto;
-}
-.no-style-button {
-  background: transparent;
-  border: none;
-  color: var(--primary_500);
-}
-.no-style-button:hover {
-  color: var(--secondary_500);
-}
-.ui.button.activity-button {
-  background-color: var(--secondary_500);
-  color: var(--white);
-}
-.ui.button.activity-button:hover {
-  background-color: var(--primary_600);
-  color: var(--white);
-}
-.card-button {
-  display: inline-block;
-}
-.hide {
-  display: none;
-}
-.light {
-  color: var(--secondary_500);
-}
-.dark {
-  color: var(--primary_500);
-}
-.light-bg {
-  background-color: #ff989725;
-}
-.edit-goal {
-  margin: 1rem 0 1rem 2rem;
-}
-.footer-link {
-  color: var(--grey_800);
-}
-.footer-link:hover {
-  color: var(--secondary_500);
-}
-.ui .message {
-  background-color: var(--white);
-}
-.nav-logo {
-  height: 3rem;
-}
-.start-button {
-  background-color: var(--white);
-  border: none;
-  border-radius: 10px;
-  color: var(--grey_800);
-  font-size: 1.25rem;
-  padding: 1rem;
-  -webkit-box-shadow: 0px 4px 8px 0px #46637350;
-  -moz-box-shadow: 0px 4px 8px 0px #46637350;
-  box-shadow: 0px 4px 8px 0px #46637350;
-  margin: 2rem;
-}
-.start-button:hover {
-  background-color: var(--secondary_500);
-  background-image: linear-gradient(
-    to right bottom,
-    var(--secondary_200),
-    var(--secondary_500)
-  );
-  color: var(--white);
-}
-.tagline {
-  color: var(--white);
-}
-.more-padding {
-  margin-top: 4rem;
-}
-.negativeText {
-  color: var(--error_700);
-}
-.positiveText {
-  color: #2c662d;
-}
-
-/****************************************************************************
- LANDING
-****************************************************************************/
-.ui.masthead {
-  height: 90vh;
-}
-.ui.vertical.masthead.segment {
-  background-image: linear-gradient(
-    to right bottom,
-    var(--primary_200),
-    var(--primary_500)
-  );
-  background-size: cover;
-  background-position: top center;
-  background-repeat: no-repeat;
-}
-.landing-header {
-  font-family: 'grand_hotelregular';
-  font-size: 10rem;
-}
-.landing-col-header {
-  font-size: 1.8rem;
-}
-.ui .card.landing-card {
-  height: 42vh;
-  padding: 2rem;
-}
-.ui .card.landing-card:hover {
-  background-color: var(--secondary_500);
-  background-image: linear-gradient(
-    to right bottom,
-    var(--secondary_200),
-    var(--secondary_500)
-  );
-  color: var(--grey_800);
-}
-.icon-padding {
-  margin-bottom: 2rem;
-}
-
-/****************************************************************************
- CALENDAR
-****************************************************************************/
-.react-calendar__navigation {
-  display: none;
-}
-.react-calendar__navigation__arrow {
-  background-color: transparent;
-  border: none;
-  font-size: 3rem;
-}
-
-.react-calendar__navigation__label {
-  background-color: transparent;
-  border: none;
-  font-size: 2.5rem;
-  margin-bottom: 1rem;
-}
-
-.react-calendar__tile {
-  height: 6rem;
-}
-
-.react-calendar__month-view__weekdays__weekday {
-  font-size: 1.5rem;
-  margin: 1rem;
-  text-align: center;
-}
-
-.react-calendar__tile--active {
-  background-color: linear-gradient(
-    to right bottom,
-    var(--secondary_200),
-    var(--secondary_500)
-  );
-  color: var(--white);
-}
-
-.react-calendar__tile--active:enabled:hover,
-.react-calendar__tile--active:enabled:focus {
-  background-color: var(--primary_500);
-  background-color: linear-gradient(
-    to right bottom,
-    var(--secondary_200),
-    var(--secondary_500)
-  );
-}
-
-.react-calendar__tile,
-.react-calendar__month-view__days__day {
-  font-size: 1.2rem;
-}
-
 /****************************************************************************
  MEDIA QUERIES
 ****************************************************************************/
-/* @media screen and (min-width: 980px) {
-} */
-
-@media screen and (min-width: 600px) {
-}
-
 @media screen and (min-width: 900px) {
   main {
     height: 100vh;
     padding: 40px;
   }
-
-  .layout {
-    background-image: linear-gradient(to bottom, #b9c87940, var(--white));
-    display: grid;
-    grid-template-columns: 150px auto;
-
-    position: relative;
-  }
-
-  .layout::before {
-    content: '';
-
-    background-image: linear-gradient(
-      to bottom,
-      var(--primary_50),
-      var(--white)
-    );
-
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: -1;
-
-    height: 50vh;
-    width: 100%;
-  }
-
-  .page-container {
-    background-color: var(--grey_25);
-    border-radius: 40px 0 0 0;
-    grid-column: 2 / 3;
-    grid-row: 1 / -1;
-    width: calc(100vw - 150px);
-  }
 }
-
-@media screen and (min-width: 1200px) {}
 
 /****************************************************************************
  TOAST

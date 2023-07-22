@@ -1,9 +1,9 @@
+import { FooterText, Links, SideNavMobile } from "./styled";
+
 import { ISidenav } from "./types";
 import { NavLinkComp as NavLink } from "../NavLink";
-import { Text } from "components";
 import { UserProvider } from "contexts";
 import { navLinks } from "data";
-import styles from "./sidenav.module.css";
 import { useMemo } from "react";
 
 export const Sidenav = ({ toggleSidenav }: ISidenav): JSX.Element => {
@@ -23,15 +23,13 @@ export const Sidenav = ({ toggleSidenav }: ISidenav): JSX.Element => {
   }, [toggleSidenav]);
 
   return (
-    <>
-      <div className={ styles.sideMobile }>
+    <SideNavMobile>
+      <Links>
         <UserProvider>
           { renderLinks }
         </UserProvider>
-      </div>
-      <div className={ styles.footer }>
-        <Text as="p" size="xs">© { new Date().getFullYear() } Nadine Pesso</Text>
-      </div>
-    </>
+      </Links>
+      <FooterText as="p" size="xs">© { new Date().getFullYear() } Nadine Pesso</FooterText>
+    </SideNavMobile>
   );
 }

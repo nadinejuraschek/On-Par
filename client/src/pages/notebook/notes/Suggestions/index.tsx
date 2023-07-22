@@ -1,21 +1,16 @@
-import { Card, Text } from "components";
-
-import styles from "./suggestions.module.css";
+import { Text } from "components";
+import { StyledCard } from "./styled";
 
 export const Suggestions = (): JSX.Element => (
-  <Card className={ styles.ideas }>
-    <Text as="h4" size="md" weight="bold">A Space for You to Write Down Your Thoughts</Text>
-    <div>
-      <Text as="h5" size="sm" weight="bold">Ideas:</Text>
-      <div className="ui list">
-        <div className="item">I am homesick. I miss ...</div>
-        <div className="item">
-          I discovered a new favorite food / place / hobby of mine
-        </div>
-        <div className="item">
-          Things my host kids said to me today
-        </div>
-      </div>
-    </div>
-  </Card>
+  <StyledCard>
+    <Text as="h4" size="md" weight="bold">A space for you to write down your thoughts and special memories.</Text>
+    <Text as="h5" size="md" weight="bold">Ideas:</Text>
+    <Text as="p" size="sm">I am homesick. I miss ...</Text>
+    <Text as="p" size="sm">
+      I discovered a new favorite food / place / hobby of mine
+    </Text>
+    <Text as="p" size="sm">
+      Things my host kids said to me today
+    </Text>
+  </StyledCard>
 );

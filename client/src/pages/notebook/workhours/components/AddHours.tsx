@@ -1,9 +1,6 @@
 import * as dayjs from "dayjs";
-
 import { Button, DatePicker, Text } from "components";
 import { FormEvent, useCallback } from 'react';
-
-import styles from "../workhours.module.css";
 import { useState } from "react";
 import { useWorkhours } from "hooks";
 
@@ -34,7 +31,7 @@ export const AddHours = (): JSX.Element => {
   return (
     <>
       <Text as="h3" size="lg" weight="bold">Add Hours</Text>
-      <div className={ styles.addForm }>
+      <div>
         <DatePicker
           format="MM/dd/yyyy"
           fullWidth

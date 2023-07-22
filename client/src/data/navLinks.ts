@@ -1,8 +1,8 @@
 // import chat from "images/chat.svg";
 // import cluster from "images/cluster.svg";
+import notebook from "images/book.svg";
 import dashboard from "images/dashboard.svg";
 // import hostfamily from "images/family.svg";
-import notebook from "images/book.svg";
 import resources from "images/mom.svg";
 
 export const navLinks = [

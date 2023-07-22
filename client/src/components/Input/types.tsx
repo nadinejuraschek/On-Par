@@ -13,3 +13,13 @@ export interface IInput {
   type?: string;
   value: string;
 }
+
+export interface IStyledField {
+  fullWidth: boolean;
+}
+
+export interface IStyledInput {
+  fullWidth: boolean;
+  hasError: boolean;
+  hasIcon: boolean;
+}

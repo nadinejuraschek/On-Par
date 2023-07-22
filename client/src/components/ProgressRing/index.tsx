@@ -1,17 +1,17 @@
-import { IProgressRing } from "./types";
-import styles from "./ring.module.css";
+import { Container, Label, Progress } from './styled';
 
-export const ProgressRing = ({ label, progress, radius, stroke }: IProgressRing): JSX.Element => {
+import { IProgressRing } from "./types";
+
+export const ProgressRing = ({ className = '', label, progress, radius, stroke }: IProgressRing): JSX.Element => {
   const normalizedRadius = radius - stroke * 2;
   const circumference = normalizedRadius * 2 * Math.PI;
   const strokeDashoffset = circumference - (progress / 100) * circumference;
   const labelSize = radius * 2;
 
   return (
-    <div className={ styles.container }>
-      <svg height={ radius * 2 } width={ radius * 2 } className={ styles.ring }>
+    <Container className={className}>
+      <svg height={ radius * 2 } width={ radius * 2 }>
         <circle
-          className={ styles.ring }
           stroke="#f1f1f1"
           fill="transparent"
           strokeWidth={ stroke }
@@ -19,8 +19,7 @@ export const ProgressRing = ({ label, progress, radius, stroke }: IProgressRing)
           cx={ radius }
           cy={ radius }
         />
-        <circle
-          className={ styles.progress }
+        <Progress
           stroke="var(--secondary_500)"
           fill="transparent"
           strokeWidth={ stroke }
@@ -31,12 +30,9 @@ export const ProgressRing = ({ label, progress, radius, stroke }: IProgressRing)
           cy={ radius }
         />
       </svg>
-      <div
-        className={ styles.label }
-        style={ { height: labelSize, width: labelSize } }
-      >
+      <Label style={ { height: labelSize, width: labelSize } }>
         { label }
-      </div>
-    </div>
+      </Label>
+    </Container>
   );
 };

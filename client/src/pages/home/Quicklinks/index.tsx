@@ -1,7 +1,6 @@
 import { Button, Text } from "components";
-
+import { Container, StyledIcon } from "./styled";
 import { quicklinks } from "data";
-import styles from "./quicklinks.module.css";
 import { useMemo } from "react";
 
 export const Quicklinks = (): JSX.Element => {
@@ -9,11 +8,17 @@ export const Quicklinks = (): JSX.Element => {
     return quicklinks.map( item => {
       const { active, icon, label, link } = item;
       return (
-        <Button align="alignStart" disabled={ !active } key={ `quicklink_${ label }` } link={ link } variant="tertiary">
-          <div className={ styles.icon }>
+        <Button
+          align="alignStart"
+          disabled={ !active }
+          key={ `quicklink_${ label }` }
+          link={ link }
+          variant="tertiary"
+        >
+          <StyledIcon>
             {/* @ts-ignore-next-line */}
             <img src={ icon } alt={ label } />
-          </div>
+          </StyledIcon>
           { label }
         </Button>
       );
@@ -21,9 +26,9 @@ export const Quicklinks = (): JSX.Element => {
   }, []);
 
   return (
-    <div className={ styles.container }>
+    <Container>
       <Text as="h3" size="lg" weight="bold">Quicklinks</Text>
       { renderLinks }
-    </div>
+    </Container>
   )
 };

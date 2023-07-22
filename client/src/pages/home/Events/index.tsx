@@ -1,40 +1,48 @@
+import { useMemo } from "react";
 import { holidays, mockBirthdays } from 'data';
-
 import { EventsList } from './List';
 import { Text } from "components";
-import styles from "./events.module.css";
+import { Content, ListContent, Wrapper } from './styled';
 
 export const Events = (): JSX.Element => {
-  const currentMonth = new Date().getMonth() + 1;
-  const currentDay = new Date().getDate();
+  const currentMonth = useMemo(() => new Date().getMonth() + 1, []);
+  const currentDay = useMemo(() => new Date().getDate(), []);
 
-  const currentHolidays = holidays.filter(holiday => holiday.month === currentMonth && holiday.day === currentDay);
+  const currentHolidays = useMemo(() => (
+    holidays.filter(holiday => holiday.month === currentMonth && holiday.day === currentDay)
+  ), [currentDay, currentMonth]);
 
-  const remainingHolidaysThisMonth = holidays.filter(holiday => holiday.month === currentMonth && holiday.day > currentDay);
+  const remainingHolidaysThisMonth = useMemo(() => (
+    holidays.filter(holiday => holiday.month === currentMonth && holiday.day > currentDay)
+  ), [currentDay, currentMonth]);
 
-  const currentBirthdays = mockBirthdays.filter(day => day.month === currentMonth && day.day === currentDay);
+  const currentBirthdays = useMemo(() => (
+    mockBirthdays.filter(day => day.month === currentMonth && day.day === currentDay)
+  ), [currentDay, currentMonth]);
 
-  const upcomingBirthdays = mockBirthdays.filter(day => day.month === currentMonth && day.day > currentDay);
+  const upcomingBirthdays = useMemo(() => (
+    mockBirthdays.filter(day => day.month === currentMonth && day.day > currentDay)
+  ), [currentDay, currentMonth]);
 
   return (
-    <div className={ styles.container }>
+    <Wrapper>
       <Text as="h3" size="lg" weight="bold">Events</Text>
-      <div className={ styles.content }>
-        <div className={ styles.listContent }>
+      <Content>
+        <ListContent>
           <Text as="h4" size="md" weight="bold">Today</Text>
           <EventsList
             emptyMessage="There are no holidays or events planned for today!"
             list={[...currentHolidays, ...currentBirthdays]}
           />
-        </div>
-        <div className={ styles.listContent }>
+        </ListContent>
+        <ListContent>
           <Text as="h4" size="md" weight="bold">Later This Month</Text>
           <EventsList
             emptyMessage="Looks like you'll have lots of free time!"
             list={[...remainingHolidaysThisMonth, ...upcomingBirthdays]}
           />
-        </div>
-      </div>
-    </div>
+        </ListContent>
+      </Content>
+    </Wrapper>
   );
 };
