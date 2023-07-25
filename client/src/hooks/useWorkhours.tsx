@@ -34,7 +34,7 @@ export function useWorkhours() {
     } ).then( res => {
       const hours = res.data.workhours;
       hours.forEach( (hour: TWorkhour) => {
-        if ( hour.dateFormat === dayjs( new Date() ).format( "YY-MM-DD" ) ) {
+        if ( dayjs( hour.date ).format("YY-MM-DD") === dayjs( new Date() ).format( "YY-MM-DD" ) ) {
           setTodayWorkhours( hour.total );
         }
         return;

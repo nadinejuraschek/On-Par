@@ -21,8 +21,8 @@ export type TGoal = {
 }
 
 export type TWorkhour = {
-  dateFormat: string;
-  total: number;
+  date: Date;
+  total: number
 }
 
 export type TPayment = {

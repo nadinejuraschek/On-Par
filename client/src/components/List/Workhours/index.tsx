@@ -30,7 +30,7 @@ export const WeeklyHours = ( { data }: IWeeklyHours ): JSX.Element => {
 
   // sort array to display Sun - Sat
   const hours = useMemo(() => data.sort(( a, b ) => (
-    a.date - b.date
+    a.date.valueOf() - b.date.valueOf()
   )), [data]);
 
   const renderWeek = useMemo(() => {

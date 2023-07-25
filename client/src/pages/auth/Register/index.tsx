@@ -7,7 +7,7 @@ import { ChangeEvent, FormEvent, MouseEvent, useCallback, useContext, useState }
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { ZodFormattedError } from "zod";
-import { TRegisterFormData, registerSchema } from "./register.schema";
+import { TRegisterFormData, registerSchema } from "../../../schema";
 import {
   Divider,
   DividerText,

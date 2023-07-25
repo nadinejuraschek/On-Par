@@ -3,7 +3,7 @@
     "jsx": "preserve",
     "baseUrl": "src",
   },
-  "include": ["src"],
+  "include": ["src", "src/schema/goal.schema.ts", "src/schema/login.schema.ts"],
   "eslint.validate": [
     "javascript",
     "javascriptreact",

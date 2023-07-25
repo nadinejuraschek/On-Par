@@ -5,7 +5,7 @@ import { ChangeEvent, FormEvent, MouseEvent, useCallback, useContext, useState }
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { ZodFormattedError } from "zod";
-import { TLoginFormData, loginSchema } from "./login.schema";
+import { TLoginFormData, loginSchema } from "../../../schema/login.schema";
 import { Divider, DividerText, Form, FormWrapper } from "../styled";
 
 export const Login = (): JSX.Element => {

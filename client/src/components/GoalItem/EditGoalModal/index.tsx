@@ -1,10 +1,11 @@
 import { Button, DatePicker, Modal, Textarea, ToggleGroup } from "components";
 import { useGoals } from "hooks";
 import { ChangeEvent, useCallback, useMemo, useState } from "react";
-
 import { TGoalType } from "types";
+import { ZodFormattedError } from "zod";
 import { Form } from "./styled";
 import { IAddGoalModal } from "./types";
+import { TGoalFormData, goalSchema } from "../../../schema";
 
 export const EditGoalModal = ({
   checked,
@@ -14,8 +15,9 @@ export const EditGoalModal = ({
   toggleModal,
   type,
 }: IAddGoalModal): JSX.Element => {
-  const { editGoal } = useGoals();
+  const { editGoal, loading } = useGoals();
 
+  const [errors, setErrors] = useState<ZodFormattedError<TGoalFormData> | undefined>(undefined);
   const [updatedGoal, setUpdatedGoal] = useState({
     checked,
     dueDate: dueDate ? new Date(dueDate) : new Date(),
@@ -24,6 +26,15 @@ export const EditGoalModal = ({
   });
 
   const handleSubmit = useCallback(() => {
+    const validation = goalSchema.safeParse(updatedGoal);
+
+    if (validation.success === false) {
+      setErrors(validation.error.format());
+      return;
+    }
+
+    setErrors(undefined);
+
     editGoal(id, updatedGoal, toggleModal);
   }, [editGoal,
     id,
@@ -34,9 +45,17 @@ export const EditGoalModal = ({
   const actions = useMemo(() => (
     <>
       <Button fullWidth handleClick={toggleModal}>Cancel</Button>
-      <Button handleClick={handleSubmit} fullWidth type="submit" variant="primary">Save</Button>
+      <Button
+        fullWidth
+        handleClick={handleSubmit}
+        loading={loading}
+        type="submit"
+        variant="primary"
+      >
+        Save
+      </Button>
     </>
-  ), [handleSubmit, toggleModal]);
+  ), [handleSubmit, loading, toggleModal]);
 
   const toggleOptions = [
     { label: "Education", value: "education" }, { label: "Personal", value: "personal" }, { label: "Travel", value: "travel" },
@@ -44,9 +63,7 @@ export const EditGoalModal = ({
 
   const handleInput = useCallback((event: ChangeEvent): void => {
     const target = event.target as HTMLInputElement;
-    const name = target.name;
-    const value = target.value;
-    setUpdatedGoal( prev => ( { ...prev, [name]: value } ) )
+    setUpdatedGoal( prev => ( { ...prev, [target.name]: target.value } ) )
   }, []);
 
   return (
@@ -57,12 +74,14 @@ export const EditGoalModal = ({
     >
       <Form>
         <ToggleGroup
+          error={errors?.type?._errors?.[0] && errors.type._errors[0]}
           handleChange={(val: TGoalType) => setUpdatedGoal((prev) => ({ ...prev, type: val }))}
           name="type"
           options={toggleOptions}
           value={updatedGoal.type}
         />
         <Textarea
+          error={errors?.text?._errors?.[0] && errors.text._errors[0]}
           fullWidth
           label="Goal"
           name="text"
@@ -71,6 +90,7 @@ export const EditGoalModal = ({
           value={updatedGoal.text}
         />
         <DatePicker
+          error={errors?.dueDate?._errors?.[0] && errors.dueDate._errors[0]}
           format="MM/dd/yyyy"
           fullWidth
           handleChange={(date: Date) => setUpdatedGoal((prev) => ({ ...prev, dueDate: date }))}
