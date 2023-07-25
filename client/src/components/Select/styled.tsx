@@ -1,6 +1,5 @@
 import SelectComp from "react-select";
-import styled, { css } from "styled-components";
-
+import styled from "styled-components";
 import { IStyledField } from "./types";
 import { Text } from "../Text";
 
@@ -15,14 +14,6 @@ export const Field = styled.div<IStyledField>`
   min-width: 20rem;
 
   width: ${({ fullWidth }) => fullWidth ? "100%" : "auto"};
-
-  ${({ hasError }) => hasError && css`
-    border-color: var(--error_300);
-
-    &:focus {
-      box-shadow: var(--shadow_xs_focused_error);
-    }
-  `};
 `;
 
 export const IconInputWrapper = styled.div`
@@ -85,6 +76,8 @@ export const ErrorText = styled(Text)`
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+
+  color: var(--error_300);
 
   max-width: 100%;
 `;

@@ -53,3 +53,13 @@ export const StyledDateTimePicker = styled(DateTimePicker)<IStyledDateTimePicker
     }
   `};
 `;
+
+export const ErrorText = styled(Text)`
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+  color: var(--error_300);
+
+  max-width: 100%;
+`;

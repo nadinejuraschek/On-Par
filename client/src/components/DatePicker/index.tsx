@@ -2,7 +2,7 @@ import "./DatePicker.css";
 import "react-clock/dist/Clock.css";
 import { Text } from "components";
 import { useMemo } from "react";
-import { Field, IconInputWrapper, StyledDateTimePicker } from "./styled";
+import { ErrorText, Field, IconInputWrapper, StyledDateTimePicker } from "./styled";
 import { IDatePicker } from "./types";
 
 export const DatePicker = ({
@@ -30,7 +30,7 @@ export const DatePicker = ({
   const renderError = useMemo(() => {
     if (!error) return null;
 
-    return <Text as="p" color="--error_300" size="xs" >{ error }</Text>;
+    return <ErrorText as="p" size="xs" >{ error }</ErrorText>;
   }, [error]);
 
   return (

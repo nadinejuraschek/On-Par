@@ -36,7 +36,7 @@ export const Select = ({
       onChange={handleChange}
       options={options}
       placeholder={placeholder}
-      styles={getSelectStyles(icon)}
+      styles={getSelectStyles(icon, !!error)}
       theme={selectTheme}
       value={value}
     />
@@ -44,6 +44,7 @@ export const Select = ({
     clearable,
     defaultValue,
     disabled,
+    error,
     handleChange,
     icon,
     loading,
@@ -73,7 +74,7 @@ export const Select = ({
   const renderError = useMemo(() => {
     if (!error) return null;
 
-    return <ErrorText as="p" color="--error_300" size="xs" >{ error }</ErrorText>;
+    return <ErrorText as="p" size="xs" >{ error }</ErrorText>;
   }, [error]);
 
   if (onlyInput) {

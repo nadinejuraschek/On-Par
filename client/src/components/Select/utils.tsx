@@ -1,15 +1,15 @@
 import { Theme } from "react-select";
 
-export const getSelectStyles = (icon = "") => ({
+export const getSelectStyles = (icon = "", hasError: boolean) => ({
   container: (baseStyles: { [key: string]: string }) => ({
     ...baseStyles,
     width: "100%",
   }),
-  control: (baseStyles: { [key: string]: string }) => ({
+  control: (baseStyles: { [key: string]: string }, state) => ({
     ...baseStyles,
-    borderColor: "var(--grey_300)",
+    borderColor: hasError ? "var(--error_300)" : "var(--grey_300)",
     borderRadius: "0.8rem",
-    boxShadow: "var(--shadow_xs)",
+    boxShadow: (state.isFocused && hasError) ? "var(--shadow_xs_focused_error)" : "var(--shadow_xs)",
     height: "4rem",
     minHeight: "4rem",
     padding: icon ? "0 0 0 4rem" : "0 0 0 1.2rem",
