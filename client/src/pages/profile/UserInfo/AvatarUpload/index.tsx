@@ -12,8 +12,8 @@ export const AvatarUpload = (): JSX.Element => {
         { /* <Filer /> */ }
       </ImageWrapper>
       <Actions>
-        <Button disabled handleClick={ () => {} }>Choose Image</Button>
-        <Button disabled handleClick={ () => {} } variant="danger">Remove Image</Button>
+        <Button disabled>Choose Image</Button>
+        <Button disabled variant="danger">Remove Image</Button>
       </Actions>
     </Container>
   );

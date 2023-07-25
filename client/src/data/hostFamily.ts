@@ -1,6 +1,7 @@
 import { TEvent } from "components/Event/types";
+import { TPerson } from "components/List/People/types";
 
-export const mockHostChildren = [
+export const mockHostChildren: TPerson[] = [
   {
     type: "hostchild",
     name: "Sophie",
@@ -21,7 +22,7 @@ export const mockHostChildren = [
   },
 ];
 
-export const mockHostParents = [
+export const mockHostParents: TPerson[] = [
   {
     type: "hostparent",
     name: "Olivia",

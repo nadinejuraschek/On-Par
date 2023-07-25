@@ -4,8 +4,8 @@ export interface IPeopleList {
 }
 
 export type TPerson = {
-  birthday: string;
-  country: string;
+  birthday?: string;
+  country?: string;
   name: string;
   profileImg: string;
   type: string;
