@@ -23,6 +23,7 @@ export const PeopleItem = ( { person }: IPeopleItem ): JSX.Element => {
     <Item>
       <Avatar
         alt={ name }
+        /* eslint-disable-next-line @typescript-eslint/ban-ts-comment */
         /* @ts-ignore-next-line */
         src={ profileImg === "" ? blankProfile : profileImg }
       />

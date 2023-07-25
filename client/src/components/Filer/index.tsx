@@ -3,6 +3,7 @@ import { ChangeEvent, MouseEvent, useState } from "react";
 import styles from "./filer.module.css";
 
 export const Filer = (): JSX.Element => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [selectedFile, setSelectedFile] = useState( null );
 
   const handleFileSelected = (event: ChangeEvent) => {

@@ -2,6 +2,7 @@ import blankPic from "images/blankProfile.svg";
 
 export const AuPairInfo = (): JSX.Element => (
   <div className="item">
+    {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
     {/* @ts-ignore-next-line */}
     <img className="ui avatar image" src={ blankPic } alt="aupair" />
     <div className="content">

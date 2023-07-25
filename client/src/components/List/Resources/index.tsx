@@ -13,6 +13,7 @@ export const Resources = (): JSX.Element => {
       return (
         <Button align="alignStart" disabled={ !active } link={ link } key={ `resource_${ label }` }>
           <StyledIcon>
+            {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
             {/* @ts-ignore-next-line */}
             <img src={ icon } alt={ label } />
           </StyledIcon>

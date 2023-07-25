@@ -11,6 +11,7 @@ export const NavLinkComp = ( {
   <StyledNavLink onClick={ toggleSidenav } to={ link }>
     <Wrapper>
       <StyledIcon>
+        {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
         {/* @ts-ignore-next-line */}
         <img alt={ label } src={ iconSrc } />
       </StyledIcon>

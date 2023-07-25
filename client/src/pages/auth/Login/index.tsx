@@ -4,9 +4,9 @@ import { UserContext } from "contexts";
 import { ChangeEvent, FormEvent, MouseEvent, useCallback, useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { ZodFormattedError } from "zod";
 import { TLoginFormData, loginSchema } from "./login.schema";
 import { Divider, DividerText, Form, FormWrapper } from "../styled";
-import { ZodFormattedError } from "zod";
 
 export const Login = (): JSX.Element => {
   const navigate = useNavigate();

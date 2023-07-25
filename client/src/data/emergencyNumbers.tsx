@@ -1,5 +1,3 @@
-// @ts-ignore
-
 export const emergencyNumbers = {
   headerRows: [
     {

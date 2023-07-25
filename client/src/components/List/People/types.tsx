@@ -1,5 +1,5 @@
 export interface IPeopleList {
-  data: any;
+  data: TPerson[];
   label: string;
 }
 

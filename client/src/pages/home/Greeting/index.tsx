@@ -30,6 +30,7 @@ export const Greeting = ( { message, name }: IGreeting ): JSX.Element => {
 
   return (
     <Wrapper>
+      {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
       {/* @ts-ignore-next-line */}
       <ProfileImage src={ blankProfile } alt={ name } />
       <Message>

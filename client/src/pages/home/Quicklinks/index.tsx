@@ -16,6 +16,7 @@ export const Quicklinks = (): JSX.Element => {
           variant="tertiary"
         >
           <StyledIcon>
+            {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
             {/* @ts-ignore-next-line */}
             <img src={ icon } alt={ label } />
           </StyledIcon>

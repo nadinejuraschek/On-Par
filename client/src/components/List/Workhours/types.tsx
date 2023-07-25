@@ -1,5 +1,5 @@
 export interface IWeeklyHours {
-  data: any;
+  data: TWorkhour[];
 }
 
 export type TWorkhour = {

@@ -6,6 +6,7 @@ export const AvatarUpload = (): JSX.Element => {
   return (
     <Container>
       <ImageWrapper>
+        {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
         {/* @ts-ignore-next-line */}
         <img src={ blankPic } alt="Profile" />
         { /* <Filer /> */ }

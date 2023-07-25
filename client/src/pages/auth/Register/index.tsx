@@ -1,12 +1,13 @@
 import axios from "axios";
-import { ZodFormattedError } from "zod";
-import { ChangeEvent, FormEvent, MouseEvent, useCallback, useContext, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
 import { Button, DatePicker, Input, Select, Text } from "components";
 import { TSelectOption } from "components/Select/types";
 import { UserContext } from "contexts";
 import { countrySelectOptions } from "data";
+import { ChangeEvent, FormEvent, MouseEvent, useCallback, useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { ZodFormattedError } from "zod";
+import { TRegisterFormData, registerSchema } from "./register.schema";
 import {
   Divider,
   DividerText,
@@ -14,7 +15,6 @@ import {
   Form,
   FormWrapper,
 } from "../styled";
-import { TRegisterFormData, registerSchema } from "./register.schema";
 
 export const Register = (): JSX.Element => {
   const navigate = useNavigate();
@@ -67,7 +67,7 @@ export const Register = (): JSX.Element => {
       .then( () => navigate( "/home" ))
       .catch( () => toast.error("Could not register user. Please try again later!"))
       .finally(() => setIsSubmitting(false));
-  }, [registerData]);
+  }, [navigate, registerData]);
 
   const handleGuest = useCallback((event: MouseEvent) => {
     event.preventDefault();
@@ -119,7 +119,7 @@ export const Register = (): JSX.Element => {
             format="MM/dd/yyyy"
             fullWidth
             handleChange={(startDate: Date) => {
-              setRegisterData((prev) => ({...prev, "startDate": startDate }));
+              setRegisterData((prev) => ({ ...prev, "startDate": startDate }));
             }}
             icon="calendar alternate outline"
             label="Arrival Date"
@@ -130,7 +130,7 @@ export const Register = (): JSX.Element => {
             error={errors?.country?.value?._errors?.[0] && errors.country.value._errors[0]}
             fullWidth
             handleChange={(option: TSelectOption) => {
-              setRegisterData((prev) => ({...prev, "country": option }));
+              setRegisterData((prev) => ({ ...prev, "country": option }));
             }}
             icon="globe icon"
             label="Home Country"
