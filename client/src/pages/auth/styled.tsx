@@ -1,5 +1,5 @@
-import styled from "styled-components";
 import { Text } from "components";
+import styled from "styled-components";
 
 export const FormWrapper = styled.div`
   background-color: var(--white);

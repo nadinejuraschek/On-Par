@@ -1,4 +1,5 @@
 import { Button, LoadingPlaceholder, Tabs } from "components";
+import { useWorkhours } from "hooks";
 import { useMemo, useState } from "react";
 import {
   Container,
@@ -7,7 +8,6 @@ import {
   ProgressContainer,
   ProgressLabel,
 } from "./styled";
-import { useWorkhours } from "hooks";
 
 const WORKHOUR_TABS = {
   DAY: 0,
@@ -18,8 +18,7 @@ export const WorkhourSummary = (): JSX.Element => {
   const [activeTab, setActiveTab] = useState(WORKHOUR_TABS.DAY);
 
   const tabs = [
-    { label: "Today", value: WORKHOUR_TABS.DAY },
-    { label: "This Week", value: WORKHOUR_TABS.WEEK }
+    { label: "Today", value: WORKHOUR_TABS.DAY }, { label: "This Week", value: WORKHOUR_TABS.WEEK },
   ];
 
   const { loading, todayWorkhours } = useWorkhours();
@@ -35,7 +34,7 @@ export const WorkhourSummary = (): JSX.Element => {
           percentage={inPercent}
         />
         <ProgressLabel
-          color={inHours > 10 ? '--error_700' : '--secondary_700'}
+          color={inHours > 10 ? "--error_700" : "--secondary_700"}
           size="sm"
         >
           <strong>{inHours}</strong> / 10 hours
@@ -65,7 +64,10 @@ export const WorkhourSummary = (): JSX.Element => {
     }
 
     return activeTab === WORKHOUR_TABS.DAY ? renderDailyProgress : renderWeeklyProgress;
-  }, [activeTab, loading, renderDailyProgress, renderWeeklyProgress]);
+  }, [activeTab,
+    loading,
+    renderDailyProgress,
+    renderWeeklyProgress]);
 
   return (
     <Container>

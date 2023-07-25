@@ -1,7 +1,7 @@
-import { GoalItem, LoadingPlaceholder, Text } from 'components';
-import { IGoalsList } from './types';
-import { Group, List } from './styled';
-import { useMemo } from 'react';
+import { GoalItem, LoadingPlaceholder, Text } from "components";
+import { useMemo } from "react";
+import { Group, List } from "./styled";
+import { IGoalsList } from "./types";
 
 export const GoalsList = ({ filter, items, loading, title }: IGoalsList): JSX.Element => {
   const renderItems = useMemo(() => {

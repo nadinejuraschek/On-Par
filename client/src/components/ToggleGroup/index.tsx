@@ -1,11 +1,11 @@
-import { Field, Group, Toggle } from './styled';
+import { Text } from "components";
+import { useMemo } from "react";
+import { Field, Group, Toggle } from "./styled";
 
 import { IToggleGroup } from "./types";
-import { Text } from 'components';
-import { useMemo } from "react";
 
 export const ToggleGroup = ({
-  className = '',
+  className = "",
   error,
   handleChange,
   label,
@@ -43,7 +43,7 @@ export const ToggleGroup = ({
             <Text
               color="--primary_600"
               size="sm"
-              weight={isSelected ? 'bold' : 'regular'}
+              weight={isSelected ? "bold" : "regular"}
             >
               {option.label}
             </Text>

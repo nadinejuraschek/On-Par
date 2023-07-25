@@ -1,7 +1,7 @@
-import * as dayjs from "dayjs";
 import { Button, Input, Modal, Textarea } from "components";
-import { ChangeEvent, FormEvent, useCallback, useMemo, useState } from 'react';
-import { IAddNoteModal } from './types';
+import * as dayjs from "dayjs";
+import { ChangeEvent, FormEvent, useCallback, useMemo, useState } from "react";
+import { IAddNoteModal } from "./types";
 
 export const AddNoteModal = ({ createNote, toggleModal }: IAddNoteModal): JSX.Element => {
   const currentDate = dayjs().format("MMMM D, YYYY");
@@ -14,7 +14,10 @@ export const AddNoteModal = ({ createNote, toggleModal }: IAddNoteModal): JSX.El
       toggleModal();
       setNewNote( { date: currentDate, text: "", title: "" } );
     });
-    }, [createNote, currentDate, newNote, toggleModal]);
+  }, [createNote,
+    currentDate,
+    newNote,
+    toggleModal]);
 
   const handleChange = useCallback((event: ChangeEvent): void => {
     const target = event.target as HTMLInputElement;

@@ -1,6 +1,6 @@
 import { Button, Input, Modal, Textarea } from "components";
-import { ChangeEvent, FormEvent, useCallback, useMemo, useState } from 'react';
-import { IEditNoteModal } from './types';
+import { ChangeEvent, FormEvent, useCallback, useMemo, useState } from "react";
+import { IEditNoteModal } from "./types";
 
 export const EditNoteModal = ({
   editNote,
@@ -13,7 +13,10 @@ export const EditNoteModal = ({
     event.preventDefault();
 
     editNote(note._id, updatedNote, handleEditCancel);
-    }, [editNote, handleEditCancel, note, updatedNote]);
+  }, [editNote,
+    handleEditCancel,
+    note,
+    updatedNote]);
 
   const handleChange = useCallback((event: ChangeEvent): void => {
     const target = event.target as HTMLInputElement;

@@ -1,27 +1,27 @@
-import styled, { css } from 'styled-components';
+import styled, { css } from "styled-components";
 
-import { IBadge } from './types';
-import { TGoalType } from 'types';
+import { TGoalType } from "types";
+import { IBadge } from "./types";
 
 const getVariantStyles = (variant?: TGoalType) => {
   switch(variant) {
-    case 'education':
-      return css`
+  case "education":
+    return css`
         background-color: var(--warning_50);
         color: var(--warning_500);
       `;
-    case 'personal':
-      return css`
+  case "personal":
+    return css`
         background-color: var(--tertiary_50);
         color: var(--tertiary_500);
       `;
-    case 'travel':
-      return css`
+  case "travel":
+    return css`
         background-color: var(--secondary_50);
         color: var(--secondary_500);
       `;
-    default:
-      return css`
+  default:
+    return css`
         background-color: var(--grey_100);
       `;
   }

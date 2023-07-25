@@ -1,8 +1,8 @@
-import { Button, DatePicker, Modal, Textarea, ToggleGroup } from 'components';
-import { ChangeEvent, useCallback, useMemo, useState } from 'react';
-import { IAddGoalModal } from './types';
-import { Form } from './styled';
-import { useGoals } from 'hooks';
+import { Button, DatePicker, Modal, Textarea, ToggleGroup } from "components";
+import { useGoals } from "hooks";
+import { ChangeEvent, useCallback, useMemo, useState } from "react";
+import { Form } from "./styled";
+import { IAddGoalModal } from "./types";
 
 export const AddGoalModal = ({ toggleModal }: IAddGoalModal): JSX.Element => {
   const { createGoal } = useGoals();
@@ -16,11 +16,11 @@ export const AddGoalModal = ({ toggleModal }: IAddGoalModal): JSX.Element => {
   const handleSubmit = useCallback(() => {
     createGoal(newGoal, () => {
       setNewGoal({
-          dueDate: undefined,
-          text: undefined,
-          type: undefined,
-        });
-        toggleModal();
+        dueDate: undefined,
+        text: undefined,
+        type: undefined,
+      });
+      toggleModal();
     });
   }, [createGoal, newGoal, toggleModal]);
 
@@ -33,9 +33,7 @@ export const AddGoalModal = ({ toggleModal }: IAddGoalModal): JSX.Element => {
   ), [handleSubmit, toggleModal]);
 
   const toggleOptions = [
-    { label: 'Education', value: 'education' },
-    { label: 'Personal', value: 'personal' },
-    { label: 'Travel', value: 'travel' },
+    { label: "Education", value: "education" }, { label: "Personal", value: "personal" }, { label: "Travel", value: "travel" },
   ];
 
   const handleInput = useCallback((event: ChangeEvent): void => {

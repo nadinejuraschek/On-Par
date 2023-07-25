@@ -1,11 +1,11 @@
-import * as dayjs from 'dayjs';
 import { LoadingSpinner, Text } from "components";
-import { useContext, useMemo, useState } from "react";
-import { InfoText, List } from "./styled";
-import { Payment } from "./Payment";
 import { UserContext } from "contexts";
-import { usePayments } from 'hooks';
+import * as dayjs from "dayjs";
+import { usePayments } from "hooks";
+import { useContext, useMemo, useState } from "react";
 import { EditPaymentModal } from "./EditPaymentModal";
+import { Payment } from "./Payment";
+import { InfoText, List } from "./styled";
 
 export const Payments = (): JSX.Element => {
   const { user } = useContext( UserContext );
@@ -14,9 +14,9 @@ export const Payments = (): JSX.Element => {
 
   const [editPayment, setEditPayment] = useState(null);
 
-  const currentWeekNum = useMemo(() => dayjs(new Date()).diff(dayjs(user?.startDate), 'week'), [user]);
+  const currentWeekNum = useMemo(() => dayjs(new Date()).diff(dayjs(user?.startDate), "week"), [user]);
 
-  const nextDueDate = useMemo(() => dayjs(new Date()).endOf('week').format('ddd DD MMM, YYYY'), []);
+  const nextDueDate = useMemo(() => dayjs(new Date()).endOf("week").format("ddd DD MMM, YYYY"), []);
 
   const sortedPayments = useMemo(() => {
     return payments.sort((a, b) => a.week - b.week).filter((payment) => (

@@ -1,25 +1,25 @@
-import * as dayjs from 'dayjs';
+import { Badge, Button, Modal } from "components";
+import * as dayjs from "dayjs";
 
-import { Badge, Button, Modal } from 'components';
-import { BadgesWrapper, ItemBody, Label, Overlay, StyledIcon, StyledItem } from './styled';
-import { useCallback, useMemo, useState } from 'react';
+import { useGoals } from "hooks";
+import { useCallback, useMemo, useState } from "react";
+import { EditGoalModal } from "./EditGoalModal";
+import { BadgesWrapper, ItemBody, Label, Overlay, StyledIcon, StyledItem } from "./styled";
 
-import { EditGoalModal } from './EditGoalModal';
-import { IGoalItem } from './types';
-import { getGoalIcon } from './utils';
-import { useGoals } from 'hooks';
+import { IGoalItem } from "./types";
+import { getGoalIcon } from "./utils";
 
 export const GoalItem = ({
   checkable = true,
   checked,
-  className = '',
+  className = "",
   deletable = true,
   dueDate,
   editable = true,
   id,
   label,
   text,
-  type = 'personal',
+  type = "personal",
 }: IGoalItem): JSX.Element => {
   const [openDeleteConfirm, setOpenDeleteConfirm] = useState(false);
   const [openEditModal, setOpenEditModal] = useState(false);
@@ -55,7 +55,12 @@ export const GoalItem = ({
         )}
       </Overlay>
     );
-  }, [checkable, checked, checkGoal, deletable, editable, id]);
+  }, [checkable,
+    checked,
+    checkGoal,
+    deletable,
+    editable,
+    id]);
 
   const renderBadges = useMemo(() => {
     const badgeIcon = <StyledIcon alt={`${type}_icon`} src={getGoalIcon(type)} />;
@@ -63,7 +68,7 @@ export const GoalItem = ({
     return (
       <BadgesWrapper>
         <Badge icon={badgeIcon} label={type.toUpperCase()} variant={type} />
-        {dueDate && <Badge label={dayjs(dueDate).format('MM/DD/YYYY')} />}
+        {dueDate && <Badge label={dayjs(dueDate).format("MM/DD/YYYY")} />}
       </BadgesWrapper>
     );
   }, [dueDate, type]);
@@ -89,7 +94,10 @@ export const GoalItem = ({
         Are you sure you&apos;d like to delete this goal?
       </Modal>
     )
-  }, [id, deleteGoal, openDeleteConfirm, closeModal]);
+  }, [id,
+    deleteGoal,
+    openDeleteConfirm,
+    closeModal]);
 
   const renderEditModal = useMemo(() => {
     if (!openEditModal) return null;
@@ -97,7 +105,13 @@ export const GoalItem = ({
     return (
       <EditGoalModal checked={checked} dueDate={dueDate} id={id} text={text} toggleModal={closeModal} type={type} />
     );
-  }, [checked, dueDate, id, openEditModal, text, closeModal, type]);
+  }, [checked,
+    dueDate,
+    id,
+    openEditModal,
+    text,
+    closeModal,
+    type]);
 
   return (
     <StyledItem

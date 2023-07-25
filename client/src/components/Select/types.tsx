@@ -1,4 +1,4 @@
-import { GroupBase, OptionsOrGroups } from 'react-select';
+import { GroupBase, OptionsOrGroups } from "react-select";
 
 export interface ISelect {
   className?: string;

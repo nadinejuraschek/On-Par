@@ -1,9 +1,9 @@
-import * as dayjs from 'dayjs';
-import { useCallback, useContext, useMemo, useState } from "react";
 import { Button, DatePicker, Modal } from "components";
-import { IEditPaymentModal } from "./types";
+import { UserContext } from "contexts";
+import * as dayjs from "dayjs";
 import { usePayments } from "hooks";
-import { UserContext } from 'contexts';
+import { useCallback, useContext, useMemo, useState } from "react";
+import { IEditPaymentModal } from "./types";
 
 export const EditPaymentModal = ({ handleClose, originalPayment }: IEditPaymentModal): JSX.Element => {
   const { user } = useContext(UserContext);
@@ -13,8 +13,8 @@ export const EditPaymentModal = ({ handleClose, originalPayment }: IEditPaymentM
   const [updatedPayment, setUpdatedPayment] = useState(originalPayment);
 
   const handleDateChange = useCallback((selected: Date) => {
-    const dateInWeek = dayjs(user.startDate).add(dayjs.duration({'weeks': originalPayment.week}));
-    const endOfWeek = dayjs(dateInWeek).endOf('week');
+    const dateInWeek = dayjs(user.startDate).add(dayjs.duration({ "weeks": originalPayment.week }));
+    const endOfWeek = dayjs(dateInWeek).endOf("week");
     const isPaymentOnTime = dayjs(selected).isSameOrBefore(endOfWeek);
 
     setUpdatedPayment(updatedPayment => ({ ...updatedPayment, date: selected, late: !isPaymentOnTime }));
@@ -23,7 +23,10 @@ export const EditPaymentModal = ({ handleClose, originalPayment }: IEditPaymentM
   const handleSubmit = useCallback(() => {
     editPayment(originalPayment._id, updatedPayment);
     handleClose();
-  }, [editPayment, handleClose, originalPayment, updatedPayment]);
+  }, [editPayment,
+    handleClose,
+    originalPayment,
+    updatedPayment]);
 
 
   // TODO: move submit to form instead of button

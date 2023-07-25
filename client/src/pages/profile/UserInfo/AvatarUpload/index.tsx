@@ -1,6 +1,6 @@
 import { Button } from "components";
-import { Actions, Container, ImageWrapper } from "./styled";
 import blankPic from "images/blankProfile.svg";
+import { Actions, Container, ImageWrapper } from "./styled";
 
 export const AvatarUpload = (): JSX.Element => {
   return (

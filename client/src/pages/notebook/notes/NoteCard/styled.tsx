@@ -1,21 +1,21 @@
-import styled, { css } from 'styled-components';
 import { Card } from "components";
+import styled, { css } from "styled-components";
 import { IStyledNote, TStyledNoteColor } from "./types";
 
 const getNoteColor = (color: TStyledNoteColor) => {
   switch (color) {
-    case 'blue':
-      return css`
+  case "blue":
+    return css`
         background-color: var(--secondary_50);
         color: var(--secondary_800);
       `;
-    case 'pink':
-      return css`
+  case "pink":
+    return css`
         background-color: var(--tertiary_50);
         color: var(--tertiary_800);
       `;
-    default:
-      return css`
+  default:
+    return css`
         background-color: var(--warning_50);
         color: var(--warning_800);
       `;

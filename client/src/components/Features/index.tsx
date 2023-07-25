@@ -1,7 +1,7 @@
-import { StyledCard, StyledImage, Title } from './styled';
+import { Link } from "react-router-dom";
+import { StyledCard, StyledImage, Title } from "./styled";
 
 import { IFeatureCard } from "./types";
-import { Link } from 'react-router-dom';
 
 export const FeatureCard = ( { header, icon, link, title }: IFeatureCard ): JSX.Element => (
   <Link to={ link }>

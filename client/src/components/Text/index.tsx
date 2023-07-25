@@ -1,5 +1,5 @@
+import { StyledText } from "./styled";
 import { IText } from "./types";
-import { StyledText } from './styled';
 
 export const Text = ({
   as,
@@ -14,7 +14,7 @@ export const Text = ({
   <StyledText
     as={as}
     className={className}
-    color={color}
+    color={`var(${color})`}
     disabled={disabled}
     htmlFor={htmlFor}
     size={size}

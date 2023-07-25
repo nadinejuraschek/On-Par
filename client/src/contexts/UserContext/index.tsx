@@ -1,10 +1,10 @@
-import { IUserProvider, TUser } from "./types";
+import axios from "axios";
+import { LoadingSpinner } from "components";
 import { createContext, useEffect, useMemo, useState } from "react";
 
-import { LoadingSpinner } from 'components';
-import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { useNavigate } from 'react-router-dom';
+import { IUserProvider, TUser } from "./types";
 
 export const UserContext = createContext({
   loading: false,
@@ -32,10 +32,13 @@ export const UserProvider = ( { children }: IUserProvider ): JSX.Element => {
   const renderContent = useMemo(() => {
     if (loading) return <main><LoadingSpinner /></main>;
 
-    if (!user) navigate('/register');
+    if (!user) navigate("/register");
 
     return children;
-  }, [children, loading, navigate, user]);
+  }, [children,
+    loading,
+    navigate,
+    user]);
 
   return (
     <UserContext.Provider value={ { loading, user } }>

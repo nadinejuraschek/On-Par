@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { IStyledField, IStyledInput } from "./types";
 import { Text } from "../Text";
 
@@ -58,6 +58,14 @@ export const StyledInput = styled.input<IStyledInput>`
     box-shadow: var(--shadow_xs_focused);
     outline: transparent;
   }
+
+  ${({ hasError }) => hasError && css`
+    border-color: var(--error_300);
+
+    &:focus {
+      box-shadow: var(--shadow_xs_focused_error);
+    }
+  `};
 `;
 
 export const StyledIcon = styled.i`
@@ -77,15 +85,11 @@ export const StyledIcon = styled.i`
 `;
 
 export const ErrorText = styled(Text)`
-  border-color: var(--error_300);
-
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 
-  max-width: 100%;
+  color: var(--error_300);
 
-  &:focus {
-    box-shadow: var(--shadow_xs_focused_error);
-  }
+  max-width: 100%;
 `;

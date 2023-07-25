@@ -1,15 +1,15 @@
-import { Body, Footer, Header, Overlay, StyledModal } from "./styled";
-import { Button, Text } from 'components';
-
-import { IModal } from './types';
+import { Button, Text } from "components";
 import { useMemo } from "react";
+import { Body, Footer, Header, Overlay, StyledModal } from "./styled";
+
+import { IModal } from "./types";
 
 export const Modal = ({
   actions,
   children,
-  className = '',
+  className = "",
   handleClose,
-  title = '',
+  title = "",
 }: IModal): JSX.Element => {
   const renderTitle = useMemo(() => {
     if (!title) return null;

@@ -1,10 +1,10 @@
-import { Button, DatePicker, Modal, Textarea, ToggleGroup } from 'components';
-import { ChangeEvent, useCallback, useMemo, useState } from 'react';
-
-import { Form } from './styled';
-import { IAddGoalModal } from './types';
-import { TGoalType } from 'types';
+import { Button, DatePicker, Modal, Textarea, ToggleGroup } from "components";
 import { useGoals } from "hooks";
+import { ChangeEvent, useCallback, useMemo, useState } from "react";
+
+import { TGoalType } from "types";
+import { Form } from "./styled";
+import { IAddGoalModal } from "./types";
 
 export const EditGoalModal = ({
   checked,
@@ -25,7 +25,10 @@ export const EditGoalModal = ({
 
   const handleSubmit = useCallback(() => {
     editGoal(id, updatedGoal, toggleModal);
-  }, [editGoal, id, toggleModal, updatedGoal]);
+  }, [editGoal,
+    id,
+    toggleModal,
+    updatedGoal]);
 
   // TODO: handleSubmit in form instead of button
   const actions = useMemo(() => (
@@ -36,9 +39,7 @@ export const EditGoalModal = ({
   ), [handleSubmit, toggleModal]);
 
   const toggleOptions = [
-    { label: 'Education', value: 'education' },
-    { label: 'Personal', value: 'personal' },
-    { label: 'Travel', value: 'travel' },
+    { label: "Education", value: "education" }, { label: "Personal", value: "personal" }, { label: "Travel", value: "travel" },
   ];
 
   const handleInput = useCallback((event: ChangeEvent): void => {

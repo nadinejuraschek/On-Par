@@ -1,8 +1,7 @@
-import * as dayjs from "dayjs";
 import { Button, DatePicker, Text } from "components";
-import { FormEvent, useCallback } from 'react';
-import { useState } from "react";
+import * as dayjs from "dayjs";
 import { useWorkhours } from "hooks";
+import { FormEvent, useCallback, useState } from "react";
 
 export const AddHours = (): JSX.Element => {
   const today = new Date();
@@ -26,7 +25,10 @@ export const AddHours = (): JSX.Element => {
     };
 
     createWorkhours(newHours);
-  }, [createWorkhours, date, end, start]);
+  }, [createWorkhours,
+    date,
+    end,
+    start]);
 
   return (
     <>

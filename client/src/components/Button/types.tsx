@@ -14,6 +14,6 @@ export interface IButton {
   loading?: boolean;
   round?: boolean;
   square?: boolean;
-  type?: 'button' | 'submit';
+  type?: "button" | "submit";
   variant?: TVariant;
 }

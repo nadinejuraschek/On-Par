@@ -1,8 +1,8 @@
-import { Container } from './styled';
+import { useMemo } from "react";
+import { TimeUtils } from "utils";
+import { Container } from "./styled";
 import { ITimer } from "./types";
 import { ProgressRing } from "../ProgressRing";
-import { TimeUtils } from "utils";
-import { useMemo } from 'react';
 
 export const Timer = ( { time }: ITimer ): JSX.Element => {
   const hours = TimeUtils.minToH( time );

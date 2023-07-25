@@ -1,12 +1,12 @@
-import { Button } from 'components';
-import { ChangeEvent, useCallback, useState } from 'react';
-import { FooterActions, StyledContent } from "./styled";
-import { TUser } from 'contexts/UserContext/types';
-import axios from 'axios';
+import axios from "axios";
+import { Button } from "components";
+import { TUser } from "contexts/UserContext/types";
+import { ChangeEvent, useCallback, useState } from "react";
 import { toast } from "react-toastify";
+import { AvatarUpload } from "./AvatarUpload";
 import { Form } from "./Form";
 import { Permissions } from "./Permissions";
-import { AvatarUpload } from "./AvatarUpload";
+import { FooterActions, StyledContent } from "./styled";
 
 export const UserInfo = ({ user }: { user: TUser }): JSX.Element => {
   const [updating, setUpdating] = useState(false);
@@ -26,9 +26,9 @@ export const UserInfo = ({ user }: { user: TUser }): JSX.Element => {
         shareLastName: formData.permissions.shareLastName,
       },
     } ).then( () => {
-      toast.success('Profile updated successfully!');
+      toast.success("Profile updated successfully!");
     } ).catch( () => {
-      toast.error('There was an error when updating your profile. Please try again later.');
+      toast.error("There was an error when updating your profile. Please try again later.");
     } ).finally( () => setUpdating( false ));
   }, [user, formData]);
 

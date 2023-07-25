@@ -1,21 +1,21 @@
-import styled, { css, keyframes } from 'styled-components';
-
-import { IButton } from './types';
 import { Link } from "react-router-dom";
-import { TVariant } from 'types';
+import styled, { css, keyframes } from "styled-components";
+
+import { TVariant } from "types";
+import { IButton } from "./types";
 
 const getVariantStyles = (variant: TVariant) => {
   switch(variant) {
-    case 'primary':
-      return primaryStyles;
-    case 'tertiary':
-      return tertiaryStyles;
-    case 'danger':
-      return dangerStyles;
-    case 'warning':
-      return warningStyles;
-    default:
-      return secondaryStyles;
+  case "primary":
+    return primaryStyles;
+  case "tertiary":
+    return tertiaryStyles;
+  case "danger":
+    return dangerStyles;
+  case "warning":
+    return warningStyles;
+  default:
+    return secondaryStyles;
   }
 };
 
@@ -177,7 +177,7 @@ export const StyledButton = styled.button<IButton>`
     cursor: not-allowed;
   }
 
-  ${({ align }) => align === 'alignStart' && css`
+  ${({ align }) => align === "alignStart" && css`
     justify-content: flex-start;
   `};
 
@@ -207,7 +207,7 @@ export const StyledLink = styled(Link)<IButton>`
     cursor: not-allowed;
   `};
 
-  ${({ align }) => align === 'alignStart' && css`
+  ${({ align }) => align === "alignStart" && css`
     justify-content: flex-start;
   `};
 

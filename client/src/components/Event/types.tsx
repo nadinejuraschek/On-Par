@@ -13,7 +13,7 @@ export type TEvent = {
   type?: TEventType;
 };
 
-export type TEventType = 'birthday' | 'holiday';
+export type TEventType = "birthday" | "holiday";
 
 export interface IStyledEvent {
   birthday: boolean;

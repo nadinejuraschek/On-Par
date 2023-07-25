@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { LayoutGradient, LayoutWithNavbar } from "layout";
 import {
   EmergencyNumbers,
   Goals,
@@ -15,7 +15,7 @@ import {
   Tax,
   Workhours,
 } from "pages";
-import { LayoutGradient, LayoutWithNavbar } from "layout";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 export const Router = (): JSX.Element => {
   return (

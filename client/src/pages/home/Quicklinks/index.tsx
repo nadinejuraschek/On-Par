@@ -1,7 +1,7 @@
 import { Button, Text } from "components";
-import { Container, StyledIcon } from "./styled";
 import { quicklinks } from "data";
 import { useMemo } from "react";
+import { Container, StyledIcon } from "./styled";
 
 export const Quicklinks = (): JSX.Element => {
   const renderLinks = useMemo(() => {

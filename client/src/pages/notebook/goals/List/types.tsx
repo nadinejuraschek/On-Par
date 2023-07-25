@@ -1,7 +1,7 @@
-import { TGoal } from 'types';
+import { TGoal } from "types";
 
 export interface IGoalsList {
-  filter?: { label: string; value: 'education' | 'personal' | 'travel'; };
+  filter?: { label: string; value: "education" | "personal" | "travel"; };
   items?: TGoal[];
   loading: boolean;
   title: string;

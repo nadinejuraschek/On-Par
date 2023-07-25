@@ -1,8 +1,8 @@
-import { IGreeting } from "./types";
 import { Text } from "components";
 import blankProfile from "images/blankProfile.svg";
-import { Message, ProfileImage, Wrapper } from "./styled";
 import { useMemo } from "react";
+import { Message, ProfileImage, Wrapper } from "./styled";
+import { IGreeting } from "./types";
 
 export const Greeting = ( { message, name }: IGreeting ): JSX.Element => {
   const greeting = useMemo(() => {

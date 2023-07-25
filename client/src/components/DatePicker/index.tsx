@@ -1,12 +1,12 @@
-import './DatePicker.css';
-import 'react-clock/dist/Clock.css';
-import { IDatePicker } from './types';
-import { Text } from 'components';
-import { useMemo } from 'react';
-import { Field, IconInputWrapper, StyledDateTimePicker } from './styled';
+import "./DatePicker.css";
+import "react-clock/dist/Clock.css";
+import { Text } from "components";
+import { useMemo } from "react";
+import { Field, IconInputWrapper, StyledDateTimePicker } from "./styled";
+import { IDatePicker } from "./types";
 
 export const DatePicker = ({
-  className = '',
+  className = "",
   disabled = false,
   error,
   format = "MM/dd/yyyy  hh:mma",

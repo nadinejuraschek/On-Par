@@ -1,8 +1,8 @@
-import { Fragment, useMemo } from "react";
-import { InfoItem, InfoText, StyledContent } from "./styled";
 import { Text } from "components";
-import { createMarkup } from "utils";
 import { taxInfo } from "data";
+import { Fragment, useMemo } from "react";
+import { createMarkup } from "utils";
+import { InfoItem, InfoText, StyledContent } from "./styled";
 
 export const Tax = (): JSX.Element => {
   const { contentRows, headerRows } = taxInfo;

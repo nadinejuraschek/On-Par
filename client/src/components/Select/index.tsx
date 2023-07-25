@@ -1,12 +1,12 @@
-import { ErrorText, Field, IconInputWrapper, StyledIcon, StyledSelect } from "./styled";
-import { getSelectStyles, selectTheme } from './utils';
-
-import { ISelect } from "./types"
 import { Text } from "components";
-import { useMemo } from 'react';
+import { useMemo } from "react";
+import { ErrorText, Field, IconInputWrapper, StyledIcon, StyledSelect } from "./styled";
+import { ISelect } from "./types"
+import { getSelectStyles, selectTheme } from "./utils";
+
 
 export const Select = ({
-  className = '',
+  className = "",
   clearable = false,
   defaultValue,
   disabled = false,

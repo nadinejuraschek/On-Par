@@ -1,4 +1,4 @@
-import {FC, SVGProps} from 'react';
+import { FC, SVGProps } from "react";
 
 export interface IFeatureCard {
   header: string;

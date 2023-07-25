@@ -1,8 +1,8 @@
-import { useEffect, useState } from 'react';
-
-import { TPayment } from 'types';
 import axios from "axios";
-import { toast } from 'react-toastify';
+import { useEffect, useState } from "react";
+
+import { toast } from "react-toastify";
+import { TPayment } from "types";
 
 export function usePayments() {
   const [loading, setLoading] = useState(false);
@@ -34,9 +34,9 @@ export function usePayments() {
   const editPayment = async (paymentid: string, updatedPayment: TPayment) => {
     setLoading(true);
     await axios
-      .put('/api/payments/' + paymentid, updatedPayment)
+      .put("/api/payments/" + paymentid, updatedPayment)
       .then(() => {
-        toast.success('The payment has been updated successfully!');
+        toast.success("The payment has been updated successfully!");
         getPayments();
       })
       .catch(() => toast.error("Could not update the payment. Please try again later!"))

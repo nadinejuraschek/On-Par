@@ -1,9 +1,9 @@
 import { LoadingSpinner, Tabs } from "components";
+import { UserContext } from "contexts";
 import { useContext, useMemo, useState } from "react";
 import { HostFamilyInfo } from "./HostFamilyInfo";
-import { UserContext } from "contexts";
-import { UserInfo } from "./UserInfo";
 import { Grid } from "./styled";
+import { UserInfo } from "./UserInfo";
 
 const PROFILE_TABS = {
   PROFILE: 0,
@@ -19,14 +19,14 @@ export const Profile = (): JSX.Element => {
 
   const renderContent = useMemo(() => {
     switch (activeTab) {
-      case PROFILE_TABS.HOST_FAMILY:
-        return <HostFamilyInfo />;
-      case PROFILE_TABS.CLUSTER:
-        return null;
-      case PROFILE_TABS.PASSWORD:
-        return null;
-      default:
-        return <UserInfo user={user} />;
+    case PROFILE_TABS.HOST_FAMILY:
+      return <HostFamilyInfo />;
+    case PROFILE_TABS.CLUSTER:
+      return null;
+    case PROFILE_TABS.PASSWORD:
+      return null;
+    default:
+      return <UserInfo user={user} />;
     }
   }, [activeTab, user]);
 

@@ -1,8 +1,8 @@
-import { useEffect, useState } from 'react';
-
-import { TNote } from 'types';
 import axios from "axios";
-import { toast } from 'react-toastify';
+import { useEffect, useState } from "react";
+
+import { toast } from "react-toastify";
+import { TNote } from "types";
 
 export function useNotes() {
   const [loading, setLoading] = useState(false);
@@ -30,10 +30,10 @@ export function useNotes() {
       data: newNote,
     } )
       .then( () => {
-        toast.success('Your note has been added successfully!');
+        toast.success("Your note has been added successfully!");
         getNotes();
       } )
-      .catch( () => toast.error('The note could not be added. Please try again later!'))
+      .catch( () => toast.error("The note could not be added. Please try again later!"))
       .finally(() => {
         setLoading(false);
         callback?.();
@@ -54,7 +54,7 @@ export function useNotes() {
     await axios
       .put(`/api/notes/${noteid}`, updatedNote)
       .then(() => {
-        toast.success('The note has been updated successfully!');
+        toast.success("The note has been updated successfully!");
         getNotes();
       })
       .catch(() => toast.error("Could not update the note. Please try again later!"))

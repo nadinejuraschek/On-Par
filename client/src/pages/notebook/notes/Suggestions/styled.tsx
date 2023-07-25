@@ -1,5 +1,5 @@
-import styled from 'styled-components';
 import { Card } from "components";
+import styled from "styled-components";
 
 export const StyledCard = styled(Card)`
   grid-column: 1 / -1;

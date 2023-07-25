@@ -37,7 +37,14 @@ export const NoteCard = ( {
       </Title>
       <Body>{ text }</Body>
     </Content>
-  ), [_id, color, date, deleteNote, handleOpenEdit, note, text, title]);
+  ), [_id,
+    color,
+    date,
+    deleteNote,
+    handleOpenEdit,
+    note,
+    text,
+    title]);
 
   return (
     <StyledNote color={color}>

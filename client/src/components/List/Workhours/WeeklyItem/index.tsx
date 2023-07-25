@@ -1,10 +1,10 @@
+import { Text } from "components";
 import * as dayjs from "dayjs";
 import { useMemo } from "react";
-import { Text } from "components";
-import { IWeeklyItem } from "./types";
-import { TWorkhour } from "../types";
 import { TimeUtils } from "utils";
 import { Hours, StartTrackerButton, StyledItem } from "./styled";
+import { IWeeklyItem } from "./types";
+import { TWorkhour } from "../types";
 
 export const WeeklyItem = ({ day, hours }: IWeeklyItem): JSX.Element => {
   const renderTotalHours = useMemo(() => {

@@ -1,12 +1,12 @@
 import { Button, LoadingSpinner } from "components";
+import { useNotes } from "hooks";
 import { useCallback, useMemo, useState } from "react";
-import { Grid, Header, List } from "./styled";
+import { TNote } from "types";
 import { AddNoteModal } from "./AddNoteModal";
 import { EditNoteModal } from "./EditNoteModal";
 import { NoteCard } from "./NoteCard";
+import { Grid, Header, List } from "./styled";
 import { Suggestions } from "./Suggestions";
-import { TNote } from "types";
-import { useNotes } from "hooks";
 
 export const Notes = (): JSX.Element => {
   const [openAddNoteModal, setOpenAddNoteModal] = useState(false);
@@ -46,23 +46,29 @@ export const Notes = (): JSX.Element => {
         note={originalNote}
       />
     );
-  }, [editNote, handleEditCancel, openEditNoteModal, originalNote]);
+  }, [editNote,
+    handleEditCancel,
+    openEditNoteModal,
+    originalNote]);
 
   const renderNotes = useMemo(() => {
     if (loading) return <LoadingSpinner />;
 
     return notes.map((note: TNote, index: number) => {
       const color = index % 3 === 0 ? "yellow" : index % 2 === 0 ? "blue" : "pink";
-        return (
-          <NoteCard
-            color={ color }
-            deleteNote={deleteNote}
-            handleOpenEdit={handleOpenEdit}
-            key={ note._id }
-            note={note}
-          />
-        )});
-  }, [deleteNote, handleOpenEdit, loading, notes]);
+      return (
+        <NoteCard
+          color={ color }
+          deleteNote={deleteNote}
+          handleOpenEdit={handleOpenEdit}
+          key={ note._id }
+          note={note}
+        />
+      ) });
+  }, [deleteNote,
+    handleOpenEdit,
+    loading,
+    notes]);
 
   return (
     <>

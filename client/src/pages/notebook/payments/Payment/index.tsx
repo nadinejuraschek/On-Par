@@ -1,8 +1,8 @@
-import * as dayjs from 'dayjs';
-import * as duration from 'dayjs/plugin/duration';
-import * as isSameOrBefore from 'dayjs/plugin/isSameOrBefore';
-import { Badge, Button } from 'components';
-import { MouseEvent, useCallback, useMemo } from 'react';
+import { Badge, Button } from "components";
+import * as dayjs from "dayjs";
+import * as duration from "dayjs/plugin/duration";
+import * as isSameOrBefore from "dayjs/plugin/isSameOrBefore";
+import { MouseEvent, useCallback, useMemo } from "react";
 import {
   Actions,
   Badges,
@@ -11,7 +11,7 @@ import {
   LateBadge,
   ListItem,
   Year,
-} from './styled';
+} from "./styled";
 import { IPaymentEntry } from "./types";
 
 dayjs.extend(duration);
@@ -33,8 +33,8 @@ export const Payment = ( {
 
     return (
       <>
-        <DayMonth>{dayjs(date).format('DD MMM')}</DayMonth>
-        <Year>{dayjs(date).format('YYYY')}</Year>
+        <DayMonth>{dayjs(date).format("DD MMM")}</DayMonth>
+        <Year>{dayjs(date).format("YYYY")}</Year>
       </>
     );
   }, [date]);

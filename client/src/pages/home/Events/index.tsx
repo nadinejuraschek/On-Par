@@ -1,8 +1,8 @@
-import { useMemo } from "react";
-import { holidays, mockBirthdays } from 'data';
-import { EventsList } from './List';
 import { Text } from "components";
-import { Content, ListContent, Wrapper } from './styled';
+import { holidays, mockBirthdays } from "data";
+import { useMemo } from "react";
+import { EventsList } from "./List";
+import { Content, ListContent, Wrapper } from "./styled";
 
 export const Events = (): JSX.Element => {
   const currentMonth = useMemo(() => new Date().getMonth() + 1, []);

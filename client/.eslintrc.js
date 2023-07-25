@@ -14,9 +14,19 @@ module.exports = {
     "plugin:jest/recommended",
     "plugin:testing-library/react",
   ],
+  overrides: [
+    {
+      files: ["*.ts", "*.tsx"],
+      rules: {
+        "no-undef": 0,
+      },
+    },
+  ],
+  parser: "@typescript-eslint/parser",
   parserOptions: {
     ecmaFeatures: {
       jsx: true,
+      tsx: true,
     },
     ecmaVersion: 2021, // Allows for the parsing of modern ECMAScript features
     sourceType: "module", // Allows for the use of imports

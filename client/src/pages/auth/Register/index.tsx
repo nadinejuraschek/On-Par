@@ -1,18 +1,18 @@
+import axios from "axios";
 import { Button, DatePicker, Input, Select, Text } from "components";
+import { TSelectOption } from "components/Select/types";
+import { UserContext } from "contexts";
+import { countrySelectOptions } from "data";
 import { FormEvent, MouseEvent, useCallback, useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import {
   Divider,
   DividerText,
   FieldPair,
   Form,
   FormWrapper,
-} from "./styled";
-import { TSelectOption } from "components/Select/types";
-import { UserContext } from "contexts";
-import axios from "axios";
-import { countrySelectOptions } from "data";
-import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
+} from "../styled";
 
 export const Register = (): JSX.Element => {
   const navigate = useNavigate();
@@ -54,7 +54,13 @@ export const Register = (): JSX.Element => {
         toast.error("Could not register user. Please try again later!");
         // console.debug( "Error when registering user: " + error.response );
       } );
-  }, [firstname, lastname, country, startDate, email, navigate, password]);
+  }, [firstname,
+    lastname,
+    country,
+    startDate,
+    email,
+    navigate,
+    password]);
 
   const handleGuest = useCallback((event: MouseEvent) => {
     event.preventDefault();
@@ -73,7 +79,7 @@ export const Register = (): JSX.Element => {
   }, [navigate]);
 
   if (user) {
-    navigate('/home');
+    navigate("/home");
   }
 
   return (
@@ -148,7 +154,7 @@ export const Register = (): JSX.Element => {
         <Divider>
           <hr />
           <DividerText>OR</DividerText>
-          </Divider>
+        </Divider>
         <Button handleClick={ handleGuest } variant="tertiary">
           Use Guest Account
         </Button>
