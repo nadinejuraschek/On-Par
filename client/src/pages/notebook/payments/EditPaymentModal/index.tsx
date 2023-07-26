@@ -3,6 +3,8 @@ import { UserContext } from "contexts";
 import * as dayjs from "dayjs";
 import { usePayments } from "hooks";
 import { useCallback, useContext, useMemo, useState } from "react";
+import { TPaymentFormData, paymentSchema } from "schema";
+import { ZodFormattedError } from "zod";
 import { IEditPaymentModal } from "./types";
 
 export const EditPaymentModal = ({ handleClose, originalPayment }: IEditPaymentModal): JSX.Element => {
@@ -10,6 +12,7 @@ export const EditPaymentModal = ({ handleClose, originalPayment }: IEditPaymentM
 
   const { editPayment } = usePayments();
 
+  const [errors, setErrors] = useState<ZodFormattedError<TPaymentFormData> | undefined>(undefined);
   const [updatedPayment, setUpdatedPayment] = useState(originalPayment);
 
   const handleDateChange = useCallback((selected: Date) => {
@@ -21,6 +24,15 @@ export const EditPaymentModal = ({ handleClose, originalPayment }: IEditPaymentM
   }, [originalPayment, user]);
 
   const handleSubmit = useCallback(() => {
+    const validation = paymentSchema.safeParse(updatedPayment);
+
+    if (validation.success === false) {
+      setErrors(validation.error.format());
+      return;
+    }
+
+    setErrors(undefined);
+
     editPayment(originalPayment._id, updatedPayment);
     handleClose();
   }, [editPayment,
@@ -42,9 +54,10 @@ export const EditPaymentModal = ({ handleClose, originalPayment }: IEditPaymentM
   return (
     <Modal actions={renderEditActions} handleClose={handleClose} title="Edit Payment">
       <DatePicker
-        label="Stipend was paid on"
+        error={errors?.date?._errors?.[0] && errors.date._errors[0]}
         format="MM/dd/yyyy"
         handleChange={handleDateChange}
+        label="Stipend was paid on"
         name="date"
         value={updatedPayment.date}
       />
