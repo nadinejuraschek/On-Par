@@ -1,6 +1,6 @@
 import { Text } from "components";
 import { useMemo } from "react";
-import { Field, Group, Toggle } from "./styled";
+import { ErrorText, Field, Group, Toggle } from "./styled";
 
 import { IToggleGroup } from "./types";
 
@@ -26,7 +26,7 @@ export const ToggleGroup = ({
   const renderError = useMemo(() => {
     if (!error) return null;
 
-    return <Text as="p" color="--error_300" size="xs" >{ error }</Text>;
+    return <ErrorText as="p" color="--error_300" size="xs" >{ error }</ErrorText>;
   }, [error]);
 
   const renderToggles = useMemo(() => {

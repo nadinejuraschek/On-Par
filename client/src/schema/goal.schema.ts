@@ -11,6 +11,8 @@ export const goalSchema = z.object({
   }).trim(),
   type: z.string({
     required_error: "Please select a goal type.",
+  }).min(1, {
+    message: "Please select a goal type.",
   }),
 });
 

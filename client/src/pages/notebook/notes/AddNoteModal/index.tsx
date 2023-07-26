@@ -1,14 +1,26 @@
 import { Button, Input, Modal, Textarea } from "components";
 import * as dayjs from "dayjs";
-import { ChangeEvent, FormEvent, useCallback, useMemo, useState } from "react";
+import { ChangeEvent, useCallback, useMemo, useState } from "react";
+import { TNoteFormData, noteSchema } from "schema";
+import { ZodFormattedError } from "zod";
+import { Form } from "./styled";
 import { IAddNoteModal } from "./types";
 
 export const AddNoteModal = ({ createNote, toggleModal }: IAddNoteModal): JSX.Element => {
   const currentDate = dayjs().format("MMMM D, YYYY");
+
+  const [errors, setErrors] = useState<ZodFormattedError<TNoteFormData> | undefined>(undefined);
   const [newNote, setNewNote] = useState( { date: currentDate, text: "", title: "" } );
 
-  const handleSubmit = useCallback((event: FormEvent): void => {
-    event.preventDefault();
+  const handleSubmit = useCallback((): void => {
+    const validation = noteSchema.safeParse(newNote);
+
+    if (validation.success === false) {
+      setErrors(validation.error.format());
+      return;
+    }
+
+    setErrors(undefined);
 
     createNote(newNote, () => {
       toggleModal();
@@ -40,8 +52,9 @@ export const AddNoteModal = ({ createNote, toggleModal }: IAddNoteModal): JSX.El
       handleClose={toggleModal}
       title="New Note"
     >
-      <form>
+      <Form>
         <Input
+          error={errors?.title?._errors?.[0] && errors.title._errors[0]}
           fullWidth
           label="Title"
           name="title"
@@ -50,6 +63,7 @@ export const AddNoteModal = ({ createNote, toggleModal }: IAddNoteModal): JSX.El
           value={ newNote.title }
         />
         <Textarea
+          error={errors?.text?._errors?.[0] && errors.text._errors[0]}
           fullWidth
           label="Note"
           name="text"
@@ -57,7 +71,7 @@ export const AddNoteModal = ({ createNote, toggleModal }: IAddNoteModal): JSX.El
           placeholder="Note"
           value={ newNote.text }
         />
-      </form>
+      </Form>
     </Modal>
   );
 }

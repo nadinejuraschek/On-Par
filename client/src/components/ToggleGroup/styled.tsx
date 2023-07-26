@@ -30,3 +30,13 @@ export const Toggle = styled.div<IToggle>`
   align-items: center;
   gap: 1.6rem;
 `;
+
+export const ErrorText = styled(Text)`
+  color: var(--error_300);
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+  max-width: 100%;
+`;
