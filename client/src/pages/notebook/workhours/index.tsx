@@ -1,7 +1,7 @@
 import { Tabs, Text, Timer, WeeklyHours as WeeklyList } from "components";
 import { useWorkhours } from "hooks";
 import { useMemo, useState } from "react";
-import { AddHours } from "./components/AddHours";
+import { AddHours } from "./AddHours";
 import { CardAddWorkhour, CardReminder, CardTimer, CardTracker, StyledContent, TabsWrapper } from "./styled";
 
 const WORKHOURS_TABS = {

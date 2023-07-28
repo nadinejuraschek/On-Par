@@ -3,6 +3,7 @@ import { z } from "zod";
 export const goalSchema = z.object({
   dueDate: z.date({
     required_error: "Please select a date.",
+    invalid_type_error: "Please select a date.",
   }),
   text: z.string({
     required_error: "Please define your goal.",
