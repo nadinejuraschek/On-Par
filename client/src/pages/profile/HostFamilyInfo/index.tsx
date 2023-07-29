@@ -1,4 +1,4 @@
-import { PeopleList, Text } from 'components';
+import { PeopleList, Text } from "components";
 import { mockHostChildren, mockHostParents } from "data";
 
 export const HostFamilyInfo = (): JSX.Element => {

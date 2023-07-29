@@ -13,16 +13,28 @@ module.exports = {
     "plugin:react-hooks/recommended",
     "plugin:jest/recommended",
     "plugin:testing-library/react",
+    "plugin:@typescript-eslint/recommended"
   ],
+  overrides: [
+    {
+      files: ["*.ts", "*.tsx"],
+      rules: {
+        "no-undef": 0,
+      },
+    },
+  ],
+  parser: "@typescript-eslint/parser",
   parserOptions: {
     ecmaFeatures: {
       jsx: true,
+      tsx: true,
     },
     ecmaVersion: 2021, // Allows for the parsing of modern ECMAScript features
     sourceType: "module", // Allows for the use of imports
   },
   plugins: [
     "import", /* eslint-plugin-import plugin. https://www.npmjs.com/package/eslint-plugin-import,  */"sort-destructure-keys",
+    "@typescript-eslint"
   ],
   root: true, // For configuration cascading.
   rules: {
@@ -38,7 +50,8 @@ module.exports = {
     ],
     "no-console": "warn",
     "no-duplicate-imports": "warn",
-    "no-unused-vars": "warn",
+    "no-unused-vars": "off",
+    "@typescript-eslint/no-unused-vars": ["error"],
     "object-curly-spacing": [
       "warn", "always",
     ],

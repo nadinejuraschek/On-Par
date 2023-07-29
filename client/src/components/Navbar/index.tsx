@@ -16,6 +16,7 @@ export const Navbar = (): JSX.Element => {
 
     return (
       <MenuButton handleClick={ toggleSidenav } square variant="tertiary">
+        {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
         {/* @ts-ignore-next-line */}
         <img alt="Toggle Menu" src={icon} />
       </MenuButton>

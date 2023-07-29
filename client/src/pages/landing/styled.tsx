@@ -1,5 +1,5 @@
-import styled from "styled-components";
 import { Text } from "components";
+import styled from "styled-components";
 import { IStyledSection } from "./types";
 
 export const StyledMain = styled.main`

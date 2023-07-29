@@ -1,5 +1,5 @@
 import { Dayjs } from "dayjs";
-import { TWorkhour } from "../types";
+import { TWorkhour } from "types";
 
 export interface IWeeklyItem {
   day: Dayjs;

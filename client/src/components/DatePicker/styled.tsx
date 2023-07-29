@@ -1,6 +1,6 @@
+import DateTimePicker from "react-datetime-picker";
 import styled, { css } from "styled-components";
 import { IStyledDateTimePicker, IStyledField } from "./types";
-import DateTimePicker from "react-datetime-picker";
 
 export const Field = styled.div<IStyledField>`
   display: flex;
@@ -11,7 +11,7 @@ export const Field = styled.div<IStyledField>`
 
   height: 9rem;
   min-width: 20rem;
-  width: ${({ fullWidth }) => fullWidth ? '100%' : 'auto'};
+  width: ${({ fullWidth }) => fullWidth ? "100%" : "auto"};
 `;
 
 export const IconInputWrapper = styled.div`
@@ -52,4 +52,14 @@ export const StyledDateTimePicker = styled(DateTimePicker)<IStyledDateTimePicker
       padding-left: 4rem;
     }
   `};
+`;
+
+export const ErrorText = styled(Text)`
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+  color: var(--error_300);
+
+  max-width: 100%;
 `;

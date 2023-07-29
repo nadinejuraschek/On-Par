@@ -1,8 +1,6 @@
 import "dayjs/locale/en";
-
 import * as dayjs from "dayjs";
-
-const dayjsDuration = require("dayjs/plugin/duration");
+import * as dayjsDuration from "dayjs/plugin/duration";
 
 dayjs.locale("en");
 dayjs.extend(dayjsDuration);

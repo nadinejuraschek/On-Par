@@ -1,6 +1,6 @@
-import styled, { css } from 'styled-components';
-import { Badge } from 'components';
-import { IStyledListItem } from './types';
+import { Badge } from "components";
+import styled, { css } from "styled-components";
+import { IStyledListItem } from "./types";
 
 export const ListItem = styled.div<IStyledListItem>`
   border: 1px solid;

@@ -1,8 +1,8 @@
-import { useEffect, useState } from 'react';
-
-import { TGoal } from 'types';
 import axios from "axios";
-import { toast } from 'react-toastify';
+import { useEffect, useState } from "react";
+
+import { toast } from "react-toastify";
+import { TGoal } from "types";
 
 export function useGoals() {
   const [loading, setLoading] = useState(false);
@@ -40,7 +40,7 @@ export function useGoals() {
     } ).finally(() => setLoading(false));
   };
 
-  const createGoal = async (newGoal: Omit<TGoal, '_id' | 'checked'>, callback?: () => void) => {
+  const createGoal = async (newGoal: Omit<TGoal, "_id" | "checked">, callback?: () => void) => {
     setLoading(true);
     await axios( {
       url: "/api/goals",
@@ -51,10 +51,10 @@ export function useGoals() {
       },
     } )
       .then( () => {
-        toast.success('Your goal has been added successfully!');
+        toast.success("Your goal has been added successfully!");
         getGoals();
       } )
-      .catch( () => toast.error('The goal could not be added. Please try again later!'))
+      .catch( () => toast.error("The goal could not be added. Please try again later!"))
       .finally(() => {
         setLoading(false);
         callback?.();
@@ -73,12 +73,12 @@ export function useGoals() {
       });
   };
 
-  const editGoal = async (goalId: string, updatedGoal: Omit<TGoal, '_id'>, callback?: () => void) => {
+  const editGoal = async (goalId: string, updatedGoal: Omit<TGoal, "_id">, callback?: () => void) => {
     setLoading(true);
     await axios
       .put(`/api/goals/${goalId}`, updatedGoal)
       .then(() => {
-        toast.success('The goal has been updated successfully!');
+        toast.success("The goal has been updated successfully!");
         getGoals();
       })
       .catch(() => toast.error("Could not update the goal. Please try again later!"))
@@ -100,7 +100,7 @@ export function useGoals() {
       } )
       .finally(() => {
         setLoading(false);
-         callback?.();
+        callback?.();
       });
   };
 

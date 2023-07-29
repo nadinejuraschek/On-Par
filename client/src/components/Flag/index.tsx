@@ -1,5 +1,5 @@
-import { IFlag } from "./types";
 import styles from "./flag.module.css";
+import { IFlag } from "./types";
 
 export const Flag = ( { country }: IFlag ): JSX.Element => {
   let countryName;

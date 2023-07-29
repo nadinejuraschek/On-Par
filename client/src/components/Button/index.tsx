@@ -1,7 +1,7 @@
-import { Loader, StyledButton, StyledLink } from './styled';
+import { useMemo } from "react";
+import { Loader, StyledButton, StyledLink } from "./styled";
 
 import { IButton } from "./types";
-import { useMemo } from 'react';
 
 export const Button = ({
   align = "alignCenter",
@@ -15,7 +15,7 @@ export const Button = ({
   loading = false,
   round = false,
   square = false,
-  type = 'button',
+  type = "button",
   variant = "secondary",
 }: IButton): JSX.Element => {
   const renderLabel = useMemo(() => {

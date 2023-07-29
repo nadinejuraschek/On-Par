@@ -1,4 +1,4 @@
-import { Container, Spinner } from './styled';
+import { Container, Spinner } from "./styled";
 
 export const LoadingSpinner = (): JSX.Element => (
   <Container>

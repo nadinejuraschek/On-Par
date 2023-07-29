@@ -1,4 +1,4 @@
-import { TEvent } from 'components/Event/types';
+import { TEvent } from "components/Event/types";
 
 export interface IEventsList {
   emptyMessage?: string;

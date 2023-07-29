@@ -1,5 +1,5 @@
-import styled from "styled-components";
 import { Text } from "components";
+import styled from "styled-components";
 import { IStyledProgress } from "./types";
 
 export const Container = styled.div`
@@ -43,7 +43,7 @@ export const Progress = styled.div<IStyledProgress>`
 
   height: 4rem;
 
-  background: ${({ isOverwork }) => isOverwork ? 'linear-gradient(to right, var(--error_50), var(--error_200))' : 'linear-gradient(to right, var(--secondary_50), var(--secondary_200))'};
+  background: ${({ isOverwork }) => isOverwork ? "linear-gradient(to right, var(--error_50), var(--error_200))" : "linear-gradient(to right, var(--secondary_50), var(--secondary_200))"};
 
   width: ${({ percentage }) => percentage ? `${percentage}%` : 0};
 `;

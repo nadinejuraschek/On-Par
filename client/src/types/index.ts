@@ -1,8 +1,8 @@
 import { FC, SVGProps } from "react";
 
-export type TVariant = 'primary' | 'secondary' | 'tertiary' | 'danger' | 'warning';
+export type TVariant = "primary" | "secondary" | "tertiary" | "danger" | "warning";
 
-export type TGoalType = 'education' | 'personal' | 'travel';
+export type TGoalType = "education" | "personal" | "travel";
 
 export type TResource = {
   icon: FC<SVGProps<SVGSVGElement>>,
@@ -21,8 +21,8 @@ export type TGoal = {
 }
 
 export type TWorkhour = {
-  dateFormat: string;
-  total: number;
+  date: Date;
+  total: number
 }
 
 export type TPayment = {

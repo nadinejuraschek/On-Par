@@ -1,10 +1,10 @@
-import * as dayjs from 'dayjs';
-
-import { useEffect, useState } from 'react';
-
-import { TWorkhour } from 'types';
 import axios from "axios";
-import { toast } from 'react-toastify';
+import * as dayjs from "dayjs";
+
+import { useEffect, useState } from "react";
+
+import { toast } from "react-toastify";
+import { TWorkhour } from "types";
 
 export function useWorkhours() {
   const [loading, setLoading] = useState(false);
@@ -34,7 +34,7 @@ export function useWorkhours() {
     } ).then( res => {
       const hours = res.data.workhours;
       hours.forEach( (hour: TWorkhour) => {
-        if ( hour.dateFormat === dayjs( new Date() ).format( "YY-MM-DD" ) ) {
+        if ( dayjs( hour.date ).format("YY-MM-DD") === dayjs( new Date() ).format( "YY-MM-DD" ) ) {
           setTodayWorkhours( hour.total );
         }
         return;
@@ -44,7 +44,7 @@ export function useWorkhours() {
     }).finally(() => setLoading(false));
   };
 
-  const createWorkhours = async (newWorkhours: Omit<TWorkhour, 'dateFormat' | 'total'>, callback?: () => void) => {
+  const createWorkhours = async (newWorkhours: Omit<TWorkhour, "dateFormat" | "total">, callback?: () => void) => {
     setLoading(true);
     await axios( {
       url: "/api/workhours",
@@ -52,10 +52,10 @@ export function useWorkhours() {
       data: newWorkhours,
     } )
       .then( () => {
-        toast.success('Your workhours has been added successfully!');
+        toast.success("Your workhours has been added successfully!");
         getWorkhours();
       } )
-      .catch( () => toast.error('The workhours could not be added. Please try again later!'))
+      .catch( () => toast.error("The workhours could not be added. Please try again later!"))
       .finally(() => {
         setLoading(false);
         callback?.();
@@ -76,7 +76,7 @@ export function useWorkhours() {
     await axios
       .put(`/api/workhours/${workhoursid}`, updatedWorkhours)
       .then(() => {
-        toast.success('The workhours has been updated successfully!');
+        toast.success("The workhours has been updated successfully!");
         getWorkhours();
       })
       .catch(() => toast.error("Could not update the workhours. Please try again later!"))

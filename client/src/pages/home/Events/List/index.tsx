@@ -1,8 +1,8 @@
-import { Event, Text } from 'components';
-import { IEventsList } from './types';
-import { EmptyList, StyledList } from './styled';
+import { Event, Text } from "components";
+import { EmptyList, StyledList } from "./styled";
+import { IEventsList } from "./types";
 
-export const EventsList = ({ emptyMessage = '', list }: IEventsList): JSX.Element => {
+export const EventsList = ({ emptyMessage = "", list }: IEventsList): JSX.Element => {
   if (list.length === 0) {
     return (
       <EmptyList>

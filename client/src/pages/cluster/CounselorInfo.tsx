@@ -5,6 +5,7 @@ export const CounselorInfo = (): JSX.Element => (
     <div className="content">
       <img
         className="right floated mini ui avatar image"
+        /* eslint-disable-next-line @typescript-eslint/ban-ts-comment */
         /* @ts-ignore-next-line */
         src={ blankPic }
         alt="counselor"

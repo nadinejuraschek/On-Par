@@ -1,10 +1,10 @@
-import { ITabs, TTab } from "./types";
-import { Tab, Tabbar, TabText } from "./styled";
 import { useMemo } from "react";
+import { Tab, Tabbar, TabText } from "./styled";
+import { ITabs, TTab } from "./types";
 
 export const Tabs = ({
   activeTab,
-  className = '',
+  className = "",
   fullWidth = false,
   handleClick,
   spaceBetween = false,
@@ -21,7 +21,7 @@ export const Tabs = ({
           disabled={disabled}
           key={ `tab_${ value }` }
           onClick={ disabled ? () => {} : () => handleClick(value) }
-          style={{ width: fullWidth ? `calc(100% / ${tabs.length}` : 'auto' }}
+          style={{ width: fullWidth ? `calc(100% / ${tabs.length}` : "auto" }}
           variant={variant}
         >
           <TabText
@@ -33,7 +33,11 @@ export const Tabs = ({
         </Tab>
       );
     });
-  }, [activeTab, fullWidth, handleClick, tabs, variant]);
+  }, [activeTab,
+    fullWidth,
+    handleClick,
+    tabs,
+    variant]);
 
   return (
     <Tabbar

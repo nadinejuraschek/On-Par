@@ -1,4 +1,4 @@
-import { GroupBase, OptionsOrGroups } from 'react-select';
+import { GroupBase, OptionsOrGroups } from "react-select";
 
 export interface ISelect {
   className?: string;
@@ -19,9 +19,8 @@ export interface ISelect {
   value: TSelectOption;
 }
 
-export type TSelectOption = { label: string, value: string };
+export type TSelectOption = { label?: string, value?: string };
 
 export interface IStyledField {
   fullWidth: boolean;
-  hasError: boolean;
 }

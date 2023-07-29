@@ -1,10 +1,10 @@
+import { UserProvider } from "contexts";
+import { navLinks } from "data";
+import { useMemo } from "react";
 import { FooterText, Links, SideNavMobile } from "./styled";
 
 import { ISidenav } from "./types";
 import { NavLinkComp as NavLink } from "../NavLink";
-import { UserProvider } from "contexts";
-import { navLinks } from "data";
-import { useMemo } from "react";
 
 export const Sidenav = ({ toggleSidenav }: ISidenav): JSX.Element => {
   const renderLinks = useMemo(() => {

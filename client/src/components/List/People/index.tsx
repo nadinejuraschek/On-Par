@@ -1,7 +1,7 @@
 import { useMemo } from "react";
-import { IPeopleList, TPerson } from "./types";
 import { PeopleItem } from "./PeopleItem";
 import { Container, Label, List } from "./styled";
+import { IPeopleList, TPerson } from "./types";
 
 export const PeopleList = ( { data, label }: IPeopleList ): JSX.Element => {
   const renderListItems = useMemo(() => {

@@ -1,9 +1,9 @@
 import { Select } from "components";
-import { useCallback, useMemo, useState } from "react";
-import { Actions, Content, Filter, Layout, StyledButton } from "./styled";
-import { AddGoalModal } from "./AddGoalModal";
-import { GoalsList } from './List';
 import { useGoals } from "hooks";
+import { useCallback, useMemo, useState } from "react";
+import { AddGoalModal } from "./AddGoalModal";
+import { GoalsList } from "./List";
+import { Actions, Content, Filter, Layout, StyledButton } from "./styled";
 
 export const Goals = (): JSX.Element => {
   const { completeGoals, loading, thisMonthGoals, upcomingGoals } = useGoals();
@@ -12,9 +12,7 @@ export const Goals = (): JSX.Element => {
   const [filter, setFilter] = useState(undefined);
 
   const filterOptions = useMemo(() => ([
-    { label: 'Education', value: 'education' },
-    { label: 'Personal', value: 'personal' },
-    { label: 'Travel', value: 'travel' },
+    { label: "Education", value: "education" }, { label: "Personal", value: "personal" }, { label: "Travel", value: "travel" },
   ]), []);
 
   const toggleModal = useCallback(() => setOpenModal(!openModal), [openModal]);

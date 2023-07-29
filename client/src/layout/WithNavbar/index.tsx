@@ -1,8 +1,8 @@
 import { Navbar, Text } from "components";
+import { UserProvider } from "contexts";
+import { useMemo } from "react";
 import { StyledLayout, StyledView } from "./styled";
-import { ILayoutWithNavbar } from './types';
-import { UserProvider } from 'contexts';
-import { useMemo } from 'react';
+import { ILayoutWithNavbar } from "./types";
 
 export const LayoutWithNavbar = ({ children, headerTitle }: ILayoutWithNavbar): JSX.Element => {
   const renderHeader = useMemo(() => {

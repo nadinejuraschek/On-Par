@@ -1,12 +1,12 @@
-import styled, { css } from 'styled-components';
+import styled, { css } from "styled-components";
+import { TVariant } from "types";
 import { IStyledTab, ITabs } from "./types";
 import { Text } from "../Text";
-import { TVariant } from 'types';
 
 const getVariantStyles = (active: boolean, variant: TVariant) => {
   switch(variant) {
-    case 'secondary':
-      return css`
+  case "secondary":
+    return css`
         display: flex;
         align-items: center;
         justify-content: center;
@@ -22,9 +22,9 @@ const getVariantStyles = (active: boolean, variant: TVariant) => {
           color: var(--primary_700);
         `};
       `;
-    default:
-      return css`
-        border-bottom: 2px solid ${active ? 'var(--primary_700)' : 'transparent'};
+  default:
+    return css`
+        border-bottom: 2px solid ${active ? "var(--primary_700)" : "transparent"};
       `;
   }
 };
@@ -37,14 +37,14 @@ export const Tabbar = styled.div<ITabs>`
   padding: 0;
 
   height: 4.2rem;
-  width: ${({ fullWidth }) => fullWidth ? '100%' : 'auto'};
+  width: ${({ fullWidth }) => fullWidth ? "100%" : "auto"};
 
   ${({ spaceBetween }) => spaceBetween && css`
     justify-content: space-between;
     gap: unset;
   `};
 
-  ${({ variant }) => variant === 'primary' && css`
+  ${({ variant }) => variant === "primary" && css`
     border-bottom: 1px solid var(--grey_200);
   `};
 `;

@@ -1,19 +1,33 @@
 import { Button, Input, Modal, Textarea } from "components";
-import { ChangeEvent, FormEvent, useCallback, useMemo, useState } from 'react';
-import { IEditNoteModal } from './types';
+import { ChangeEvent, useCallback, useMemo, useState } from "react";
+import { TNoteFormData, noteSchema } from "schema";
+import { ZodFormattedError } from "zod";
+import { Form } from "./styled";
+import { IEditNoteModal } from "./types";
 
 export const EditNoteModal = ({
   editNote,
   handleEditCancel,
   note,
 }: IEditNoteModal): JSX.Element => {
+  const [errors, setErrors] = useState<ZodFormattedError<TNoteFormData> | undefined>(undefined);
   const [updatedNote, setUpdatedNote] = useState(note);
 
-  const handleSubmit = useCallback((event: FormEvent): void => {
-    event.preventDefault();
+  const handleSubmit = useCallback((): void => {
+    const validation = noteSchema.safeParse(updatedNote);
+
+    if (validation.success === false) {
+      setErrors(validation.error.format());
+      return;
+    }
+
+    setErrors(undefined);
 
     editNote(note._id, updatedNote, handleEditCancel);
-    }, [editNote, handleEditCancel, note, updatedNote]);
+  }, [editNote,
+    handleEditCancel,
+    note,
+    updatedNote]);
 
   const handleChange = useCallback((event: ChangeEvent): void => {
     const target = event.target as HTMLInputElement;
@@ -34,8 +48,9 @@ export const EditNoteModal = ({
       handleClose={handleEditCancel}
       title="New Note"
     >
-      <form>
+      <Form>
         <Input
+          error={errors?.title?._errors?.[0] && errors.title._errors[0]}
           fullWidth
           label="Title"
           name="title"
@@ -44,6 +59,7 @@ export const EditNoteModal = ({
           value={ updatedNote.title }
         />
         <Textarea
+          error={errors?.text?._errors?.[0] && errors.text._errors[0]}
           fullWidth
           label="Note"
           name="text"
@@ -51,7 +67,7 @@ export const EditNoteModal = ({
           placeholder="Note"
           value={ updatedNote.text }
         />
-      </form>
+      </Form>
     </Modal>
   );
 }

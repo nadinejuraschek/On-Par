@@ -1,8 +1,8 @@
-import { IGreeting } from "./types";
 import { Text } from "components";
 import blankProfile from "images/blankProfile.svg";
-import { Message, ProfileImage, Wrapper } from "./styled";
 import { useMemo } from "react";
+import { Message, ProfileImage, Wrapper } from "./styled";
+import { IGreeting } from "./types";
 
 export const Greeting = ( { message, name }: IGreeting ): JSX.Element => {
   const greeting = useMemo(() => {
@@ -30,6 +30,7 @@ export const Greeting = ( { message, name }: IGreeting ): JSX.Element => {
 
   return (
     <Wrapper>
+      {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
       {/* @ts-ignore-next-line */}
       <ProfileImage src={ blankProfile } alt={ name } />
       <Message>

@@ -1,7 +1,7 @@
 import { Button, GoalItem, LoadingSpinner, Text } from "components";
-import { Wrapper } from "./styled";
 import { useGoals } from "hooks";
 import { useMemo } from "react";
+import { Wrapper } from "./styled";
 
 export const Goals = (): JSX.Element => {
   const { loading, thisMonthGoals } = useGoals();

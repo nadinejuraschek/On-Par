@@ -1,9 +1,9 @@
 import { Button, Text } from "components";
+import { resources } from "data";
 import { useCallback, useMemo } from "react";
 import { TResource } from "types";
-import { resources } from "data";
-import { sortResources } from "./utils";
 import { Group, List, StyledIcon, Wrapper } from "./styled";
+import { sortResources } from "./utils";
 
 export const Resources = (): JSX.Element => {
   const renderItems = useCallback((items: TResource[]) => {
@@ -13,6 +13,7 @@ export const Resources = (): JSX.Element => {
       return (
         <Button align="alignStart" disabled={ !active } link={ link } key={ `resource_${ label }` }>
           <StyledIcon>
+            {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
             {/* @ts-ignore-next-line */}
             <img src={ icon } alt={ label } />
           </StyledIcon>

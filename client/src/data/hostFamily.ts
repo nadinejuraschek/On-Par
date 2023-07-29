@@ -1,6 +1,7 @@
-import { TEvent } from 'components/Event/types';
+import { TEvent } from "components/Event/types";
+import { TPerson } from "components/List/People/types";
 
-export const mockHostChildren = [
+export const mockHostChildren: TPerson[] = [
   {
     type: "hostchild",
     name: "Sophie",
@@ -21,7 +22,7 @@ export const mockHostChildren = [
   },
 ];
 
-export const mockHostParents = [
+export const mockHostParents: TPerson[] = [
   {
     type: "hostparent",
     name: "Olivia",
@@ -42,34 +43,34 @@ export const mockBirthdays: TEvent[] = [
     day: 30,
     month: 1,
     year: 2013,
-    type: 'birthday',
+    type: "birthday",
   },
   {
     name: "Jacob's Birthday",
     day: 3,
     month: 6,
     year: 2017,
-    type: 'birthday',
+    type: "birthday",
   },
   {
     name: "Liam's Birthday",
     day: 9,
     month: 4,
     year: 2020,
-    type: 'birthday',
+    type: "birthday",
   },
   {
     name: "Olivia's Birthday",
     day: 23,
     month: 4,
     year: 1985,
-    type: 'birthday',
+    type: "birthday",
   },
   {
     name: "Kyle's Birthday",
     day: 15,
     month: 11,
     year: 1983,
-    type: 'birthday',
+    type: "birthday",
   },
 ];

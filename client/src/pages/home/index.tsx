@@ -1,7 +1,15 @@
-import * as dayjs from "dayjs";
-import * as isSameOrAfter from 'dayjs/plugin/isSameOrAfter'
+import axios from "axios";
 import { Button, Resources as ResourcesList, Text } from "components";
+import { UserContext } from "contexts";
+import * as dayjs from "dayjs";
+import * as isSameOrAfter from "dayjs/plugin/isSameOrAfter"
 import { useCallback, useContext, useMemo, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { Countdown } from "./Countdown";
+import { Events } from "./Events";
+import { Goals } from "./Goals";
+import { Greeting } from "./Greeting";
+import { Quicklinks } from "./Quicklinks";
 import {
   ButtonsWrapper,
   CompletedYearCard,
@@ -14,15 +22,7 @@ import {
   ResourcesCard,
   TodayCard,
 } from "./styled";
-import { Countdown } from "./Countdown";
-import { Events } from "./Events";
-import { Goals } from "./Goals";
-import { Greeting } from "./Greeting";
-import { Quicklinks } from "./Quicklinks";
-import { UserContext } from "contexts";
 import { WorkhourSummary } from "./WorkhourSummary";
-import axios from "axios";
-import { useNavigate } from "react-router-dom";
 
 dayjs.extend(isSameOrAfter);
 

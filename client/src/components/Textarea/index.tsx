@@ -1,12 +1,12 @@
-import { ErrorText, Field, StyledTextarea } from './styled';
-import { useEffect, useMemo } from 'react';
+import { Text } from "components";
+import { useEffect, useMemo } from "react";
+import { useDebounce } from "usehooks-ts";
+import { ErrorText, Field, StyledTextarea } from "./styled";
 
 import { ITextarea } from "./types";
-import { Text } from "components";
-import { useDebounce } from 'usehooks-ts';
 
 export const Textarea = ({
-  className = '',
+  className = "",
   error,
   fullWidth = false,
   handleChange,

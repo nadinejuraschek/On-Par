@@ -11,4 +11,4 @@ export interface IStyledNote {
   color: TStyledNoteColor;
 }
 
-export type TStyledNoteColor = 'blue' | 'pink' | 'yellow';
+export type TStyledNoteColor = "blue" | "pink" | "yellow";

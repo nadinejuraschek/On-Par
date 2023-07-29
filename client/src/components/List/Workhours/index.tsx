@@ -1,9 +1,9 @@
+import { Button } from "components";
 import * as dayjs from "dayjs";
+import { useCallback, useMemo, useState } from "react";
+import { DateNav, WeeklyGrid, WeeklyList, WeekRange } from "./styled";
 import { IWeeklyHours } from "./types";
 import { WeeklyItem } from "./WeeklyItem";
-import { useCallback, useMemo, useState } from "react";
-import { Button } from "components";
-import { DateNav, WeeklyGrid, WeeklyList, WeekRange } from "./styled";
 
 export const WeeklyHours = ( { data }: IWeeklyHours ): JSX.Element => {
   const [startWeek, setStartWeek] = useState( dayjs().startOf( "week" ) );
@@ -30,7 +30,7 @@ export const WeeklyHours = ( { data }: IWeeklyHours ): JSX.Element => {
 
   // sort array to display Sun - Sat
   const hours = useMemo(() => data.sort(( a, b ) => (
-    a.date - b.date
+    a.date.valueOf() - b.date.valueOf()
   )), [data]);
 
   const renderWeek = useMemo(() => {
@@ -44,7 +44,7 @@ export const WeeklyHours = ( { data }: IWeeklyHours ): JSX.Element => {
             day={ day }
             key={ i }
             hours={ hours }
-          />
+          />,
         );
         day = dayjs( day ).add( 1, "day" );
       }

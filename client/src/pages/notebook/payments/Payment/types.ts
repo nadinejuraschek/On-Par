@@ -1,4 +1,4 @@
-import { TPayment } from 'types';
+import { TPayment } from "types";
 
 export interface IPaymentEntry {
   handleEdit: () => void;

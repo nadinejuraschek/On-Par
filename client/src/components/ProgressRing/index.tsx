@@ -1,8 +1,8 @@
-import { Container, Label, Progress } from './styled';
+import { Container, Label, Progress } from "./styled";
 
 import { IProgressRing } from "./types";
 
-export const ProgressRing = ({ className = '', label, progress, radius, stroke }: IProgressRing): JSX.Element => {
+export const ProgressRing = ({ className = "", label, progress, radius, stroke }: IProgressRing): JSX.Element => {
   const normalizedRadius = radius - stroke * 2;
   const circumference = normalizedRadius * 2 * Math.PI;
   const strokeDashoffset = circumference - (progress / 100) * circumference;

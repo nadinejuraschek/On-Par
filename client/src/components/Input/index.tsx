@@ -1,12 +1,12 @@
-import { ErrorText, Field, IconInputWrapper, StyledIcon, StyledInput } from './styled';
-import { useEffect, useMemo } from 'react';
+import { useEffect, useMemo } from "react";
+import { useDebounce } from "usehooks-ts";
+import { ErrorText, Field, IconInputWrapper, StyledIcon, StyledInput } from "./styled";
 
 import { IInput } from "./types";
 import { Text } from "../Text";
-import { useDebounce } from 'usehooks-ts';
 
 export const Input = ( {
-  className = '',
+  className = "",
   disabled = false,
   error,
   fullWidth = false,
@@ -15,7 +15,7 @@ export const Input = ( {
   label,
   name,
   placeholder = "Type here...",
-  type = 'text',
+  type = "text",
   value,
 }: IInput ): JSX.Element => {
   const debouncedValue = useDebounce<string>(value, 500);
@@ -51,7 +51,7 @@ export const Input = ( {
         />
         { icon && <StyledIcon className={`${icon} icon`} /> }
       </IconInputWrapper>
-      { error && <ErrorText as="p" color="--error_300" size="xs" >{ error }</ErrorText> }
+      { error && <ErrorText as="p" size="xs" >{ error }</ErrorText> }
     </Field>
   );
 };

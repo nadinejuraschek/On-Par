@@ -1,7 +1,7 @@
 import { Button, Text } from "components";
-import { Container, StyledIcon } from "./styled";
 import { quicklinks } from "data";
 import { useMemo } from "react";
+import { Container, StyledIcon } from "./styled";
 
 export const Quicklinks = (): JSX.Element => {
   const renderLinks = useMemo(() => {
@@ -16,6 +16,7 @@ export const Quicklinks = (): JSX.Element => {
           variant="tertiary"
         >
           <StyledIcon>
+            {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
             {/* @ts-ignore-next-line */}
             <img src={ icon } alt={ label } />
           </StyledIcon>
