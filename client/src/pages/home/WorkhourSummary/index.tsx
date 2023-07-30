@@ -1,6 +1,6 @@
 import { Button, LoadingPlaceholder, Tabs } from "components";
 import { useWorkhours } from "hooks";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import {
   Container,
   LoadingProgressContainer,
@@ -21,7 +21,13 @@ export const WorkhourSummary = (): JSX.Element => {
     { label: "Today", value: WORKHOUR_TABS.DAY }, { label: "This Week", value: WORKHOUR_TABS.WEEK },
   ];
 
-  const { loading, todayWorkhours } = useWorkhours();
+  const { getWeeklyWorkhours, loading, todayWorkhours, weeklyWorkhours } = useWorkhours();
+
+  useEffect(() => {
+    // TODO: move
+    getWeeklyWorkhours();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const renderDailyProgress = useMemo(() => {
     const inPercent = (todayWorkhours/600)*100;
@@ -44,17 +50,22 @@ export const WorkhourSummary = (): JSX.Element => {
   }, [todayWorkhours]);
 
   // TODO: calculate weekly hours
-  const renderWeeklyProgress = useMemo(() => (
-    <ProgressContainer>
-      <Progress />
-      <ProgressLabel
-        color={"--secondary_700"}
-        size="sm"
-      >
-        <strong>XX</strong> / 45 hours
-      </ProgressLabel>
-    </ProgressContainer>
-  ), []);
+  const renderWeeklyProgress = useMemo(() => {
+    const inPercent = (weeklyWorkhours/600)*100;
+    const inHours = weeklyWorkhours/60;
+
+    return (
+      <ProgressContainer>
+        <Progress isOverwork={inHours > 45} percentage={inPercent} />
+        <ProgressLabel
+          color={inHours > 45 ? "--error_700" : "--secondary_700"}
+          size="sm"
+        >
+          <strong>{inHours}</strong> / 45 hours
+        </ProgressLabel>
+      </ProgressContainer>
+    );
+  }, [weeklyWorkhours]);
 
   const renderContent = useMemo(() => {
     if (loading) {
@@ -64,10 +75,12 @@ export const WorkhourSummary = (): JSX.Element => {
     }
 
     return activeTab === WORKHOUR_TABS.DAY ? renderDailyProgress : renderWeeklyProgress;
-  }, [activeTab,
+  }, [
+    activeTab,
     loading,
     renderDailyProgress,
-    renderWeeklyProgress]);
+    renderWeeklyProgress,
+  ]);
 
   return (
     <Container>

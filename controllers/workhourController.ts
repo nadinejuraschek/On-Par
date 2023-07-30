@@ -1,30 +1,63 @@
 import { Request, Response } from 'express';
-
 import dayjs from 'dayjs';
 import db from '../models/db';
 
 // READ
 const getWorkhours = async (req: Request, res: Response) => {
-  await db.User.findById(req.user)
+  const result = await db.User.findById(req.user)
     .populate('workhours')
-    .then(workhours => {
-      res.status(200).json(workhours);
-    })
+    .then(workhours => workhours)
     .catch(err => {
       res.status(500).json({ error: err.message });
     });
+
+  res.status(200).json(result?.workhours);
+};
+
+const getWorkhoursDay = async (req: Request, res: Response) => {
+  const today = dayjs().set('hour', 12).set('minute', 0).set('second', 0).set('millisecond', 0).toDate();
+
+  const result = await db.User.findById(req.user)
+    .populate({
+      path: 'workhours',
+      match: { date: today }
+    })
+    .then(workhours => workhours)
+    .catch(err => {
+      res.status(500).json({ error: err.message });
+    });
+
+  res.status(200).json(result?.workhours);
+};
+
+const getWorkhoursWeek = async (req: Request, res: Response) => {
+  const startDate = dayjs(req.params.startDate).set('hour', 12).set('minute', 0).set('second', 0).set('millisecond', 0).toDate();
+  const endDate = dayjs(req.params.endDate).set('hour', 12).set('minute', 0).set('second', 0).set('millisecond', 0).toDate();
+
+  const result = await db.User.findById(req.user)
+    .populate({
+      path: 'workhours',
+      match: { date: { $gte: startDate, $lt: endDate } }
+    })
+    .then(workhours => workhours)
+    .catch(err => {
+      res.status(500).json({ error: err.message });
+    });
+
+  res.status(200).json(result?.workhours);
 };
 
 // CREATE
 const createWorkhour = async (req: Request, res: Response) => {
-  const { date, dateFormat, hours } = req.body;
+  const { date, hours } = req.body;
 
-  const workitem = await db.Workhour.findOne({ dateFormat: dateFormat});
+  const dateWithoutTime = dayjs(date).set('hour', 12).set('minute', 0).set('second', 0).set('millisecond', 0).toDate();
+
+  const workitem = await db.Workhour.findOne({ date: dateWithoutTime });
 
   if (workitem === null) {
     await db.Workhour.create({
-      date: date,
-      dateFormat: dayjs(date).format('YY-MM-DD'),
+      date: dateWithoutTime,
       hours: hours,
       total: hours[0].duration,
     })
@@ -84,5 +117,7 @@ export const workhourController = {
   createWorkhour,
   deleteWorkhour,
   getWorkhours,
+  getWorkhoursDay,
+  getWorkhoursWeek,
   updateWorkhour,
 };
