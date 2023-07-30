@@ -21,17 +21,16 @@ export const WorkhourSummary = (): JSX.Element => {
     { label: "Today", value: WORKHOUR_TABS.DAY }, { label: "This Week", value: WORKHOUR_TABS.WEEK },
   ];
 
-  const { getWeeklyWorkhours, loading, todayWorkhours, weeklyWorkhours } = useWorkhours();
+  const { getWeeklyWorkhours, loading, todayWorkhourTotal, weeklyWorkhourTotal } = useWorkhours();
 
   useEffect(() => {
     // TODO: move
     getWeeklyWorkhours();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [getWeeklyWorkhours]);
 
   const renderDailyProgress = useMemo(() => {
-    const inPercent = (todayWorkhours/600)*100;
-    const inHours = todayWorkhours/60;
+    const inPercent = (todayWorkhourTotal/600)*100;
+    const inHours = todayWorkhourTotal/60;
 
     return (
       <ProgressContainer>
@@ -47,12 +46,12 @@ export const WorkhourSummary = (): JSX.Element => {
         </ProgressLabel>
       </ProgressContainer>
     );
-  }, [todayWorkhours]);
+  }, [todayWorkhourTotal]);
 
   // TODO: calculate weekly hours
   const renderWeeklyProgress = useMemo(() => {
-    const inPercent = (weeklyWorkhours/600)*100;
-    const inHours = weeklyWorkhours/60;
+    const inPercent = (weeklyWorkhourTotal/600)*100;
+    const inHours = weeklyWorkhourTotal/60;
 
     return (
       <ProgressContainer>
@@ -65,7 +64,7 @@ export const WorkhourSummary = (): JSX.Element => {
         </ProgressLabel>
       </ProgressContainer>
     );
-  }, [weeklyWorkhours]);
+  }, [weeklyWorkhourTotal]);
 
   const renderContent = useMemo(() => {
     if (loading) {
