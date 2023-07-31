@@ -36,7 +36,7 @@ const registerUser = async (req: Request, res: Response) => {
     familyID: Math.floor(Math.random() * 90000) + 10000,
     firstname: req.body.firstname,
     lastname: req.body.lastname,
-    country: req.body.country.value,
+    country: req.body.country,
     startDate: req.body.startDate,
     endDate: dayjs(req.body.startDate).add(1, 'years').toDate(),
     email: req.body.email.toLowerCase(),
@@ -47,8 +47,6 @@ const registerUser = async (req: Request, res: Response) => {
       shareLastName: false,
     },
   });
-
-  console.log('process.env.APP_SECRET: ', process.env.APP_SECRET);
 
   // create cookie for user
   const token = jwt.sign({ id: user._id }, process.env.APP_SECRET || '');
@@ -71,19 +69,17 @@ const registerUser = async (req: Request, res: Response) => {
       const paymentIds = insertedPayment.map((payment) => payment._id);
       db.User.findByIdAndUpdate(
         { _id: user._id },
-        { $push: { payments: paymentIds } },
-        (err: any) => {
-          if (err) {
-            console.log('Error: ' + err);
-          }
-        }
-      );
+        { $push: { payments: paymentIds } })
+        .then(() => {})
+        .catch((err) => {
+          res.status(500).json({ error: err.message });
+        });
     })
     .catch(err => {
       res.status(500).json({ error: err.message });
     });
 
-  res.json(user);
+  res.status(200).json(user._id);
 };
 
 const loginUser = async (req: Request, res: Response) => {
@@ -94,7 +90,7 @@ const loginUser = async (req: Request, res: Response) => {
   }
   const valid = await bcrypt.compare(req.body.password, user.password);
   if (!valid) {
-    res.json({ message: 'Entered e-mail and password do not match!' });
+    res.status(500).json({ message: 'Entered e-mail and password do not match!' });
     return;
   }
   const token = jwt.sign({ id: user.id }, process.env.APP_SECRET || '');
@@ -103,20 +99,18 @@ const loginUser = async (req: Request, res: Response) => {
     maxAge: 1000 * 60 * 60 * 24 * 365,
   });
 
-  res.json(user);
+  res.status(200).json(user._id);
 };
 
 const signoutUser = (req: Request, res: Response) => {
   res.clearCookie('token');
-  res.json('User is signed out.');
+  res.status(200).json('User is signed out.');
 };
 
 // UPDATE
 const updateUser = async (req: Request, res: Response) => {
   await db.User.findByIdAndUpdate(req.params.id, req.body)
-    .then(updatedUser => {
-      res.status(200).json(updatedUser);
-    })
+    .then(() => 'Success!')
     .catch(err => {
       res.status(500).json({ error: err.message });
     });
@@ -126,7 +120,7 @@ const updateUser = async (req: Request, res: Response) => {
 const deleteUser = async (req: Request, res: Response) => {
   await db.User.findByIdAndRemove(req.params.id)
     .then(() => {
-      res.status(200).json({ message: 'User has been deleted successfully!' });
+      res.status(200).json('User has been deleted successfully!');
     })
     .catch(err => {
       res.status(500).json({ error: err.message });

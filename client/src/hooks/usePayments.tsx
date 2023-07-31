@@ -17,7 +17,7 @@ export function usePayments() {
     await axios( {
       url: "/api/user/:id/payments",
       method: "GET",
-    }).then( res => setPayments(res.data.payments))
+    }).then( res => setPayments(res.data))
       .catch( () => toast.error("Could not fetch payments. Please try again later!"))
       .finally(() => setLoading(false));
   };
