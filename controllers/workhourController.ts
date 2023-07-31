@@ -55,7 +55,7 @@ const createWorkhour = async (req: Request, res: Response) => {
 
   const workitem = await db.Workhour.findOne({ date: dateWithoutTime });
 
-  if (workitem === null) {
+  if (!workitem) {
     await db.Workhour.create({
       date: dateWithoutTime,
       hours: hours,
@@ -66,7 +66,9 @@ const createWorkhour = async (req: Request, res: Response) => {
           { _id: req.user },
           { $push: { workhours: insertedWorkhour._id } },
         ).then(() => res.json('Success!'))
-        .catch((err) => console.log('Error: ' + err));
+        .catch((err) => {
+          res.status(500).json({ error: err.message });
+        });
       })
       .catch(err => {
         res.status(500).json({ error: err.message });
@@ -74,12 +76,10 @@ const createWorkhour = async (req: Request, res: Response) => {
   } else {
     const newTotal = workitem.total + hours[0].duration;
     await db.Workhour.findOneAndUpdate(
-      { date: date },
+      { date: dateWithoutTime },
       { total: newTotal, $push: { hours: hours } },
       )
-      .then(updatedWorkhour => {
-        res.status(200).json(updatedWorkhour);
-      })
+      .then(() => res.status(200).json('Success!'))
       .catch(err => {
         res.status(500).json({ error: err.message });
       });
@@ -92,8 +92,8 @@ const updateWorkhour = async (req: Request, res: Response) => {
     { _id: req.params.workhourid },
     { $push: { hours: req.body } }
     )
-    .then(updatedWorkhour => {
-      res.status(200).json(updatedWorkhour);
+    .then(() => {
+      res.status(200).json('Success!');
     })
     .catch(err => {
       res.status(500).json({ error: err.message });
@@ -106,7 +106,7 @@ const deleteWorkhour = async (req: Request, res: Response) => {
     .then(() => {
       res
         .status(200)
-        .json({ message: 'Workhours have been deleted successfully!' });
+        .json('Workhours have been deleted successfully!');
     })
     .catch(err => {
       res.status(500).json({ error: err.message });
