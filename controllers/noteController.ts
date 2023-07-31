@@ -4,14 +4,14 @@ import db from '../models/db';
 
 // READ
 const getNotes = async (req: Request, res: Response) => {
-  await db.User.findById(req.user)
+  const result = await db.User.findById(req.user)
     .populate('notes')
-    .then(notes => {
-      res.status(200).json(notes);
-    })
+    .then(notes => notes)
     .catch(err => {
       res.status(500).json({ error: err.message });
     });
+
+  return res.status(200).json(result?.notes);
 };
 
 const getSingleNote = async (req: Request, res: Response) => {
@@ -32,9 +32,11 @@ const createNote = async (req: Request, res: Response) => {
         { _id: req.user },
         { $push: { notes: insertedNote._id } })
         .then(() => {
-          res.json('Success!')
+          res.status(200).json('Success!')
         })
-        .catch((err) => console.log('Error: ' + err));
+        .catch((err) => {
+          res.status(500).json({ error: err.message });
+        });
     })
     .catch(err => {
       res.status(500).json({ error: err.message });
@@ -44,8 +46,8 @@ const createNote = async (req: Request, res: Response) => {
 // UPDATE
 const updateNote = async (req: Request, res: Response) => {
   await db.Note.findOneAndUpdate({ _id: req.params.noteid }, req.body)
-    .then(updatedNote => {
-      res.status(200).json(updatedNote);
+    .then(() => {
+      res.status(200).json('Success!');
     })
     .catch(err => {
       res.status(500).json({ error: err.message });
@@ -56,7 +58,7 @@ const updateNote = async (req: Request, res: Response) => {
 const deleteNote = async (req: Request, res: Response) => {
   await db.Note.findByIdAndRemove(req.params.noteid)
     .then(() => {
-      res.status(200).json({ message: "Note has been deleted successfully!"});
+      res.status(200).json("Note has been deleted successfully!");
     })
     .catch(err => {
       res.status(500).json({ error: err.message });
