@@ -5,6 +5,8 @@ const router = express.Router();
 
 // READ
 router.get('/user/:id/workhours', workhourController.getWorkhours);
+router.get('/user/:id/workhours/today', workhourController.getWorkhoursDay);
+router.get('/user/:id/workhours/:startDate/:endDate', workhourController.getWorkhoursWeek);
 
 // CREATE
 router.post('/workhours', workhourController.createWorkhour);

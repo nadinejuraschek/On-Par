@@ -11,13 +11,14 @@ const WORKHOURS_TABS = {
 
 export const Workhours = (): JSX.Element => {
   const [tab, setTab] = useState( WORKHOURS_TABS.WEEKLY );
-  const { todayWorkhours, workhours } = useWorkhours();
+
+  const { todayWorkhourTotal } = useWorkhours();
 
   const tabs = [
     { label: "Weekly", value: WORKHOURS_TABS.WEEKLY }, { disabled: true, label: "Daily", value: WORKHOURS_TABS.DAILY },
   ];
 
-  const renderTimes = useMemo(() => <Timer time={ todayWorkhours } />, [todayWorkhours]);
+  const renderTimes = useMemo(() => <Timer time={ todayWorkhourTotal } />, [todayWorkhourTotal]);
 
   return (
     <StyledContent>
@@ -25,7 +26,7 @@ export const Workhours = (): JSX.Element => {
         <Tabs activeTab={ tab } fullWidth handleClick={ setTab } tabs={ tabs } variant="secondary" />
       </TabsWrapper>
       <CardTracker>
-        <WeeklyList data={ workhours } />
+        <WeeklyList />
       </CardTracker>
       <CardTimer>
         {renderTimes}

@@ -1,20 +1,24 @@
 import { Request, Response } from 'express';
-
 import db from '../models/db';
+import { handleUnknownUser } from '../utils/handleUnknownUser';
 
 // READ
 const getNotes = async (req: Request, res: Response) => {
-  await db.User.findById(req.user)
+  handleUnknownUser(res, req.user);
+
+  const result = await db.User.findById(req.user)
     .populate('notes')
-    .then(notes => {
-      res.status(200).json(notes);
-    })
+    .then(notes => notes)
     .catch(err => {
       res.status(500).json({ error: err.message });
     });
+
+  return res.status(200).json(result?.notes);
 };
 
 const getSingleNote = async (req: Request, res: Response) => {
+  handleUnknownUser(res, req.user);
+
   await db.Note.findById(req.params.noteid)
     .then(note => {
       res.status(200).json(note);
@@ -26,15 +30,25 @@ const getSingleNote = async (req: Request, res: Response) => {
 
 // CREATE
 const createNote = async (req: Request, res: Response) => {
-  await db.Note.create(req.body)
+  handleUnknownUser(res, req.user);
+
+  const validated = {
+    ...req.body,
+    text: req.body.text.trim(),
+    title: req.body.title.trim(),
+  };
+
+  await db.Note.create(validated)
     .then(async (insertedNote) => {
       await db.User.findOneAndUpdate(
         { _id: req.user },
         { $push: { notes: insertedNote._id } })
         .then(() => {
-          res.json('Success!')
+          res.status(200).json('Note has been created successfully!')
         })
-        .catch((err) => console.log('Error: ' + err));
+        .catch((err) => {
+          res.status(500).json({ error: err.message });
+        });
     })
     .catch(err => {
       res.status(500).json({ error: err.message });
@@ -43,9 +57,17 @@ const createNote = async (req: Request, res: Response) => {
 
 // UPDATE
 const updateNote = async (req: Request, res: Response) => {
-  await db.Note.findOneAndUpdate({ _id: req.params.noteid }, req.body)
-    .then(updatedNote => {
-      res.status(200).json(updatedNote);
+  handleUnknownUser(res, req.user);
+
+  const validated = {
+    ...req.body,
+    text: req.body.text.trim(),
+    title: req.body.title.trim(),
+  };
+
+  await db.Note.findOneAndUpdate({ _id: req.params.noteid }, validated)
+    .then(() => {
+      res.status(200).json('Note has been updated successfully!');
     })
     .catch(err => {
       res.status(500).json({ error: err.message });
@@ -54,9 +76,11 @@ const updateNote = async (req: Request, res: Response) => {
 
 // DELETE
 const deleteNote = async (req: Request, res: Response) => {
+  handleUnknownUser(res, req.user);
+
   await db.Note.findByIdAndRemove(req.params.noteid)
     .then(() => {
-      res.status(200).json({ message: "Note has been deleted successfully!"});
+      res.status(200).json("Note has been deleted successfully!");
     })
     .catch(err => {
       res.status(500).json({ error: err.message });

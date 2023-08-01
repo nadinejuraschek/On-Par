@@ -22,7 +22,7 @@ export function useGoals() {
       url: "/api/user/:id/goals",
       method: "GET",
     } ).then( res => {
-      const allGoals = res.data.goals;
+      const allGoals = res.data;
       setGoals(allGoals);
 
       const goalsCompleted = allGoals.filter( ({ checked }: TGoal) => checked );

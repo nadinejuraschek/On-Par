@@ -1,22 +1,22 @@
-import { Text } from "components";
+// import { Text } from "components";
 import * as dayjs from "dayjs";
 import { useMemo } from "react";
-import { TWorkhour } from "types";
 import { TimeUtils } from "utils";
-import { Hours, StartTrackerButton, StyledItem } from "./styled";
+import { Date, Day, Hours, Month, StartTrackerButton, StyledItem, TrackerWrapper } from "./styled";
 import { IWeeklyItem } from "./types";
 
 export const WeeklyItem = ({ day, hours }: IWeeklyItem): JSX.Element => {
-  const renderTotalHours = useMemo(() => {
-    const todaysHours = hours.filter(item => dayjs(item.date).format("YY-MM-DD") === dayjs(day).format("YY-MM-DD"));
-    const totalHours = todaysHours.reduce((a: number, b: TWorkhour) => a+b.total, 0);
+  const totalHours = useMemo(() => {
+    const todaysHours = hours.find(item => dayjs(item.date).set("hour", 12).set("minute", 0).set("second", 0).set("millisecond", 0).toISOString() === dayjs(day).set("hour", 12).set("minute", 0).set("second", 0).set("millisecond", 0).toISOString());
 
-    return (
-      <Hours isOvertime={totalHours > 600}>
-        { totalHours === 0 ? null : TimeUtils.minToH(totalHours) }
-      </Hours>
-    );
+    return todaysHours?.total ?? 0;
   }, [day, hours]);
+
+  const renderTotalHours = useMemo(() => (
+    <Hours isOvertime={totalHours > 600}>
+      { totalHours === 0 ? null : `${TimeUtils.minToH(totalHours)} h` }
+    </Hours>
+  ), [totalHours]);
 
   const renderStartTrackerButton = useMemo(() => {
     const formattedDay = dayjs(day).format("YY-MM-DD");
@@ -29,9 +29,15 @@ export const WeeklyItem = ({ day, hours }: IWeeklyItem): JSX.Element => {
 
   return (
     <StyledItem>
-      <Text>{ dayjs(day).format("ddd DD") }</Text>
+      <Date>
+        <Day>{dayjs(day).format("DD")}</Day>
+        <Month>{dayjs(day).format("MMM")}</Month>
+      </Date>
+      {/* <Text>{ dayjs(day).format("ddd DD") }</Text> */}
       { renderTotalHours }
-      { renderStartTrackerButton }
+      <TrackerWrapper>
+        { renderStartTrackerButton }
+      </TrackerWrapper>
     </StyledItem>
   );
 };

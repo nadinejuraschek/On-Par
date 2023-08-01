@@ -17,7 +17,7 @@ export function useNotes() {
     await axios( {
       url: "/api/user/:id/notes",
       method: "GET",
-    } ).then( res => setNotes(res.data.notes))
+    } ).then( res => setNotes(res.data))
       .catch( () => toast.error("Could not fetch notes. Please try again later!"))
       .finally(() => setLoading(false));
   };

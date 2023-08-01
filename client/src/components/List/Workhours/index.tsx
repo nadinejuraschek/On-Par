@@ -1,24 +1,32 @@
 import { Button } from "components";
 import * as dayjs from "dayjs";
-import { useCallback, useMemo, useState } from "react";
+import { useWorkhours } from "hooks";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { DateNav, WeeklyGrid, WeeklyList, WeekRange } from "./styled";
-import { IWeeklyHours } from "./types";
 import { WeeklyItem } from "./WeeklyItem";
 
-export const WeeklyHours = ( { data }: IWeeklyHours ): JSX.Element => {
+export const WeeklyHours = (): JSX.Element => {
+  const { getWeeklyWorkhours, weeklyWorkhours } = useWorkhours();
+
   const [startWeek, setStartWeek] = useState( dayjs().startOf( "week" ) );
 
   const endWeek = dayjs( startWeek ).endOf( "week" );
 
+  useEffect(() => {
+    getWeeklyWorkhours(dayjs(startWeek).format("YYYY-MM-DD"));
+  }, [getWeeklyWorkhours, startWeek]);
+
   const prev = useCallback(() => {
     const futureDate = dayjs( startWeek ).subtract( 1, "weeks" );
+    getWeeklyWorkhours(dayjs(futureDate).format("YYYY-MM-DD"));
     setStartWeek( futureDate );
-  }, [startWeek]);
+  }, [getWeeklyWorkhours, startWeek]);
 
   const next = useCallback(() => {
     const futureDate = dayjs( startWeek ).add( 1, "weeks" );
+    getWeeklyWorkhours(dayjs(futureDate).format("YYYY-MM-DD"));
     setStartWeek( futureDate );
-  }, [startWeek]);
+  }, [getWeeklyWorkhours, startWeek]);
 
   const renderWeekRange = useMemo(() => {
     return (
@@ -29,9 +37,9 @@ export const WeeklyHours = ( { data }: IWeeklyHours ): JSX.Element => {
   }, [endWeek, startWeek]);
 
   // sort array to display Sun - Sat
-  const hours = useMemo(() => data.sort(( a, b ) => (
+  const hours = useMemo(() => weeklyWorkhours.sort(( a, b ) => (
     a.date.valueOf() - b.date.valueOf()
-  )), [data]);
+  )), [weeklyWorkhours]);
 
   const renderWeek = useMemo(() => {
     let day = startWeek;
