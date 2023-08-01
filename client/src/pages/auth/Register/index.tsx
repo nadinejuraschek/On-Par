@@ -57,7 +57,6 @@ export const Register = (): JSX.Element => {
       ...registerData,
       country: registerData.country.value,
       role: "Au Pair",
-      familyID: "00000",
     };
 
     axios( {

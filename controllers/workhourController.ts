@@ -1,9 +1,12 @@
 import { Request, Response } from 'express';
 import dayjs from 'dayjs';
 import db from '../models/db';
+import { handleUnknownUser } from '../utils/handleUnknownUser';
 
 // READ
 const getWorkhours = async (req: Request, res: Response) => {
+  handleUnknownUser(res, req.user);
+
   const result = await db.User.findById(req.user)
     .populate('workhours')
     .then(workhours => workhours)
@@ -15,6 +18,8 @@ const getWorkhours = async (req: Request, res: Response) => {
 };
 
 const getWorkhoursDay = async (req: Request, res: Response) => {
+  handleUnknownUser(res, req.user);
+
   const today = dayjs().set('hour', 12).set('minute', 0).set('second', 0).set('millisecond', 0).toDate();
 
   const result = await db.User.findById(req.user)
@@ -31,6 +36,8 @@ const getWorkhoursDay = async (req: Request, res: Response) => {
 };
 
 const getWorkhoursWeek = async (req: Request, res: Response) => {
+  handleUnknownUser(res, req.user);
+
   const startDate = dayjs(req.params.startDate).set('hour', 12).set('minute', 0).set('second', 0).set('millisecond', 0).toDate();
   const endDate = dayjs(req.params.endDate).set('hour', 12).set('minute', 0).set('second', 0).set('millisecond', 0).toDate();
 
@@ -49,6 +56,8 @@ const getWorkhoursWeek = async (req: Request, res: Response) => {
 
 // CREATE
 const createWorkhour = async (req: Request, res: Response) => {
+  handleUnknownUser(res, req.user);
+
   const { date, hours } = req.body;
 
   const dateWithoutTime = dayjs(date).set('hour', 12).set('minute', 0).set('second', 0).set('millisecond', 0).toDate();
@@ -79,7 +88,7 @@ const createWorkhour = async (req: Request, res: Response) => {
       { date: dateWithoutTime },
       { total: newTotal, $push: { hours: hours } },
       )
-      .then(() => res.status(200).json('Success!'))
+      .then(() => res.status(200).json('Workhours have been created successfully!'))
       .catch(err => {
         res.status(500).json({ error: err.message });
       });
@@ -88,12 +97,14 @@ const createWorkhour = async (req: Request, res: Response) => {
 
 // UPDATE
 const updateWorkhour = async (req: Request, res: Response) => {
+  handleUnknownUser(res, req.user);
+
   await db.Workhour.findOneAndUpdate(
     { _id: req.params.workhourid },
     { $push: { hours: req.body } }
     )
     .then(() => {
-      res.status(200).json('Success!');
+      res.status(200).json('Workhours have been updated successfully!');
     })
     .catch(err => {
       res.status(500).json({ error: err.message });
@@ -102,6 +113,8 @@ const updateWorkhour = async (req: Request, res: Response) => {
 
 // DELETE
 const deleteWorkhour = async (req: Request, res: Response) => {
+  handleUnknownUser(res, req.user);
+
   await db.Workhour.findByIdAndRemove(req.params.workhourid)
     .then(() => {
       res

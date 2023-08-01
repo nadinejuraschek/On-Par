@@ -1,9 +1,11 @@
 import { Request, Response } from 'express';
-
 import db from '../models/db';
+import { handleUnknownUser } from '../utils/handleUnknownUser';
 
 // READ
 const getGoals = async (req: Request, res: Response) => {
+  handleUnknownUser(res, req.user);
+
   const result = await db.User.findById(req.user)
     .populate({
       path: 'goals',
@@ -18,6 +20,8 @@ const getGoals = async (req: Request, res: Response) => {
 };
 
 const getSingleGoal = async (req: Request, res: Response) => {
+  handleUnknownUser(res, req.user);
+
   await db.Goal.findById(req.params.goalId)
     .then(goal => {
       res.status(200).json(goal);
@@ -29,12 +33,16 @@ const getSingleGoal = async (req: Request, res: Response) => {
 
 // CREATE
 const createGoal = async (req: Request, res: Response) => {
-  await db.Goal.create(req.body)
+  handleUnknownUser(res, req.user);
+
+  const validated = { ...req.body, text: req.body.text.trim() };
+
+  await db.Goal.create(validated)
     .then(insertedGoal => {
       db.User.findOneAndUpdate(
         { _id: req.user },
         { $push: { goals: insertedGoal._id } })
-        .then(() => res.json('Success!'))
+        .then(() => res.status(200).json('Goal has been created successfully!'))
         .catch((err) => {
           res.status(500).json({ error: err.message });
         });
@@ -46,8 +54,12 @@ const createGoal = async (req: Request, res: Response) => {
 
 // UPDATE
 const updateGoal = async (req: Request, res: Response) => {
-  await db.Goal.findOneAndUpdate({ _id: req.params.goalid }, req.body)
-    .then(() => res.status(200).json('Success!'))
+  handleUnknownUser(res, req.user);
+
+  const validated = { ...req.body, text: req.body.text.trim() };
+
+  await db.Goal.findOneAndUpdate({ _id: req.params.goalid }, validated)
+    .then(() => res.status(200).json('Goal has been updated successfully!'))
     .catch(err => {
       res.status(500).json({ error: err.message });
     });
@@ -55,6 +67,8 @@ const updateGoal = async (req: Request, res: Response) => {
 
 // DELETE
 const deleteGoal = async (req: Request, res: Response) => {
+  handleUnknownUser(res, req.user);
+
   await db.Goal.findByIdAndRemove(req.params.goalid)
     .then(() => {
       res.status(200).json('Goal has been deleted successfully!');

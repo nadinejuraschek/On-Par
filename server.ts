@@ -48,7 +48,7 @@ app.use((req: Request, res: Response, next: NextFunction) => {
     // get the verified userID from jwt
     const verified = jwt.verify(token, process.env.APP_SECRET);
     const id = typeof verified !== 'string' ? verified.id : verified;
-    // set that  userId on the request object
+    // set that userId on the request object
     req.user = id;
   }
   // carry on the request after the middleware

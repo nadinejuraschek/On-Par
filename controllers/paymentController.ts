@@ -1,9 +1,11 @@
 import { Request, Response } from 'express';
-
 import db from '../models/db';
+import { handleUnknownUser } from '../utils/handleUnknownUser';
 
 // READ
 const getPayments = async (req: Request, res: Response) => {
+  handleUnknownUser(res, req.user);
+
   const result = await db.User.findById(req.user)
     .populate('payments')
     .then(payments => payments)
@@ -16,12 +18,14 @@ const getPayments = async (req: Request, res: Response) => {
 
 // CREATE
 const createPayment = async (req: Request, res: Response) => {
+  handleUnknownUser(res, req.user);
+
   await db.Payment.create(req.body)
     .then(async insertedPayment => {
       await db.User.findByIdAndUpdate(
         { _id: req.user },
         { $push: { payments: insertedPayment._id } })
-        .then(() => res.status(200).json('Success!'))
+        .then(() => res.status(200).json('Payment has been created successfully!'))
         .catch((err) => {
           res.status(500).json({ error: err.message });
         });
@@ -33,9 +37,11 @@ const createPayment = async (req: Request, res: Response) => {
 
 // UPDATE
 const updatePayment = async (req: Request, res: Response) => {
+  handleUnknownUser(res, req.user);
+
   await db.Payment.findByIdAndUpdate(req.params.paymentid, req.body)
     .then(() => {
-      res.status(200).json('Success!');
+      res.status(200).json('Payment has been updated successfully!');
     })
     .catch(err => {
       res.status(500).json({ error: err.message });
@@ -44,6 +50,8 @@ const updatePayment = async (req: Request, res: Response) => {
 
 // DELETE
 const deletePayment = async (req: Request, res: Response) => {
+  handleUnknownUser(res, req.user);
+
   await db.Payment.findByIdAndRemove(req.params.paymentid)
     .then(() => {
       res
