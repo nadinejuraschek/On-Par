@@ -43,13 +43,15 @@ export const UserInfo = ({ user }: { user: TUser }): JSX.Element => {
   }, []);
 
   return (
-    <StyledContent>
-      <AvatarUpload />
-      <Permissions handleCheckboxChange={handleCheckboxChange} permissions={formData.permissions} />
-      <Form handleInputChange={handleInputChange} setFormData={setFormData} formData={formData} />
+    <>
+      <StyledContent>
+        <AvatarUpload />
+        <Permissions handleCheckboxChange={handleCheckboxChange} permissions={formData.permissions} />
+        <Form handleInputChange={handleInputChange} setFormData={setFormData} formData={formData} />
+      </StyledContent>
       <FooterActions>
         <Button handleClick={handleEdit} loading={updating} variant="primary">Save Changes</Button>
       </FooterActions>
-    </StyledContent>
+    </>
   );
 };

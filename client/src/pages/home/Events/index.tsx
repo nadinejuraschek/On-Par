@@ -5,7 +5,7 @@ import { EventsList } from "./List";
 import { Content, ListContent, Wrapper } from "./styled";
 
 export const Events = (): JSX.Element => {
-  const currentMonth = useMemo(() => new Date().getMonth() + 1, []);
+  const currentMonth = useMemo(() => new Date().getMonth(), []);
   const currentDay = useMemo(() => new Date().getDate(), []);
 
   const currentHolidays = useMemo(() => (

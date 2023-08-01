@@ -2,7 +2,6 @@ import { TEvent } from "components/Event/types";
 import * as dayjs from "dayjs";
 import * as weekday from "dayjs/plugin/weekday";
 
-
 dayjs.extend(weekday);
 
 const currentYear = new Date().getFullYear();
@@ -46,7 +45,6 @@ const getDatesOfDayOfWeek = (year: number, month: number, dayOfWeek: number) => 
 }
 
 // TODO: integrate more religious holidays (e.g. jewish)
-
 export const holidays: TEvent[] = [
   {
     name: "New Year's Day",
