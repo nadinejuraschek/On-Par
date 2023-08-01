@@ -55,7 +55,7 @@ export const Form = ({ formData, handleInputChange, setFormData }: IForm): JSX.E
         name="endDate"
         value={dayjs(formData.endDate).format("MMM DD, YYYY")}
       />
-      <ExtensionInfo>
+      <ExtensionInfo variant="secondary">
         <Text size="md">Thinking of extending your au pair experience?</Text>
         <Button link="/resources" variant="secondary">Read Extension Requirements</Button>
       </ExtensionInfo>

@@ -1,4 +1,4 @@
-import { Input } from "components";
+import { Banner, Input } from "components";
 import styled from "styled-components";
 
 export const StyledForm = styled.form`
@@ -27,20 +27,11 @@ export const ExtensionInput = styled(Input)`
   }
 `;
 
-export const ExtensionInfo = styled.div`
+export const ExtensionInfo = styled(Banner)`
   display: none;
 
   @media only screen and (min-width: 600px) {
     display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1.4rem;
-
-    background-color: var(--secondary_25);
-    border: 1px solid var(--grey_200);
-    border-radius: 0.8rem;
-    padding: 1.6rem;
-
-    grid-column: 1 / 3;
+    grid-column: 1 / -1;
   }
 `;

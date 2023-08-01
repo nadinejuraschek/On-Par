@@ -7,14 +7,27 @@ export const List = styled.div`
   flex-direction: column;
   gap: 1rem;
 
+  overflow-y: auto;
+
+  /* Hide scrollbar for IE, Edge and Firefox */
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+
+  /* Hide scrollbar for Chrome, Safari and Opera */
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
   width: 100%;
 `;
 
 export const InfoText = styled.span`
   display: flex;
   gap: 1rem;
+`;
 
-  i {
-    color: var(--warning_500);
-  }
+export const BannerWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 `;

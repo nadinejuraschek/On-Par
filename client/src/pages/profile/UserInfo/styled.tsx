@@ -4,10 +4,9 @@ export const StyledContent = styled.div`
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: auto;
-  grid-gap: 2.4rem;
+  grid-gap: 2rem;
 
-  padding: 1rem 0;
-
+  height: 100%;
   width: 100%;
 
   @media only screen and (min-width: 600px) {
@@ -18,9 +17,4 @@ export const StyledContent = styled.div`
 export const FooterActions = styled.div`
   display: flex;
   justify-content: flex-end;
-
-  @media only screen and (min-width: 600px) {
-    grid-column: 1 / -1;
-    grid-row: 4 / 5;
-  }
 `;

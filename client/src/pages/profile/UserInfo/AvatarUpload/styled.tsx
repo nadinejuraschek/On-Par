@@ -29,8 +29,8 @@ export const ImageWrapper = styled.div`
   }
 
   @media only screen and (min-width: 900px) {
-    height: 16rem;
-    width: 16rem;
+    height: 15rem;
+    width: 15rem;
   }
 `;
 
