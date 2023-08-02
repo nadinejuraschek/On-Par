@@ -5,15 +5,17 @@ import { TNote } from "types";
 import { AddNoteModal } from "./AddNoteModal";
 import { EditNoteModal } from "./EditNoteModal";
 import { NoteCard } from "./NoteCard";
+import { Pagination } from "./Pagination";
 import { Grid, Header, List } from "./styled";
-import { Suggestions } from "./Suggestions";
+// import { Suggestions } from "./Suggestions";
 
 export const Notes = (): JSX.Element => {
   const [openAddNoteModal, setOpenAddNoteModal] = useState(false);
   const [openEditNoteModal, setOpenEditNoteModal] = useState(false);
   const [originalNote, setOriginalNote] = useState<TNote | null>(null);
+  const [page, setPage] = useState(1);
 
-  const { createNote, deleteNote, editNote, loading, notes } = useNotes();
+  const { createNote, deleteNote, editNote, loading, notes, totalCount } = useNotes();
 
   const handleOpenEdit = useCallback((note: TNote) => {
     setOpenEditNoteModal(true);
@@ -73,7 +75,7 @@ export const Notes = (): JSX.Element => {
   return (
     <>
       <Grid>
-        <Suggestions />
+        {/* <Suggestions /> */}
         <Header>
           <Button handleClick={() => setOpenAddNoteModal(true)} variant="primary">
             <i className="plus icon"></i> Add Note
@@ -82,6 +84,7 @@ export const Notes = (): JSX.Element => {
         <List>
           { renderNotes }
         </List>
+        <Pagination handlePageChange={setPage} limit={10} page={page} totalCount={totalCount} />
       </Grid>
       {renderAddNoteModal}
       {renderEditNoteModal}

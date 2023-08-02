@@ -6,14 +6,30 @@ import { handleUnknownUser } from '../utils/handleUnknownUser';
 const getNotes = async (req: Request, res: Response) => {
   handleUnknownUser(res, req.user);
 
+  const page = Number(req.query.page) || 0;
+  const limit = 10;
+
   const result = await db.User.findById(req.user)
-    .populate('notes')
+    .populate({
+      path:'notes',
+      options: {
+        perDocumentLimit: limit,
+        skip: page * limit,
+      },
+    })
     .then(notes => notes)
     .catch(err => {
       res.status(500).json({ error: err.message });
     });
 
-  return res.status(200).json(result?.notes);
+  const totalCount = await db.User.findById(req.user)
+    .populate('notes')
+    .then(data => data?.notes.length)
+    .catch(err => {
+      res.status(500).json({ error: err.message });
+    });
+
+  return res.status(200).json({ notes: result?.notes, total: totalCount });
 };
 
 const getSingleNote = async (req: Request, res: Response) => {

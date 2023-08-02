@@ -1,12 +1,12 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-
 import { toast } from "react-toastify";
 import { TNote } from "types";
 
 export function useNotes() {
   const [loading, setLoading] = useState(false);
   const [notes, setNotes] = useState<TNote[]>([]);
+  const [totalCount, setTotalCount] = useState(0);
 
   useEffect(() => {
     getNotes();
@@ -17,8 +17,11 @@ export function useNotes() {
     await axios( {
       url: "/api/user/:id/notes",
       method: "GET",
-    } ).then( res => setNotes(res.data))
-      .catch( () => toast.error("Could not fetch notes. Please try again later!"))
+    } ).then( res => {
+      setTotalCount(res.data.total);
+      setNotes(res.data.notes);
+    })
+      .catch(() => toast.error("Could not fetch notes. Please try again later!"))
       .finally(() => setLoading(false));
   };
 
@@ -70,5 +73,6 @@ export function useNotes() {
     editNote,
     loading,
     notes,
+    totalCount,
   };
 }
