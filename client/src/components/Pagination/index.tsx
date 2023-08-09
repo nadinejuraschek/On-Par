@@ -3,7 +3,13 @@ import { useMemo } from "react";
 import { Options, Page, StyledPagination } from "./styled";
 import { IPagination } from "./types";
 
-export const Pagination = ({ handlePageChange, limit, page, totalCount }: IPagination): JSX.Element => {
+export const Pagination = ({
+  className = "",
+  handlePageChange,
+  limit,
+  page,
+  totalCount,
+}: IPagination): JSX.Element => {
   const renderPageOptions = useMemo(() => {
     const optionsCount = (totalCount < limit) ? 1 : Math.ceil(totalCount / limit);
     return Array.from(Array(optionsCount + 1).keys()).slice(1).map((num) => (
@@ -25,7 +31,7 @@ export const Pagination = ({ handlePageChange, limit, page, totalCount }: IPagin
   ]);
 
   return (
-    <StyledPagination>
+    <StyledPagination className={className}>
       <Button
         disabled={page === 1}
         handleClick={() => handlePageChange(page--)}

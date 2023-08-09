@@ -6,15 +6,12 @@ export const StyledPagination = styled.div`
   align-items: center;
   justify-content: space-between;
   gap: 2rem;
-
-  grid-column: 1 / -1;
 `;
 
 export const Options = styled.div`
   display: flex;
   gap: 1rem;
 `;
-
 
 export const Page = styled(Button)<{ active: boolean }>`
   background-color: ${({ active }) => active ? "var(--primary_50)" : "var(--white)"};

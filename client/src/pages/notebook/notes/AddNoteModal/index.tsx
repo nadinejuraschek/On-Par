@@ -1,34 +1,40 @@
 import { Button, Input, Modal, Textarea } from "components";
 import * as dayjs from "dayjs";
+import { useCreateNote } from "hooks";
 import { ChangeEvent, useCallback, useMemo, useState } from "react";
 import { TNoteFormData, noteSchema } from "schema";
 import { ZodFormattedError } from "zod";
 import { Form } from "./styled";
 import { IAddNoteModal } from "./types";
 
-export const AddNoteModal = ({ createNote, toggleModal }: IAddNoteModal): JSX.Element => {
+export const AddNoteModal = ({ refetchNotes, toggleModal }: IAddNoteModal): JSX.Element => {
   const currentDate = dayjs().format("MMMM D, YYYY");
 
   const [errors, setErrors] = useState<ZodFormattedError<TNoteFormData> | undefined>(undefined);
   const [newNote, setNewNote] = useState( { date: currentDate, text: "", title: "" } );
+  const [submitting, setSubmitting] = useState(false);
+
+  const { createNote } = useCreateNote();
 
   const handleSubmit = useCallback((): void => {
+    setSubmitting(true);
     const validation = noteSchema.safeParse(newNote);
 
     if (validation.success === false) {
       setErrors(validation.error.format());
+      setSubmitting(false);
       return;
     }
 
     setErrors(undefined);
 
-    createNote(newNote, () => {
-      toggleModal();
-      setNewNote( { date: currentDate, text: "", title: "" } );
-    });
+    createNote(newNote);
+    refetchNotes();
+    setSubmitting(false);
+    toggleModal();
   }, [createNote,
-    currentDate,
     newNote,
+    refetchNotes,
     toggleModal]);
 
   const handleChange = useCallback((event: ChangeEvent): void => {
@@ -42,9 +48,17 @@ export const AddNoteModal = ({ createNote, toggleModal }: IAddNoteModal): JSX.El
   const addNoteModalActions = useMemo(() => (
     <>
       <Button fullWidth handleClick={toggleModal}>Cancel</Button>
-      <Button fullWidth handleClick={handleSubmit} type="submit" variant="primary">Save</Button>
+      <Button
+        fullWidth
+        handleClick={handleSubmit}
+        loading={submitting}
+        type="submit"
+        variant="primary"
+      >
+        Save
+      </Button>
     </>
-  ), [handleSubmit, toggleModal]);
+  ), [handleSubmit, submitting, toggleModal]);
 
   return (
     <Modal

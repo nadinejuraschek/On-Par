@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 import { toast } from "react-toastify";
 import { TGoal } from "types";
@@ -13,9 +13,10 @@ export function useGoals() {
 
   useEffect(() => {
     getGoals();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const getGoals = async () => {
+  const getGoals = useCallback(async () => {
     setLoading(true);
 
     await axios( {
@@ -38,9 +39,9 @@ export function useGoals() {
       toast.error("Could not fetch goals. Please try again later!");
       // console.debug( 'Error when fetching goals: ', err );
     } ).finally(() => setLoading(false));
-  };
+  }, []);
 
-  const createGoal = async (newGoal: Omit<TGoal, "_id" | "checked">, callback?: () => void) => {
+  const createGoal = useCallback(async (newGoal: Omit<TGoal, "_id" | "checked">, callback?: () => void) => {
     setLoading(true);
     await axios( {
       url: "/api/goals",
@@ -59,9 +60,9 @@ export function useGoals() {
         setLoading(false);
         callback?.();
       });
-  };
+  }, [getGoals]);
 
-  const deleteGoal = async (goalId: string, callback?: () => void) => {
+  const deleteGoal = useCallback(async (goalId: string, callback?: () => void) => {
     setLoading(true);
     await axios.delete(`/api/goals/${goalId}`).then( () => {
       toast.success("The goal has been deleted successfully!");
@@ -71,9 +72,9 @@ export function useGoals() {
         setLoading(false);
         callback?.();
       });
-  };
+  }, [getGoals]);
 
-  const editGoal = async (goalId: string, updatedGoal: Omit<TGoal, "_id">, callback?: () => void) => {
+  const editGoal = useCallback(async (goalId: string, updatedGoal: Omit<TGoal, "_id">, callback?: () => void) => {
     setLoading(true);
     await axios
       .put(`/api/goals/${goalId}`, updatedGoal)
@@ -86,9 +87,9 @@ export function useGoals() {
         setLoading(false);
         callback?.();
       });
-  };
+  }, [getGoals]);
 
-  const checkGoal = async (goalId: string, callback?: () => void) => {
+  const checkGoal = useCallback(async (goalId: string, callback?: () => void) => {
     setLoading(true);
     await axios.put(`/api/goals/${goalId}`, { checked: true } )
       .then( () => {
@@ -102,7 +103,7 @@ export function useGoals() {
         setLoading(false);
         callback?.();
       });
-  };
+  }, [getGoals]);
 
   return {
     checkGoal,

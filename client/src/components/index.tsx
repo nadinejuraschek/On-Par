@@ -15,6 +15,7 @@ export * from "./LoadingPlaceholder";
 export * from "./LoadingSpinner";
 export * from "./Modal";
 export * from "./Navbar";
+export * from "./Pagination";
 export * from "./ProgressRing";
 export * from "./Select";
 export * from "./Tabs";

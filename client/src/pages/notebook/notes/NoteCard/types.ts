@@ -2,9 +2,9 @@ import { TNote } from "types";
 
 export interface INoteCard {
   color: TStyledNoteColor;
-  deleteNote: (noteid: string) => void;
   handleOpenEdit: (note: TNote) => void;
   note: TNote;
+  refetchNotes: () => void;
 }
 
 export interface IStyledNote {
