@@ -2,6 +2,7 @@ export * from "./useCreateNote";
 export * from "./useDeleteNote";
 export * from "./useEditNote";
 export * from "./useFetchNotes";
+export * from "./useFetchGoals";
 export * from "./useGoals";
 export * from "./useCreateNote";
 export * from "./usePayments";

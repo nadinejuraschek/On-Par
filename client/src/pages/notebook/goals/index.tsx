@@ -1,13 +1,10 @@
 import { Select } from "components";
-import { useGoals } from "hooks";
 import { useCallback, useMemo, useState } from "react";
 import { AddGoalModal } from "./AddGoalModal";
 import { GoalsList } from "./List";
 import { Actions, Content, Filter, Layout, StyledButton } from "./styled";
 
 export const Goals = (): JSX.Element => {
-  const { completeGoals, loading, thisMonthGoals, upcomingGoals } = useGoals();
-
   const [openModal, setOpenModal] = useState(false);
   const [filter, setFilter] = useState(undefined);
 
@@ -21,34 +18,31 @@ export const Goals = (): JSX.Element => {
     return (
       <GoalsList
         filter={filter}
-        items={thisMonthGoals}
-        loading={loading}
         title="This Month"
+        type="month"
       />
     );
-  }, [thisMonthGoals, filter, loading]);
+  }, [filter]);
 
   const renderUpcomingGoals = useMemo(() => {
     return (
       <GoalsList
         filter={filter}
-        items={upcomingGoals}
-        loading={loading}
         title="Upcoming / Overdue"
+        type="upcoming"
       />
     );
-  }, [upcomingGoals, filter, loading]);
+  }, [filter]);
 
   const renderCompletedGoals = useMemo(() => {
     return (
       <GoalsList
         filter={filter}
-        items={completeGoals}
-        loading={loading}
         title="Completed"
+        type="completed"
       />
     );
-  }, [completeGoals, filter, loading]);
+  }, [filter]);
 
   const renderAddGoalModal = useMemo(() => {
     if (!openModal) return null;

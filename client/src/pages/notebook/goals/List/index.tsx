@@ -1,13 +1,18 @@
 import { GoalItem, LoadingPlaceholder, Text } from "components";
+import { useFetchGoals } from "hooks";
 import { useMemo } from "react";
 import { Group, List } from "./styled";
 import { IGoalsList } from "./types";
 
-export const GoalsList = ({ filter, items, loading, title }: IGoalsList): JSX.Element => {
-  const renderItems = useMemo(() => {
-    if (!items) return null;
+export const GoalsList = ({ filter, title, type }: IGoalsList): JSX.Element => {
+  const { data: goals, loading } = useFetchGoals({ filter: type });
 
-    return items.filter((item) => {
+  const renderItems = useMemo(() => {
+    if (loading) return <LoadingPlaceholder />;
+
+    if (!goals) return null;
+
+    return goals.filter((item) => {
       if (!filter) {
         return item;
       }
@@ -26,9 +31,7 @@ export const GoalsList = ({ filter, items, loading, title }: IGoalsList): JSX.El
         type={item.type}
       />
     ));
-  }, [filter, items]);
-
-  if (loading) return <LoadingPlaceholder />;
+  }, [filter, goals, loading]);
 
   return (
     <Group>

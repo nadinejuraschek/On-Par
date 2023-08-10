@@ -4,7 +4,7 @@ import styled from "styled-components";
 export const Layout = styled.div`
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: 4rem calc(100% - 7rem);
+  grid-template-rows: 4.8rem calc(100% - 7.8rem);
   grid-gap: 3rem;
   align-items: flex-start;
 
@@ -27,8 +27,11 @@ export const Actions = styled.div`
   grid-row: 1 / 2;
 
   display: flex;
+  align-items: center;
   justify-content: flex-end;
   gap: 3rem;
+
+  height: 100%;
 `;
 
 export const StyledButton = styled(Button)`

@@ -1,15 +1,17 @@
 import { Button, GoalItem, LoadingSpinner, Text } from "components";
-import { useGoals } from "hooks";
+import { useFetchGoals } from "hooks";
 import { useMemo } from "react";
 import { Wrapper } from "./styled";
 
 export const Goals = (): JSX.Element => {
-  const { loading, thisMonthGoals } = useGoals();
+  const { data: goals, loading } = useFetchGoals({ filter: "upcoming", limit: "3" });
 
   const renderGoals = useMemo(() => {
     if (loading) return <LoadingSpinner />;
 
-    return thisMonthGoals.slice(0, 3).map((item) => (
+    if (!goals) return null;
+
+    return goals.map((item) => (
       <GoalItem
         checked={item.checked}
         deletable={false}
@@ -22,7 +24,7 @@ export const Goals = (): JSX.Element => {
         type={item.type}
       />
     ));
-  }, [loading, thisMonthGoals]);
+  }, [goals, loading]);
 
   return (
     <Wrapper>
