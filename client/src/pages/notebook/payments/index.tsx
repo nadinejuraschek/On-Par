@@ -1,30 +1,31 @@
 import { Banner, LoadingSpinner, Text } from "components";
 import { UserContext } from "contexts";
 import * as dayjs from "dayjs";
-import { usePayments } from "hooks";
-import { useContext, useMemo, useState } from "react";
-import { EditPaymentModal } from "./EditPaymentModal";
-import { Payment } from "./Payment";
-import { BannerWrapper, InfoText, List } from "./styled";
+import { useFetchPayments } from "hooks";
+import { useContext, useMemo } from "react";
+import { PaymentList } from "./PaymentList";
+import { BannerWrapper, InfoText } from "./styled";
 
 export const Payments = (): JSX.Element => {
   const { user } = useContext( UserContext );
 
-  const { loading, payments } = usePayments();
-
-  const [editPayment, setEditPayment] = useState(null);
+  const { data: payments, loading } = useFetchPayments();
 
   const currentWeekNum = useMemo(() => dayjs(new Date()).diff(dayjs(user?.startDate), "week"), [user]);
 
   const nextDueDate = useMemo(() => dayjs(new Date()).endOf("week").format("ddd DD MMM, YYYY"), []);
 
   const sortedPayments = useMemo(() => {
+    if (!payments) return [];
+
     return payments.sort((a, b) => a.week - b.week).filter((payment) => (
       payment.week <= currentWeekNum
     )).reverse();
   }, [currentWeekNum, payments]);
 
   const renderMissingPaymentsWarning = useMemo(() => {
+    if (!payments) return null;
+
     const count = payments.filter((payment) => (
       payment.week <= currentWeekNum
     )).filter((payment) => !payment.date).length;
@@ -43,25 +44,13 @@ export const Payments = (): JSX.Element => {
     );
   }, [currentWeekNum, payments]);
 
-  const renderEntries = useMemo(() => {
-    return sortedPayments.map( payment => (
-      <Payment
-        handleEdit={() => setEditPayment(payment)}
-        key={ payment._id }
-        payment={ payment }
-      />
-    ));
-  }, [sortedPayments]);
+  const renderList = useMemo(() => {
+    if (loading) return <LoadingSpinner />;
 
-  const renderEditModal = useMemo(() => {
-    if (!editPayment) return null;
+    if (sortedPayments.length === 0) return null;
 
-    return <EditPaymentModal handleClose={() => setEditPayment(null)} originalPayment={editPayment} />;
-  }, [editPayment]);
-
-  if (loading) {
-    return <LoadingSpinner />;
-  }
+    return <PaymentList entries={sortedPayments} />;
+  }, [loading, sortedPayments]);
 
   return (
     <>
@@ -76,10 +65,7 @@ export const Payments = (): JSX.Element => {
         </Banner>
         {renderMissingPaymentsWarning}
       </BannerWrapper>
-      <List>
-        {renderEntries}
-      </List>
-      {renderEditModal}
+      {renderList}
     </>
   );
 };

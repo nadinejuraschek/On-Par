@@ -81,7 +81,7 @@ const createGoal = async (req: Request, res: Response) => {
 const updateGoal = async (req: Request, res: Response) => {
   handleUnknownUser(res, req.user);
 
-  const validated = { ...req.body, text: req.body.text.trim() };
+  const validated = req.body.text ? { ...req.body, text: req.body.text.trim() } : req.body;
 
   await db.Goal.findOneAndUpdate({ _id: req.params.goalid }, validated)
     .then(() => res.status(200).json('Goal has been updated successfully!'))

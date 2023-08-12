@@ -1,5 +1,5 @@
 import { Button, DatePicker, Modal, Textarea, ToggleGroup } from "components";
-import { useGoals } from "hooks";
+import { useEditGoal } from "hooks";
 import { ChangeEvent, useCallback, useMemo, useState } from "react";
 import { TGoalType } from "types";
 import { ZodFormattedError } from "zod";
@@ -15,9 +15,10 @@ export const EditGoalModal = ({
   toggleModal,
   type,
 }: IAddGoalModal): JSX.Element => {
-  const { editGoal, loading } = useGoals();
+  const { editGoal } = useEditGoal();
 
   const [errors, setErrors] = useState<ZodFormattedError<TGoalFormData> | undefined>(undefined);
+  const [submitting, setSubmitting] = useState(false);
   const [updatedGoal, setUpdatedGoal] = useState({
     checked,
     dueDate: dueDate ? new Date(dueDate) : new Date(),
@@ -26,16 +27,22 @@ export const EditGoalModal = ({
   });
 
   const handleSubmit = useCallback(() => {
+    setSubmitting(true);
     const validation = goalSchema.safeParse(updatedGoal);
 
     if (validation.success === false) {
       setErrors(validation.error.format());
+      setSubmitting(false);
       return;
     }
 
     setErrors(undefined);
 
-    editGoal(id, updatedGoal, toggleModal);
+    editGoal(id, updatedGoal);
+    setSubmitting(false);
+    toggleModal();
+    // TODO: refetch goals
+    // refetchGoals();
   }, [editGoal,
     id,
     toggleModal,
@@ -48,14 +55,14 @@ export const EditGoalModal = ({
       <Button
         fullWidth
         handleClick={handleSubmit}
-        loading={loading}
+        loading={submitting}
         type="submit"
         variant="primary"
       >
         Save
       </Button>
     </>
-  ), [handleSubmit, loading, toggleModal]);
+  ), [handleSubmit, submitting, toggleModal]);
 
   const toggleOptions = [
     { label: "Education", value: "education" }, { label: "Personal", value: "personal" }, { label: "Travel", value: "travel" },

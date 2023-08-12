@@ -1,6 +1,6 @@
 import { Badge, Button, Modal } from "components";
 import * as dayjs from "dayjs";
-import { useDeleteGoal, useGoals } from "hooks";
+import { useDeleteGoal, useEditGoal } from "hooks";
 import { useCallback, useMemo, useState } from "react";
 import { EditGoalModal } from "./EditGoalModal";
 import { BadgesWrapper, ItemBody, Label, Overlay, StyledIcon, StyledItem } from "./styled";
@@ -21,21 +21,26 @@ export const GoalItem = ({
 }: IGoalItem): JSX.Element => {
   const [openDeleteConfirm, setOpenDeleteConfirm] = useState(false);
   const [openEditModal, setOpenEditModal] = useState(false);
-  const [submitting, setSubmitting] = useState(false);
+  const [submittingDelete, setSubmittingDelete] = useState(false);
 
   const { deleteGoal } = useDeleteGoal();
-
-  const { checkGoal } = useGoals();
+  const { editGoal } = useEditGoal();
 
   const closeModal = useCallback(() => {
     setOpenDeleteConfirm(false);
     setOpenEditModal(false);
   }, []);
 
+  const handleEditGoal = useCallback(() => {
+    editGoal(id, { checked: true });
+    // TODO: refetch goals
+    // refetchGoals();
+  }, [editGoal, id]);
+
   const handleDeleteGoal = useCallback(() => {
-    setSubmitting(true);
+    setSubmittingDelete(true);
     deleteGoal(id);
-    setSubmitting(false);
+    setSubmittingDelete(false);
     setOpenDeleteConfirm(false);
     // TODO: refetch goals
     // refetchGoals();
@@ -49,7 +54,7 @@ export const GoalItem = ({
     return (
       <Overlay>
         {checkable && (
-          <Button handleClick={() => checkGoal(id)} square>
+          <Button handleClick={handleEditGoal} square>
             <i className="check icon" />
           </Button>
         )}
@@ -67,10 +72,9 @@ export const GoalItem = ({
     );
   }, [checkable,
     checked,
-    checkGoal,
     deletable,
     editable,
-    id]);
+    handleEditGoal]);
 
   const renderBadges = useMemo(() => {
     const badgeIcon = <StyledIcon alt={`${type}_icon`} src={getGoalIcon(type)} />;
@@ -92,7 +96,7 @@ export const GoalItem = ({
         <Button
           fullWidth
           handleClick={handleDeleteGoal}
-          loading={submitting}
+          loading={submittingDelete}
           variant="danger"
         >
           Delete
@@ -108,7 +112,7 @@ export const GoalItem = ({
   }, [openDeleteConfirm,
     closeModal,
     handleDeleteGoal,
-    submitting]);
+    submittingDelete]);
 
   const renderEditModal = useMemo(() => {
     if (!openEditModal) return null;
