@@ -9,7 +9,7 @@ import { BannerWrapper, InfoText } from "./styled";
 export const Payments = (): JSX.Element => {
   const { user } = useContext( UserContext );
 
-  const { data: payments, loading } = useFetchPayments();
+  const { data: payments, loading, refetch: refetchPayments } = useFetchPayments();
 
   const currentWeekNum = useMemo(() => dayjs(new Date()).diff(dayjs(user?.startDate), "week"), [user]);
 
@@ -49,8 +49,8 @@ export const Payments = (): JSX.Element => {
 
     if (sortedPayments.length === 0) return null;
 
-    return <PaymentList entries={sortedPayments} />;
-  }, [loading, sortedPayments]);
+    return <PaymentList entries={sortedPayments} refetchPayments={refetchPayments} />;
+  }, [loading, refetchPayments, sortedPayments]);
 
   return (
     <>

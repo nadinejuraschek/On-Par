@@ -4,7 +4,7 @@ import { List } from "./styled";
 import { IPaymentList } from "./types";
 import { EditPaymentModal } from "../EditPaymentModal";
 
-export const PaymentList = ({ entries }: IPaymentList): JSX.Element => {
+export const PaymentList = ({ entries, refetchPayments }: IPaymentList): JSX.Element => {
   const [editPayment, setEditPayment] = useState(null);
 
   const renderEntries = useMemo(() => {
@@ -20,8 +20,14 @@ export const PaymentList = ({ entries }: IPaymentList): JSX.Element => {
   const renderEditModal = useMemo(() => {
     if (!editPayment) return null;
 
-    return <EditPaymentModal handleClose={() => setEditPayment(null)} originalPayment={editPayment} />;
-  }, [editPayment]);
+    return (
+      <EditPaymentModal
+        handleClose={() => setEditPayment(null)}
+        originalPayment={editPayment}
+        refetchPayments={refetchPayments}
+      />
+    );
+  }, [editPayment, refetchPayments]);
 
   return (
     <>
