@@ -1,6 +1,6 @@
 import { Button, LoadingPlaceholder, Tabs } from "components";
-import { useWorkhours } from "hooks";
-import { useEffect, useMemo, useState } from "react";
+import { useFetchWorkhoursToday, useFetchWorkhoursWeekly } from "hooks";
+import { useMemo, useState } from "react";
 import {
   Container,
   LoadingProgressContainer,
@@ -21,12 +21,11 @@ export const WorkhourSummary = (): JSX.Element => {
     { label: "Today", value: WORKHOUR_TABS.DAY }, { label: "This Week", value: WORKHOUR_TABS.WEEK },
   ];
 
-  const { getWeeklyWorkhours, loading, todayWorkhourTotal, weeklyWorkhourTotal } = useWorkhours();
-
-  useEffect(() => {
-    // TODO: move
-    getWeeklyWorkhours();
-  }, [getWeeklyWorkhours]);
+  const { data: todayWorkhourTotal, loading: loadingWorkhoursToday } = useFetchWorkhoursToday();
+  const {
+    data: weeklyWorkhoursData,
+    loading: loadingWorkhoursWeekly,
+  } = useFetchWorkhoursWeekly({});
 
   const renderDailyProgress = useMemo(() => {
     const inPercent = (todayWorkhourTotal/600)*100;
@@ -50,8 +49,8 @@ export const WorkhourSummary = (): JSX.Element => {
 
   // TODO: calculate weekly hours
   const renderWeeklyProgress = useMemo(() => {
-    const inPercent = (weeklyWorkhourTotal/600)*100;
-    const inHours = weeklyWorkhourTotal/60;
+    const inPercent = (weeklyWorkhoursData.total/2700)*100;
+    const inHours = weeklyWorkhoursData.total/60;
 
     return (
       <ProgressContainer>
@@ -64,22 +63,25 @@ export const WorkhourSummary = (): JSX.Element => {
         </ProgressLabel>
       </ProgressContainer>
     );
-  }, [weeklyWorkhourTotal]);
+  }, [weeklyWorkhoursData]);
 
   const renderContent = useMemo(() => {
-    if (loading) {
+    if (loadingWorkhoursToday || loadingWorkhoursWeekly) {
       <LoadingProgressContainer>
         <LoadingPlaceholder />
       </LoadingProgressContainer>
     }
 
+    if (!todayWorkhourTotal || !weeklyWorkhoursData?.total) return null;
+
     return activeTab === WORKHOUR_TABS.DAY ? renderDailyProgress : renderWeeklyProgress;
-  }, [
-    activeTab,
-    loading,
+  }, [activeTab,
+    loadingWorkhoursToday,
+    loadingWorkhoursWeekly,
     renderDailyProgress,
     renderWeeklyProgress,
-  ]);
+    todayWorkhourTotal,
+    weeklyWorkhoursData]);
 
   return (
     <Container>

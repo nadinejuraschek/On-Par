@@ -11,15 +11,6 @@ export const WeeklyGrid = styled.div`
   width: 100%;
 `;
 
-export const WeeklyList = styled.ul`
-  display: grid;
-  row-gap: 1rem;
-  margin: 0;
-  padding: 0;
-
-  height: 100%;
-`;
-
 export const DateNav = styled.div`
   display: flex;
   align-items: center;

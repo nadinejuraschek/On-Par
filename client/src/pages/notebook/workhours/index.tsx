@@ -1,5 +1,5 @@
 import { Tabs, Text, Timer, WeeklyHours as WeeklyList } from "components";
-import { useWorkhours } from "hooks";
+import { useFetchWorkhoursToday } from "hooks";
 import { useMemo, useState } from "react";
 import { AddHours } from "./AddHours";
 import { CardAddWorkhour, CardReminder, CardTimer, CardTracker, StyledContent, TabsWrapper } from "./styled";
@@ -12,7 +12,7 @@ const WORKHOURS_TABS = {
 export const Workhours = (): JSX.Element => {
   const [tab, setTab] = useState( WORKHOURS_TABS.WEEKLY );
 
-  const { todayWorkhourTotal } = useWorkhours();
+  const { data: todayWorkhourTotal } = useFetchWorkhoursToday();
 
   const tabs = [
     { label: "Weekly", value: WORKHOURS_TABS.WEEKLY }, { disabled: true, label: "Daily", value: WORKHOURS_TABS.DAILY },

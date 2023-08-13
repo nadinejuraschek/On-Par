@@ -1,11 +1,10 @@
-// import { Text } from "components";
 import * as dayjs from "dayjs";
 import { useMemo } from "react";
 import { TimeUtils } from "utils";
 import { Date, Day, Hours, Month, StartTrackerButton, StyledItem, TrackerWrapper } from "./styled";
-import { IWeeklyItem } from "./types";
+import { IWorkhourDay } from "./types";
 
-export const WeeklyItem = ({ day, hours }: IWeeklyItem): JSX.Element => {
+export const WorkhourDay = ({ day, hours }: IWorkhourDay): JSX.Element => {
   const totalHours = useMemo(() => {
     const todaysHours = hours.find(item => dayjs(item.date).set("hour", 12).set("minute", 0).set("second", 0).set("millisecond", 0).toISOString() === dayjs(day).set("hour", 12).set("minute", 0).set("second", 0).set("millisecond", 0).toISOString());
 
@@ -33,7 +32,6 @@ export const WeeklyItem = ({ day, hours }: IWeeklyItem): JSX.Element => {
         <Day>{dayjs(day).format("DD")}</Day>
         <Month>{dayjs(day).format("MMM")}</Month>
       </Date>
-      {/* <Text>{ dayjs(day).format("ddd DD") }</Text> */}
       { renderTotalHours }
       <TrackerWrapper>
         { renderStartTrackerButton }
