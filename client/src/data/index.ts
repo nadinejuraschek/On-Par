@@ -1,3 +1,4 @@
+export * from "./avatarStyle";
 export * from "./childActivities";
 export * from "./countries";
 export * from "./emergencyNumbers";
