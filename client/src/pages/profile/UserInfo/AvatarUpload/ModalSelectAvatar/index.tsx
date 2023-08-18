@@ -9,32 +9,52 @@ import {
   skinColorOptions,
 } from "data";
 import { IModalSelectAvatar } from "./types";
+import { defaultAvatarStyle, getAvatarStyleValues } from "./utils";
 import { AvatarWrapper, Body, FieldPair, Form, StyledAvatar } from './styled';
 import { TSelectOption } from 'components/Select/types';
 
-export const ModalSelectAvatar = ({ handleClose }: IModalSelectAvatar): JSX.Element => {
-  const [avatarStyle, setAvatarStyle] = useState<{ [key: string]: TSelectOption }>({
-    accessories: { label: 'None', value: 'Blank' },
-    clothesType: { label: 'Hoodie', value: 'Hoodie' },
-    clothesColor: { label: 'Blue', value: 'Blue02' },
-    hairColor: { label: 'Brown (dark)', value: 'BrownDark' },
-    hairType: { label: 'Straight (long)', value: 'LongHairStraight2' },
-    skinColor: { label: 'Brown', value: 'Brown' },
-  });
+export const ModalSelectAvatar = ({
+  handleClose,
+  handleSave,
+  profileImageSrc,
+}: IModalSelectAvatar): JSX.Element => {
+  const defaultStyle = useMemo(() => {
+    const values = getAvatarStyleValues(profileImageSrc);
+    return profileImageSrc ? {
+      accessories: accessoriesOptions.find((option) => option.value === values.accessories),
+      clothesType: clothesTypeOptions.find((option) => option.value === values.clothesType),
+      clothesColor: clothesColorOptions.find((option) => option.value === values.clothesColor),
+      hairColor: hairColorOptions.find((option) => option.value === values.hairColor),
+      hairType: hairTypeOptions.find((option) => option.value === values.hairType),
+      skinColor: skinColorOptions.find((option) => option.value === values.skinColor),
+    } : defaultAvatarStyle;
+  }, [profileImageSrc]);
+
+  const [avatarStyle, setAvatarStyle] = useState<{ [key: string]: TSelectOption }>(defaultStyle);
 
   const handleStyleChange = useCallback((option: TSelectOption, name: string) => {
-    console.log('LOG val: ', option);
     setAvatarStyle({ ...avatarStyle, [name]: option });
   }, [avatarStyle]);
 
   const actions = useMemo(() => {
+    const compiledAvatarSource = `https://avataaars.io/?avatarStyle=Transparent&topType=${avatarStyle.hairType.value}&accessoriesType=${avatarStyle.accessories.value}&hairColor=${avatarStyle.hairColor.value}&facialHairType=Blank&clotheType=${avatarStyle.clothesType.value}&clotheColor=${avatarStyle.clothesColor.value}&eyeType=Happy&eyebrowType=DefaultNatural&mouthType=Smile&skinColor=${avatarStyle.skinColor.value}`;
+
     return (
       <>
         <Button fullWidth handleClick={handleClose}>Cancel</Button>
-        <Button variant="primary" fullWidth>Save</Button>
+        <Button
+          fullWidth
+          handleClick={() => {
+            handleSave(compiledAvatarSource);
+            handleClose();
+          }}
+          variant="primary"
+        >
+          Save
+        </Button>
       </>
     );
-  }, [handleClose]);
+  }, [avatarStyle, handleClose, handleSave]);
 
   return (
     <Modal actions={actions} handleClose={handleClose} title="Choose Your Avatar">

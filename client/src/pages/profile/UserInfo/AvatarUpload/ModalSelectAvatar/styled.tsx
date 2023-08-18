@@ -17,6 +17,7 @@ export const StyledAvatar = styled(Avatar)`
   height: 16rem;
   width: 16rem;
 
+  background-color: var(--secondary_25);
   border-radius: 50%;
 `;
 
