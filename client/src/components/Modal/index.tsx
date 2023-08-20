@@ -1,4 +1,5 @@
 import { Button, Text } from "components";
+import { Portal } from "layout";
 import { useMemo } from "react";
 import { Body, Footer, Header, Overlay, StyledModal } from "./styled";
 
@@ -24,19 +25,21 @@ export const Modal = ({
   }, [actions]);
 
   return (
-    <Overlay>
-      <StyledModal className={className}>
-        <Header hasTitle={title}>
-          { renderTitle }
-          <Button handleClick={handleClose} square variant="tertiary">
-            <i className="close icon"></i>
-          </Button>
-        </Header>
-        <Body>
-          { children }
-        </Body>
-        { renderFooter }
-      </StyledModal>
-    </Overlay>
+    <Portal>
+      <Overlay>
+        <StyledModal className={className}>
+          <Header hasTitle={title}>
+            { renderTitle }
+            <Button handleClick={handleClose} square variant="tertiary">
+              <i className="close icon"></i>
+            </Button>
+          </Header>
+          <Body>
+            { children }
+          </Body>
+          { renderFooter }
+        </StyledModal>
+      </Overlay>
+    </Portal>
   );
 };
