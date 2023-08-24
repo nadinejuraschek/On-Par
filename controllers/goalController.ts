@@ -6,15 +6,40 @@ import { handleUnknownUser } from '../utils/handleUnknownUser';
 const getGoals = async (req: Request, res: Response) => {
   handleUnknownUser(res, req.user);
 
+  const filter = req.query.filter || '';
+  const limit = req.query.limit || '';
+
   const result = await db.User.findById(req.user)
     .populate({
       path: 'goals',
-      options: { sort: { dueDate: 1 }}
+      options: {
+        perDocumentLimit: limit,
+        sort: { dueDate: 1 },
+      },
     })
     .then(goals => goals)
     .catch(err => {
       res.status(500).json({ error: err.message });
     });
+
+  if (filter === 'month') {
+    const incompleteGoals = result?.goals?.filter( ({ checked }) => !checked ) || [];
+    const filteredGoals = incompleteGoals?.filter( ({ dueDate }) => new Date(dueDate).getMonth() === new Date().getMonth()) || [];
+
+    return res.status(200).json(filteredGoals);
+  }
+
+  if (filter === 'upcoming') {
+    const incompleteGoals = result?.goals?.filter( ({ checked }) => !checked ) || [];
+    const filteredGoals = incompleteGoals?.filter( ({ dueDate }) => new Date(dueDate).getMonth() !== new Date().getMonth()) || [];
+
+    return res.status(200).json(filteredGoals);
+  }
+
+  if (filter === 'completed') {
+    const filteredGoals = result?.goals?.filter( ({ checked }) => checked ) || [];
+    return res.status(200).json(filteredGoals);
+  }
 
   return res.status(200).json(result?.goals);
 };
@@ -56,7 +81,7 @@ const createGoal = async (req: Request, res: Response) => {
 const updateGoal = async (req: Request, res: Response) => {
   handleUnknownUser(res, req.user);
 
-  const validated = { ...req.body, text: req.body.text.trim() };
+  const validated = req.body.text ? { ...req.body, text: req.body.text.trim() } : req.body;
 
   await db.Goal.findOneAndUpdate({ _id: req.params.goalid }, validated)
     .then(() => res.status(200).json('Goal has been updated successfully!'))

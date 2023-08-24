@@ -1,4 +1,5 @@
 import { Button, Input, Modal, Textarea } from "components";
+import { useEditNote } from "hooks";
 import { ChangeEvent, useCallback, useMemo, useState } from "react";
 import { TNoteFormData, noteSchema } from "schema";
 import { ZodFormattedError } from "zod";
@@ -6,27 +7,36 @@ import { Form } from "./styled";
 import { IEditNoteModal } from "./types";
 
 export const EditNoteModal = ({
-  editNote,
   handleEditCancel,
   note,
+  refetchNotes,
 }: IEditNoteModal): JSX.Element => {
   const [errors, setErrors] = useState<ZodFormattedError<TNoteFormData> | undefined>(undefined);
+  const [submitting, setSubmitting] = useState(false);
   const [updatedNote, setUpdatedNote] = useState(note);
 
+  const { editNote } = useEditNote();
+
   const handleSubmit = useCallback((): void => {
+    setSubmitting(true);
     const validation = noteSchema.safeParse(updatedNote);
 
     if (validation.success === false) {
       setErrors(validation.error.format());
+      setSubmitting(false);
       return;
     }
 
     setErrors(undefined);
 
-    editNote(note._id, updatedNote, handleEditCancel);
+    editNote(note._id, updatedNote);
+    refetchNotes();
+    setSubmitting(false);
+    handleEditCancel();
   }, [editNote,
     handleEditCancel,
     note,
+    refetchNotes,
     updatedNote]);
 
   const handleChange = useCallback((event: ChangeEvent): void => {
@@ -38,9 +48,17 @@ export const EditNoteModal = ({
   const addNoteModalActions = useMemo(() => (
     <>
       <Button fullWidth handleClick={handleEditCancel}>Cancel</Button>
-      <Button fullWidth handleClick={handleSubmit} type="submit" variant="primary">Save</Button>
+      <Button
+        fullWidth
+        handleClick={handleSubmit}
+        loading={submitting}
+        type="submit"
+        variant="primary"
+      >
+        Save
+      </Button>
     </>
-  ), [handleEditCancel, handleSubmit]);
+  ), [handleEditCancel, handleSubmit, submitting]);
 
   return (
     <Modal

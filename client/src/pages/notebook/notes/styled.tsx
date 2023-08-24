@@ -1,3 +1,4 @@
+import { Pagination } from "components";
 import styled from "styled-components";
 
 export const Grid = styled.div`
@@ -6,17 +7,17 @@ export const Grid = styled.div`
   grid-template-rows: auto;
   grid-gap: 2rem;
 
+  height: calc(100% - 6rem);
   width: 100%;
 
   @media only screen and (min-width: 900px) {
     grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: min-content repeat(2, auto);
+    grid-template-rows: 4rem calc(100% - 12rem) 4rem;
   }
 `;
 
 export const Header = styled.div`
   grid-column: 1 / -1;
-  grid-row: 2 / 3;
 
   display: flex;
   align-items: center;
@@ -25,15 +26,26 @@ export const Header = styled.div`
 
 export const List = styled.div`
   grid-column: 1 / -1;
-  grid-row: 4 / 5;
 
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  align-content: flex-start;
   gap: 1rem;
 
-  @media only screen and (min-width: 900px) {
-    grid-column: 1 / -1;
-    grid-row: 3 / -1;
+  overflow-y: auto;
+  height: 100%;
+
+  /* Hide scrollbar for IE, Edge and Firefox */
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+
+  /* Hide scrollbar for Chrome, Safari and Opera */
+  &::-webkit-scrollbar {
+    display: none;
   }
+`;
+
+export const StyledPagination = styled(Pagination)`
+  grid-column: 1 / -1;
 `;
