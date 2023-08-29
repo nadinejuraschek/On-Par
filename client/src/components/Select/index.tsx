@@ -19,7 +19,7 @@ export const Select = ({
   name,
   onlyInput = false,
   options,
-  placeholder = undefined,
+  placeholder = "",
   searchable = false,
   value,
 }: ISelect): JSX.Element => {

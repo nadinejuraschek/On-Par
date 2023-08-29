@@ -136,6 +136,7 @@ export const Register = (): JSX.Element => {
             label="Home Country"
             name="country"
             options={countrySelectOptions}
+            placeholder="Country"
             value={registerData.country}
           />
         </FieldPair>
