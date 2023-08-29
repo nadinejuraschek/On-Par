@@ -16,7 +16,7 @@ export const Textarea = ({
   rows = 5,
   value,
 }: ITextarea): JSX.Element => {
-  const debouncedValue = useDebounce<string>(value, 500);
+  const debouncedValue = useDebounce<string>(value, 100);
 
   useEffect(() => {
     // Triggers when "debouncedValue" changes
@@ -34,8 +34,8 @@ export const Textarea = ({
         { label }
       </Text>
       <StyledTextarea
-        fullWidth={fullWidth}
-        hasError={error}
+        $fullWidth={fullWidth}
+        $hasError={error}
         name={ name }
         onChange={ handleChange }
         placeholder={ placeholder }

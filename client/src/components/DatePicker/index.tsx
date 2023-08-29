@@ -34,7 +34,7 @@ export const DatePicker = ({
   }, [error]);
 
   return (
-    <Field className={className} fullWidth={fullWidth}>
+    <Field className={className} $fullWidth={fullWidth}>
       {renderLabel}
       <IconInputWrapper>
         <StyledDateTimePicker
@@ -43,8 +43,8 @@ export const DatePicker = ({
           disabled={disabled}
           disableClock
           format={format}
-          hasError={error}
-          hasIcon={icon}
+          $hasError={error}
+          $hasIcon={icon}
           locale="en-US"
           name={name}
           onChange={handleChange}

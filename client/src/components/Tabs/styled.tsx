@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components";
 import { TVariant } from "types";
-import { IStyledTab, ITabs } from "./types";
+import { IStyledTab, IStyledTabs } from "./types";
 import { Text } from "../Text";
 
 const getVariantStyles = (active: boolean, variant: TVariant) => {
@@ -29,7 +29,7 @@ const getVariantStyles = (active: boolean, variant: TVariant) => {
   }
 };
 
-export const Tabbar = styled.div<ITabs>`
+export const Tabbar = styled.div<IStyledTabs>`
   display: flex;
   align-items: center;
   gap: 1.6rem;
@@ -37,14 +37,14 @@ export const Tabbar = styled.div<ITabs>`
   padding: 0;
 
   height: 4.2rem;
-  width: ${({ fullWidth }) => fullWidth ? "100%" : "auto"};
+  width: ${({ $fullWidth }) => $fullWidth ? "100%" : "auto"};
 
-  ${({ spaceBetween }) => spaceBetween && css`
+  ${({ $spaceBetween }) => $spaceBetween && css`
     justify-content: space-between;
     gap: unset;
   `};
 
-  ${({ variant }) => variant === "primary" && css`
+  ${({ $variant }) => $variant === "primary" && css`
     border-bottom: 1px solid var(--grey_200);
   `};
 `;
@@ -71,5 +71,5 @@ export const Tab = styled.div<IStyledTab>`
     cursor: not-allowed;
   }
 
-  ${({ active, variant }) => getVariantStyles(active, variant)};
+  ${({ $active, $variant }) => getVariantStyles($active, $variant)};
 `;

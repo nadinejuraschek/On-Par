@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import styled, { css, keyframes } from "styled-components";
 
 import { TVariant } from "types";
-import { IButton } from "./types";
+import { IStyledButton } from "./types";
 
 const getVariantStyles = (variant: TVariant) => {
   switch(variant) {
@@ -170,64 +170,64 @@ const warningStyles = css`
   }
 `;
 
-export const StyledButton = styled.button<IButton>`
+export const StyledButton = styled.button<IStyledButton>`
   ${buttonStyles};
 
   &:disabled {
     cursor: not-allowed;
   }
 
-  ${({ align }) => align === "alignStart" && css`
+  ${({ $align }) => $align === "alignStart" && css`
     justify-content: flex-start;
   `};
 
-  ${({ round }) => round && css`
+  ${({ $round }) => $round && css`
     border-radius: 50%;
 
     min-width: 4rem;
     width: 4rem;
   `};
 
-  ${({ square }) => square && css`
+  ${({ $square }) => $square && css`
     min-width: 4rem;
     width: 4rem;
   `};
 
-  ${({ fullWidth }) => fullWidth && css`
+  ${({ $fullWidth }) => $fullWidth && css`
     width: 100%;
   `};
 
-  ${({ variant }) => getVariantStyles(variant)};
+  ${({ $variant }) => getVariantStyles($variant)};
 `;
 
-export const StyledLink = styled(Link)<IButton>`
+export const StyledLink = styled(Link)<IStyledButton>`
   ${buttonStyles};
 
   ${({ disabled }) => disabled && css`
     cursor: not-allowed;
   `};
 
-  ${({ align }) => align === "alignStart" && css`
+  ${({ $align }) => $align === "alignStart" && css`
     justify-content: flex-start;
   `};
 
-  ${({ round }) => round && css`
+  ${({ $round }) => $round && css`
     border-radius: 50%;
 
     min-width: 4rem;
     width: 4rem;
   `};
 
-  ${({ square }) => square && css`
+  ${({ $square }) => $square && css`
     min-width: 4rem;
     width: 4rem;
   `};
 
-  ${({ fullWidth }) => fullWidth && css`
+  ${({ $fullWidth }) => $fullWidth && css`
     width: 100%;
   `};
 
-  ${({ variant }) => getVariantStyles(variant)};
+  ${({ $variant }) => getVariantStyles($variant)};
 `;
 
 export const Loader = styled.div`

@@ -1,7 +1,7 @@
 import styled, { css } from "styled-components";
 
 import { TGoalType } from "types";
-import { IBadge } from "./types";
+import { IStyledBadge } from "./types";
 
 const getVariantStyles = (variant?: TGoalType) => {
   switch(variant) {
@@ -27,7 +27,7 @@ const getVariantStyles = (variant?: TGoalType) => {
   }
 };
 
-export const StyledBadge = styled.div<IBadge>`
+export const StyledBadge = styled.div<IStyledBadge>`
   border-radius: 0.8rem;
   padding: 0.4rem 0.8rem;
 
@@ -37,5 +37,5 @@ export const StyledBadge = styled.div<IBadge>`
 
   width: max-content;
 
-  ${({ variant }) => getVariantStyles(variant)};
+  ${({ $variant }) => getVariantStyles($variant)};
 `;

@@ -37,7 +37,7 @@ export const ToggleGroup = ({
         <Toggle
           key={index}
           onClick={() => handleChange(option.value)}
-          isSelected={isSelected}
+          $isSelected={isSelected}
         >
           {option.label && (
             <Text
@@ -54,7 +54,7 @@ export const ToggleGroup = ({
   }, [handleChange, options, value]);
 
   return (
-    <Field className={className} withLabel={Boolean(label)}>
+    <Field className={className} $withLabel={Boolean(label)}>
       {renderLabel}
       <Group>
         {renderToggles}

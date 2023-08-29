@@ -82,7 +82,7 @@ export const Select = ({
   }
 
   return (
-    <Field className={className} fullWidth={fullWidth} hasError={error}>
+    <Field className={className} $fullWidth={fullWidth} $hasError={error}>
       { renderLabel }
       <IconInputWrapper>
         { selectInput }

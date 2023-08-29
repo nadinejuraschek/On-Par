@@ -46,8 +46,8 @@ export const Month = styled.span`
 `;
 
 export const Hours = styled(Text)<IStyledHours>`
-  color: ${({ isOvertime }) => isOvertime ? "var(--error_600)" : "#2c662d"};
-  font-weight: ${({ isOvertime }) => isOvertime ? "bold" : "normal"};
+  color: ${({ $isOvertime }) => $isOvertime ? "var(--error_600)" : "#2c662d"};
+  font-weight: ${({ $isOvertime }) => $isOvertime ? "bold" : "normal"};
 
   text-align: right;
 

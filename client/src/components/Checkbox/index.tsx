@@ -1,7 +1,6 @@
 import { Text } from "components";
 import { useMemo } from "react";
 import { ErrorText, Field, StyledCheckbox } from "./styled";
-
 import { ICheckbox } from "./types";
 
 export const Checkbox = ({

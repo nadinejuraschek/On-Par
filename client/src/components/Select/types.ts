@@ -22,5 +22,6 @@ export interface ISelect {
 export type TSelectOption = { label?: string, value?: string };
 
 export interface IStyledField {
-  fullWidth: boolean;
+  $fullWidth: boolean;
+  $hasError: boolean;
 }

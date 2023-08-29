@@ -34,8 +34,8 @@ export const WorkhourSummary = (): JSX.Element => {
     return (
       <ProgressContainer>
         <Progress
-          isOverwork={inHours > 10}
-          percentage={inPercent}
+          $isOverwork={inHours > 10}
+          $percentage={inPercent}
         />
         <ProgressLabel
           color={inHours > 10 ? "--error_700" : "--secondary_700"}
@@ -54,7 +54,7 @@ export const WorkhourSummary = (): JSX.Element => {
 
     return (
       <ProgressContainer>
-        <Progress isOverwork={inHours > 45} percentage={inPercent} />
+        <Progress $isOverwork={inHours > 45} $percentage={inPercent} />
         <ProgressLabel
           color={inHours > 45 ? "--error_700" : "--secondary_700"}
           size="sm"
@@ -72,16 +72,12 @@ export const WorkhourSummary = (): JSX.Element => {
       </LoadingProgressContainer>
     }
 
-    if (!todayWorkhourTotal || !weeklyWorkhoursData?.total) return null;
-
     return activeTab === WORKHOUR_TABS.DAY ? renderDailyProgress : renderWeeklyProgress;
   }, [activeTab,
     loadingWorkhoursToday,
     loadingWorkhoursWeekly,
     renderDailyProgress,
-    renderWeeklyProgress,
-    todayWorkhourTotal,
-    weeklyWorkhoursData]);
+    renderWeeklyProgress]);
 
   return (
     <Container>

@@ -27,16 +27,15 @@ export const Button = ({
   if (link) {
     return (
       <StyledLink
-        align={align}
+        $align={align}
         aria-label={ label }
         className={className}
         disabled={disabled}
-        fullWidth={fullWidth}
-        round={round}
-        square={square}
+        $fullWidth={fullWidth}
+        $round={round}
+        $square={square}
         to={link}
-        type={ type }
-        variant={variant}
+        $variant={variant}
       >
         { renderLabel }
       </StyledLink>
@@ -45,16 +44,16 @@ export const Button = ({
 
   return (
     <StyledButton
-      align={align}
+      $align={align}
       aria-label={ label }
       className={className}
       disabled={disabled}
-      fullWidth={fullWidth}
+      $fullWidth={fullWidth}
       onClick={ handleClick }
-      round={round}
-      square={square}
+      $round={round}
+      $square={square}
       type={ type }
-      variant={variant}
+      $variant={variant}
     >
       { renderLabel }
     </StyledButton>

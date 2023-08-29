@@ -45,7 +45,7 @@ export const Payment = ( {
   }, [late]);
 
   return (
-    <ListItem warning={!date}>
+    <ListItem $warning={!date}>
       <Date>{ renderDateColumn }</Date>
       <Badges>
         {renderLateBadge}

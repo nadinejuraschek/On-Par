@@ -7,5 +7,5 @@ export interface IWorkhourDay {
 }
 
 export interface IStyledHours {
-  isOvertime: boolean;
+  $isOvertime: boolean;
 }

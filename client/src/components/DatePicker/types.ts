@@ -12,10 +12,10 @@ export interface IDatePicker {
 }
 
 export interface IStyledField {
-  fullWidth: boolean;
+  $fullWidth: boolean;
 }
 
 export interface IStyledDateTimePicker {
-  hasError: boolean;
-  hasIcon: boolean;
+  $hasError: boolean;
+  $hasIcon: boolean;
 }
