@@ -18,6 +18,7 @@ export const ImageWrapper = styled.div`
   height: 12rem;
   width: 12rem;
 
+  background-color: var(--secondary_25);
   border: 1px solid var(--grey_200);
   border-radius: 0.8rem;
   box-shadow: var(--shadow_xs);

@@ -26,7 +26,7 @@ const getVariantStyle = (variant?: TBannerVariant) => {
   }
 };
 
-export const StyledBanner = styled.div<{ variant?: TBannerVariant }>`
+export const StyledBanner = styled.div<{ $variant?: TBannerVariant }>`
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -36,5 +36,5 @@ export const StyledBanner = styled.div<{ variant?: TBannerVariant }>`
   box-shadow: var(--shadow_xs);
   padding: 1.6rem;
 
-  ${({ variant }) => getVariantStyle(variant)};
+  ${({ $variant }) => getVariantStyle($variant)};
 `;

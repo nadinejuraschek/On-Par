@@ -22,7 +22,7 @@ export const ListItem = styled.div<IStyledListItem>`
     background-color: var(--grey_50);
   }
 
-  ${({ warning }) => warning && css`
+  ${({ $warning }) => $warning && css`
     &::before {
       content: '';
 

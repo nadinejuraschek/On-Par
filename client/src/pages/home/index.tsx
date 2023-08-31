@@ -91,7 +91,7 @@ export const Home = (): JSX.Element => {
   return (
     <Grid>
       <HeaderCard>
-        <Greeting message={ message } name={ user?.firstname } />
+        <Greeting message={ message } name={ user?.firstname } profileImageSrc={user?.profileImage} />
         <ButtonsWrapper>
           <Button link="/profile" variant="secondary">Profile</Button>
           <Button handleClick={ handleLogout } variant="secondary">Log Out</Button>

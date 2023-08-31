@@ -8,5 +8,5 @@ export interface IModal extends PropsWithChildren {
 }
 
 export interface IStyledHeader {
-  hasTitle: boolean;
+  $hasTitle: boolean;
 }

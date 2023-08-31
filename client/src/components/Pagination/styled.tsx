@@ -13,11 +13,11 @@ export const Options = styled.div`
   gap: 1rem;
 `;
 
-export const Page = styled(Button)<{ active: boolean }>`
-  background-color: ${({ active }) => active ? "var(--primary_50)" : "var(--white)"};
-  color: ${({ active }) => active ? "var(--grey_700)" : "var(--grey_600)"};
+export const Page = styled(Button)<{ $active: boolean }>`
+  background-color: ${({ $active }) => $active ? "var(--primary_50)" : "var(--white)"};
+  color: ${({ $active }) => $active ? "var(--grey_700)" : "var(--grey_600)"};
 
   &:hover, &:focus {
-    background-color: ${({ active }) => active && "var(--primary_50)"};
+    background-color: ${({ $active }) => $active && "var(--primary_50)"};
   }
 `;

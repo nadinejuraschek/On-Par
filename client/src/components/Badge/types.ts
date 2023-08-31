@@ -7,3 +7,7 @@ export interface IBadge {
   label: string;
   variant?: TGoalType;
 }
+
+export interface IStyledBadge {
+  $variant: TGoalType;
+}

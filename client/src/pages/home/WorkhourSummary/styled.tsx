@@ -43,9 +43,9 @@ export const Progress = styled.div<IStyledProgress>`
 
   height: 4rem;
 
-  background: ${({ isOverwork }) => isOverwork ? "linear-gradient(to right, var(--error_50), var(--error_200))" : "linear-gradient(to right, var(--secondary_50), var(--secondary_200))"};
+  background: ${({ $isOverwork }) => $isOverwork ? "linear-gradient(to right, var(--error_50), var(--error_200))" : "linear-gradient(to right, var(--secondary_50), var(--secondary_200))"};
 
-  width: ${({ percentage }) => percentage ? `${percentage}%` : 0};
+  width: ${({ $percentage }) => $percentage ? `${$percentage}%` : 0};
 `;
 
 export const ProgressLabel = styled(Text)`

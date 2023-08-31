@@ -15,11 +15,11 @@ export interface IInput {
 }
 
 export interface IStyledField {
-  fullWidth: boolean;
+  $fullWidth: boolean;
 }
 
 export interface IStyledInput {
-  fullWidth: boolean;
-  hasError: boolean;
-  hasIcon: boolean;
+  $fullWidth: boolean;
+  $hasError: boolean;
+  $hasIcon: boolean;
 }

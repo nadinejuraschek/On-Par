@@ -14,7 +14,7 @@ export const Pagination = ({
     const optionsCount = (totalCount < limit) ? 1 : Math.ceil(totalCount / limit);
     return Array.from(Array(optionsCount + 1).keys()).slice(1).map((num) => (
       <Page
-        active={page === num}
+        $active={page === num}
         handleClick={() => handlePageChange(num)}
         key={num}
         round

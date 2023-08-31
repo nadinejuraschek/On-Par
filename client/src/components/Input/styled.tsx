@@ -12,7 +12,7 @@ export const Field = styled.div<IStyledField>`
   height: 9rem;
   min-width: 20rem;
 
-  width: ${({ fullWidth }) => fullWidth ? "100%" : "auto"};
+  width: ${({ $fullWidth }) => $fullWidth ? "100%" : "auto"};
 `;
 
 export const IconInputWrapper = styled.div`
@@ -34,11 +34,11 @@ export const StyledInput = styled.input<IStyledInput>`
   font-size: 1.4rem;
   line-height: 2rem;
   padding: 0 1.2rem;
-  padding-left: ${({ hasIcon }) => hasIcon ? "4rem" : "1.2rem"};
+  padding-left: ${({ $hasIcon }) => $hasIcon ? "4rem" : "1.2rem"};
   transition: color 0.1s ease, border-color 0.1s ease;
 
   height: 4rem;
-  width: ${({ fullWidth }) => fullWidth ? "100%" : "auto"};
+  width: ${({ $fullWidth }) => $fullWidth ? "100%" : "auto"};
 
   &::placeholder {
     color: var(--grey_500);
@@ -59,7 +59,7 @@ export const StyledInput = styled.input<IStyledInput>`
     outline: transparent;
   }
 
-  ${({ hasError }) => hasError && css`
+  ${({ $hasError }) => $hasError && css`
     border-color: var(--error_300);
 
     &:focus {

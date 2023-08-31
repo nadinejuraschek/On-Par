@@ -131,12 +131,12 @@ export const GoalItem = ({
   return (
     <StyledItem
       className={className}
-      isChecked={checked}
-      isOverdue={isOverdue}
+      $isChecked={checked}
+      $isOverdue={isOverdue}
     >
       <ItemBody>
         <Label
-          isChecked={checked}
+          $isChecked={checked}
           size="md"
         >
           { label }

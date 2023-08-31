@@ -27,15 +27,17 @@ export const StyledItem = styled.li<IStyledItem>`
   border: 1px solid var(--grey_300);
   border-radius: 0.8rem;
   box-shadow: var(--shadow_xs);
-  opacity: ${({ isChecked }) => isChecked ? 0.4 : 1};
+  opacity: ${({ $isChecked }) => $isChecked ? 0.4 : 1};
   overflow: hidden;
-  cursor: ${({ isChecked }) => isChecked ? "unset" : "pointer"};
+  cursor: ${({ $isChecked }) => $isChecked ? "unset" : "pointer"};
 
   list-style-type: none;
 
   position: relative;
 
   height: min-content;
+  width: 100%;
+
 
   &:not(:last-child) {
     margin-bottom: 1rem;
@@ -45,7 +47,7 @@ export const StyledItem = styled.li<IStyledItem>`
     display: flex;
   }
 
-  ${({ isOverdue }) => isOverdue && css`
+  ${({ $isOverdue }) => $isOverdue && css`
     background-color: var(--tertiary_25);
     border-color: var(--error_300);
   `};
@@ -61,6 +63,7 @@ export const ItemBody = styled.div`
 
 export const BadgesWrapper = styled.div`
   display: flex;
+  flex-wrap: wrap;
   justify-content: flex-end;
   gap: 1rem;
 `;
@@ -71,5 +74,5 @@ export const StyledIcon = styled.img`
 `;
 
 export const Label = styled(Text)<IStyledLabel>`
-  text-decoration: ${({ isChecked }) => isChecked ? "line-through" : "unset"};
+  text-decoration: ${({ $isChecked }) => $isChecked ? "line-through" : "unset"};
 `;

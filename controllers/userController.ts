@@ -22,6 +22,7 @@ const getUser = async (req: Request, res: Response) => {
         lastname: user?.lastname,
         location: user?.location,
         permissions: user?.permissions,
+        profileImage: user?.profileImage,
         role: user?.role,
         startDate: user?.startDate,
       };

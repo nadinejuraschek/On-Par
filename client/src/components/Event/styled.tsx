@@ -6,7 +6,7 @@ export const StyledEvent = styled.div<IStyledEvent>`
   align-items: center;
   gap: 1.6rem;
 
-  background-color: ${({ birthday }) => birthday ? "var(--secondary_50)" : "var(--grey_100)"};
+  background-color: ${({ $birthday }) => $birthday ? "var(--secondary_50)" : "var(--grey_100)"};
   border-radius: 0.8rem;
   box-shadow: var(--shadow_xs);
   padding: 1.6rem;
