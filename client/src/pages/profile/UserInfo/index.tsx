@@ -25,6 +25,7 @@ export const UserInfo = ({ user }: { user: TUser }): JSX.Element => {
         shareEmail: formData.permissions.shareEmail,
         shareLastName: formData.permissions.shareLastName,
       },
+      profileImage: formData.profileImage,
     } ).then( () => {
       toast.success("Profile updated successfully!");
     } ).catch( () => {
@@ -37,6 +38,10 @@ export const UserInfo = ({ user }: { user: TUser }): JSX.Element => {
     setFormData((prev) => ({ ...prev, [field]: value }));
   }, []);
 
+  const handleAvatarChange = useCallback((imgSource: string) => {
+    setFormData((prev) => ({ ...prev, profileImage: imgSource }));
+  }, []);
+
   const handleCheckboxChange = useCallback((e: ChangeEvent, field: string) => {
     const value = (e.target as HTMLInputElement).checked;
     setFormData((prev) => ({ ...prev, permissions: { ...prev.permissions, [field]: value } }));
@@ -45,7 +50,7 @@ export const UserInfo = ({ user }: { user: TUser }): JSX.Element => {
   return (
     <>
       <StyledContent>
-        <AvatarUpload />
+        <AvatarUpload handleAvatarChange={handleAvatarChange} profileImageSrc={formData.profileImage} />
         <Permissions handleCheckboxChange={handleCheckboxChange} permissions={formData.permissions} />
         <Form handleInputChange={handleInputChange} setFormData={setFormData} formData={formData} />
       </StyledContent>

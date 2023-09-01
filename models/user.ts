@@ -20,8 +20,7 @@ interface IUserSchema {
   goals: any[];
   // TODO: determine type
   notes: any[];
-  // TODO: determine type
-  profileImage?: any | null;
+  profileImage?: string | null;
   // TODO: should be of type Date
   birthday?: any | null;
   location?: string | null;
@@ -60,7 +59,7 @@ const userSchema = new Schema<IUserSchema>({
   goals: [{ type: Schema.Types.ObjectId, ref: 'Goal' }],
   notes: [{ type: Schema.Types.ObjectId, ref: 'Note' }],
 
-  profileImage: { img: { data: Buffer, contentType: String } },
+  profileImage: { type: String },
 
   birthday: Object,
 
