@@ -4,7 +4,7 @@ import { useMemo } from "react";
 import { Message, ProfileImage, Wrapper } from "./styled";
 import { IGreeting } from "./types";
 
-export const Greeting = ( { message, name }: IGreeting ): JSX.Element => {
+export const Greeting = ( { message, name, profileImageSrc }: IGreeting ): JSX.Element => {
   const greeting = useMemo(() => {
     const month = new Date().getMonth() + 1;
     const day = new Date().getDate();
@@ -32,7 +32,7 @@ export const Greeting = ( { message, name }: IGreeting ): JSX.Element => {
     <Wrapper>
       {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
       {/* @ts-ignore-next-line */}
-      <ProfileImage src={ blankProfile } alt={ name } />
+      <ProfileImage src={ profileImageSrc || blankProfile } alt={ name } />
       <Message>
         <Text as="h2" size="lg" weight="bold">{ greeting }</Text>
         <Text as="h4" size="md">{ message }</Text>

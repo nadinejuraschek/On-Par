@@ -6,13 +6,14 @@ export const Wrapper = styled.div`
 `;
 
 export const ProfileImage = styled.img`
+  background-color: var(--secondary_25);
   border-radius: 0.8rem;
   box-shadow: var(--shadow_xs);
-  margin-right: 2rem;
+  margin-right: 2.4rem;
   object-fit: cover;
 
-  height: 8rem;
-  width: 8rem;
+  height: 10rem;
+  width: 10rem;
 `;
 
 export const Message = styled.div`

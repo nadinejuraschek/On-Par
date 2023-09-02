@@ -21,6 +21,7 @@ export type TUser = {
   lastname: string;
   location?: string;
   permissions: TUserPermissions;
+  profileImage?: string;
   role?: string;
   startDate: string;
 };
