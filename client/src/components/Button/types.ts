@@ -17,3 +17,15 @@ export interface IButton {
   type?: "button" | "submit";
   variant?: TVariant;
 }
+
+export interface IStyledButton {
+  $align: "alignCenter" | "alignStart" | "alignEnd";
+  className?: string;
+  disabled?: boolean;
+  $fullWidth?: boolean;
+  loading?: boolean;
+  $round?: boolean;
+  $square?: boolean;
+  type?: "button" | "submit";
+  $variant?: TVariant;
+}

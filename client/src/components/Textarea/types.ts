@@ -13,6 +13,6 @@ export interface ITextarea {
 }
 
 export interface IStyledTextarea {
-  fullWidth: boolean;
-  hasError: boolean;
+  $fullWidth: boolean;
+  $hasError: boolean;
 }

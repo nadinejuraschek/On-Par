@@ -14,10 +14,10 @@ export interface IGoalItem {
 }
 
 export interface IStyledItem {
-  isChecked: boolean;
-  isOverdue: boolean;
+  $isChecked: boolean;
+  $isOverdue: boolean;
 }
 
 export interface IStyledLabel {
-  isChecked: boolean;
+  $isChecked: boolean;
 }

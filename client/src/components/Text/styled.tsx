@@ -1,5 +1,5 @@
 import styled, { css } from "styled-components";
-import { IText, TSize } from "./types";
+import { IStyledText, TSize } from "./types";
 
 const getSize = (size: TSize) => {
   switch(size) {
@@ -41,15 +41,15 @@ const getSize = (size: TSize) => {
   }
 };
 
-export const StyledText = styled.div<IText>`
+export const StyledText = styled.div<IStyledText>`
   margin: 0;
   padding: 0;
 
-  font-weight: ${({ weight }) => weight === "bold" ? 600 : 500};
+  font-weight: ${({ $weight }) => $weight === "bold" ? 600 : 500};
 
-  ${({ size }) => getSize(size)};
+  ${({ $size }) => getSize($size)};
 
-  color: ${({ color }) => color && color};
+  color: ${({ $color }) => $color && $color};
 
   &[disabled] {
     color: var(--grey_400);

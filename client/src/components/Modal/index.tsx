@@ -28,7 +28,7 @@ export const Modal = ({
     <Portal>
       <Overlay>
         <StyledModal className={className}>
-          <Header hasTitle={title}>
+          <Header $hasTitle={title}>
             { renderTitle }
             <Button handleClick={handleClose} square variant="tertiary">
               <i className="close icon"></i>

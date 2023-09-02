@@ -14,11 +14,11 @@ export const Text = ({
   <StyledText
     as={as}
     className={className}
-    color={`var(${color})`}
+    $color={`var(${color})`}
     disabled={disabled}
     htmlFor={htmlFor}
-    size={size}
-    weight={weight}
+    $size={size}
+    $weight={weight}
   >
     { children }
   </StyledText>

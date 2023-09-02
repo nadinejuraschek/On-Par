@@ -13,7 +13,7 @@ export const Field = styled.div<IStyledField>`
   height: 9rem;
   min-width: 20rem;
 
-  width: ${({ fullWidth }) => fullWidth ? "100%" : "auto"};
+  width: ${({ $fullWidth }) => $fullWidth ? "100%" : "auto"};
 `;
 
 export const IconInputWrapper = styled.div`

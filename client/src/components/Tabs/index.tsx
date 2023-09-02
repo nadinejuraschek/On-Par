@@ -17,12 +17,12 @@ export const Tabs = ({
       const isActive = value === (activeTab || tabs[0].value);
       return (
         <Tab
-          active={isActive}
+          $active={isActive}
           disabled={disabled}
           key={ `tab_${ value }` }
           onClick={ disabled ? () => {} : () => handleClick(value) }
           style={{ width: fullWidth ? `calc(100% / ${tabs.length}` : "auto" }}
-          variant={variant}
+          $variant={variant}
         >
           <TabText
             disabled={disabled}
@@ -42,9 +42,9 @@ export const Tabs = ({
   return (
     <Tabbar
       className={className}
-      fullWidth={fullWidth}
-      spaceBetween={spaceBetween}
-      variant={variant}
+      $fullWidth={fullWidth}
+      $spaceBetween={spaceBetween}
+      $variant={variant}
     >
       { renderTabs }
     </Tabbar>

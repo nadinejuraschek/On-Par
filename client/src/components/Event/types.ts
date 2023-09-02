@@ -16,5 +16,5 @@ export type TEvent = {
 export type TEventType = "birthday" | "holiday";
 
 export interface IStyledEvent {
-  birthday: boolean;
+  $birthday: boolean;
 }

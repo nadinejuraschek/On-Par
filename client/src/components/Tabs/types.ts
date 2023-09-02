@@ -1,5 +1,4 @@
 import { Dispatch, SetStateAction } from "react";
-
 import { TVariant } from "types";
 
 export interface ITabs {
@@ -12,9 +11,15 @@ export interface ITabs {
   variant?: TVariant;
 }
 
+export interface IStyledTabs {
+  $fullWidth: boolean;
+  $spaceBetween: boolean;
+  $variant: TVariant;
+}
+
 export interface IStyledTab {
-  active: boolean;
-  variant?: TVariant;
+  $active: boolean;
+  $variant?: TVariant;
 }
 
 export type TTab = {

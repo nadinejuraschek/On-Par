@@ -6,5 +6,5 @@ export interface IPaymentEntry {
 }
 
 export interface IStyledListItem {
-  warning: boolean;
+  $warning: boolean;
 }

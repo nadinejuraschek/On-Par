@@ -1,4 +1,4 @@
 export interface IStyledProgress {
-  isOverwork: boolean;
-  percentage: number;
+  $isOverwork: boolean;
+  $percentage: number;
 }

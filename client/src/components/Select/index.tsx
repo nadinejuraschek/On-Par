@@ -19,7 +19,7 @@ export const Select = ({
   name,
   onlyInput = false,
   options,
-  placeholder = undefined,
+  placeholder = "",
   searchable = false,
   value,
 }: ISelect): JSX.Element => {
@@ -82,7 +82,7 @@ export const Select = ({
   }
 
   return (
-    <Field className={className} fullWidth={fullWidth} hasError={error}>
+    <Field className={className} $fullWidth={fullWidth} $hasError={error}>
       { renderLabel }
       <IconInputWrapper>
         { selectInput }

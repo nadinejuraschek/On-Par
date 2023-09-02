@@ -18,7 +18,7 @@ export const Input = ( {
   type = "text",
   value,
 }: IInput ): JSX.Element => {
-  const debouncedValue = useDebounce<string>(value, 500);
+  const debouncedValue = useDebounce<string>(value, 100);
 
   useEffect(() => {
     // Triggers when "debouncedValue" changes
@@ -35,14 +35,14 @@ export const Input = ( {
   }, [label, name]);
 
   return (
-    <Field className={className} fullWidth={fullWidth}>
+    <Field className={className} $fullWidth={fullWidth}>
       { renderLabel }
       <IconInputWrapper>
         <StyledInput
           disabled={disabled}
-          fullWidth={fullWidth}
-          hasError={error}
-          hasIcon={icon}
+          $fullWidth={fullWidth}
+          $hasError={error}
+          $hasIcon={icon}
           name={ name }
           onChange={ handleChange }
           placeholder={ placeholder }
