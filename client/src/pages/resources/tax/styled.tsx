@@ -9,6 +9,9 @@ export const StyledContent = styled.div`
   width: 100%;
 `;
 
-export const InfoText = styled.div``;
-
 export const InfoItem = styled.div``;
+
+export const ContentText = styled.p`
+  font-size: 1.4rem;
+  line-height: 2rem;
+`;

@@ -35,6 +35,8 @@ export const StyledTh = styled.th`
   border-bottom: 1px solid var(--grey_200);
   border-left: 1px solid var(--grey_200);
   color: var(--grey_700);
+  font-size: 1.6rem;
+  line-height: 2.4rem;
   padding: 1rem 0.8rem;
   text-transform: none;
   vertical-align: inherit;
@@ -50,6 +52,8 @@ export const StyledTh = styled.th`
 export const StyledTd = styled.td`
   border-left: 1px solid var(--grey_200);
   border-top: 1px solid var(--grey_200);
+  font-size: 1.4rem;
+  line-height: 2rem;
   padding: 0.8rem;
 
   -webkit-transition: background .1s ease,color .1s ease;

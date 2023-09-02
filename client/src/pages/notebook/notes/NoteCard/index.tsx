@@ -49,7 +49,7 @@ export const NoteCard = ( {
             </Button>
           </Actions>
         </Title>
-        <Body>{ text }</Body>
+        <Body><Text size="sm">{ text }</Text></Body>
       </Content>
     </StyledNote>
   );
