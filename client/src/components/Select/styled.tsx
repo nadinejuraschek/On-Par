@@ -22,6 +22,19 @@ export const IconInputWrapper = styled.div`
   position: relative;
 `;
 
+export const IconWrapper = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  height: 4rem;
+  width: 4rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
 export const StyledSelect = styled(SelectComp)`
   div.selectInput__control::placeholder {
     color: var(--grey_500);

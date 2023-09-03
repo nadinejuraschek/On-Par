@@ -1,4 +1,4 @@
-import { Button, Text } from "components";
+import { Button, Icon, Text } from "components";
 import { Portal } from "layout";
 import { useMemo } from "react";
 import { Body, Footer, Header, Overlay, StyledModal } from "./styled";
@@ -31,7 +31,7 @@ export const Modal = ({
           <Header $hasTitle={title}>
             { renderTitle }
             <Button handleClick={handleClose} square variant="tertiary">
-              <i className="close icon"></i>
+              <Icon type="close" />
             </Button>
           </Header>
           <Body>

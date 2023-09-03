@@ -1,6 +1,6 @@
-import { Text } from "components";
+import { Icon, Text } from "components";
 import { useMemo } from "react";
-import { ErrorText, Field, IconInputWrapper, StyledIcon, StyledSelect } from "./styled";
+import { ErrorText, Field, IconInputWrapper, IconWrapper, StyledSelect } from "./styled";
 import { ISelect } from "./types"
 import { getSelectStyles, selectTheme } from "./utils";
 
@@ -68,7 +68,11 @@ export const Select = ({
   const renderIcon = useMemo(() => {
     if (!icon) return null;
 
-    return <StyledIcon className={ `${ icon } icon` } />;
+    return (
+      <IconWrapper>
+        <Icon type={icon} />
+      </IconWrapper>
+    );
   }, [icon]);
 
   const renderError = useMemo(() => {

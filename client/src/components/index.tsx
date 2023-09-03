@@ -8,6 +8,7 @@ export * from "./GoalItem";
 export * from "./Event";
 export * from "./Features";
 export * from "./Flag";
+export * from "./Icon";
 export * from "./Input";
 export * from "./List";
 export * from "./LoadingPlaceholder";

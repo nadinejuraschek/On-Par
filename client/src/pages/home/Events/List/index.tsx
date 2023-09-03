@@ -6,7 +6,7 @@ export const EventsList = ({ emptyMessage = "", list }: IEventsList): JSX.Elemen
   if (list.length === 0) {
     return (
       <EmptyList>
-        <Text size="xs">{emptyMessage}</Text>
+        <Text size="sm">{emptyMessage}</Text>
       </EmptyList>
     );
   }

@@ -1,4 +1,4 @@
-import { Badge, Button } from "components";
+import { Badge, Button, Icon } from "components";
 import * as dayjs from "dayjs";
 import * as duration from "dayjs/plugin/duration";
 import * as isSameOrBefore from "dayjs/plugin/isSameOrBefore";
@@ -41,7 +41,8 @@ export const Payment = ( {
 
   const renderLateBadge = useMemo(() => {
     if (!late) return null;
-    return <LateBadge icon={<i className="clock outline icon"></i>} label="Paid Late" />;
+
+    return <LateBadge icon={<Icon color="var(--error_800)" type="clock" />} label="Paid Late" />;
   }, [late]);
 
   return (
@@ -57,7 +58,7 @@ export const Payment = ( {
           square
           variant="tertiary"
         >
-          <i className="edit outline icon"></i>
+          <Icon type="pen" />
         </Button>
       </Actions>
     </ListItem>

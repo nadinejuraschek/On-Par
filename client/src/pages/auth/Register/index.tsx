@@ -121,7 +121,7 @@ export const Register = (): JSX.Element => {
             handleChange={(startDate: Date) => {
               setRegisterData((prev) => ({ ...prev, "startDate": startDate }));
             }}
-            icon="calendar alternate outline"
+            icon="calendar"
             label="Arrival Date"
             name="startDate"
             value={new Date(registerData.startDate)}
@@ -132,7 +132,7 @@ export const Register = (): JSX.Element => {
             handleChange={(option: TSelectOption) => {
               setRegisterData((prev) => ({ ...prev, "country": option }));
             }}
-            icon="globe icon"
+            icon="globe"
             label="Home Country"
             name="country"
             options={countrySelectOptions}
@@ -144,7 +144,7 @@ export const Register = (): JSX.Element => {
           error={errors?.email?._errors?.[0] && errors.email._errors[0]}
           fullWidth
           handleChange={handleInputChange}
-          icon="mail"
+          icon="envelope"
           label="E-Mail"
           name="email"
           placeholder="E-Mail"

@@ -1,7 +1,7 @@
 import { useEffect, useMemo } from "react";
 import { useDebounce } from "usehooks-ts";
-import { ErrorText, Field, IconInputWrapper, StyledIcon, StyledInput } from "./styled";
-
+import { ErrorText, Field, IconInputWrapper, IconWrapper, StyledInput } from "./styled";
+import { Icon } from "../Icon";
 import { IInput } from "./types";
 import { Text } from "../Text";
 
@@ -34,6 +34,22 @@ export const Input = ( {
     );
   }, [label, name]);
 
+  const renderIcon = useMemo(() => {
+    if (!icon) return null;
+
+    return (
+      <IconWrapper>
+        <Icon type={icon} />
+      </IconWrapper>
+    );
+  }, [icon]);
+
+  const renderErrorMessage = useMemo(() => {
+    if (!error) return null;
+
+    return <ErrorText as="p" size="xs" >{ error }</ErrorText>;
+  }, [error]);
+
   return (
     <Field className={className} $fullWidth={fullWidth}>
       { renderLabel }
@@ -49,9 +65,9 @@ export const Input = ( {
           type={type}
           value={ value }
         />
-        { icon && <StyledIcon className={`${icon} icon`} /> }
+        { renderIcon }
       </IconInputWrapper>
-      { error && <ErrorText as="p" size="xs" >{ error }</ErrorText> }
+      { renderErrorMessage }
     </Field>
   );
 };

@@ -79,7 +79,7 @@ export const Login = (): JSX.Element => {
           error={errors?.email?._errors?.[0] && errors.email._errors[0]}
           fullWidth
           handleChange={handleInputChange}
-          icon="mail"
+          icon="envelope"
           label="E-Mail"
           name="email"
           placeholder="E-Mail"

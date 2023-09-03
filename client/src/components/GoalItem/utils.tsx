@@ -1,15 +1,12 @@
-import education from "images/education.svg";
-import personal from "images/personal.svg";
-import travel from "images/travel.svg";
 import { TGoalType } from "types";
 
-export const getGoalIcon = (type: TGoalType) => {
+export const getGoalIcon = (type: TGoalType): string => {
   switch (type) {
-  case "education":
-    return education;
-  case "travel":
-    return travel;
-  default:
-    return personal;
+    case "education":
+      return "education";
+    case "travel":
+      return "plane";
+    default:
+      return "user";
   }
 };

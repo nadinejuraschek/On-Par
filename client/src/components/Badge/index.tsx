@@ -5,6 +5,6 @@ import { IBadge } from "./types";
 export const Badge = ({ className = "", icon, label, variant }: IBadge): JSX.Element => (
   <StyledBadge className={className} $variant={variant}>
     {icon && icon}
-    <Text size="xs">{label}</Text>
+    <Text color="inherit" size="xs">{label}</Text>
   </StyledBadge>
 );

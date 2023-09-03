@@ -1,4 +1,4 @@
-import { Banner, LoadingSpinner, Text } from "components";
+import { Banner, Icon, LoadingSpinner, Text } from "components";
 import { UserContext } from "contexts";
 import * as dayjs from "dayjs";
 import { useFetchPayments } from "hooks";
@@ -36,7 +36,7 @@ export const Payments = (): JSX.Element => {
       <Banner variant="warning">
         <Text>
           <InfoText>
-            <i className="exclamation triangle icon" style={{ color: "var(--warning_500)" }}></i>
+            <Icon color="var(--warning_500)" type="warning" />
             <span>You are missing <strong>{count} stipends</strong>.</span>
           </InfoText>
         </Text>
@@ -58,7 +58,7 @@ export const Payments = (): JSX.Element => {
         <Banner variant="secondary">
           <Text>
             <InfoText>
-              <i className="clock outline icon" style={{ color: "var(--grey_500)" }}></i>
+              <Icon color="var(--grey_500)" type="clock" />
               This week&apos;s stipend is due on: <strong>{nextDueDate}</strong>
             </InfoText>
           </Text>

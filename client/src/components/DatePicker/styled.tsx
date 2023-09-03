@@ -18,22 +18,19 @@ export const IconInputWrapper = styled.div`
   position: relative;
 
   width: 100%;
+`;
 
-  i {
-    font-size: 1.6rem;
-    margin: 0;
+export const IconWrapper = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  height: 4rem;
+  width: 4rem;
 
-    height: 100%;
-    width: 4rem;
-
-    position: absolute;
-    top: 0;
-    left: 0;
-  }
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 export const StyledDateTimePicker = styled(DateTimePicker)<IStyledDateTimePicker>`

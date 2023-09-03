@@ -3,7 +3,7 @@ import { useMemo } from "react";
 import { TimeUtils } from "utils";
 import { Avatar, Details, Item } from "./styled";
 import { IPeopleItem } from "./types";
-import blankProfile from "../../../../images/blankProfile.svg";
+import blankProfile from "../../../../assets/blankProfile.svg";
 
 export const PeopleItem = ( { person }: IPeopleItem ): JSX.Element => {
   const { birthday, country, name, profileImg, type } = person;

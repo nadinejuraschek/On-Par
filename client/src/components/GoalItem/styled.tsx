@@ -68,11 +68,6 @@ export const BadgesWrapper = styled.div`
   gap: 1rem;
 `;
 
-export const StyledIcon = styled.img`
-  height: 1rem;
-  width: 1rem;
-`;
-
 export const Label = styled(Text)<IStyledLabel>`
   text-decoration: ${({ $isChecked }) => $isChecked ? "line-through" : "unset"};
 `;

@@ -1,8 +1,8 @@
 import "./DatePicker.css";
 import "react-clock/dist/Clock.css";
-import { Text } from "components";
+import { Icon, Text } from "components";
 import { useMemo } from "react";
-import { ErrorText, Field, IconInputWrapper, StyledDateTimePicker } from "./styled";
+import { ErrorText, Field, IconInputWrapper, IconWrapper, StyledDateTimePicker } from "./styled";
 import { IDatePicker } from "./types";
 
 export const DatePicker = ({
@@ -26,6 +26,16 @@ export const DatePicker = ({
       </Text>
     );
   }, [label, name]);
+
+  const renderIcon = useMemo(() => {
+    if (!icon) return null;
+
+    return (
+      <IconWrapper>
+        <Icon type={icon} />
+      </IconWrapper>
+    );
+  }, [icon]);
 
   const renderError = useMemo(() => {
     if (!error) return null;
@@ -51,7 +61,7 @@ export const DatePicker = ({
           showLeadingZeros
           value={value}
         />
-        { icon && <i className={`${icon} icon`}></i> }
+        { renderIcon }
       </IconInputWrapper>
       { renderError }
     </Field>

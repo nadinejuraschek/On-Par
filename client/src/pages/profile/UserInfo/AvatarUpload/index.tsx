@@ -1,6 +1,6 @@
 import { useMemo, useState } from "react";
 import { Button } from "components";
-import blankPic from "images/blankProfile.svg";
+import blankPic from "assets/blankProfile.svg";
 import { Actions, Container, ImageWrapper } from "./styled";
 import { IAvatarUpload } from './types';
 import { ModalSelectAvatar } from "./ModalSelectAvatar";

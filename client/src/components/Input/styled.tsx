@@ -68,20 +68,17 @@ export const StyledInput = styled.input<IStyledInput>`
   `};
 `;
 
-export const StyledIcon = styled.i`
-  font-size: 1.6rem !important;
-  margin: 0 !important;
-
-  display: flex !important;
-  align-items: center;
-  justify-content: center;
-
-  height: 4rem !important;
-  width: 4rem !important;
-
+export const IconWrapper = styled.div`
   position: absolute;
   top: 0;
   left: 0;
+
+  height: 4rem;
+  width: 4rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 export const ErrorText = styled(Text)`

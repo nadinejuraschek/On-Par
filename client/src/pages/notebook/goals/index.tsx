@@ -1,4 +1,4 @@
-import { Select } from "components";
+import { Icon, Select } from "components";
 import { useCallback, useMemo, useState } from "react";
 import { AddGoalModal } from "./AddGoalModal";
 import { GoalsList } from "./List";
@@ -9,7 +9,9 @@ export const Goals = (): JSX.Element => {
   const [filter, setFilter] = useState(undefined);
 
   const filterOptions = useMemo(() => ([
-    { label: "Education", value: "education" }, { label: "Personal", value: "personal" }, { label: "Travel", value: "travel" },
+    { label: "Education", value: "education" },
+    { label: "Personal", value: "personal" },
+    { label: "Travel", value: "travel" },
   ]), []);
 
   const toggleModal = useCallback(() => setOpenModal(!openModal), [openModal]);
@@ -66,7 +68,7 @@ export const Goals = (): JSX.Element => {
             />
           </Filter>
           <StyledButton handleClick={toggleModal} variant="primary">
-            <i className="plus icon"></i> Add Goal
+            <Icon type="plus" /> Add Goal
           </StyledButton>
         </Actions>
         <Content>
