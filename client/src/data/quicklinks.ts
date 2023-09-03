@@ -1,5 +1,5 @@
-import emergencyphone from "images/emergency-call.svg";
-import tax from "images/tax.svg";
+import emergencyphone from "assets/emergency-call.svg";
+import tax from "assets/tax.svg";
 
 export const quicklinks = [
   {

@@ -1,15 +1,15 @@
-import app from "images/app.svg";
-import childcare from "images/childcare.svg";
-import documents from "images/document.svg";
-import driversLicense from "images/driver-license.svg";
-import education from "images/education.svg";
-import emergencyphone from "images/emergency-call.svg";
-import englishLanguage from "images/english-language.svg";
-import extension from "images/extension.svg";
-import firstAid from "images/first-aid.svg";
-import rule from "images/rule.svg";
-import tax from "images/tax.svg";
-import traveling from "images/traveling.svg";
+import app from "assets/app.svg";
+import childcare from "assets/childcare.svg";
+import documents from "assets/document.svg";
+import driversLicense from "assets/driver-license.svg";
+import education from "assets/education.svg";
+import emergencyphone from "assets/emergency-call.svg";
+import englishLanguage from "assets/english-language.svg";
+import extension from "assets/extension.svg";
+import firstAid from "assets/first-aid.svg";
+import rule from "assets/rule.svg";
+import tax from "assets/tax.svg";
+import traveling from "assets/traveling.svg";
 
 export const resources = [
   {

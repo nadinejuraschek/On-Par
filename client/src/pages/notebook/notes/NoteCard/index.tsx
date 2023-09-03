@@ -1,4 +1,4 @@
-import { Button, Text } from "components";
+import { Button, Icon, Text } from "components";
 import { useDeleteNote } from "hooks";
 import { useCallback, useState } from "react";
 import { Actions, Body, Content, StyledNote, Title, TitleText } from "./styled";
@@ -35,17 +35,15 @@ export const NoteCard = ( {
             <Button
               handleClick={() => handleOpenEdit(note)}
               square
-              variant="tertiary"
             >
-              <i className="edit outline icon"></i>
+              <Icon color="var(--grey_600)" type="pen" />
             </Button>
             <Button
               loading={submitting}
               handleClick={handleDeleteNote}
               square
-              variant="tertiary"
             >
-              <i className="trash icon"></i>
+              <Icon color="var(--grey_600)" type="trash" />
             </Button>
           </Actions>
         </Title>

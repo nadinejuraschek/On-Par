@@ -1,4 +1,4 @@
-import blankPic from "images/blankProfile.svg";
+import blankPic from "assets/blankProfile.svg";
 
 export const CounselorInfo = (): JSX.Element => (
   <div className="ui card">

@@ -1,7 +1,7 @@
-import goalIcon from "images/goal.svg";
-import hoursIcon from "images/hours.svg";
-import notesIcon from "images/note.svg";
-import paymentIcon from "images/payment.svg";
+import goalIcon from "assets/goal.svg";
+import hoursIcon from "assets/hours.svg";
+import notesIcon from "assets/note.svg";
+import paymentIcon from "assets/payment.svg";
 
 export const notebookFeatures = [
   { title: "workhours", header: "Work Hours", icon: hoursIcon, link: "/notebook/workhours" },

@@ -1,4 +1,4 @@
-import { Button } from "components";
+import { Button, Icon } from "components";
 import * as dayjs from "dayjs";
 import { useFetchWorkhoursWeekly } from "hooks";
 import { useCallback, useMemo, useState } from "react";
@@ -51,11 +51,11 @@ export const WeeklyHours = (): JSX.Element => {
     <WeeklyGrid>
       <DateNav>
         <Button handleClick={ prev } square variant="tertiary">
-          <i className="chevron left icon"></i>
+          <Icon type="chevronLeft" />
         </Button>
         { renderWeekRange }
         <Button handleClick={ next } square variant="tertiary">
-          <i className="chevron right icon"></i>
+          <Icon type="chevronRight" />
         </Button>
       </DateNav>
       {renderList}

@@ -1,4 +1,4 @@
-import { Button, LoadingSpinner } from "components";
+import { Button, Icon, LoadingSpinner } from "components";
 import { useFetchNotes } from "hooks";
 import { useCallback, useMemo, useState } from "react";
 import { TNote } from "types";
@@ -92,7 +92,7 @@ export const Notes = (): JSX.Element => {
         {/* <Suggestions /> */}
         <Header>
           <Button handleClick={() => setOpenAddNoteModal(true)} variant="primary">
-            <i className="plus icon"></i> Add Note
+            <Icon type="plus" /> Add Note
           </Button>
         </Header>
         <List>

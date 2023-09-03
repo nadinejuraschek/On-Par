@@ -414,7 +414,7 @@ body ::-webkit-scrollbar-thumb:hover {
  PAGE LAYOUT
 ****************************************************************************/
 .gradient {
-  background-image: url(../images/gradient.svg);
+  background-image: url(../assets/gradient.svg);
   background-repeat: no-repeat;
   background-size: cover;
 

@@ -27,6 +27,12 @@ export const StyledNote = styled(Card)<IStyledNote>`
 
   ${({ color }) => getNoteColor(color)};
 
+  &:hover {
+    button {
+      display: flex;
+    }
+  }
+
   @media only screen and (min-width: 900px) {
     height: min-content;
     width: calc(50% - 0.5rem);
@@ -40,10 +46,13 @@ export const Content = styled.div`
 `;
 
 export const Title = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 2rem;
+  display: grid;
+  align-items: start;
+  grid-template-columns: 1fr 9rem;
+  grid-template-rows: 1fr;
+  grid-gap: 2rem;
+
+  min-height: 4rem;
 `;
 
 export const TitleText = styled.div`
@@ -57,14 +66,11 @@ export const Actions = styled.div`
   align-items: flex-start;
   gap: 1rem;
 
-  button {
-    background-color: transparent;
-    border-color: transparent;
+  height: 4rem;
+  width: 9rem;
 
-    &:hover {
-      background-color: #ffffff4D;
-      border-color: #ffffff4D;
-    }
+  button {
+    display: none;
   }
 `;
 

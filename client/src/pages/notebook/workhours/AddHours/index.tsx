@@ -59,7 +59,7 @@ export const AddHours = (): JSX.Element => {
         format="MM/dd/yyyy"
         fullWidth
         handleChange={(selected: Date) => handleChange(selected, "date")}
-        icon="calendar alternate outline"
+        icon="calendar"
         label="Date"
         name="date"
         value={workhoursData.date}
@@ -72,7 +72,7 @@ export const AddHours = (): JSX.Element => {
           const newDate = workhoursData.date.setHours(selected.getHours(), selected.getMinutes());
           handleChange(new Date(newDate), "start");
         }}
-        icon="clock outline"
+        icon="clock"
         label="Start Time"
         name="start"
         value={workhoursData.start}
@@ -85,7 +85,7 @@ export const AddHours = (): JSX.Element => {
           const newDate = workhoursData.date.setHours(selected.getHours(), selected.getMinutes());
           handleChange(new Date(newDate), "end");
         }}
-        icon="clock outline"
+        icon="clock"
         label="End Time"
         name="end"
         value={workhoursData.end}

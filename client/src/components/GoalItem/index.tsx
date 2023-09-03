@@ -1,9 +1,9 @@
-import { Badge, Button, Modal } from "components";
+import { Badge, Button, Icon, Modal } from "components";
 import * as dayjs from "dayjs";
 import { useDeleteGoal, useEditGoal } from "hooks";
 import { useCallback, useMemo, useState } from "react";
 import { EditGoalModal } from "./EditGoalModal";
-import { BadgesWrapper, ItemBody, Label, Overlay, StyledIcon, StyledItem } from "./styled";
+import { BadgesWrapper, ItemBody, Label, Overlay, StyledItem } from "./styled";
 import { IGoalItem } from "./types";
 import { getGoalIcon } from "./utils";
 
@@ -55,17 +55,17 @@ export const GoalItem = ({
       <Overlay>
         {checkable && (
           <Button handleClick={handleEditGoal} square>
-            <i className="check icon" />
+            <Icon type="check" />
           </Button>
         )}
         {editable && (
           <Button handleClick={() => setOpenEditModal(true)} square>
-            <i className="edit icon" />
+            <Icon type="pen" />
           </Button>
         )}
         {deletable && (
           <Button handleClick={() => setOpenDeleteConfirm(true)} square>
-            <i className="trash icon" />
+            <Icon type="trash" />
           </Button>
         )}
       </Overlay>
@@ -77,7 +77,7 @@ export const GoalItem = ({
     handleEditGoal]);
 
   const renderBadges = useMemo(() => {
-    const badgeIcon = <StyledIcon alt={`${type}_icon`} src={getGoalIcon(type)} />;
+    const badgeIcon = <Icon size="1.2rem" type={getGoalIcon(type)} />;
 
     return (
       <BadgesWrapper>
