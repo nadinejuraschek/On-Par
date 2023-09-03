@@ -36,6 +36,11 @@ export const IconWrapper = styled.div`
 `;
 
 export const StyledSelect = styled(SelectComp)`
+  div.selectInput__control {
+    font-size: 1.4rem;
+    line-height: 2rem;
+  }
+
   div.selectInput__control::placeholder {
     color: var(--grey_500);
   }
@@ -56,6 +61,8 @@ export const StyledSelect = styled(SelectComp)`
 
   div.selectInput__menu {
     border-radius: 0.8rem;
+    font-size: 1.4rem;
+    line-height: 2rem;
     overflow: hidden;
   }
 
@@ -65,7 +72,12 @@ export const StyledSelect = styled(SelectComp)`
 
   div.selectInput__option:hover,
   div.selectInput__option--is-focused {
-    background-color: var(--secondary_50);
+    background-color: var(--grey_100);
+  }
+
+  div.selectInput__option--is-selected {
+    background-color: var(--primary_50);
+    color: var(--grey_900);
   }
 `;
 

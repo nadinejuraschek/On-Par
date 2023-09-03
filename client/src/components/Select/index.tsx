@@ -32,6 +32,7 @@ export const Select = ({
       isClearable={clearable}
       isRtl={false}
       isSearchable={searchable}
+      menuPlacement="auto"
       name={name}
       onChange={handleChange}
       options={options}

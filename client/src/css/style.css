@@ -461,6 +461,8 @@ img {
 .Toastify__toast.toast {
   border-radius: 8px;
   box-shadow: var(--shadow_lg);
+  font-size: 1.4rem;
+  line-height: 2rem;
   padding: 1.6rem;
 }
 
