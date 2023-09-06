@@ -1,5 +1,5 @@
-import { Text } from "components";
 import blankProfile from "assets/blankProfile.svg";
+import { Text } from "components";
 import { useMemo } from "react";
 import { Message, ProfileImage, Wrapper } from "./styled";
 import { IGreeting } from "./types";

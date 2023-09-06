@@ -1,5 +1,5 @@
-import { useCallback, useMemo, useState } from 'react';
 import { Button, Modal, Select } from "components"
+import { TSelectOption } from "components/Select/types";
 import {
   accessoriesOptions,
   clothesColorOptions,
@@ -8,10 +8,10 @@ import {
   hairTypeOptions,
   skinColorOptions,
 } from "data";
+import { useCallback, useMemo, useState } from "react";
+import { AvatarWrapper, Body, FieldPair, Form, StyledAvatar } from "./styled";
 import { IModalSelectAvatar } from "./types";
 import { defaultAvatarStyle, getAvatarStyleValues } from "./utils";
-import { AvatarWrapper, Body, FieldPair, Form, StyledAvatar } from './styled';
-import { TSelectOption } from 'components/Select/types';
 
 export const ModalSelectAvatar = ({
   handleClose,
@@ -61,30 +61,30 @@ export const ModalSelectAvatar = ({
       <Body>
         <AvatarWrapper>
           <StyledAvatar
-            avatarStyle='Transparent'
+            avatarStyle="Transparent"
             topType={avatarStyle.hairType.value}
             accessoriesType={avatarStyle.accessories.value}
             hairColor={avatarStyle.hairColor.value}
-            facialHairType='Blank'
+            facialHairType="Blank"
             clotheType={avatarStyle.clothesType.value}
             clotheColor={avatarStyle.clothesColor.value}
-            eyeType='Happy'
-            eyebrowType='DefaultNatural'
-            mouthType='Smile'
+            eyeType="Happy"
+            eyebrowType="DefaultNatural"
+            mouthType="Smile"
             skinColor={avatarStyle.skinColor.value}
           />
         </AvatarWrapper>
         <Form>
           <FieldPair>
             <Select
-              handleChange={(option) => handleStyleChange(option, 'skinColor')}
+              handleChange={(option) => handleStyleChange(option, "skinColor")}
               label="Skin Color"
               name="skinColor"
               options={skinColorOptions}
               value={avatarStyle.skinColor}
             />
             <Select
-              handleChange={(option) => handleStyleChange(option, 'accessories')}
+              handleChange={(option) => handleStyleChange(option, "accessories")}
               label="Glasses"
               name="accessories"
               options={accessoriesOptions}
@@ -93,14 +93,14 @@ export const ModalSelectAvatar = ({
           </FieldPair>
           <FieldPair>
             <Select
-              handleChange={(option) => handleStyleChange(option, 'hairType')}
+              handleChange={(option) => handleStyleChange(option, "hairType")}
               label="Hair Type"
               name="hairType"
               options={hairTypeOptions}
               value={avatarStyle.hairType}
             />
             <Select
-              handleChange={(option) => handleStyleChange(option, 'hairColor')}
+              handleChange={(option) => handleStyleChange(option, "hairColor")}
               label="Hair Color"
               name="hairColor"
               options={hairColorOptions}
@@ -109,14 +109,14 @@ export const ModalSelectAvatar = ({
           </FieldPair>
           <FieldPair>
             <Select
-              handleChange={(option) => handleStyleChange(option, 'clothesType')}
+              handleChange={(option) => handleStyleChange(option, "clothesType")}
               label="Clothes Type"
               name="clothesType"
               options={clothesTypeOptions}
               value={avatarStyle.clothesType}
             />
             <Select
-              handleChange={(option) => handleStyleChange(option, 'clothesColor')}
+              handleChange={(option) => handleStyleChange(option, "clothesColor")}
               label="Clothes Color"
               name="clothesColor"
               options={clothesColorOptions}

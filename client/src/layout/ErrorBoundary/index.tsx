@@ -1,11 +1,11 @@
-import { Component, ErrorInfo, PropsWithChildren } from 'react';
-import { Button, Text } from 'components';
-import { IErrorBoundaryState } from './types';
-import { Wrapper } from './styled';
+import { Button, Text } from "components";
+import { Component, ErrorInfo, PropsWithChildren } from "react";
+import { Wrapper } from "./styled";
+import { IErrorBoundaryState } from "./types";
 
 export class ErrorBoundary extends Component<PropsWithChildren, IErrorBoundaryState> {
   public state: IErrorBoundaryState = {
-    hasError: false
+    hasError: false,
   };
 
   /* eslint-disable-next-line @typescript-eslint/no-unused-vars */
@@ -14,6 +14,7 @@ export class ErrorBoundary extends Component<PropsWithChildren, IErrorBoundarySt
   }
 
   public componentDidCatch(error: Error, errorInfo: ErrorInfo) {
+    /* eslint-disable-next-line no-console */
     console.error("Uncaught error:", error, errorInfo);
   }
 
