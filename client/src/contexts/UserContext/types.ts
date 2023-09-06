@@ -4,10 +4,15 @@ export interface IUserProvider {
   children: ReactNode;
 }
 
+export interface IUserContext {
+  loading: boolean;
+  user: TUser | null;
+}
+
 export type TUserPermissions = {
   shareBirthday: boolean;
-    shareEmail: boolean;
-    shareLastName: boolean;
+  shareEmail: boolean;
+  shareLastName: boolean;
 };
 
 export type TUser = {

@@ -19,7 +19,7 @@
   "author": "Nadine Pesso",
   "license": "ISC",
   "engines": {
-    "node": "18.16.1"
+    "node": "18.17.1"
   },
   "bugs": {
     "url": "https://github.com/nadinejuraschek/APIA_Project/issues"
@@ -49,6 +49,7 @@
     "del-cli": "^5.1.0",
     "eslint-plugin-sort-destructure-keys": "^1.5.0",
     "lodash": "^4.17.21",
+    "nodemon": "^3.0.1",
     "ts-node": "^10.9.1",
     "typescript": "^5.2.2"
   }

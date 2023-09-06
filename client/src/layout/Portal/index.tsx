@@ -1,7 +1,7 @@
-import { useLayoutEffect, useState } from 'react';
-import { createPortal } from 'react-dom';
-import { IPortal } from './types';
-import { createWrapperAndAppendToBody } from './utils';
+import { useLayoutEffect, useState } from "react";
+import { createPortal } from "react-dom";
+import { IPortal } from "./types";
+import { createWrapperAndAppendToBody } from "./utils";
 
 export const Portal = ({ children, wrapperId = "portal" }: IPortal): JSX.Element => {
   const [wrapperElement, setWrapperElement] = useState(null);

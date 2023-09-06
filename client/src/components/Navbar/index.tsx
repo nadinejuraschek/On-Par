@@ -1,6 +1,6 @@
-import { navLinks } from "data";
 import close from "assets/close.svg";
 import menu from "assets/menu.svg";
+import { navLinks } from "data";
 import { useCallback, useMemo, useState } from "react";
 import { NavLinkComp as NavLink } from "./NavLink";
 import { Sidenav } from "./Sidenav";

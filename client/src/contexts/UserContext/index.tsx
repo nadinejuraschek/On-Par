@@ -4,9 +4,9 @@ import { createContext, useEffect, useMemo, useState } from "react";
 
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { IUserProvider, TUser } from "./types";
+import { IUserContext, IUserProvider, TUser } from "./types";
 
-export const UserContext = createContext({
+export const UserContext = createContext<IUserContext>({
   loading: false,
   user: null,
 });

@@ -1,9 +1,9 @@
-import { useMemo, useState } from "react";
-import { Button } from "components";
 import blankPic from "assets/blankProfile.svg";
-import { Actions, Container, ImageWrapper } from "./styled";
-import { IAvatarUpload } from './types';
+import { Button } from "components";
+import { useMemo, useState } from "react";
 import { ModalSelectAvatar } from "./ModalSelectAvatar";
+import { Actions, Container, ImageWrapper } from "./styled";
+import { IAvatarUpload } from "./types";
 
 export const AvatarUpload = ({ handleAvatarChange, profileImageSrc }: IAvatarUpload): JSX.Element => {
   const [openModalSelectAvatar, setOpenModalSelectAvatar] = useState(false);
@@ -22,18 +22,18 @@ export const AvatarUpload = ({ handleAvatarChange, profileImageSrc }: IAvatarUpl
 
   return (
     <>
-    <Container>
-      <ImageWrapper>
-        {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
-        {/* @ts-ignore-next-line */}
-        <img src={profileImageSrc || blankPic} alt="Profile" />
-      </ImageWrapper>
-      <Actions>
-        <Button handleClick={() => setOpenModalSelectAvatar(true)}>Choose Image</Button>
-        <Button handleClick={() => handleAvatarChange('')} variant="danger">Remove Image</Button>
-      </Actions>
-    </Container>
-    {renderModalSelectAvatar}
+      <Container>
+        <ImageWrapper>
+          {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
+          {/* @ts-ignore-next-line */}
+          <img src={profileImageSrc || blankPic} alt="Profile" />
+        </ImageWrapper>
+        <Actions>
+          <Button handleClick={() => setOpenModalSelectAvatar(true)}>Choose Image</Button>
+          <Button handleClick={() => handleAvatarChange("")} variant="danger">Remove Image</Button>
+        </Actions>
+      </Container>
+      {renderModalSelectAvatar}
     </>
   );
 };

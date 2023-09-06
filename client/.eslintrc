@@ -1,87 +1,84 @@
-module.exports = {
-  env: {
-    browser: true, // Browser global variables like `window` etc.
-    commonjs: true, // CommonJS global variables and CommonJS scoping.Allows require, exports and module.
-    es6: true, // Enable all ECMAScript 6 features except for modules.
-    jest: true, // Jest global variables like `it` etc.
-    node: true, // Defines things like process.env when generating through node
+{
+  "env": {
+    "browser": true, // Browser global variables like `window` etc.
+    "commonjs": true, // CommonJS global variables and CommonJS scoping.Allows require, exports and module.
+    "es6": true, // Enable all ECMAScript 6 features except for modules.
+    "node": true // Defines things like process.env when generating through node
   },
-  extends: [
+  "extends": [
     "eslint:recommended",
     "plugin:react/recommended",
     "plugin:jsx-a11y/recommended",
     "plugin:react-hooks/recommended",
-    "plugin:jest/recommended",
-    "plugin:testing-library/react",
     "plugin:@typescript-eslint/recommended"
   ],
-  overrides: [
+  "overrides": [
     {
-      files: ["*.ts", "*.tsx"],
-      rules: {
-        "no-undef": 0,
-      },
-    },
+      "files": ["*.ts", "*.tsx"],
+      "rules": {
+        "no-undef": 0
+      }
+    }
   ],
-  parser: "@typescript-eslint/parser",
-  parserOptions: {
-    ecmaFeatures: {
-      jsx: true,
-      tsx: true,
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true,
+      "tsx": true
     },
-    ecmaVersion: 2021, // Allows for the parsing of modern ECMAScript features
-    sourceType: "module", // Allows for the use of imports
+    "ecmaVersion": 2021, // Allows for the parsing of modern ECMAScript features
+    "sourceType": "module" // Allows for the use of imports
   },
-  plugins: [
+  "plugins": [
     "import", /* eslint-plugin-import plugin. https://www.npmjs.com/package/eslint-plugin-import,  */"sort-destructure-keys",
     "@typescript-eslint"
   ],
-  root: true, // For configuration cascading.
-  rules: {
-    indent: [
-      "warn", 2,
+  "root": true, // For configuration cascading.
+  "rules": {
+    "indent": [
+      "warn", 2
     ],
-    quotes: [
-      "warn", "double",
+    "quotes": [
+      "warn", "double"
     ],
     "react/react-in-jsx-scope": "off",
     "jsx-quotes": [
-      "warn", "prefer-double",
+      "warn", "prefer-double"
     ],
     "no-console": "warn",
     "no-duplicate-imports": "warn",
     "no-unused-vars": "off",
     "@typescript-eslint/no-unused-vars": ["error"],
     "object-curly-spacing": [
-      "warn", "always",
+      "warn", "always"
     ],
     "react/jsx-indent": [
       "warn",
       2,
       {
-        checkAttributes: true,
-        indentLogicalExpressions: true,
-      },
+        "checkAttributes": true,
+        "indentLogicalExpressions": true
+      }
     ],
     "react/jsx-indent-props": [
-      "warn", 2,
+      "warn", 2
     ],
     "import/order": [
       "warn",
       {
-        alphabetize: {
-          caseInsensitive: true,
-          order: "asc",
+        "alphabetize": {
+          "caseInsensitive": true,
+          "order": "asc"
         },
-        groups: [
+        "groups": [
           "builtin",
           "external",
           "index",
           "sibling",
           "parent",
-          "internal",
-        ],
-      },
+          "internal"
+        ]
+      }
     ],
     "jsx-a11y/no-static-element-interactions": "warn",
     "jsx-a11y/no-noninteractive-element-interactions": "warn",
@@ -105,11 +102,11 @@ module.exports = {
     "block-spacing": [ "warn", "always" ],
     "comma-dangle": [ "warn", "always-multiline" ],
     "react-hooks/rules-of-hooks": "error",
-    "react-hooks/exhaustive-deps": "error",
+    "react-hooks/exhaustive-deps": "error"
   },
-  settings: {
-    react: {
-      version: "detect", // Detect react version
-    },
-  },
-};
+  "settings": {
+    "react": {
+      "version": "detect" // Detect react version
+    }
+  }
+}

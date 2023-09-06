@@ -1,10 +1,10 @@
 export const defaultAvatarStyle = {
-  accessories: { label: 'None', value: 'Blank' },
-  clothesType: { label: 'Hoodie', value: 'Hoodie' },
-  clothesColor: { label: 'Blue', value: 'Blue02' },
-  hairColor: { label: 'Brown (dark)', value: 'BrownDark' },
-  hairType: { label: 'Straight (long)', value: 'LongHairStraight2' },
-  skinColor: { label: 'Brown', value: 'Brown' },
+  accessories: { label: "None", value: "Blank" },
+  clothesType: { label: "Hoodie", value: "Hoodie" },
+  clothesColor: { label: "Blue", value: "Blue02" },
+  hairColor: { label: "Brown (dark)", value: "BrownDark" },
+  hairType: { label: "Straight (long)", value: "LongHairStraight2" },
+  skinColor: { label: "Brown", value: "Brown" },
 };
 
 const getStringBetween = (fullStr: string, startStr: string, endStr: string): string | null => {
@@ -25,11 +25,11 @@ const getStringBetween = (fullStr: string, startStr: string, endStr: string): st
 
 export const getAvatarStyleValues = (imgSrc: string): { [key: string]: string } => {
   return {
-    accessories: getStringBetween(imgSrc, 'accessoriesType=', '&'),
-    clothesType: getStringBetween(imgSrc, 'clotheType=', '&'),
-    clothesColor: getStringBetween(imgSrc, 'clotheColor=', '&'),
-    hairColor: getStringBetween(imgSrc, 'hairColor=', '&'),
-    hairType: getStringBetween(imgSrc, 'topType=', '&'),
-    skinColor: getStringBetween(`${imgSrc}/`, 'skinColor=', '/'),
+    accessories: getStringBetween(imgSrc, "accessoriesType=", "&") || defaultAvatarStyle.accessories.value,
+    clothesType: getStringBetween(imgSrc, "clotheType=", "&") || defaultAvatarStyle.clothesType.value,
+    clothesColor: getStringBetween(imgSrc, "clotheColor=", "&") || defaultAvatarStyle.clothesColor.value,
+    hairColor: getStringBetween(imgSrc, "hairColor=", "&") || defaultAvatarStyle.hairColor.value,
+    hairType: getStringBetween(imgSrc, "topType=", "&") || defaultAvatarStyle.hairType.value,
+    skinColor: getStringBetween(`${imgSrc}/`, "skinColor=", "/") || defaultAvatarStyle.skinColor.value,
   }
 }

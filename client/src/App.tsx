@@ -1,8 +1,8 @@
 import "react-toastify/dist/ReactToastify.min.css";
+import { ErrorBoundary } from "layout";
 import { ToastContainer } from "react-toastify";
 import { Router } from "router";
 import { ThemeProvider } from "styled-components";
-import { ErrorBoundary } from "layout";
 
 export const App = (): JSX.Element => {
   return (

@@ -1,8 +1,8 @@
 import { useEffect, useMemo } from "react";
 import { useDebounce } from "usehooks-ts";
 import { ErrorText, Field, IconInputWrapper, IconWrapper, StyledInput } from "./styled";
-import { Icon } from "../Icon";
 import { IInput } from "./types";
+import { Icon } from "../Icon";
 import { Text } from "../Text";
 
 export const Input = ( {
