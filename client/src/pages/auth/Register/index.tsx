@@ -16,7 +16,7 @@ import {
   FormWrapper,
 } from "../styled";
 
-export const Register = (): JSX.Element => {
+const Register = (): JSX.Element => {
   const navigate = useNavigate();
 
   const { user } = useContext(UserContext);
@@ -178,3 +178,5 @@ export const Register = (): JSX.Element => {
     </FormWrapper>
   );
 };
+
+export default Register;

@@ -1,8 +1,8 @@
 import { Button, DatePicker, Modal } from "components";
-import { UserContext } from "contexts";
+import { useUserContext } from "contexts";
 import * as dayjs from "dayjs";
 import { useEditPayment } from "hooks";
-import { useCallback, useContext, useMemo, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import { TPaymentFormData, paymentSchema } from "schema";
 import { ZodFormattedError } from "zod";
 import { IEditPaymentModal } from "./types";
@@ -12,7 +12,7 @@ export const EditPaymentModal = ({
   originalPayment,
   refetchPayments,
 }: IEditPaymentModal): JSX.Element => {
-  const { user } = useContext(UserContext);
+  const [{ user }] = useUserContext();
 
   const { editPayment } = useEditPayment();
 
@@ -21,6 +21,8 @@ export const EditPaymentModal = ({
   const [updatedPayment, setUpdatedPayment] = useState(originalPayment);
 
   const handleDateChange = useCallback((selected: Date) => {
+    if (!user?.startDate) return;
+
     const dateInWeek = dayjs(user.startDate).add(dayjs.duration({ "weeks": originalPayment.week }));
     const endOfWeek = dayjs(dateInWeek).endOf("week");
     const isPaymentOnTime = dayjs(selected).isSameOrBefore(endOfWeek);
@@ -29,6 +31,8 @@ export const EditPaymentModal = ({
   }, [originalPayment, user]);
 
   const handleSubmit = useCallback(() => {
+    if (!originalPayment._id) return;
+
     setSubmitting(true);
 
     const validation = paymentSchema.safeParse(updatedPayment);

@@ -9,7 +9,7 @@ const WORKHOURS_TABS = {
   DAILY: 1,
 }
 
-export const Workhours = (): JSX.Element => {
+const Workhours = (): JSX.Element => {
   const [tab, setTab] = useState( WORKHOURS_TABS.WEEKLY );
 
   const { data: todayWorkhourTotal } = useFetchWorkhoursToday();
@@ -43,3 +43,5 @@ export const Workhours = (): JSX.Element => {
     </StyledContent>
   );
 };
+
+export default Workhours;

@@ -1,8 +1,10 @@
 import { Container } from "./styled";
 
-export const Sandbox = (): JSX.Element => {
+const Sandbox = (): JSX.Element => {
   return (
     <Container>
     </Container>
   );
 }
+
+export default Sandbox;

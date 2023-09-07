@@ -1,13 +1,13 @@
 import { Banner, Icon, LoadingSpinner, Text } from "components";
-import { UserContext } from "contexts";
+import { useUserContext } from "contexts";
 import * as dayjs from "dayjs";
 import { useFetchPayments } from "hooks";
-import { useContext, useMemo } from "react";
+import { useMemo } from "react";
 import { PaymentList } from "./PaymentList";
 import { BannerWrapper, InfoText } from "./styled";
 
-export const Payments = (): JSX.Element => {
-  const { user } = useContext( UserContext );
+const Payments = (): JSX.Element => {
+  const [{ user }] = useUserContext();
 
   const { data: payments, loading, refetch: refetchPayments } = useFetchPayments();
 
@@ -69,3 +69,5 @@ export const Payments = (): JSX.Element => {
     </>
   );
 };
+
+export default Payments;

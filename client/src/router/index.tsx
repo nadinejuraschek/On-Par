@@ -1,31 +1,30 @@
-import { LayoutGradient, LayoutWithNavbar } from "layout";
-import {
-  EmergencyNumbers,
-  Goals,
-  Home,
-  Landing,
-  Login,
-  Notebook,
-  Notes,
-  Payments,
-  Profile,
-  Register,
-  Resources,
-  Sandbox,
-  Tax,
-  Workhours,
-} from "pages";
+import { LayoutWithNavbar } from "layout";
+import { lazy } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+
+const EmergencyNumbers = lazy(() => import("../pages/resources/emergencyNumbers"));
+const Goals = lazy(() => import("../pages/notebook/goals"));
+const Home = lazy(() => import("../pages/home"));
+const Landing = lazy(() => import("../pages/landing"));
+const Notebook = lazy(() => import("../pages/notebook"));
+const Notes = lazy(() => import("../pages/notebook/notes"));
+const Payments = lazy(() => import("../pages/notebook/payments"));
+const Profile = lazy(() => import("../pages/profile"));
+const Resources = lazy(() => import("../pages/resources"));
+const Sandbox = lazy(() => import("../pages/sandbox"));
+const Tax = lazy(() => import("../pages/resources/tax"));
+const Workhours = lazy(() => import("../pages/notebook/workhours"));
 
 export const Router = (): JSX.Element => {
   return (
     <BrowserRouter>
       <Routes>
+
         { /* Landing Page */ }
         <Route path="/" element={ <Landing /> } />
         { /* Authentication */ }
-        <Route path="/login" element={ <LayoutGradient><Login /></LayoutGradient> } />
-        <Route path="/register" element={ <LayoutGradient><Register /></LayoutGradient> } />
+        {/* <Route path="/login" element={ <LayoutGradient><Login /></LayoutGradient> } /> */}
+        {/* <Route path="/register" element={ <LayoutGradient><Register /></LayoutGradient> } /> */}
 
         { /* Home */ }
         <Route

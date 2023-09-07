@@ -69,7 +69,7 @@ import { Brand, StyledMain, StyledSection, Subtitle, Title } from "./styled";
                 </div>
             </div> */
 
-export const Landing = (): JSX.Element => {
+const Landing = (): JSX.Element => {
   return (
     <StyledMain>
       <StyledSection color="var(--primary_50)">
@@ -85,3 +85,5 @@ export const Landing = (): JSX.Element => {
     </StyledMain>
   );
 };
+
+export default Landing;

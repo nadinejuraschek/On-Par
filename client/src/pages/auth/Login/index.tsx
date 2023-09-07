@@ -1,17 +1,17 @@
 import axios from "axios";
 import { Button, Input, Text } from "components";
-import { UserContext } from "contexts";
-import { ChangeEvent, FormEvent, MouseEvent, useCallback, useContext, useState } from "react";
+import { useUserContext } from "contexts";
+import { ChangeEvent, FormEvent, MouseEvent, useCallback, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { ZodFormattedError } from "zod";
 import { TLoginFormData, loginSchema } from "../../../schema/login.schema";
 import { Divider, DividerText, Form, FormWrapper } from "../styled";
 
-export const Login = (): JSX.Element => {
+const Login = (): JSX.Element => {
   const navigate = useNavigate();
 
-  const { user } = useContext(UserContext);
+  const [{ user }] = useUserContext();
 
   const [errors, setErrors] = useState<ZodFormattedError<TLoginFormData> | undefined>(undefined);
   const [loginData, setLoginData] = useState<TLoginFormData>({
@@ -109,3 +109,5 @@ export const Login = (): JSX.Element => {
     </FormWrapper>
   );
 };
+
+export default Login;

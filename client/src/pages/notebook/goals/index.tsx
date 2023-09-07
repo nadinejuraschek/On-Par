@@ -4,7 +4,7 @@ import { AddGoalModal } from "./AddGoalModal";
 import { GoalsList } from "./List";
 import { Actions, Content, Filter, Layout, StyledButton } from "./styled";
 
-export const Goals = (): JSX.Element => {
+const Goals = (): JSX.Element => {
   const [openModal, setOpenModal] = useState(false);
   const [filter, setFilter] = useState(undefined);
 
@@ -79,3 +79,5 @@ export const Goals = (): JSX.Element => {
     </>
   );
 };
+
+export default Goals;

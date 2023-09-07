@@ -4,7 +4,7 @@ import { Fragment, useMemo } from "react";
 import { createMarkup } from "utils";
 import { ContentText, InfoItem, StyledContent } from "./styled";
 
-export const Tax = (): JSX.Element => {
+const Tax = (): JSX.Element => {
   const { contentRows, headerRows } = taxInfo;
 
   const renderHeader = useMemo(() => headerRows.cells.map( ( cell, index ) => (
@@ -27,3 +27,5 @@ export const Tax = (): JSX.Element => {
     </StyledContent>
   );
 };
+
+export default Tax;

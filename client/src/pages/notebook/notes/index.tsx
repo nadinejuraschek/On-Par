@@ -8,7 +8,7 @@ import { NoteCard } from "./NoteCard";
 import { Grid, Header, List, StyledPagination } from "./styled";
 // import { Suggestions } from "./Suggestions";
 
-export const Notes = (): JSX.Element => {
+const Notes = (): JSX.Element => {
   const [openAddNoteModal, setOpenAddNoteModal] = useState(false);
   const [openEditNoteModal, setOpenEditNoteModal] = useState(false);
   const [originalNote, setOriginalNote] = useState<TNote | null>(null);
@@ -105,3 +105,5 @@ export const Notes = (): JSX.Element => {
     </>
   );
 };
+
+export default Notes;

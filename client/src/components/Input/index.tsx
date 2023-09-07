@@ -1,5 +1,5 @@
-import { useEffect, useMemo } from "react";
-import { useDebounce } from "usehooks-ts";
+import { useCallback, useMemo, useState } from "react";
+// import { useDebounce } from "usehooks-ts";
 import { ErrorText, Field, IconInputWrapper, IconWrapper, StyledInput } from "./styled";
 import { IInput } from "./types";
 import { Icon } from "../Icon";
@@ -18,11 +18,17 @@ export const Input = ( {
   type = "text",
   value,
 }: IInput ): JSX.Element => {
-  const debouncedValue = useDebounce<string>(value, 100);
+  /* const debouncedValue = useDebounce<string>(value, 100);
 
   useEffect(() => {
     // Triggers when "debouncedValue" changes
-  }, [debouncedValue]);
+  }, [debouncedValue]); */
+  const [controlledValue, setControlledValue] = useState(value);
+
+  const handleControlledChange = useCallback((e) => {
+    setControlledValue(e.target.value);
+    handleChange(e.target.value);
+  }, [handleChange]);
 
   const renderLabel = useMemo(() => {
     if (!label) return null;
@@ -60,10 +66,10 @@ export const Input = ( {
           $hasError={error}
           $hasIcon={icon}
           name={ name }
-          onChange={ handleChange }
+          onChange={ handleControlledChange }
           placeholder={ placeholder }
           type={type}
-          value={ value }
+          value={ controlledValue }
         />
         { renderIcon }
       </IconInputWrapper>

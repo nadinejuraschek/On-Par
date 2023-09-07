@@ -2,7 +2,7 @@ import { FeatureCard } from "components";
 import { notebookFeatures } from "data";
 import { StyledContent } from "./styled";
 
-export const Notebook = (): JSX.Element => (
+const Notebook = (): JSX.Element => (
   <StyledContent>
     {
       notebookFeatures.map( ( feature, index ) => (
@@ -17,3 +17,5 @@ export const Notebook = (): JSX.Element => (
     }
   </StyledContent>
 );
+
+export default Notebook;

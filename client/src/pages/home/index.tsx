@@ -1,9 +1,9 @@
 import axios from "axios";
 import { Button, Resources as ResourcesList, Text } from "components";
-import { UserContext } from "contexts";
+import { useUserContext } from "contexts";
 import * as dayjs from "dayjs";
 import * as isSameOrAfter from "dayjs/plugin/isSameOrAfter"
-import { useCallback, useContext, useMemo, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Countdown } from "./Countdown";
 import { Events } from "./Events";
@@ -26,8 +26,8 @@ import { WorkhourSummary } from "./WorkhourSummary";
 
 dayjs.extend(isSameOrAfter);
 
-export const Home = (): JSX.Element => {
-  const { user } = useContext( UserContext );
+const Home = (): JSX.Element => {
+  const [{ user }] = useUserContext();
   const [message, setMessage] = useState( "" );
 
   const navigate = useNavigate();
@@ -91,7 +91,11 @@ export const Home = (): JSX.Element => {
   return (
     <Grid>
       <HeaderCard>
-        <Greeting message={ message } name={ user?.firstname } profileImageSrc={user?.profileImage} />
+        <Greeting
+          message={ message }
+          name={ user?.firstname ?? "" }
+          profileImageSrc={user?.profileImage ?? ""}
+        />
         <ButtonsWrapper>
           <Button link="/profile" variant="secondary">Profile</Button>
           <Button handleClick={ handleLogout } variant="secondary">Log Out</Button>
@@ -102,3 +106,5 @@ export const Home = (): JSX.Element => {
     </Grid>
   );
 };
+
+export default Home;
