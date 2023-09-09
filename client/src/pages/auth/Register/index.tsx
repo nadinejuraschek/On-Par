@@ -1,12 +1,11 @@
 import axios from "axios";
 import { Button, DatePicker, Input, Select, Text } from "components";
 import { TSelectOption } from "components/Select/types";
-import { UserContext } from "contexts";
 import { countrySelectOptions } from "data";
-import { ChangeEvent, FormEvent, MouseEvent, useCallback, useContext, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { ChangeEvent, FormEvent, MouseEvent, useCallback, useState } from "react";
 import { toast } from "react-toastify";
 import { ZodFormattedError } from "zod";
+import { IRegister } from "./types";
 import { TRegisterFormData, registerSchema } from "../../../schema";
 import {
   Divider,
@@ -15,12 +14,9 @@ import {
   Form,
   FormWrapper,
 } from "../styled";
+import { AUTH_VIEW } from "../types";
 
-const Register = (): JSX.Element => {
-  const navigate = useNavigate();
-
-  const { user } = useContext(UserContext);
-
+export const Register = ({ handleView }: IRegister): JSX.Element => {
   const [errors, setErrors] = useState<ZodFormattedError<TRegisterFormData> | undefined>(undefined);
   const [registerData, setRegisterData] = useState<TRegisterFormData>({
     firstname: "",
@@ -64,10 +60,12 @@ const Register = (): JSX.Element => {
       method: "POST",
       data: newUser,
     } )
-      .then( () => navigate( "/home" ))
+      .then( () => {
+        window.location.reload();
+      })
       .catch( () => toast.error("Could not register user. Please try again later!"))
       .finally(() => setIsSubmitting(false));
-  }, [navigate, registerData]);
+  }, [registerData]);
 
   const handleGuest = useCallback((event: MouseEvent) => {
     event.preventDefault();
@@ -78,14 +76,12 @@ const Register = (): JSX.Element => {
       method: "POST",
       data: { email: "tester@mail.com", password: "testing123" },
     } )
-      .then( () => navigate( "/home" ))
+      .then( () => {
+        window.location.reload();
+      })
       .catch( () => toast.error("Could not log in test user. Please try again later!"))
       .finally(() => setIsSubmitting(false));
-  }, [navigate]);
-
-  if (user) {
-    navigate("/home");
-  }
+  }, []);
 
   return (
     <FormWrapper>
@@ -164,7 +160,7 @@ const Register = (): JSX.Element => {
         <Button loading={isSubmitting} type="submit" variant="primary">
           Register
         </Button>
-        <Button link="/login" variant="tertiary">
+        <Button handleClick={() => handleView(AUTH_VIEW.LOGIN)} variant="tertiary">
           Log In
         </Button>
         <Divider>
@@ -178,5 +174,3 @@ const Register = (): JSX.Element => {
     </FormWrapper>
   );
 };
-
-export default Register;

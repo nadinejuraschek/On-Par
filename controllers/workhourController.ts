@@ -1,11 +1,14 @@
 import { Request, Response } from 'express';
 import dayjs from 'dayjs';
 import db from '../models/db';
-import { handleUnknownUser } from '../utils/handleUnknownUser';
+import { isValidUser } from '../utils/isValidUser';
 
 // READ
 const getWorkhours = async (req: Request, res: Response) => {
-  handleUnknownUser(res, req.user);
+  const validUser = isValidUser(res, req.user);
+  if (!validUser) {
+    return res.status(403).json("Please log in to use this feature.");
+  }
 
   const result = await db.User.findById(req.user)
     .populate('workhours')
@@ -18,7 +21,10 @@ const getWorkhours = async (req: Request, res: Response) => {
 };
 
 const getWorkhoursDay = async (req: Request, res: Response) => {
-  handleUnknownUser(res, req.user);
+  const validUser = isValidUser(res, req.user);
+  if (!validUser) {
+    return res.status(403).json("Please log in to use this feature.");
+  }
 
   const today = dayjs().set('hour', 12).set('minute', 0).set('second', 0).set('millisecond', 0).toDate();
 
@@ -36,7 +42,10 @@ const getWorkhoursDay = async (req: Request, res: Response) => {
 };
 
 const getWorkhoursWeek = async (req: Request, res: Response) => {
-  handleUnknownUser(res, req.user);
+  const validUser = isValidUser(res, req.user);
+  if (!validUser) {
+    return res.status(403).json("Please log in to use this feature.");
+  }
 
   const startDate = dayjs(req.params.startDate).set('hour', 12).set('minute', 0).set('second', 0).set('millisecond', 0).toDate();
   const endDate = dayjs(req.params.endDate).set('hour', 12).set('minute', 0).set('second', 0).set('millisecond', 0).toDate();
@@ -56,7 +65,10 @@ const getWorkhoursWeek = async (req: Request, res: Response) => {
 
 // CREATE
 const createWorkhour = async (req: Request, res: Response) => {
-  handleUnknownUser(res, req.user);
+  const validUser = isValidUser(res, req.user);
+  if (!validUser) {
+    return res.status(403).json("Please log in to use this feature.");
+  }
 
   const { date, hours } = req.body;
 
@@ -97,7 +109,10 @@ const createWorkhour = async (req: Request, res: Response) => {
 
 // UPDATE
 const updateWorkhour = async (req: Request, res: Response) => {
-  handleUnknownUser(res, req.user);
+  const validUser = isValidUser(res, req.user);
+  if (!validUser) {
+    return res.status(403).json("Please log in to use this feature.");
+  }
 
   await db.Workhour.findOneAndUpdate(
     { _id: req.params.workhourid },
@@ -113,7 +128,10 @@ const updateWorkhour = async (req: Request, res: Response) => {
 
 // DELETE
 const deleteWorkhour = async (req: Request, res: Response) => {
-  handleUnknownUser(res, req.user);
+  const validUser = isValidUser(res, req.user);
+  if (!validUser) {
+    return res.status(403).json("Please log in to use this feature.");
+  }
 
   await db.Workhour.findByIdAndRemove(req.params.workhourid)
     .then(() => {

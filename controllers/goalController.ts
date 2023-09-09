@@ -1,10 +1,13 @@
 import { Request, Response } from 'express';
 import db from '../models/db';
-import { handleUnknownUser } from '../utils/handleUnknownUser';
+import { isValidUser } from '../utils/isValidUser';
 
 // READ
 const getGoals = async (req: Request, res: Response) => {
-  handleUnknownUser(res, req.user);
+  const validUser = isValidUser(res, req.user);
+  if (!validUser) {
+    return res.status(403).json("Please log in to use this feature.");
+  }
 
   const filter = req.query.filter || '';
   const limit = req.query.limit || '';
@@ -45,7 +48,10 @@ const getGoals = async (req: Request, res: Response) => {
 };
 
 const getSingleGoal = async (req: Request, res: Response) => {
-  handleUnknownUser(res, req.user);
+  const validUser = isValidUser(res, req.user);
+  if (!validUser) {
+    return res.status(403).json("Please log in to use this feature.");
+  }
 
   await db.Goal.findById(req.params.goalId)
     .then(goal => {
@@ -58,7 +64,10 @@ const getSingleGoal = async (req: Request, res: Response) => {
 
 // CREATE
 const createGoal = async (req: Request, res: Response) => {
-  handleUnknownUser(res, req.user);
+  const validUser = isValidUser(res, req.user);
+  if (!validUser) {
+    return res.status(403).json("Please log in to use this feature.");
+  }
 
   const validated = { ...req.body, text: req.body.text.trim() };
 
@@ -79,7 +88,10 @@ const createGoal = async (req: Request, res: Response) => {
 
 // UPDATE
 const updateGoal = async (req: Request, res: Response) => {
-  handleUnknownUser(res, req.user);
+  const validUser = isValidUser(res, req.user);
+  if (!validUser) {
+    return res.status(403).json("Please log in to use this feature.");
+  }
 
   const validated = req.body.text ? { ...req.body, text: req.body.text.trim() } : req.body;
 
@@ -92,7 +104,10 @@ const updateGoal = async (req: Request, res: Response) => {
 
 // DELETE
 const deleteGoal = async (req: Request, res: Response) => {
-  handleUnknownUser(res, req.user);
+  const validUser = isValidUser(res, req.user);
+  if (!validUser) {
+    return res.status(403).json("Please log in to use this feature.");
+  }
 
   await db.Goal.findByIdAndRemove(req.params.goalid)
     .then(() => {

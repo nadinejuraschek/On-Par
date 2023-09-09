@@ -1,5 +1,4 @@
-export * from "./auth/Login";
-export * from "./auth/Register";
+export * from "./auth";
 export * from "./home";
 export * from "./landing";
 export * from "./notebook";

@@ -6,7 +6,7 @@ import dashboard from "assets/dashboard.svg";
 import resources from "assets/mom.svg";
 
 export const navLinks = [
-  { iconSrc: dashboard, label: "Dashboard", link: "/home" }, { iconSrc: notebook, label: "Notebook", link: "/notebook" }, { iconSrc: resources, label: "Resources", link: "/resources" },
+  { iconSrc: dashboard, label: "Dashboard", link: "/" }, { iconSrc: notebook, label: "Notebook", link: "/notebook" }, { iconSrc: resources, label: "Resources", link: "/resources" },
   // { iconSrc: chat, label: "Messages", link: "/messages" },
   // { iconSrc: hostfamily, label: "Host Family", link: "/hostfamily" },
   // { iconSrc: cluster, label: "Cluster", link: "/cluster" },

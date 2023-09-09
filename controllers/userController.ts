@@ -3,11 +3,14 @@ import bcrypt from 'bcryptjs';
 import dayjs from 'dayjs';
 import db from '../models/db';
 import jwt from 'jsonwebtoken';
-import { handleUnknownUser } from '../utils/handleUnknownUser';
+import { isValidUser } from '../utils/isValidUser';
 
 // READ
 const getUser = async (req: Request, res: Response) => {
-  handleUnknownUser(res, req.user);
+  const validUser = isValidUser(res, req.user);
+  if (!validUser) {
+    return res.status(403).json("Please log in to use this feature.");
+  }
 
   await db.User.findById(req.user)
     .then(user => {
@@ -34,7 +37,10 @@ const getUser = async (req: Request, res: Response) => {
 };
 
 const getUserById = async (req: Request, res: Response) => {
-  handleUnknownUser(res, req.user);
+  const validUser = isValidUser(res, req.user);
+  if (!validUser) {
+    return res.status(403).json("Please log in to use this feature.");
+  }
 
   await db.User.findById({ _id: req.params.id })
     .then(user => {
@@ -149,7 +155,10 @@ const signoutUser = (req: Request, res: Response) => {
 
 // UPDATE
 const updateUser = async (req: Request, res: Response) => {
-  handleUnknownUser(res, req.user);
+  const validUser = isValidUser(res, req.user);
+  if (!validUser) {
+    return res.status(403).json("Please log in to use this feature.");
+  }
 
   await db.User.findByIdAndUpdate(req.params.id, req.body)
     .then(() => res.status(200).json('User has been updated successfully!'))
@@ -160,7 +169,10 @@ const updateUser = async (req: Request, res: Response) => {
 
 // DELETE
 const deleteUser = async (req: Request, res: Response) => {
-  handleUnknownUser(res, req.user);
+  const validUser = isValidUser(res, req.user);
+  if (!validUser) {
+    return res.status(403).json("Please log in to use this feature.");
+  }
 
   await db.User.findByIdAndRemove(req.params.id)
     .then(() => {

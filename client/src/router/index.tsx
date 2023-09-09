@@ -5,7 +5,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 const EmergencyNumbers = lazy(() => import("../pages/resources/emergencyNumbers"));
 const Goals = lazy(() => import("../pages/notebook/goals"));
 const Home = lazy(() => import("../pages/home"));
-const Landing = lazy(() => import("../pages/landing"));
+// const Landing = lazy(() => import("../pages/landing"));
 const Notebook = lazy(() => import("../pages/notebook"));
 const Notes = lazy(() => import("../pages/notebook/notes"));
 const Payments = lazy(() => import("../pages/notebook/payments"));
@@ -21,14 +21,14 @@ export const Router = (): JSX.Element => {
       <Routes>
 
         { /* Landing Page */ }
-        <Route path="/" element={ <Landing /> } />
+        {/* <Route path="/" element={ <Landing /> } /> */}
         { /* Authentication */ }
         {/* <Route path="/login" element={ <LayoutGradient><Login /></LayoutGradient> } /> */}
         {/* <Route path="/register" element={ <LayoutGradient><Register /></LayoutGradient> } /> */}
 
         { /* Home */ }
         <Route
-          path="/home"
+          path="/"
           element={
             <LayoutWithNavbar>
               <Home />

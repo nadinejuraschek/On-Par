@@ -37,7 +37,7 @@ const Home = (): JSX.Element => {
       url: "/api/user/signout",
       method: "POST",
     } ).then( () => {
-      navigate( "/login" );
+      navigate(0);
     } );
   }, [navigate]);
 

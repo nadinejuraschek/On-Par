@@ -75,7 +75,7 @@ const Landing = (): JSX.Element => {
       <StyledSection color="var(--primary_50)">
         <Title as="h1" size="lg"><Brand>On Par</Brand>|<span>The Au Pair&apos;s Assistant</span></Title>
         <Subtitle as="h2" weight="bold">Because taking care of kids is hard enough.</Subtitle>
-        <Button link="/home" variant="primary">
+        <Button link="/" variant="primary">
           Get Started
           <i className="right arrow icon"></i>
         </Button>

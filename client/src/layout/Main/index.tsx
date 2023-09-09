@@ -3,12 +3,10 @@ import axios from "axios";
 import { LoadingSpinner } from "components";
 import { useUserContext } from "contexts";
 import { ACTIONS } from "contexts/UserContext/types";
-import { useEffect, useState } from "react";
-import { toast } from "react-toastify";
+import { lazy, useEffect, useState } from "react";
 import { Router } from "router";
 
-// const Login = lazy(() => import("../../pages/auth/Login"));
-// const Register = lazy(() => import("../../pages/auth/Register"));
+const Auth = lazy(() => import("../../pages/auth"));
 
 export const Main = (): JSX.Element => {
   const [loading, setLoading] = useState(false);
@@ -26,14 +24,16 @@ export const Main = (): JSX.Element => {
         payload: res.data,
       });
     } ).catch( () => {
-      toast.error("Could not find the user information. Please try again later!");
+      // eslint-disable-next-line no-console
+      console.debug("Could not fetch the user information.");
+      // toast.error("Could not find the user information. Please try again later!");
     }).finally(() => setLoading(false));
   }, [dispatch] );
 
   if (loading) return <main><LoadingSpinner /></main>;
 
   if (!user) {
-    return <div>LOGIN / REGISTER</div>;
+    return <Auth />;
   }
 
   return <Router />;

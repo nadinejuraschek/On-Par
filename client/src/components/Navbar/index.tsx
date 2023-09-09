@@ -46,7 +46,7 @@ export const Navbar = (): JSX.Element => {
   return (
     <>
       <NavMobile>
-        <Logo to="/home">
+        <Logo to="/">
           <LogoText as="h1" size="xl">On Par</LogoText>
         </Logo>
         { renderMenuButton }
@@ -54,7 +54,7 @@ export const Navbar = (): JSX.Element => {
       { renderSidenav }
 
       <NavDesktop>
-        <Logo to="/home">
+        <Logo to="/">
           <LogoText as="h1" size="xl">On Par</LogoText>
         </Logo>
         { renderLinks }

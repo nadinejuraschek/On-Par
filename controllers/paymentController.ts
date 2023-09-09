@@ -1,10 +1,13 @@
 import { Request, Response } from 'express';
 import db from '../models/db';
-import { handleUnknownUser } from '../utils/handleUnknownUser';
+import { isValidUser } from '../utils/isValidUser';
 
 // READ
 const getPayments = async (req: Request, res: Response) => {
-  handleUnknownUser(res, req.user);
+  const validUser = isValidUser(res, req.user);
+  if (!validUser) {
+    return res.status(403).json("Please log in to use this feature.");
+  }
 
   const result = await db.User.findById(req.user)
     .populate('payments')
@@ -18,7 +21,10 @@ const getPayments = async (req: Request, res: Response) => {
 
 // CREATE
 const createPayment = async (req: Request, res: Response) => {
-  handleUnknownUser(res, req.user);
+  const validUser = isValidUser(res, req.user);
+  if (!validUser) {
+    return res.status(403).json("Please log in to use this feature.");
+  }
 
   await db.Payment.create(req.body)
     .then(async insertedPayment => {
@@ -37,7 +43,10 @@ const createPayment = async (req: Request, res: Response) => {
 
 // UPDATE
 const updatePayment = async (req: Request, res: Response) => {
-  handleUnknownUser(res, req.user);
+  const validUser = isValidUser(res, req.user);
+  if (!validUser) {
+    return res.status(403).json("Please log in to use this feature.");
+  }
 
   await db.Payment.findByIdAndUpdate(req.params.paymentid, req.body)
     .then(() => {
@@ -50,7 +59,10 @@ const updatePayment = async (req: Request, res: Response) => {
 
 // DELETE
 const deletePayment = async (req: Request, res: Response) => {
-  handleUnknownUser(res, req.user);
+  const validUser = isValidUser(res, req.user);
+  if (!validUser) {
+    return res.status(403).json("Please log in to use this feature.");
+  }
 
   await db.Payment.findByIdAndRemove(req.params.paymentid)
     .then(() => {
