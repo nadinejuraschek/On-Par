@@ -1,31 +1,18 @@
 import { Button, Header as HeaderComp, Icon, LoadingSpinner } from "components";
 import { useFetchNotes } from "hooks";
-import { useCallback, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { TNote } from "types";
 import { AddNoteModal } from "./AddNoteModal";
-import { EditNoteModal } from "./EditNoteModal";
 import { NoteCard } from "./NoteCard";
 import { Grid, Header, List, Search, StyledPagination } from "./styled";
 // import { Suggestions } from "./Suggestions";
 
 const Notes = (): JSX.Element => {
   const [openAddNoteModal, setOpenAddNoteModal] = useState(false);
-  const [openEditNoteModal, setOpenEditNoteModal] = useState(false);
-  const [originalNote, setOriginalNote] = useState<TNote | null>(null);
   const [page, setPage] = useState(0);
   const [searchInput, setSearchInput] = useState("");
 
   const { data: notesData, loading, refetch: refetchNotes } = useFetchNotes({ page });
-
-  const handleOpenEdit = useCallback((note: TNote) => {
-    setOpenEditNoteModal(true);
-    setOriginalNote(note);
-  }, []);
-
-  const handleEditCancel = useCallback(() => {
-    setOpenEditNoteModal(false);
-    setOriginalNote(null);
-  }, []);
 
   const renderAddNoteModal = useMemo(() => {
     if (!openAddNoteModal) return null;
@@ -37,21 +24,6 @@ const Notes = (): JSX.Element => {
       />
     );
   }, [openAddNoteModal, refetchNotes]);
-
-  const renderEditNoteModal = useMemo(() => {
-    if (!openEditNoteModal) return null;
-
-    return (
-      <EditNoteModal
-        handleEditCancel={handleEditCancel}
-        note={originalNote}
-        refetchNotes={refetchNotes}
-      />
-    );
-  }, [handleEditCancel,
-    openEditNoteModal,
-    originalNote,
-    refetchNotes]);
 
   const renderNotes = useMemo(() => {
     if (loading) return <LoadingSpinner />;
@@ -67,13 +39,12 @@ const Notes = (): JSX.Element => {
       return (
         <NoteCard
           color={ color }
-          handleOpenEdit={handleOpenEdit}
           key={ note._id }
           note={note}
           refetchNotes={refetchNotes}
         />
       ) });
-  }, [handleOpenEdit,
+  }, [
     loading,
     notesData,
     refetchNotes,
@@ -115,7 +86,6 @@ const Notes = (): JSX.Element => {
         {renderPagination}
       </Grid>
       {renderAddNoteModal}
-      {renderEditNoteModal}
     </>
   );
 };

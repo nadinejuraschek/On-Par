@@ -2,7 +2,8 @@ import { Badge, Button, Icon } from "components";
 import * as dayjs from "dayjs";
 import * as duration from "dayjs/plugin/duration";
 import * as isSameOrBefore from "dayjs/plugin/isSameOrBefore";
-import { MouseEvent, useCallback, useMemo } from "react";
+import { MouseEvent, useCallback, useMemo, useState } from "react";
+import { TPayment } from "types";
 import {
   Actions,
   Badges,
@@ -13,20 +14,23 @@ import {
   Year,
 } from "./styled";
 import { IPaymentEntry } from "./types";
+import { EditPaymentModal } from "../../EditPaymentModal";
 
 dayjs.extend(duration);
 dayjs.extend(isSameOrBefore);
 
 export const Payment = ( {
-  handleEdit,
   payment,
+  refetchPayments,
 }: IPaymentEntry ): JSX.Element => {
   const { date, late, week } = payment;
 
+  const [editPayment, setEditPayment] = useState<TPayment | null>(null);
+
   const handleEditClick = useCallback((event: MouseEvent) => {
     event.preventDefault();
-    handleEdit();
-  }, [handleEdit]);
+    setEditPayment(payment);
+  }, [payment]);
 
   const renderDateColumn = useMemo(() => {
     if (!date) return null;
@@ -45,22 +49,37 @@ export const Payment = ( {
     return <LateBadge icon={<Icon color="var(--error_800)" type="clock" />} label="Paid Late" />;
   }, [late]);
 
+  const renderEditModal = useMemo(() => {
+    if (!editPayment) return null;
+
+    return (
+      <EditPaymentModal
+        handleClose={() => setEditPayment(null)}
+        originalPayment={editPayment}
+        refetchPayments={refetchPayments}
+      />
+    );
+  }, [editPayment, refetchPayments]);
+
   return (
-    <ListItem $warning={!date}>
-      <Date>{ renderDateColumn }</Date>
-      <Badges>
-        {renderLateBadge}
-        <Badge label={`Week #${week}`} />
-      </Badges>
-      <Actions>
-        <Button
-          handleClick={handleEditClick}
-          square
-          variant="tertiary"
-        >
-          <Icon type="pen" />
-        </Button>
-      </Actions>
-    </ListItem>
+    <>
+      <ListItem $warning={!date}>
+        <Date>{ renderDateColumn }</Date>
+        <Badges>
+          {renderLateBadge}
+          <Badge label={`Week #${week}`} />
+        </Badges>
+        <Actions>
+          <Button
+            handleClick={handleEditClick}
+            square
+            variant="tertiary"
+          >
+            <Icon type="pen" />
+          </Button>
+        </Actions>
+      </ListItem>
+      {renderEditModal}
+    </>
   );
 };
