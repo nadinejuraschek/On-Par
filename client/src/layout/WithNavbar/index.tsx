@@ -1,21 +1,13 @@
-import { Navbar, Text } from "components";
-import { useMemo } from "react";
-import { StyledLayout, StyledView } from "./styled";
-import { ILayoutWithNavbar } from "./types";
+import { PropsWithChildren } from "react";
+import { StyledHeader, StyledLayout, StyledNav, StyledView } from "./styled";
 
-export const LayoutWithNavbar = ({ children, headerTitle }: ILayoutWithNavbar): JSX.Element => {
-  const renderHeader = useMemo(() => {
-    if (!headerTitle) return null;
-
-    return <Text as="h2" size="xl" weight="bold">{headerTitle}</Text>;
-  }, [headerTitle]);
-
+export const LayoutWithNavbar = ({ children }: PropsWithChildren): JSX.Element => {
   return (
     <StyledLayout>
-      <Navbar />
+      <StyledNav id="navbar" />
       <StyledView>
+        <StyledHeader id="header" />
         <main>
-          { renderHeader }
           { children }
         </main>
       </StyledView>

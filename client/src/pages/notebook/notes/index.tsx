@@ -1,4 +1,4 @@
-import { Button, Icon, LoadingSpinner } from "components";
+import { Button, Header as HeaderComp, Icon, LoadingSpinner } from "components";
 import { useFetchNotes } from "hooks";
 import { useCallback, useMemo, useState } from "react";
 import { TNote } from "types";
@@ -88,6 +88,7 @@ const Notes = (): JSX.Element => {
 
   return (
     <>
+      <HeaderComp pageTitle="Notes" />
       <Grid>
         {/* <Suggestions /> */}
         <Header>

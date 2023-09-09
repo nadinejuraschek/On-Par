@@ -1,4 +1,4 @@
-import { Text } from "components";
+import { Header, Text } from "components";
 import { taxInfo } from "data";
 import { Fragment, useMemo } from "react";
 import { createMarkup } from "utils";
@@ -21,10 +21,13 @@ const Tax = (): JSX.Element => {
   ) ), [contentRows]);
 
   return (
-    <StyledContent>
-      { renderHeader }
-      { renderContentRows }
-    </StyledContent>
+    <>
+      <Header pageTitle="Tax Information" />
+      <StyledContent>
+        { renderHeader }
+        { renderContentRows }
+      </StyledContent>
+    </>
   );
 };
 

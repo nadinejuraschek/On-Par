@@ -1,4 +1,4 @@
-import { Banner, Icon, LoadingSpinner, Text } from "components";
+import { Banner, Header, Icon, LoadingSpinner, Text } from "components";
 import { useUserContext } from "contexts";
 import * as dayjs from "dayjs";
 import { useFetchPayments } from "hooks";
@@ -54,6 +54,7 @@ const Payments = (): JSX.Element => {
 
   return (
     <>
+      <Header pageTitle="Payments" />
       <BannerWrapper>
         <Banner variant="secondary">
           <Text>

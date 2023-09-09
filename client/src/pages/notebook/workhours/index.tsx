@@ -1,4 +1,4 @@
-import { Tabs, Text, Timer, WeeklyHours as WeeklyList } from "components";
+import { Header, Tabs, Text, Timer, WeeklyHours as WeeklyList } from "components";
 import { useFetchWorkhoursToday } from "hooks";
 import { useMemo, useState } from "react";
 import { AddHours } from "./AddHours";
@@ -10,7 +10,7 @@ const WORKHOURS_TABS = {
 }
 
 const Workhours = (): JSX.Element => {
-  const [tab, setTab] = useState( WORKHOURS_TABS.WEEKLY );
+  const [tab, setTab] = useState<number | string>( WORKHOURS_TABS.WEEKLY );
 
   const { data: todayWorkhourTotal } = useFetchWorkhoursToday();
 
@@ -21,26 +21,29 @@ const Workhours = (): JSX.Element => {
   const renderTimes = useMemo(() => <Timer time={ todayWorkhourTotal } />, [todayWorkhourTotal]);
 
   return (
-    <StyledContent>
-      <TabsWrapper>
-        <Tabs activeTab={ tab } fullWidth handleClick={ setTab } tabs={ tabs } variant="secondary" />
-      </TabsWrapper>
-      <CardTracker>
-        <WeeklyList />
-      </CardTracker>
-      <CardTimer>
-        {renderTimes}
-      </CardTimer>
-      <CardAddWorkhour>
-        <AddHours />
-      </CardAddWorkhour>
-      <CardReminder>
-        <Text size="sm">
-          <strong>Reminder:</strong><br />
-          You should be working a maximum of <strong>10h a day</strong> and <strong>45h per week</strong>.
-        </Text>
-      </CardReminder>
-    </StyledContent>
+    <>
+      <Header pageTitle="Workhours" />
+      <StyledContent>
+        <TabsWrapper>
+          <Tabs activeTab={ tab } fullWidth handleClick={ setTab } tabs={ tabs } variant="secondary" />
+        </TabsWrapper>
+        <CardTracker>
+          <WeeklyList />
+        </CardTracker>
+        <CardTimer>
+          {renderTimes}
+        </CardTimer>
+        <CardAddWorkhour>
+          <AddHours />
+        </CardAddWorkhour>
+        <CardReminder>
+          <Text size="sm">
+            <strong>Reminder:</strong><br />
+            You should be working a maximum of <strong>10h a day</strong> and <strong>45h per week</strong>.
+          </Text>
+        </CardReminder>
+      </StyledContent>
+    </>
   );
 };
 

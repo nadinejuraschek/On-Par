@@ -1,4 +1,4 @@
-import { Icon, Select } from "components";
+import { Header, Icon, Select } from "components";
 import { useCallback, useMemo, useState } from "react";
 import { AddGoalModal } from "./AddGoalModal";
 import { GoalsList } from "./List";
@@ -52,6 +52,7 @@ const Goals = (): JSX.Element => {
 
   return (
     <>
+      <Header pageTitle="Goals" />
       <Layout>
         <Actions>
           <Filter>

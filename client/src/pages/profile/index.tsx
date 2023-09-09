@@ -1,4 +1,4 @@
-import { LoadingSpinner, Tabs } from "components";
+import { Header, LoadingSpinner, Tabs } from "components";
 import { useUserContext } from "contexts";
 import { useMemo, useState } from "react";
 import { HostFamilyInfo } from "./HostFamilyInfo";
@@ -44,10 +44,13 @@ const Profile = (): JSX.Element => {
   ];
 
   return (
-    <Grid>
-      <Tabs activeTab={activeTab} fullWidth handleClick={setActiveTab} tabs={tabs} variant="secondary" />
-      {renderContent}
-    </Grid>
+    <>
+      <Header pageTitle="Profile" />
+      <Grid>
+        <Tabs activeTab={activeTab} fullWidth handleClick={setActiveTab} tabs={tabs} variant="secondary" />
+        {renderContent}
+      </Grid>
+    </>
   );
 };
 

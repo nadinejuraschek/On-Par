@@ -1,10 +1,11 @@
 import close from "assets/close.svg";
 import menu from "assets/menu.svg";
 import { navLinks } from "data";
+import { Portal } from "layout";
 import { useCallback, useMemo, useState } from "react";
 import { NavLinkComp as NavLink } from "./NavLink";
 import { Sidenav } from "./Sidenav";
-import { Footer, Logo, LogoText, MenuButton, NavDesktop, NavMobile } from "./styled";
+import { DesktopLinks, Footer, Logo, LogoText, MenuButton } from "./styled";
 
 export const Navbar = (): JSX.Element => {
   const [openSidenav, setOpenSidenav] = useState( false );
@@ -24,7 +25,7 @@ export const Navbar = (): JSX.Element => {
   }, [openSidenav, toggleSidenav]);
 
   const renderLinks = useMemo(() => {
-    return navLinks.map(link => {
+    const links = navLinks.map(link => {
       const { iconSrc, label, link: href } = link;
       return (
         <NavLink
@@ -35,6 +36,8 @@ export const Navbar = (): JSX.Element => {
         />
       );
     });
+
+    return <DesktopLinks>{links}</DesktopLinks>;
   }, []);
 
   const renderSidenav = useMemo(() => {
@@ -44,22 +47,19 @@ export const Navbar = (): JSX.Element => {
   }, [openSidenav, toggleSidenav]);
 
   return (
-    <>
-      <NavMobile>
-        <Logo to="/">
-          <LogoText as="h1" size="xl">On Par</LogoText>
-        </Logo>
-        { renderMenuButton }
-      </NavMobile>
+    <Portal wrapperId="navbar">
+      {/* LOGO */}
+      <Logo to="/">
+        <LogoText as="h1" size="xl">On Par</LogoText>
+      </Logo>
+      {/* MENU - ONLY MOBILE NAV */}
+      { renderMenuButton }
+      {/* SIDENAV - ONLY MOBILE NAV */}
       { renderSidenav }
-
-      <NavDesktop>
-        <Logo to="/">
-          <LogoText as="h1" size="xl">On Par</LogoText>
-        </Logo>
-        { renderLinks }
-        <Footer>© { new Date().getFullYear() }</Footer>
-      </NavDesktop>
-    </>
+      {/* NAV LINKS - ONLY DESKTOP NAV */}
+      { renderLinks }
+      {/* FOOTER - ONLY DESKTOP NAV */}
+      <Footer>© { new Date().getFullYear() }</Footer>
+    </Portal>
   );
 };

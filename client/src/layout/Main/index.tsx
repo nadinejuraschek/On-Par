@@ -3,6 +3,7 @@ import axios from "axios";
 import { LoadingSpinner } from "components";
 import { useUserContext } from "contexts";
 import { ACTIONS } from "contexts/UserContext/types";
+import { LayoutWithNavbar } from "layout/WithNavbar";
 import { lazy, useEffect, useState } from "react";
 import { Router } from "router";
 
@@ -36,5 +37,5 @@ export const Main = (): JSX.Element => {
     return <Auth />;
   }
 
-  return <Router />;
+  return <LayoutWithNavbar><Router /></LayoutWithNavbar>;
 };

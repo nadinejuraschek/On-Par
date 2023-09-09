@@ -3,8 +3,8 @@ import { createPortal } from "react-dom";
 import { IPortal } from "./types";
 import { createWrapperAndAppendToBody } from "./utils";
 
-export const Portal = ({ children, wrapperId = "portal" }: IPortal): JSX.Element => {
-  const [wrapperElement, setWrapperElement] = useState(null);
+export const Portal = ({ children, wrapperId = "portal" }: IPortal): JSX.Element | null => {
+  const [wrapperElement, setWrapperElement] = useState<HTMLElement | null>(null);
 
   useLayoutEffect(() => {
     let element = document.getElementById(wrapperId);
@@ -18,7 +18,7 @@ export const Portal = ({ children, wrapperId = "portal" }: IPortal): JSX.Element
 
     return () => {
       // delete the programatically created element
-      if (systemCreated && element.parentNode) {
+      if (systemCreated && element?.parentNode) {
         element.parentNode.removeChild(element);
       }
     }
