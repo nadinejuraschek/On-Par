@@ -4,10 +4,10 @@ import { TGoalType } from "types";
 export interface IBadge {
   className?: string;
   icon?: ReactNode;
-  label: string;
+  label?: string;
   variant?: TGoalType;
 }
 
 export interface IStyledBadge {
-  $variant: TGoalType;
+  $variant?: TGoalType;
 }

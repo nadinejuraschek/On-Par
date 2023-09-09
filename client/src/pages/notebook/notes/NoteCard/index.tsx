@@ -39,7 +39,7 @@ export const NoteCard = ( {
   }, []);
 
   const renderEditNoteModal = useMemo(() => {
-    if (!openEditNoteModal || !note) return null;
+    if (!openEditNoteModal || !originalNote) return null;
 
     return (
       <EditNoteModal
@@ -49,7 +49,6 @@ export const NoteCard = ( {
       />
     );
   }, [handleEditCancel,
-    note,
     openEditNoteModal,
     originalNote,
     refetchNotes]);

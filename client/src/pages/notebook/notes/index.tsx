@@ -1,6 +1,6 @@
 import { Button, Header as HeaderComp, Icon, LoadingSpinner } from "components";
 import { useFetchNotes } from "hooks";
-import { useMemo, useState } from "react";
+import { ChangeEvent, useCallback, useMemo, useState } from "react";
 import { TNote } from "types";
 import { AddNoteModal } from "./AddNoteModal";
 import { NoteCard } from "./NoteCard";
@@ -13,6 +13,11 @@ const Notes = (): JSX.Element => {
   const [searchInput, setSearchInput] = useState("");
 
   const { data: notesData, loading, refetch: refetchNotes } = useFetchNotes({ page });
+
+  const handleSearch = useCallback((event: ChangeEvent) => {
+    const target = event.target as HTMLInputElement;
+    setSearchInput(target.value);
+  }, []);
 
   const renderAddNoteModal = useMemo(() => {
     if (!openAddNoteModal) return null;
@@ -70,7 +75,7 @@ const Notes = (): JSX.Element => {
         {/* <Suggestions /> */}
         <Header>
           <Search
-            handleChange={(val: string) => setSearchInput(val)}
+            handleChange={handleSearch}
             icon="search"
             name="search"
             placeholder="Search"

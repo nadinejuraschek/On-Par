@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useState } from "react";
+import { ChangeEvent, useCallback, useMemo, useState } from "react";
 //import { useDebounce } from "usehooks-ts";
 import { ErrorText, Field, IconInputWrapper, IconWrapper, StyledInput } from "./styled";
 import { IInput } from "./types";
@@ -25,9 +25,9 @@ export const Input = ( {
   }, [debouncedValue]); */
   const [controlledValue, setControlledValue] = useState(value);
 
-  const handleControlledChange = useCallback((e) => {
-    setControlledValue(e.target.value);
-    handleChange(e.target.value);
+  const handleControlledChange = useCallback((event: ChangeEvent) => {
+    setControlledValue((event.target as HTMLInputElement).value);
+    handleChange(event);
   }, [handleChange]);
 
   const renderLabel = useMemo(() => {
@@ -63,8 +63,8 @@ export const Input = ( {
         <StyledInput
           disabled={disabled}
           $fullWidth={fullWidth}
-          $hasError={error}
-          $hasIcon={icon}
+          $hasError={Boolean(error)}
+          $hasIcon={Boolean(icon)}
           name={ name }
           onChange={ handleControlledChange }
           placeholder={ placeholder }

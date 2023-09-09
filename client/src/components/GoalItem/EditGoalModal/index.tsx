@@ -26,6 +26,10 @@ export const EditGoalModal = ({
     type,
   });
 
+  const handleToggleType = useCallback((val: string) => {
+    setUpdatedGoal((prev) => ({ ...prev, type: val as TGoalType }));
+  }, []);
+
   const handleSubmit = useCallback(() => {
     setSubmitting(true);
     const validation = goalSchema.safeParse(updatedGoal);
@@ -82,7 +86,7 @@ export const EditGoalModal = ({
       <Form>
         <ToggleGroup
           error={errors?.type?._errors?.[0] && errors.type._errors[0]}
-          handleChange={(val: TGoalType) => setUpdatedGoal((prev) => ({ ...prev, type: val }))}
+          handleChange={handleToggleType}
           name="type"
           options={toggleOptions}
           value={updatedGoal.type}
