@@ -1,22 +1,12 @@
-import { Header, Tabs, Text, Timer, WeeklyHours as WeeklyList } from "components";
+import { Header, Text, Timer, WeeklyHours as WeeklyList } from "components";
 import { useFetchWorkhoursToday } from "hooks";
-import { useMemo, useState } from "react";
+import { useMemo } from "react";
 import { AddHours } from "./AddHours";
-import { CardAddWorkhour, CardReminder, CardTimer, CardTracker, StyledContent, TabsWrapper } from "./styled";
-
-const WORKHOURS_TABS = {
-  WEEKLY: 0,
-  DAILY: 1,
-}
+import { CardAddWorkhour, CardReminder, CardTimer, CardTracker, StyledContent } from "./styled";
 
 const Workhours = (): JSX.Element => {
-  const [tab, setTab] = useState<number | string>( WORKHOURS_TABS.WEEKLY );
 
   const { data: todayWorkhourTotal } = useFetchWorkhoursToday();
-
-  const tabs = [
-    { label: "Weekly", value: WORKHOURS_TABS.WEEKLY }, { disabled: true, label: "Daily", value: WORKHOURS_TABS.DAILY },
-  ];
 
   const renderTimes = useMemo(() => <Timer time={ todayWorkhourTotal } />, [todayWorkhourTotal]);
 
@@ -24,9 +14,12 @@ const Workhours = (): JSX.Element => {
     <>
       <Header pageTitle="Workhours" />
       <StyledContent>
-        <TabsWrapper>
-          <Tabs activeTab={ tab } fullWidth handleClick={ setTab } tabs={ tabs } variant="secondary" />
-        </TabsWrapper>
+        <CardReminder>
+          <Text size="sm">
+            <strong>Reminder:</strong><br />
+            You should be working a maximum of <strong>10h a day</strong> and <strong>45h per week</strong>.
+          </Text>
+        </CardReminder>
         <CardTracker>
           <WeeklyList />
         </CardTracker>
@@ -36,12 +29,6 @@ const Workhours = (): JSX.Element => {
         <CardAddWorkhour>
           <AddHours />
         </CardAddWorkhour>
-        <CardReminder>
-          <Text size="sm">
-            <strong>Reminder:</strong><br />
-            You should be working a maximum of <strong>10h a day</strong> and <strong>45h per week</strong>.
-          </Text>
-        </CardReminder>
       </StyledContent>
     </>
   );

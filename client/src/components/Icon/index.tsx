@@ -15,6 +15,7 @@ import {
   faPhone,
   faPlane,
   faPlus,
+  faSearch,
   faTrash,
   faUser,
   faTriangleExclamation,
@@ -61,6 +62,8 @@ export const Icon = ({ color = "inherit", size = "1.4rem", type }: IIcon): JSX.E
       return faPlane;
     case "plus":
       return faPlus;
+    case "search":
+      return faSearch;
     case "trash":
       return faTrash;
     case "user":

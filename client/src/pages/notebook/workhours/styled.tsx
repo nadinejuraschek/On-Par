@@ -12,15 +12,10 @@ export const StyledContent = styled.div`
 
   @media only screen and (min-width: 900px) {
     grid-template-columns: repeat(8, 1fr);
-    grid-template-rows: auto repeat(5, 1fr) max-content;
+    grid-template-rows: auto repeat(5, 1fr);
     column-gap: 1rem;
     row-gap: 2rem;
   }
-`;
-
-export const TabsWrapper = styled.div`
-  grid-column: 1 / 6;
-  grid-row: 1 / 2;
 `;
 
 export const CardAddWorkhour = styled(Card)`
@@ -55,7 +50,9 @@ export const CardTimer = styled(Card)`
 `;
 
 export const CardReminder = styled(Card)`
-  grid-row: 2 / 3;
+  grid-row: 1 / 2;
+
+  background-color: var(--tertiary_25);
 
   strong {
     color: var(--error_600);
@@ -63,6 +60,6 @@ export const CardReminder = styled(Card)`
 
   @media only screen and (min-width: 900px) {
     grid-column: 1 / 6;
-    grid-row: 7 / 8;
+    grid-row: 1 / 2;
   }
 `;

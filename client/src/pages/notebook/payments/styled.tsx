@@ -10,4 +10,6 @@ export const BannerWrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 1rem;
+
+  margin-bottom: 3rem;
 `;
