@@ -7,7 +7,7 @@ import { ZodFormattedError } from "zod";
 import { Form } from "./styled";
 import { IAddNoteModal } from "./types";
 
-export const AddNoteModal = ({ refetchNotes, toggleModal }: IAddNoteModal): JSX.Element => {
+export const AddNoteModal = ({ refetchNotes, toggleModal }: IAddNoteModal): JSX.Element | null => {
   const currentDate = dayjs().format("MMMM D, YYYY");
 
   const [errors, setErrors] = useState<ZodFormattedError<TNoteFormData> | undefined>(undefined);
@@ -59,6 +59,8 @@ export const AddNoteModal = ({ refetchNotes, toggleModal }: IAddNoteModal): JSX.
       </Button>
     </>
   ), [handleSubmit, submitting, toggleModal]);
+
+  if (!open) return null;
 
   return (
     <Modal

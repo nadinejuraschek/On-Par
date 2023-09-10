@@ -1,9 +1,8 @@
-import { Icon, Text } from "components";
+import { FormField } from "components";
 import { useMemo } from "react";
-import { ErrorText, Field, IconInputWrapper, IconWrapper, StyledSelect } from "./styled";
+import { StyledSelect } from "./styled";
 import { ISelect } from "./types"
 import { getSelectStyles, selectTheme } from "./utils";
-
 
 export const Select = ({
   className = "",
@@ -56,44 +55,20 @@ export const Select = ({
     value,
   ]);
 
-  const renderLabel = useMemo(() => {
-    if (!label) return null;
-
-    return (
-      <Text as="label" htmlFor={ name } size="sm" weight="bold">
-        { label }
-      </Text>
-    );
-  }, [label, name]);
-
-  const renderIcon = useMemo(() => {
-    if (!icon) return null;
-
-    return (
-      <IconWrapper>
-        <Icon type={icon} />
-      </IconWrapper>
-    );
-  }, [icon]);
-
-  const renderError = useMemo(() => {
-    if (!error) return null;
-
-    return <ErrorText as="p" size="xs" >{ error }</ErrorText>;
-  }, [error]);
-
   if (onlyInput) {
     return selectInput;
   }
 
   return (
-    <Field className={className} $fullWidth={fullWidth} $hasError={error}>
-      { renderLabel }
-      <IconInputWrapper>
-        { selectInput }
-        { renderIcon }
-      </IconInputWrapper>
-      { renderError }
-    </Field>
+    <FormField
+      className={className}
+      error={error}
+      icon={icon}
+      label={label}
+      name={name}
+      fullWidth={fullWidth}
+    >
+      { selectInput }
+    </FormField>
   );
 };

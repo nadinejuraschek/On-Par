@@ -1,10 +1,10 @@
-import { Icon, Select } from "components";
+import { Header, Icon, Select } from "components";
 import { useCallback, useMemo, useState } from "react";
 import { AddGoalModal } from "./AddGoalModal";
 import { GoalsList } from "./List";
 import { Actions, Content, Filter, Layout, StyledButton } from "./styled";
 
-export const Goals = (): JSX.Element => {
+const Goals = (): JSX.Element => {
   const [openModal, setOpenModal] = useState(false);
   const [filter, setFilter] = useState(undefined);
 
@@ -52,6 +52,7 @@ export const Goals = (): JSX.Element => {
 
   return (
     <>
+      <Header pageTitle="Goals" />
       <Layout>
         <Actions>
           <Filter>
@@ -79,3 +80,5 @@ export const Goals = (): JSX.Element => {
     </>
   );
 };
+
+export default Goals;

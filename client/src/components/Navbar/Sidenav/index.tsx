@@ -1,4 +1,3 @@
-import { UserProvider } from "contexts";
 import { navLinks } from "data";
 import { useMemo } from "react";
 import { FooterText, Links, SideNavMobile } from "./styled";
@@ -25,9 +24,7 @@ export const Sidenav = ({ toggleSidenav }: ISidenav): JSX.Element => {
   return (
     <SideNavMobile>
       <Links>
-        <UserProvider>
-          { renderLinks }
-        </UserProvider>
+        { renderLinks }
       </Links>
       <FooterText as="p" size="xs">© { new Date().getFullYear() } Nadine Pesso</FooterText>
     </SideNavMobile>

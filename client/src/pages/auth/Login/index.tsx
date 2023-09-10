@@ -1,18 +1,14 @@
 import axios from "axios";
 import { Button, Input, Text } from "components";
-import { UserContext } from "contexts";
-import { ChangeEvent, FormEvent, MouseEvent, useCallback, useContext, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { ChangeEvent, FormEvent, MouseEvent, useCallback, useState } from "react";
 import { toast } from "react-toastify";
 import { ZodFormattedError } from "zod";
+import { ILogin } from "./types";
 import { TLoginFormData, loginSchema } from "../../../schema/login.schema";
 import { Divider, DividerText, Form, FormWrapper } from "../styled";
+import { AUTH_VIEW } from "../types";
 
-export const Login = (): JSX.Element => {
-  const navigate = useNavigate();
-
-  const { user } = useContext(UserContext);
-
+export const Login = ({ handleView }: ILogin): JSX.Element => {
   const [errors, setErrors] = useState<ZodFormattedError<TLoginFormData> | undefined>(undefined);
   const [loginData, setLoginData] = useState<TLoginFormData>({
     email: "",
@@ -44,10 +40,12 @@ export const Login = (): JSX.Element => {
       method: "POST",
       data: loginData,
     } )
-      .then( () => navigate( "/home" ))
+      .then( () => {
+        window.location.reload();
+      })
       .catch( () => toast.error("Could not log you in. Please try again later!"))
       .finally(() => setIsSubmitting(false));
-  }, [loginData, navigate]);
+  }, [loginData]);
 
   const handleGuest = useCallback((event: MouseEvent) => {
     event.preventDefault();
@@ -59,17 +57,13 @@ export const Login = (): JSX.Element => {
       data: { email: "tester@mail.com", password: "testing123" },
     } )
       .then( () => {
-        navigate( "/home" );
-      } )
+        window.location.reload();
+      })
       .catch(() => {
         toast.error("Could not log in test user. Please try again later!");
       } )
       .finally(() => setIsSubmitting(false));
-  }, [navigate]);
-
-  if (user) {
-    navigate("/home");
-  }
+  }, []);
 
   return (
     <FormWrapper>
@@ -99,7 +93,12 @@ export const Login = (): JSX.Element => {
         <Button loading={isSubmitting} type="submit" variant="primary">
           Log In
         </Button>
-        <Button link="/register" variant="tertiary">Create an Account</Button>
+        <Button
+          handleClick={() => handleView(AUTH_VIEW.REGISTER)}
+          variant="tertiary"
+        >
+          Create an Account
+        </Button>
         <Divider>
           <hr />
           <DividerText>OR</DividerText>

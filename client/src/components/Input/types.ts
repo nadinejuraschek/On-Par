@@ -11,11 +11,8 @@ export interface IInput {
   name: string;
   placeholder?: string;
   type?: string;
-  value: string;
-}
-
-export interface IStyledField {
-  $fullWidth: boolean;
+  step?: string;
+  value: string | number;
 }
 
 export interface IStyledInput {

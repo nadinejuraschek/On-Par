@@ -6,6 +6,7 @@ import {
   faChevronRight,
   faClock,
   faCopy,
+  faDollarSign,
   faEarthAmericas,
   faEnvelope,
   faGraduationCap,
@@ -15,6 +16,7 @@ import {
   faPhone,
   faPlane,
   faPlus,
+  faSearch,
   faTrash,
   faUser,
   faTriangleExclamation,
@@ -43,6 +45,8 @@ export const Icon = ({ color = "inherit", size = "1.4rem", type }: IIcon): JSX.E
       return faXmark;
     case "copy":
       return faCopy;
+    case "dollar":
+      return faDollarSign;
     case "education":
       return faGraduationCap;
     case "envelope":
@@ -61,6 +65,8 @@ export const Icon = ({ color = "inherit", size = "1.4rem", type }: IIcon): JSX.E
       return faPlane;
     case "plus":
       return faPlus;
+    case "search":
+      return faSearch;
     case "trash":
       return faTrash;
     case "user":

@@ -18,6 +18,8 @@ export const EditNoteModal = ({
   const { editNote } = useEditNote();
 
   const handleSubmit = useCallback((): void => {
+    if (!note._id) return;
+
     setSubmitting(true);
     const validation = noteSchema.safeParse(updatedNote);
 

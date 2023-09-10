@@ -1,8 +1,9 @@
+import { Header } from "components";
 import { emergencyNumbers } from "data";
 import { useMemo } from "react";
 import { StyledTable, StyledTBody, StyledTd, StyledTh, StyledTHead, StyledTr } from "./styled";
 
-export const EmergencyNumbers = (): JSX.Element => {
+const EmergencyNumbers = (): JSX.Element => {
   const { contentRows, headerRows } = emergencyNumbers;
 
   const renderHeaderRows = useMemo(() => {
@@ -22,13 +23,18 @@ export const EmergencyNumbers = (): JSX.Element => {
   }, [contentRows]);
 
   return (
-    <StyledTable>
-      <StyledTHead>
-        { renderHeaderRows }
-      </StyledTHead>
-      <StyledTBody>
-        { renderContentRows }
-      </StyledTBody>
-    </StyledTable>
+    <>
+      <Header pageTitle="Emergency Numbers" />
+      <StyledTable>
+        <StyledTHead>
+          { renderHeaderRows }
+        </StyledTHead>
+        <StyledTBody>
+          { renderContentRows }
+        </StyledTBody>
+      </StyledTable>
+    </>
   );
 };
+
+export default EmergencyNumbers;

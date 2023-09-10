@@ -37,7 +37,7 @@ export const ListItem = styled.div<IStyledListItem>`
   `}
 `;
 
-export const Date = styled.div`
+export const DateCol = styled.div`
   height: 100%;
   width: 100%;
 
@@ -51,11 +51,18 @@ export const Date = styled.div`
 `;
 
 export const DayMonth = styled.span`
-  font-size: 1.4rem;
+  font-size: 1.3rem;
 `;
 
 export const Year = styled.span`
   font-size: 1.8rem;
+`;
+
+export const Body = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
 `;
 
 export const Badges = styled.div`

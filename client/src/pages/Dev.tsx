@@ -4,7 +4,7 @@ export const Dev = (): JSX.Element => (
       <h2>This feature is currently in development.</h2>
       <h4>Check back soon!</h4>
       <p>
-        <a href="/home">
+        <a href="/">
           <i className="arrow left icon"></i>
           Go Back
         </a>

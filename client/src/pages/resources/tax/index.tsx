@@ -1,10 +1,10 @@
-import { Text } from "components";
+import { Header, Text } from "components";
 import { taxInfo } from "data";
 import { Fragment, useMemo } from "react";
 import { createMarkup } from "utils";
 import { ContentText, InfoItem, StyledContent } from "./styled";
 
-export const Tax = (): JSX.Element => {
+const Tax = (): JSX.Element => {
   const { contentRows, headerRows } = taxInfo;
 
   const renderHeader = useMemo(() => headerRows.cells.map( ( cell, index ) => (
@@ -21,9 +21,14 @@ export const Tax = (): JSX.Element => {
   ) ), [contentRows]);
 
   return (
-    <StyledContent>
-      { renderHeader }
-      { renderContentRows }
-    </StyledContent>
+    <>
+      <Header pageTitle="Tax Information" />
+      <StyledContent>
+        { renderHeader }
+        { renderContentRows }
+      </StyledContent>
+    </>
   );
 };
+
+export default Tax;

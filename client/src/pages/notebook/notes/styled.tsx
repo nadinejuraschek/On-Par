@@ -1,4 +1,4 @@
-import { Pagination } from "components";
+import { Input, Pagination } from "components";
 import styled from "styled-components";
 
 export const Grid = styled.div`
@@ -7,12 +7,12 @@ export const Grid = styled.div`
   grid-template-rows: auto;
   grid-gap: 2rem;
 
-  height: calc(100% - 6rem);
+  height: 100%;
   width: 100%;
 
   @media only screen and (min-width: 900px) {
     grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: 4rem calc(100% - 12rem) 4rem;
+    grid-template-rows: 4rem 1fr 4rem;
   }
 `;
 
@@ -21,7 +21,15 @@ export const Header = styled.div`
 
   display: flex;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: space-between;
+`;
+
+export const Search = styled(Input)`
+  min-height: 4rem;
+
+  input {
+    min-width: 26rem;
+  }
 `;
 
 export const List = styled.div`

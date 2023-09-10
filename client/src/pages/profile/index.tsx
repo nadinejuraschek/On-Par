@@ -1,6 +1,6 @@
-import { LoadingSpinner, Tabs } from "components";
-import { UserContext } from "contexts";
-import { useContext, useMemo, useState } from "react";
+import { Header, LoadingSpinner, Tabs } from "components";
+import { useUserContext } from "contexts";
+import { useMemo, useState } from "react";
 import { HostFamilyInfo } from "./HostFamilyInfo";
 import { Grid } from "./styled";
 import { UserInfo } from "./UserInfo";
@@ -12,12 +12,14 @@ const PROFILE_TABS = {
   CLUSTER: 3,
 }
 
-export const Profile = (): JSX.Element => {
-  const { user } = useContext( UserContext );
+const Profile = (): JSX.Element => {
+  const [{ user }] = useUserContext();
 
-  const [ activeTab, setActiveTab ] = useState(PROFILE_TABS.PROFILE);
+  const [ activeTab, setActiveTab ] = useState<number | string>(PROFILE_TABS.PROFILE);
 
   const renderContent = useMemo(() => {
+    if (!user) return null;
+
     switch (activeTab) {
     case PROFILE_TABS.HOST_FAMILY:
       return <HostFamilyInfo />;
@@ -42,9 +44,14 @@ export const Profile = (): JSX.Element => {
   ];
 
   return (
-    <Grid>
-      <Tabs activeTab={activeTab} fullWidth handleClick={setActiveTab} tabs={tabs} variant="secondary" />
-      {renderContent}
-    </Grid>
+    <>
+      <Header pageTitle="Profile" />
+      <Grid>
+        <Tabs activeTab={activeTab} fullWidth handleClick={setActiveTab} tabs={tabs} variant="secondary" />
+        {renderContent}
+      </Grid>
+    </>
   );
 };
+
+export default Profile;

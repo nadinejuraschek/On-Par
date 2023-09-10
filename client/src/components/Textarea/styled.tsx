@@ -1,18 +1,5 @@
 import styled, { css } from "styled-components";
-
 import { IStyledTextarea } from "./types";
-import { Text } from "../Text";
-
-export const Field = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: flex-start;
-  gap: 0.6rem;
-
-  height: 16.8rem;
-  min-width: 20rem;
-`;
 
 export const StyledTextarea = styled.textarea<IStyledTextarea>`
   background-color: var(--white);
@@ -47,14 +34,4 @@ export const StyledTextarea = styled.textarea<IStyledTextarea>`
       box-shadow: var(--shadow_xs_focused_error);
     }
   `};
-`;
-
-export const ErrorText = styled(Text)`
-  color: var(--error_300);
-
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-
-  max-width: 100%;
 `;

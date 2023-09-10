@@ -81,7 +81,7 @@ export const GoalItem = ({
 
     return (
       <BadgesWrapper>
-        <Badge icon={badgeIcon} label={type.toUpperCase()} variant={type} />
+        <Badge icon={badgeIcon} variant={type} />
         {dueDate && <Badge label={dayjs(dueDate).format("MM/DD/YYYY")} />}
       </BadgesWrapper>
     );
@@ -129,23 +129,25 @@ export const GoalItem = ({
     type]);
 
   return (
-    <StyledItem
-      className={className}
-      $isChecked={checked}
-      $isOverdue={isOverdue}
-    >
-      <ItemBody>
-        <Label
-          $isChecked={checked}
-          size="md"
-        >
-          { label }
-        </Label>
-        {renderBadges}
-      </ItemBody>
-      {renderActions}
+    <>
+      <StyledItem
+        className={className}
+        $isChecked={checked}
+        $isOverdue={isOverdue}
+      >
+        <ItemBody>
+          <Label
+            $isChecked={checked}
+            size="md"
+          >
+            { label }
+          </Label>
+          {renderBadges}
+        </ItemBody>
+        {renderActions}
+      </StyledItem>
       {renderDeleteConfirmModal}
       {renderEditModal}
-    </StyledItem>
+    </>
   );
 }

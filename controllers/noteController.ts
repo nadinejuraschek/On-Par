@@ -1,10 +1,13 @@
 import { Request, Response } from 'express';
 import db from '../models/db';
-import { handleUnknownUser } from '../utils/handleUnknownUser';
+import { isValidUser } from '../utils/isValidUser';
 
 // READ
 const getNotes = async (req: Request, res: Response) => {
-  handleUnknownUser(res, req.user);
+  const validUser = isValidUser(res, req.user);
+  if (!validUser) {
+    return res.status(403).json("Please log in to use this feature.");
+  }
 
   const page = Number(req.query.page) || 0;
   const limit = 10;
@@ -33,7 +36,10 @@ const getNotes = async (req: Request, res: Response) => {
 };
 
 const getSingleNote = async (req: Request, res: Response) => {
-  handleUnknownUser(res, req.user);
+  const validUser = isValidUser(res, req.user);
+  if (!validUser) {
+    return res.status(403).json("Please log in to use this feature.");
+  }
 
   await db.Note.findById(req.params.noteid)
     .then(note => {
@@ -46,7 +52,10 @@ const getSingleNote = async (req: Request, res: Response) => {
 
 // CREATE
 const createNote = async (req: Request, res: Response) => {
-  handleUnknownUser(res, req.user);
+  const validUser = isValidUser(res, req.user);
+  if (!validUser) {
+    return res.status(403).json("Please log in to use this feature.");
+  }
 
   const validated = {
     ...req.body,
@@ -73,7 +82,10 @@ const createNote = async (req: Request, res: Response) => {
 
 // UPDATE
 const updateNote = async (req: Request, res: Response) => {
-  handleUnknownUser(res, req.user);
+  const validUser = isValidUser(res, req.user);
+  if (!validUser) {
+    return res.status(403).json("Please log in to use this feature.");
+  }
 
   const validated = {
     ...req.body,
@@ -92,7 +104,10 @@ const updateNote = async (req: Request, res: Response) => {
 
 // DELETE
 const deleteNote = async (req: Request, res: Response) => {
-  handleUnknownUser(res, req.user);
+  const validUser = isValidUser(res, req.user);
+  if (!validUser) {
+    return res.status(403).json("Please log in to use this feature.");
+  }
 
   await db.Note.findByIdAndRemove(req.params.noteid)
     .then(() => {

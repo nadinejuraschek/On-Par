@@ -1,29 +1,22 @@
-import { Button, Icon, LoadingSpinner } from "components";
+import { Button, Header as HeaderComp, Icon, LoadingSpinner } from "components";
 import { useFetchNotes } from "hooks";
-import { useCallback, useMemo, useState } from "react";
+import { ChangeEvent, useCallback, useMemo, useState } from "react";
 import { TNote } from "types";
 import { AddNoteModal } from "./AddNoteModal";
-import { EditNoteModal } from "./EditNoteModal";
 import { NoteCard } from "./NoteCard";
-import { Grid, Header, List, StyledPagination } from "./styled";
+import { Grid, Header, List, Search, StyledPagination } from "./styled";
 // import { Suggestions } from "./Suggestions";
 
-export const Notes = (): JSX.Element => {
+const Notes = (): JSX.Element => {
   const [openAddNoteModal, setOpenAddNoteModal] = useState(false);
-  const [openEditNoteModal, setOpenEditNoteModal] = useState(false);
-  const [originalNote, setOriginalNote] = useState<TNote | null>(null);
   const [page, setPage] = useState(0);
+  const [searchInput, setSearchInput] = useState("");
 
   const { data: notesData, loading, refetch: refetchNotes } = useFetchNotes({ page });
 
-  const handleOpenEdit = useCallback((note: TNote) => {
-    setOpenEditNoteModal(true);
-    setOriginalNote(note);
-  }, []);
-
-  const handleEditCancel = useCallback(() => {
-    setOpenEditNoteModal(false);
-    setOriginalNote(null);
+  const handleSearch = useCallback((event: ChangeEvent) => {
+    const target = event.target as HTMLInputElement;
+    setSearchInput(target.value);
   }, []);
 
   const renderAddNoteModal = useMemo(() => {
@@ -37,41 +30,30 @@ export const Notes = (): JSX.Element => {
     );
   }, [openAddNoteModal, refetchNotes]);
 
-  const renderEditNoteModal = useMemo(() => {
-    if (!openEditNoteModal) return null;
-
-    return (
-      <EditNoteModal
-        handleEditCancel={handleEditCancel}
-        note={originalNote}
-        refetchNotes={refetchNotes}
-      />
-    );
-  }, [handleEditCancel,
-    openEditNoteModal,
-    originalNote,
-    refetchNotes]);
-
   const renderNotes = useMemo(() => {
     if (loading) return <LoadingSpinner />;
 
     if (!notesData || notesData.notes.length === 0) return null;
 
-    return notesData.notes.map((note: TNote, index: number) => {
+    const filteredNotes = notesData.notes.filter((note) => {
+      return note.title.includes(searchInput) || note.text.includes(searchInput);
+    });
+
+    return filteredNotes.map((note: TNote, index: number) => {
       const color = index % 3 === 0 ? "yellow" : index % 2 === 0 ? "blue" : "pink";
       return (
         <NoteCard
           color={ color }
-          handleOpenEdit={handleOpenEdit}
           key={ note._id }
           note={note}
           refetchNotes={refetchNotes}
         />
       ) });
-  }, [handleOpenEdit,
+  }, [
     loading,
     notesData,
-    refetchNotes]);
+    refetchNotes,
+    searchInput]);
 
   const renderPagination = useMemo(() => {
     const total = notesData?.total ? notesData.total : 0;
@@ -88,9 +70,17 @@ export const Notes = (): JSX.Element => {
 
   return (
     <>
+      <HeaderComp pageTitle="Notes" />
       <Grid>
         {/* <Suggestions /> */}
         <Header>
+          <Search
+            handleChange={handleSearch}
+            icon="search"
+            name="search"
+            placeholder="Search"
+            value={searchInput}
+          />
           <Button handleClick={() => setOpenAddNoteModal(true)} variant="primary">
             <Icon type="plus" /> Add Note
           </Button>
@@ -101,7 +91,8 @@ export const Notes = (): JSX.Element => {
         {renderPagination}
       </Grid>
       {renderAddNoteModal}
-      {renderEditNoteModal}
     </>
   );
 };
+
+export default Notes;

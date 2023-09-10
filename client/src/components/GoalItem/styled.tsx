@@ -24,7 +24,7 @@ export const Overlay = styled.div`
 
 export const StyledItem = styled.li<IStyledItem>`
   background-color: var(--white);
-  border: 1px solid var(--grey_300);
+  border: 1px solid var(--grey_200);
   border-radius: 0.8rem;
   box-shadow: var(--shadow_xs);
   opacity: ${({ $isChecked }) => $isChecked ? 0.4 : 1};
@@ -48,7 +48,6 @@ export const StyledItem = styled.li<IStyledItem>`
   }
 
   ${({ $isOverdue }) => $isOverdue && css`
-    background-color: var(--tertiary_25);
     border-color: var(--error_300);
   `};
 `;
