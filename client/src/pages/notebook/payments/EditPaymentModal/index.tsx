@@ -1,8 +1,8 @@
-import { Button, DatePicker, Modal } from "components";
+import { Button, DatePicker, Input, Modal } from "components";
 import { useUserContext } from "contexts";
 import * as dayjs from "dayjs";
 import { useEditPayment } from "hooks";
-import { useCallback, useMemo, useState } from "react";
+import { ChangeEvent, useCallback, useMemo, useState } from "react";
 import { TPaymentFormData, paymentSchema } from "schema";
 import { ZodFormattedError } from "zod";
 import { IEditPaymentModal } from "./types";
@@ -19,6 +19,12 @@ export const EditPaymentModal = ({
   const [errors, setErrors] = useState<ZodFormattedError<TPaymentFormData> | undefined>(undefined);
   const [submitting, setSubmitting] = useState(false);
   const [updatedPayment, setUpdatedPayment] = useState(originalPayment);
+
+  const handleAmountChange = useCallback((event: ChangeEvent) => {
+    const target = event.target as HTMLInputElement;
+    const amount = parseFloat(target.value);
+    setUpdatedPayment(updatedPayment => ({ ...updatedPayment, amount }));
+  }, []);
 
   const handleDateChange = useCallback((selected: Date) => {
     if (!user?.startDate) return;
@@ -76,10 +82,22 @@ export const EditPaymentModal = ({
 
   return (
     <Modal actions={renderEditActions} handleClose={handleClose} title="Edit Payment">
+      <Input
+        fullWidth
+        handleChange={handleAmountChange}
+        icon="dollar"
+        label="Amount"
+        name="amount"
+        placeholder="195.95"
+        type="number"
+        step="0.01"
+        value={updatedPayment.amount || 195.95}
+      />
       <DatePicker
         error={errors?.date?._errors?.[0] && errors.date._errors[0]}
         format="MM/dd/yyyy"
         handleChange={handleDateChange}
+        icon="calendar"
         label="Stipend was paid on"
         name="date"
         value={updatedPayment.date}

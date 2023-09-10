@@ -11,10 +11,6 @@ export interface IDatePicker {
   value: Date | null;
 }
 
-export interface IStyledField {
-  $fullWidth: boolean;
-}
-
 export interface IStyledDateTimePicker {
   $hasError: boolean;
   $hasIcon: boolean;

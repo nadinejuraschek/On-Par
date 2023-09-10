@@ -7,6 +7,7 @@ export * from "./DatePicker";
 export * from "./GoalItem";
 export * from "./Event";
 export * from "./Features";
+export * from "./FormField";
 export * from "./Header";
 export * from "./Icon";
 export * from "./Input";

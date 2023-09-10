@@ -1,9 +1,8 @@
-import { ChangeEvent, useCallback, useMemo, useState } from "react";
+import { ChangeEvent, useCallback, useState } from "react";
 //import { useDebounce } from "usehooks-ts";
-import { ErrorText, Field, IconInputWrapper, IconWrapper, StyledInput } from "./styled";
+import { StyledInput } from "./styled";
 import { IInput } from "./types";
-import { Icon } from "../Icon";
-import { Text } from "../Text";
+import { FormField } from "../FormField";
 
 export const Input = ( {
   className = "",
@@ -15,6 +14,7 @@ export const Input = ( {
   label,
   name,
   placeholder = "Type here...",
+  step = "1",
   type = "text",
   value,
 }: IInput ): JSX.Element => {
@@ -30,50 +30,27 @@ export const Input = ( {
     handleChange(event);
   }, [handleChange]);
 
-  const renderLabel = useMemo(() => {
-    if (!label) return null;
-
-    return (
-      <Text as="label" htmlFor={ name } size="sm" weight="bold">
-        { label }
-      </Text>
-    );
-  }, [label, name]);
-
-  const renderIcon = useMemo(() => {
-    if (!icon) return null;
-
-    return (
-      <IconWrapper>
-        <Icon type={icon} />
-      </IconWrapper>
-    );
-  }, [icon]);
-
-  const renderErrorMessage = useMemo(() => {
-    if (!error) return null;
-
-    return <ErrorText as="p" size="xs" >{ error }</ErrorText>;
-  }, [error]);
-
   return (
-    <Field className={className} $fullWidth={fullWidth}>
-      { renderLabel }
-      <IconInputWrapper>
-        <StyledInput
-          disabled={disabled}
-          $fullWidth={fullWidth}
-          $hasError={Boolean(error)}
-          $hasIcon={Boolean(icon)}
-          name={ name }
-          onChange={ handleControlledChange }
-          placeholder={ placeholder }
-          type={type}
-          value={ controlledValue }
-        />
-        { renderIcon }
-      </IconInputWrapper>
-      { renderErrorMessage }
-    </Field>
+    <FormField
+      className={className}
+      error={error}
+      icon={icon}
+      label={label}
+      name={name}
+      fullWidth={fullWidth}
+    >
+      <StyledInput
+        disabled={disabled}
+        $fullWidth={fullWidth}
+        $hasError={Boolean(error)}
+        $hasIcon={Boolean(icon)}
+        name={ name }
+        onChange={ handleControlledChange }
+        placeholder={ placeholder }
+        type={type}
+        step={step}
+        value={ controlledValue }
+      />
+    </FormField>
   );
 };

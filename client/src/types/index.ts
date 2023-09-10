@@ -34,6 +34,7 @@ export type TWorkhour = {
 
 export type TPayment = {
   _id?: string;
+  amount: number | null;
   date: Date | null;
   late: boolean;
   paid: boolean;

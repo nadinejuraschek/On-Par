@@ -25,7 +25,7 @@ export const Header = styled.div`
 `;
 
 export const Search = styled(Input)`
-  height: 4rem;
+  min-height: 4rem;
 
   input {
     min-width: 26rem;

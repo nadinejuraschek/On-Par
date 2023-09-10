@@ -105,6 +105,7 @@ const registerUser = async (req: Request, res: Response) => {
   // create empty payment entries for the whole year
   const createPaymentEntries = () => {
     return Array(52).fill({
+      amount: null,
       paid: false,
       date: null,
       late: false,

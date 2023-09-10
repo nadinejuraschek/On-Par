@@ -5,6 +5,7 @@ export interface ITextarea {
   error?: string;
   fullWidth?: boolean;
   handleChange: (event: ChangeEvent) => void;
+  icon?: string;
   label: string;
   name: string;
   placeholder?: string;

@@ -1,4 +1,4 @@
-import { Badge, Button, Icon } from "components";
+import { Badge, Button, Icon, Text } from "components";
 import * as dayjs from "dayjs";
 import * as duration from "dayjs/plugin/duration";
 import * as isSameOrBefore from "dayjs/plugin/isSameOrBefore";
@@ -7,7 +7,8 @@ import { TPayment } from "types";
 import {
   Actions,
   Badges,
-  Date,
+  Body,
+  DateCol,
   DayMonth,
   LateBadge,
   ListItem,
@@ -23,13 +24,14 @@ export const Payment = ( {
   payment,
   refetchPayments,
 }: IPaymentEntry ): JSX.Element => {
-  const { date, late, week } = payment;
+  const { amount, date, late, week } = payment;
 
   const [editPayment, setEditPayment] = useState<TPayment | null>(null);
 
   const handleEditClick = useCallback((event: MouseEvent) => {
     event.preventDefault();
-    setEditPayment(payment);
+    const dateAsDate = typeof payment.date === "string" ? new Date(payment.date) : payment.date;
+    setEditPayment({ ...payment, amount: payment.amount ?? 195.95, date: dateAsDate });
   }, [payment]);
 
   const renderDateColumn = useMemo(() => {
@@ -42,6 +44,13 @@ export const Payment = ( {
       </>
     );
   }, [date]);
+
+  const renderPayment = useMemo(() => {
+    if (!amount) return null;
+
+    const formattedAmount = new Intl.NumberFormat("en-US", { currency: "USD", style: "currency" }).format(amount);
+    return <Text size="lg">{formattedAmount}</Text>;
+  }, [amount]);
 
   const renderLateBadge = useMemo(() => {
     if (!late) return null;
@@ -64,11 +73,14 @@ export const Payment = ( {
   return (
     <>
       <ListItem $warning={!date}>
-        <Date>{ renderDateColumn }</Date>
-        <Badges>
-          {renderLateBadge}
-          <Badge label={`Week #${week}`} />
-        </Badges>
+        <DateCol>{ renderDateColumn }</DateCol>
+        <Body>
+          {renderPayment}
+          <Badges>
+            {renderLateBadge}
+            <Badge label={`Week #${week}`} />
+          </Badges>
+        </Body>
         <Actions>
           <Button
             handleClick={handleEditClick}
