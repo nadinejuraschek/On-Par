@@ -1,8 +1,8 @@
-import { Header, Text, Timer, WeeklyHours as WeeklyList } from "components";
+import { Header, Text, Timer } from "components";
 import { useFetchWorkhoursToday } from "hooks";
 import { useMemo } from "react";
-import { AddHours } from "./AddHours";
 import { CardAddWorkhour, CardReminder, CardTimer, CardTracker, StyledContent } from "./styled";
+import { WeeklyList } from "./WeeklyList";
 
 const Workhours = (): JSX.Element => {
 
@@ -27,7 +27,8 @@ const Workhours = (): JSX.Element => {
           {renderTimes}
         </CardTimer>
         <CardAddWorkhour>
-          <AddHours />
+          {/* <AddHours /> */}
+          Weekly Overview
         </CardAddWorkhour>
       </StyledContent>
     </>

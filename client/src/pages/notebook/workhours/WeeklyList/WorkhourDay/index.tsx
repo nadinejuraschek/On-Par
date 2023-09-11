@@ -1,7 +1,8 @@
+import { Text } from "components";
 import * as dayjs from "dayjs";
 import { useMemo } from "react";
 import { TimeUtils } from "utils";
-import { Date, Day, Hours, Month, StartTrackerButton, StyledItem, TrackerWrapper } from "./styled";
+import { Actions, Date, Hours, StartTrackerButton, StyledItem, Tracker } from "./styled";
 import { IWorkhourDay } from "./types";
 
 export const WorkhourDay = ({ day, hours }: IWorkhourDay): JSX.Element => {
@@ -11,11 +12,23 @@ export const WorkhourDay = ({ day, hours }: IWorkhourDay): JSX.Element => {
     return todaysHours?.total ?? 0;
   }, [day, hours]);
 
-  const renderTotalHours = useMemo(() => (
-    <Hours isOvertime={totalHours > 600}>
-      { totalHours === 0 ? null : `${TimeUtils.minToH(totalHours)} h` }
-    </Hours>
-  ), [totalHours]);
+  const renderTotalHours = useMemo(() => {
+    const isOvertime = totalHours > 600;
+    return (
+      <Hours>
+        <Text color="--grey_400" size="sm">
+          Total
+        </Text>
+        <Text
+          color={isOvertime ? "--error_600" : "--success_700"}
+          weight={isOvertime ? "bold" : "regular"}
+          size="sm"
+        >
+          { totalHours === 0 ? "0:00 h" : `${TimeUtils.minToH(totalHours)} h` }
+        </Text>
+      </Hours>
+    );
+  }, [totalHours]);
 
   const renderStartTrackerButton = useMemo(() => {
     const formattedDay = dayjs(day).format("YY-MM-DD");
@@ -29,13 +42,15 @@ export const WorkhourDay = ({ day, hours }: IWorkhourDay): JSX.Element => {
   return (
     <StyledItem>
       <Date>
-        <Day>{dayjs(day).format("DD")}</Day>
-        <Month>{dayjs(day).format("MMM")}</Month>
+        <Text color="--grey_400" size="sm">{dayjs(day).format("ddd")}</Text>
+        <Text size="sm">{dayjs(day).format("MMM")} {dayjs(day).format("DD")}</Text>
       </Date>
+      <Tracker>
+      </Tracker>
       { renderTotalHours }
-      <TrackerWrapper>
+      <Actions>
         { renderStartTrackerButton }
-      </TrackerWrapper>
+      </Actions>
     </StyledItem>
   );
 };

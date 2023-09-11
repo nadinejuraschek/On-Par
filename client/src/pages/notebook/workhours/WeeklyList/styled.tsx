@@ -1,5 +1,5 @@
+import { Text } from "components";
 import styled from "styled-components";
-import { Text } from "../../Text";
 
 export const WeeklyGrid = styled.div`
   display: grid;

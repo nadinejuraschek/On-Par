@@ -13,8 +13,8 @@ export const AddHours = (): JSX.Element => {
   const [submitting, setSubmitting] = useState(false);
   const [workhoursData, setWorkhoursData] = useState<TWorkhoursFormData>({
     date: today,
-    start: undefined,
-    end: undefined,
+    start: today,
+    end: today,
   });
 
   const { createWorkhours } = useCreateWorkhours();

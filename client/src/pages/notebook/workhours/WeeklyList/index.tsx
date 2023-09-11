@@ -5,7 +5,7 @@ import { useCallback, useMemo, useState } from "react";
 import { DateNav, WeeklyGrid, WeekRange } from "./styled";
 import { WorkhourList } from "./WorkhourList";
 
-export const WeeklyHours = (): JSX.Element => {
+export const WeeklyList = (): JSX.Element => {
   const [startWeek, setStartWeek] = useState( dayjs().startOf( "week" ) );
 
   const endWeek = dayjs( startWeek ).endOf( "week" );

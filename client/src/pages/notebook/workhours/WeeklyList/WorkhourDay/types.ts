@@ -5,7 +5,3 @@ export interface IWorkhourDay {
   day: Dayjs;
   hours: TWorkhour[];
 }
-
-export interface IStyledHours {
-  $isOvertime: boolean;
-}

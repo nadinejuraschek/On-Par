@@ -1,7 +1,5 @@
+import { Button } from "components";
 import styled from "styled-components";
-import { IStyledHours } from "./types";
-import { Button } from "../../../Button";
-import { Text } from "../../../Text";
 
 export const StyledItem = styled.li`
   display: grid;
@@ -9,9 +7,8 @@ export const StyledItem = styled.li`
   grid-gap: 1rem;
 
   display: grid;
-  grid-template-columns: 6rem 1fr auto;
+  grid-template-columns: 10rem 1fr 10rem auto;
   align-items: center;
-  grid-gap: 2rem;
 
   border: 1px solid;
   border-radius: 0.8rem;
@@ -30,31 +27,39 @@ export const Date = styled.div`
 
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
   gap: 0.2rem;
 
   border-right: 1px solid var(--grey_200);
+  padding: 0 1.5rem;
 `;
 
-export const Day = styled.span`
-  font-size: 1.8rem;
-`;
+export const Tracker = styled.div`
+  padding: 0 1.5rem;
 
-export const Month = styled.span`
-  font-size: 1.4rem;
-`;
+  display: flex;
+  gap: 0.2rem;
 
-export const Hours = styled(Text)<IStyledHours>`
-  color: ${({ $isOvertime }) => $isOvertime ? "var(--error_600)" : "#2c662d"};
-  font-weight: ${({ $isOvertime }) => $isOvertime ? "bold" : "normal"};
-
-  text-align: right;
-
+  height: 100%;
   width: 100%;
 `;
 
-export const TrackerWrapper = styled.div`
+export const Hours = styled.div`
+  border-left: 1px solid var(--grey_200);
+  padding: 0 1.5rem;
+  text-align: right;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 0.2rem;
+
+  height: 100%;
+  width: 100%;
+`;
+
+export const Actions = styled.div`
   border-left: 1px solid var(--grey_200);
   padding: 0 1.5rem;
 
