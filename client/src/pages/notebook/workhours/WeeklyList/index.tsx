@@ -37,16 +37,6 @@ export const WeeklyList = (): JSX.Element => {
     return workhoursData.hours.sort(( a, b ) => a.date.valueOf() - b.date.valueOf());
   }, [workhoursData]);
 
-  const renderList = useMemo(() => {
-    return (
-      <WorkhourList
-        endDate={endWeek}
-        hours={hours}
-        startDate={startWeek}
-      />
-    );
-  }, [endWeek, hours, startWeek]);
-
   return (
     <WeeklyGrid>
       <DateNav>
@@ -58,7 +48,11 @@ export const WeeklyList = (): JSX.Element => {
           <Icon type="chevronRight" />
         </Button>
       </DateNav>
-      {renderList}
+      <WorkhourList
+        endDate={endWeek}
+        hours={hours}
+        startDate={startWeek}
+      />
     </WeeklyGrid>
   );
 };

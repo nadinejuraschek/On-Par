@@ -10,6 +10,8 @@ const getVariantStyles = (variant: TVariant) => {
     return primaryStyles;
   case "tertiary":
     return tertiaryStyles;
+  case "quarternary":
+    return quarternaryStyles;
   case "danger":
     return dangerStyles;
   case "warning":
@@ -126,6 +128,28 @@ const tertiaryStyles = css`
   }
 `;
 
+const quarternaryStyles = css`
+  background-color: transparent;
+  border: none;
+  box-shadow: none;
+  color: var(--grey_500);
+
+  &:hover {
+    background-color: transparent;
+    color: var(--grey_700);
+  }
+
+  &:active, &:focus {
+    box-shadow: var(--shadow_xs_focused);
+  }
+
+  &:disabled {
+    background-color: transparent;
+    border: none;
+    color: var(--grey_300);
+  }
+`;
+
 const dangerStyles = css`
   background-color: var(--error_50);
   border-color: var(--error_50);
@@ -197,7 +221,7 @@ export const StyledButton = styled.button<IStyledButton>`
     width: 100%;
   `};
 
-  ${({ $variant }) => getVariantStyles($variant)};
+  ${({ $variant }) => getVariantStyles($variant ?? "secondary")};
 `;
 
 export const StyledLink = styled(Link)<IStyledButton>`
@@ -227,7 +251,7 @@ export const StyledLink = styled(Link)<IStyledButton>`
     width: 100%;
   `};
 
-  ${({ $variant }) => getVariantStyles($variant)};
+  ${({ $variant }) => getVariantStyles($variant ?? "secondary")};
 `;
 
 export const Loader = styled.div`

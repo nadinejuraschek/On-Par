@@ -32,6 +32,8 @@ export const CardAddWorkhour = styled(Card)`
 `;
 
 export const CardTracker = styled(Card)`
+  overflow-y: auto;
+
   @media only screen and (min-width: 900px) {
     grid-column: 1 / 6;
     grid-row: 2 / 7;

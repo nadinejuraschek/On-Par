@@ -2,8 +2,10 @@ import {
   faBars,
   faCalendarDays,
   faCheck,
+  faChevronDown,
   faChevronLeft,
   faChevronRight,
+  faChevronUp,
   faClock,
   faCopy,
   faDollarSign,
@@ -15,6 +17,7 @@ import {
   faPen,
   faPhone,
   faPlane,
+  faPlay,
   faPlus,
   faSearch,
   faTrash,
@@ -35,10 +38,14 @@ export const Icon = ({ color = "inherit", size = "1.4rem", type }: IIcon): JSX.E
       return faCalendarDays;
     case "check":
       return faCheck;
+    case "chevronDown":
+      return faChevronDown;
     case "chevronLeft":
       return faChevronLeft;
     case "chevronRight":
       return faChevronRight;
+    case "chevronUp":
+      return faChevronUp;
     case "clock":
       return faClock;
     case "close":
@@ -63,6 +70,8 @@ export const Icon = ({ color = "inherit", size = "1.4rem", type }: IIcon): JSX.E
       return faPhone;
     case "plane":
       return faPlane;
+    case "play":
+      return faPlay;
     case "plus":
       return faPlus;
     case "search":

@@ -27,7 +27,6 @@ const Workhours = (): JSX.Element => {
           {renderTimes}
         </CardTimer>
         <CardAddWorkhour>
-          {/* <AddHours /> */}
           Weekly Overview
         </CardAddWorkhour>
       </StyledContent>

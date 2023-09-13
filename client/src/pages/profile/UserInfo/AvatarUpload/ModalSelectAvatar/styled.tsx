@@ -31,15 +31,6 @@ export const Form = styled.div`
   overflow-y: auto;
 
   max-height: 20rem;
-
-  /* Hide scrollbar for IE, Edge and Firefox */
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
-
-  /* Hide scrollbar for Chrome, Safari and Opera */
-  &::-webkit-scrollbar {
-    display: none;
-  }
 `;
 
 export const FieldPair = styled.div`

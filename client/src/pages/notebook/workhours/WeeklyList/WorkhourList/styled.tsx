@@ -5,6 +5,7 @@ export const WeeklyList = styled.ul`
   row-gap: 1rem;
   margin: 0;
   padding: 0;
+  padding-bottom: 2rem;
 
   height: 100%;
 `;

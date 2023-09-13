@@ -1,6 +1,6 @@
 import { FC, SVGProps } from "react";
 
-export type TVariant = "primary" | "secondary" | "tertiary" | "danger" | "warning";
+export type TVariant = "primary" | "secondary" | "tertiary" | "quarternary" | "danger" | "warning";
 
 export type TGoalType = "education" | "personal" | "travel";
 
@@ -18,19 +18,21 @@ export type TGoal = {
   month?: number;
   text: string;
   type: TGoalType;
-}
+};
 
 export type TWorkhour = {
   _id: string;
   date: Date;
-  hours: {
-    _id: string;
-    duration: number;
-    end: Date;
-    start: Date;
-  }[];
+  hours: TSubWorkhour[];
   total: number;
-}
+};
+
+export type TSubWorkhour = {
+  _id: string;
+  duration: number;
+  end: Date;
+  start: Date;
+};
 
 export type TPayment = {
   _id?: string;

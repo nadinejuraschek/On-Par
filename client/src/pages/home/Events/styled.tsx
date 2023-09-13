@@ -16,13 +16,6 @@ export const Content = styled.div`
   gap: 2.4rem;
 
   overflow-y: auto;
-
-  -ms-overflow-style: none;  /* Hide scrollbar for IE and Edge */
-  scrollbar-width: none;  /* Hide scrollbar for Firefox */
-
-  &::-webkit-scrollbar {
-    display: none; /* Hide scrollbar for Chrome, Safari and Opera */
-  }
 `;
 
 export const ListContent = styled.div`

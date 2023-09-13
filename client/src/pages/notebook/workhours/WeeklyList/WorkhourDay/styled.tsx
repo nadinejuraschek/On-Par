@@ -1,76 +1,51 @@
-import { Button } from "components";
+import { DatePicker } from "components";
 import styled from "styled-components";
 
 export const StyledItem = styled.li`
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-gap: 1rem;
+  grid-template-columns: 10rem 1fr 7.2rem;
 
-  display: grid;
-  grid-template-columns: 10rem 1fr 10rem auto;
-  align-items: center;
-
-  border: 1px solid;
-  border-radius: 0.8rem;
   background-color: var(--white);
-  border-color: var(--grey_200);
+  border: 1px solid var(--grey_200);
+  border-radius: 0.8rem;
   box-shadow: var(--shadow_xs);
   overflow: hidden;
 
-  height: 6rem;
-  width: 100%;
+  min-height: 6rem;
 `;
 
-export const Date = styled.div`
-  height: 100%;
-  width: 100%;
-
+export const Content = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  gap: 0.2rem;
 
-  border-right: 1px solid var(--grey_200);
-  padding: 0 1.5rem;
-`;
-
-export const Tracker = styled.div`
-  padding: 0 1.5rem;
-
-  display: flex;
-  gap: 0.2rem;
-
-  height: 100%;
-  width: 100%;
-`;
-
-export const Hours = styled.div`
   border-left: 1px solid var(--grey_200);
-  padding: 0 1.5rem;
-  text-align: right;
-
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  justify-content: center;
-  gap: 0.2rem;
+  padding-right: 1.6rem;
 
   height: 100%;
   width: 100%;
+`;
+
+export const Row = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 4rem;
+  align-items: center;
+  gap: 1.5rem;
+
+  height: 6rem;
+`;
+
+export const StyledDatePicker = styled(DatePicker)`
+  min-height: 4rem;
+  min-width: unset;
 `;
 
 export const Actions = styled.div`
   border-left: 1px solid var(--grey_200);
-  padding: 0 1.5rem;
+  padding: 0.8rem 0;
 
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
 
   height: 100%;
-  width: 11rem;
-`;
-
-export const StartTrackerButton = styled(Button)`
-  width: 5rem;
 `;
