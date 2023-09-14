@@ -13,5 +13,11 @@ export const TimeInput = styled.div`
   display: grid;
   grid-template-columns: 11rem 1rem 11rem;
   align-items: center;
-  gap: 1.6rem;
+  gap: 1.2rem;
+`;
+
+export const Actions = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
 `;

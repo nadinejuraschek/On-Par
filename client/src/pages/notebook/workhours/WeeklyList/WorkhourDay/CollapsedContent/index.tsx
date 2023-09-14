@@ -1,10 +1,10 @@
 import { Button, Icon } from "components";
 import * as dayjs from "dayjs";
-import { useCreateWorkhours } from "hooks";
+import { useCreateWorkhours, useDeleteWorkhours } from "hooks";
 import { useCallback, useMemo, useState } from "react";
 import { TWorkhoursFormData, workhoursSchema } from "schema/workhours.schema";
 import { ZodFormattedError } from "zod";
-import { TimeCol, TimeInput } from "./styled";
+import { Actions, TimeCol, TimeInput } from "./styled";
 import { ICollapsedContent } from "./types";
 import { WeekhourDayCol } from "../Col";
 import { StyledDatePicker } from "../styled";
@@ -22,6 +22,7 @@ export const CollapsedContent = ({ hours }: ICollapsedContent): JSX.Element => {
   });
 
   const { createWorkhours } = useCreateWorkhours();
+  const { deleteWorkhours } = useDeleteWorkhours();
 
   const handleChange = useCallback((date: Date, name: string) => {
     setWorkhoursData( (prev) => ( { ...prev, [name]: date } ) );
@@ -118,14 +119,24 @@ export const CollapsedContent = ({ hours }: ICollapsedContent): JSX.Element => {
         <span>&mdash;</span>
         {renderEndTime}
       </TimeInput>
-      <Button
-        loading={submitting}
-        handleClick={editMode ? handleSubmit : () => setEditMode(true)}
-        square
-        variant="tertiary"
-      >
-        <Icon type={editMode ? "check" : "pen"} />
-      </Button>
+      <Actions>
+        <Button
+          loading={submitting}
+          handleClick={editMode ? handleSubmit : () => setEditMode(true)}
+          square
+          variant="tertiary"
+        >
+          <Icon type={editMode ? "check" : "pen"} />
+        </Button>
+        <Button
+          loading={submitting}
+          handleClick={() => deleteWorkhours(hours._id)}
+          square
+          variant="tertiary"
+        >
+          <Icon type="trash" />
+        </Button>
+      </Actions>
     </TimeCol>
   );
 }
