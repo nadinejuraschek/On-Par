@@ -79,7 +79,7 @@ const createWorkhour = async (req: Request, res: Response) => {
   if (!workitem) {
     await db.Workhour.create({
       date: dateWithoutTime,
-      hours: hours,
+      hours,
       total: hours[0].duration,
     })
       .then(async insertedWorkhour => {
@@ -98,7 +98,7 @@ const createWorkhour = async (req: Request, res: Response) => {
     const newTotal = workitem.total + hours[0].duration;
     await db.Workhour.findOneAndUpdate(
       { date: dateWithoutTime },
-      { total: newTotal, $push: { hours: hours } },
+      { total: newTotal, $push: { hours } },
       )
       .then(() => res.status(200).json('Workhours have been created successfully!'))
       .catch(err => {
@@ -144,9 +144,42 @@ const deleteWorkhour = async (req: Request, res: Response) => {
     });
 };
 
+// DELETE NESTED HOURS
+const deleteWorkhourNested = async (req: Request, res: Response) => {
+  const validUser = isValidUser(res, req.user);
+  if (!validUser) {
+    return res.status(403).json("Please log in to use this feature.");
+  }
+
+  const workitem = await db.Workhour.findOne({ _id: req.params.workhourid });
+
+  if (!workitem) {
+    return res.status(500).json("Workhour entry id could not be found.");
+  }
+
+  const hoursToDelete = workitem.hours.find((item) => item._id.toString() === req.params.workhournestedid);
+
+  if (!hoursToDelete) {
+    return res.status(500).json("Workhour nested time entry id could not be found.");
+  }
+
+  const newTotal = workitem.total - hoursToDelete.duration;
+  const newHours = workitem.hours.filter((item) => item._id.toString() !== req.params.workhournestedid);
+
+  await db.Workhour.findOneAndUpdate(
+    { _id: req.params.workhourid },
+    { total: newTotal, hours: newHours },
+  )
+    .then(() => res.status(200).json('Workhours have been created successfully!'))
+    .catch(err => {
+      res.status(500).json({ error: err.message });
+    });
+};
+
 export const workhourController = {
   createWorkhour,
   deleteWorkhour,
+  deleteWorkhourNested,
   getWorkhours,
   getWorkhoursDay,
   getWorkhoursWeek,

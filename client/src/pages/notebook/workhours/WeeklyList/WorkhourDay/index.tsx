@@ -13,7 +13,7 @@ export const WorkhourDay = ({ day, hours }: IWorkhourDay): JSX.Element => {
   const renderCollapsedContent = useMemo(() => {
     if (isCollapsed || !hours?.[0]) return null;
 
-    return hours[0].hours.map((item) => <CollapsedContent hours={item} key={item._id} />);
+    return hours[0].hours.map((item) => <CollapsedContent hours={item} itemId={hours[0]._id} key={item._id} />);
   }, [hours, isCollapsed]);
 
   const totalHours = useMemo(() => {

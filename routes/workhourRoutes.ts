@@ -16,5 +16,6 @@ router.put('/workhours/:workhourid', workhourController.updateWorkhour);
 
 // DELETE
 router.delete('/workhours/:workhourid', workhourController.deleteWorkhour);
+router.delete('/workhours/:workhourid/:workhournestedid', workhourController.deleteWorkhourNested);
 
 export default router;

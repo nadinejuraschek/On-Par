@@ -9,7 +9,7 @@ import { ICollapsedContent } from "./types";
 import { WeekhourDayCol } from "../Col";
 import { StyledDatePicker } from "../styled";
 
-export const CollapsedContent = ({ hours }: ICollapsedContent): JSX.Element => {
+export const CollapsedContent = ({ hours, itemId }: ICollapsedContent): JSX.Element => {
   const today = new Date();
 
   const [editMode, setEditMode] = useState(false);
@@ -22,7 +22,7 @@ export const CollapsedContent = ({ hours }: ICollapsedContent): JSX.Element => {
   });
 
   const { createWorkhours } = useCreateWorkhours();
-  const { deleteWorkhours } = useDeleteWorkhours();
+  const { deleteWorkhoursNested } = useDeleteWorkhours();
 
   const handleChange = useCallback((date: Date, name: string) => {
     setWorkhoursData( (prev) => ( { ...prev, [name]: date } ) );
@@ -130,7 +130,7 @@ export const CollapsedContent = ({ hours }: ICollapsedContent): JSX.Element => {
         </Button>
         <Button
           loading={submitting}
-          handleClick={() => deleteWorkhours(hours._id)}
+          handleClick={() => deleteWorkhoursNested(itemId, hours._id)}
           square
           variant="tertiary"
         >

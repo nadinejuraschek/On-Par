@@ -10,6 +10,7 @@ type THours = {
   duration: number;
   end: Date;
   start: Date;
+  _id: string;
 };
 
 // SCHEMA SETUP
