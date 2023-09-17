@@ -2,12 +2,14 @@ import { Button, Icon } from "components";
 import * as dayjs from "dayjs";
 import { useMemo, useState } from "react";
 import { TimeUtils } from "utils";
+import { AddHoursInput } from "./AddHoursInput";
 import { WeekhourDayCol as Col } from "./Col";
 import { CollapsedContent } from "./CollapsedContent";
 import { Actions, Content, Row, StyledItem } from "./styled";
 import { IWorkhourDay } from "./types";
 
 export const WorkhourDay = ({ day, hours }: IWorkhourDay): JSX.Element => {
+  const [addHours, setAddHours] = useState(false);
   const [isCollapsed, setIsCollapsed] = useState(true);
 
   const renderCollapsedContent = useMemo(() => {
@@ -37,6 +39,12 @@ export const WorkhourDay = ({ day, hours }: IWorkhourDay): JSX.Element => {
       </Button>
     );
   }, [isCollapsed, totalHours]);
+
+  const renderAddHours = useMemo(() => {
+    if (!addHours) return null;
+
+    return <Row><AddHoursInput day={day} /></Row>;
+  }, [addHours, day]);
 
   const renderStartTrackerButton = useMemo(() => {
     const formattedDay = dayjs(day).format("YY-MM-DD");
@@ -70,8 +78,12 @@ export const WorkhourDay = ({ day, hours }: IWorkhourDay): JSX.Element => {
           { renderToggleCollapse }
         </Row>
         { renderCollapsedContent }
+        { renderAddHours }
       </Content>
       <Actions>
+        <Button handleClick={addHours ? () => {} : () => setAddHours(true)} square variant="tertiary">
+          <Icon type={addHours ? "check" : "plus"} />
+        </Button>
         { renderStartTrackerButton }
       </Actions>
     </StyledItem>

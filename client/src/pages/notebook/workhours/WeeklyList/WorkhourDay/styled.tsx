@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 export const StyledItem = styled.li`
   display: grid;
-  grid-template-columns: 8rem 1fr 7.2rem;
+  grid-template-columns: 8rem 1fr 12.2rem;
 
   background-color: var(--white);
   border: 1px solid var(--grey_200);
@@ -41,11 +41,11 @@ export const StyledDatePicker = styled(DatePicker)`
 
 export const Actions = styled.div`
   border-left: 1px solid var(--grey_200);
-  padding: 0.8rem 0;
+  padding: 0.8rem 1.6rem;
 
   display: flex;
   align-items: flex-start;
-  justify-content: center;
+  gap: 0.8rem;
 
   height: 100%;
 `;
