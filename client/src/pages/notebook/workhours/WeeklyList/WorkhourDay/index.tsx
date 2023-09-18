@@ -2,15 +2,15 @@ import { Button, Icon } from "components";
 import * as dayjs from "dayjs";
 import { useMemo, useState } from "react";
 import { TimeUtils } from "utils";
-import { AddHoursInput } from "./AddHoursInput";
 import { WeekhourDayCol as Col } from "./Col";
 import { CollapsedContent } from "./CollapsedContent";
+import { ModalAddHours } from "./ModalAddHours";
 import { Actions, Content, Row, StyledItem } from "./styled";
 import { IWorkhourDay } from "./types";
 
 export const WorkhourDay = ({ day, hours }: IWorkhourDay): JSX.Element => {
-  const [addHours, setAddHours] = useState(false);
   const [isCollapsed, setIsCollapsed] = useState(true);
+  const [openModalAddHours, setOpenModalAddHours] = useState(false);
 
   const renderCollapsedContent = useMemo(() => {
     if (isCollapsed || !hours?.[0]) return null;
@@ -40,12 +40,6 @@ export const WorkhourDay = ({ day, hours }: IWorkhourDay): JSX.Element => {
     );
   }, [isCollapsed, totalHours]);
 
-  const renderAddHours = useMemo(() => {
-    if (!addHours) return null;
-
-    return <Row><AddHoursInput day={day} /></Row>;
-  }, [addHours, day]);
-
   const renderStartTrackerButton = useMemo(() => {
     const formattedDay = dayjs(day).format("YY-MM-DD");
     const formattedToday = dayjs().format("YY-MM-DD");
@@ -59,33 +53,41 @@ export const WorkhourDay = ({ day, hours }: IWorkhourDay): JSX.Element => {
     );
   }, [day]);
 
+  const renderModalAddHours = useMemo(() => {
+    if (!openModalAddHours) return null;
+
+    return <ModalAddHours day={day} handleClose={() => setOpenModalAddHours(false)} />;
+  }, [day, openModalAddHours]);
+
   return (
-    <StyledItem>
-      <Col
-        label={dayjs(day).format("ddd")}
-        value={`${dayjs(day).format("MMM")} ${dayjs(day).format("DD")}`}
-        withPadding
-      />
-      <Content>
-        <Row>
-          <Col
-            color={isOvertime ? "--error_600" : "--success_700"}
-            label="Total"
-            value={totalHours === 0 ? "0:00 h" : `${TimeUtils.minToH(totalHours)} h`}
-            weight={isOvertime ? "bold" : "regular"}
-            withPadding
-          />
-          { renderToggleCollapse }
-        </Row>
-        { renderCollapsedContent }
-        { renderAddHours }
-      </Content>
-      <Actions>
-        <Button handleClick={addHours ? () => {} : () => setAddHours(true)} square variant="tertiary">
-          <Icon type={addHours ? "check" : "plus"} />
-        </Button>
-        { renderStartTrackerButton }
-      </Actions>
-    </StyledItem>
+    <>
+      <StyledItem>
+        <Col
+          label={dayjs(day).format("ddd")}
+          value={`${dayjs(day).format("MMM")} ${dayjs(day).format("DD")}`}
+          withPadding
+        />
+        <Content>
+          <Row>
+            <Col
+              color={isOvertime ? "--error_600" : "--success_700"}
+              label="Total"
+              value={totalHours === 0 ? "0:00 h" : `${TimeUtils.minToH(totalHours)} h`}
+              weight={isOvertime ? "bold" : "regular"}
+              withPadding
+            />
+            { renderToggleCollapse }
+          </Row>
+          { renderCollapsedContent }
+        </Content>
+        <Actions>
+          <Button handleClick={() => setOpenModalAddHours(true)} square variant="tertiary">
+            <Icon type="plus" />
+          </Button>
+          { renderStartTrackerButton }
+        </Actions>
+      </StyledItem>
+      {renderModalAddHours}
+    </>
   );
 };
