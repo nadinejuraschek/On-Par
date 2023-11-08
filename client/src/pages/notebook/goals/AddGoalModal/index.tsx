@@ -1,5 +1,5 @@
 import { Button, DatePicker, Modal, Textarea, ToggleGroup } from "components";
-import { useGoals } from "hooks";
+import { useCreateGoal } from "hooks";
 import { ChangeEvent, useCallback, useMemo, useState } from "react";
 import { ZodFormattedError } from "zod";
 import { Form } from "./styled";
@@ -7,7 +7,7 @@ import { IAddGoalModal } from "./types";
 import { TGoalFormData, goalSchema } from "../../../../schema/goal.schema";
 
 export const AddGoalModal = ({ toggleModal }: IAddGoalModal): JSX.Element => {
-  const { createGoal, loading } = useGoals();
+  const { createGoal } = useCreateGoal();
 
   const [errors, setErrors] = useState<ZodFormattedError<TGoalFormData> | undefined>(undefined);
   const [newGoal, setNewGoal] = useState({
@@ -15,25 +15,25 @@ export const AddGoalModal = ({ toggleModal }: IAddGoalModal): JSX.Element => {
     text: undefined,
     type: undefined,
   });
+  const [submitting, setSubmitting] = useState(false);
 
   const handleSubmit = useCallback(() => {
+    setSubmitting(true);
+
     const validation = goalSchema.safeParse(newGoal);
 
     if (validation.success === false) {
       setErrors(validation.error.format());
+      setSubmitting(false);
       return;
     }
 
     setErrors(undefined);
 
-    createGoal(newGoal, () => {
-      setNewGoal({
-        dueDate: undefined,
-        text: undefined,
-        type: undefined,
-      });
-      toggleModal();
-    });
+    createGoal(newGoal);
+    setSubmitting(false);
+    // TODO: refetch goals
+    toggleModal();
   }, [createGoal, newGoal, toggleModal]);
 
   // TODO: handleSubmit in form instead of button
@@ -43,14 +43,14 @@ export const AddGoalModal = ({ toggleModal }: IAddGoalModal): JSX.Element => {
       <Button
         fullWidth
         handleClick={handleSubmit}
-        loading={loading}
+        loading={submitting}
         type="submit"
         variant="primary"
       >
         Save
       </Button>
     </>
-  ), [handleSubmit, loading, toggleModal]);
+  ), [handleSubmit, submitting, toggleModal]);
 
   const toggleOptions = [
     { label: "Education", value: "education" }, { label: "Personal", value: "personal" }, { label: "Travel", value: "travel" },

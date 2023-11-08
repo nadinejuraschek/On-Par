@@ -1,4 +1,6 @@
+export * from "./useCreateGoal";
 export * from "./useCreateNote";
+export * from "./useDeleteGoal";
 export * from "./useDeleteNote";
 export * from "./useEditNote";
 export * from "./useFetchNotes";

@@ -1,11 +1,9 @@
 import { Badge, Button, Modal } from "components";
 import * as dayjs from "dayjs";
-
-import { useGoals } from "hooks";
+import { useDeleteGoal, useGoals } from "hooks";
 import { useCallback, useMemo, useState } from "react";
 import { EditGoalModal } from "./EditGoalModal";
 import { BadgesWrapper, ItemBody, Label, Overlay, StyledIcon, StyledItem } from "./styled";
-
 import { IGoalItem } from "./types";
 import { getGoalIcon } from "./utils";
 
@@ -23,13 +21,25 @@ export const GoalItem = ({
 }: IGoalItem): JSX.Element => {
   const [openDeleteConfirm, setOpenDeleteConfirm] = useState(false);
   const [openEditModal, setOpenEditModal] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
 
-  const { checkGoal, deleteGoal } = useGoals();
+  const { deleteGoal } = useDeleteGoal();
+
+  const { checkGoal } = useGoals();
 
   const closeModal = useCallback(() => {
     setOpenDeleteConfirm(false);
     setOpenEditModal(false);
   }, []);
+
+  const handleDeleteGoal = useCallback(() => {
+    setSubmitting(true);
+    deleteGoal(id);
+    setSubmitting(false);
+    setOpenDeleteConfirm(false);
+    // TODO: refetch goals
+    // refetchGoals();
+  }, [deleteGoal, id]);
 
   const isOverdue = useMemo(() => !checked && dayjs().isAfter(dayjs(dueDate)), [checked, dueDate]);
 
@@ -81,7 +91,8 @@ export const GoalItem = ({
         <Button fullWidth handleClick={closeModal}>Cancel</Button>
         <Button
           fullWidth
-          handleClick={() => deleteGoal(id, () => setOpenDeleteConfirm(false))}
+          handleClick={handleDeleteGoal}
+          loading={submitting}
           variant="danger"
         >
           Delete
@@ -94,10 +105,10 @@ export const GoalItem = ({
         Are you sure you&apos;d like to delete this goal?
       </Modal>
     )
-  }, [id,
-    deleteGoal,
-    openDeleteConfirm,
-    closeModal]);
+  }, [openDeleteConfirm,
+    closeModal,
+    handleDeleteGoal,
+    submitting]);
 
   const renderEditModal = useMemo(() => {
     if (!openEditModal) return null;
