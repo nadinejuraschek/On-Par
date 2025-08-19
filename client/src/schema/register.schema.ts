@@ -1,8 +1,8 @@
-import * as dayjs from "dayjs";
+// import * as dayjs from "dayjs";
 import { z } from "zod";
 
-const minAge = dayjs().subtract(18, "year").toDate();
-const maxAge = dayjs().subtract(26, "year").toDate();
+// const minAge = dayjs().subtract(18, "year").toDate();
+// const maxAge = dayjs().subtract(26, "year").toDate();
 
 export const registerSchema = z.object({
   firstname: z.string({
@@ -17,11 +17,10 @@ export const registerSchema = z.object({
   }).trim().toLowerCase(),
   startDate: z.date({
     required_error: "Please select a date and time",
-  }).min(minAge, {
-    message: "You must be at least 18 years old.",
+  }),/*.min(minAge, {    message: "You must be at least 18 years old.",
   }).max(maxAge, {
     message: "You must not be more than 26 years old.",
-  }),
+  })*/
   country: z.object({
     label: z.string(),
     value: z.string().min(1,  {
