@@ -10,7 +10,8 @@
     "install-client": "cd client && npm install",
     "start": "nodemon ./server.ts",
     "client": "cd client && npm start",
-    "dev": "concurrently -n 'server, client' -c 'green, blue' \"nodemon ./server.ts\" \"npm run client\""
+    "dev": "concurrently -n 'server, client' -c 'green, blue' \"nodemon ./server.ts\" \"npm run client\"",
+    "prod": "concurrently -n 'server, client' -c 'green, blue' \"node ./server.ts\" \"npm run client\""
   },
   "repository": {
     "type": "git",
