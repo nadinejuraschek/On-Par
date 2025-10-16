@@ -6,7 +6,7 @@
   "scripts": {
     "build-dist": "npm run clean-dist && ./node_modules/typescript/bin/tsc",
     "build-dev": "npm run clean-dist && ./node_modules/typescript/bin/tsc && cd client && npm run build",
-    "build": "./node_modules/typescript/bin/tsc && cd client && npm run build",
+    "build": "npx tsc && cd client && npm run build",
     "clean-dist": "del-cli ./dist",
     "install-client": "cd client && npm install",
     "start": "nodemon ./server.ts",
