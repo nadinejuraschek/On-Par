@@ -6,7 +6,7 @@
   "scripts": {
     "build-dist": "npm run clean-dist && ./node_modules/typescript/bin/tsc",
     "build-dev": "npm run clean-dist && ./node_modules/typescript/bin/tsc && cd client && npm run build",
-    "build": "npx tsc && cd client && npm run build",
+    "build": "./node_modules/.bin/tsc && cd client && npm run build",
     "clean-dist": "del-cli ./dist",
     "install-client": "cd client && npm install",
     "start": "nodemon ./server.ts",
@@ -37,8 +37,7 @@
     "jsonwebtoken": "^9.0.2",
     "method-override": "^3.0.0",
     "mongoose": "^7.8.7",
-    "morgan": "^1.10.1",
-    "typescript": "^5.9.3"
+    "morgan": "^1.10.1"
   },
   "devDependencies": {
     "@types/bcryptjs": "^2.4.6",
@@ -52,6 +51,7 @@
     "lodash": "^4.17.21",
     "nodemon": "^3.1.10",
     "ts-node": "^10.9.2",
+    "typescript": "^5.9.3",
     "vite": "^7.1.10"
   }
 }
