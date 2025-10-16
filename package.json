@@ -18,9 +18,6 @@
   },
   "author": "Nadine Pesso",
   "license": "ISC",
-  "engines": {
-    "node": "22.20.0"
-  },
   "bugs": {
     "url": "https://github.com/nadinejuraschek/APIA_Project/issues"
   },
