@@ -46,6 +46,7 @@
     "@types/express": "^4.17.23",
     "@types/jsonwebtoken": "^9.0.10",
     "@types/morgan": "^1.9.10",
+    "@vitejs/plugin-react": "^5.0.4",
     "del-cli": "^6.0.0",
     "eslint-plugin-sort-destructure-keys": "^1.6.0",
     "lodash": "^4.17.21",
