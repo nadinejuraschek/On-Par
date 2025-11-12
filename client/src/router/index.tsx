@@ -1,11 +1,10 @@
-import { lazy } from "react";
+import { lazy, Suspense } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 const InnerLayoutWithNavbar = lazy(() => import("../layout/InnerWithNavbar"));
 const EmergencyNumbers = lazy(() => import("../pages/resources/emergencyNumbers"));
 const Goals = lazy(() => import("../pages/notebook/goals"));
 const Home = lazy(() => import("../pages/home"));
-const Notebook = lazy(() => import("../pages/notebook"));
 const Notes = lazy(() => import("../pages/notebook/notes"));
 const Payments = lazy(() => import("../pages/notebook/payments"));
 const Profile = lazy(() => import("../pages/profile"));
@@ -27,22 +26,84 @@ export const Router = (): JSX.Element => {
           <Route index element={<Home />} />
 
           { /* Profile */ }
-          <Route path="profile" element={<Profile />} />
+          <Route
+            path="profile"
+            element={
+              <Suspense fallback={<div>Loading...</div>}>
+                <Profile />
+              </Suspense>
+            }
+          />
 
           { /* Resources */ }
-          <Route path="resources" element={<Resources />} />
-          <Route path="resources/emergencynumbers" element={<EmergencyNumbers />} />
-          <Route path="resources/tax" element={<Tax />} />
+          <Route
+            path="resources"
+            element={
+              <Suspense fallback={<div>Loading...</div>}>
+                <Resources />
+              </Suspense>
+            }
+          />
+          <Route
+            path="resources/emergencynumbers"
+            element={
+              <Suspense fallback={<div>Loading...</div>}>
+                <EmergencyNumbers />
+              </Suspense>
+            }
+          />
+          <Route
+            path="resources/tax"
+            element={
+              <Suspense fallback={<div>Loading...</div>}>
+                <Tax />
+              </Suspense>
+            }
+          />
 
           { /* Notebook Sections */ }
-          <Route path="notebook" element={<Notebook />} />
-          <Route path="notebook/workhours" element={<Workhours />} />
-          <Route path="notebook/payments" element={<Payments />} />
-          <Route path="notebook/goals" element={<Goals />} />
-          <Route path="notebook/notes" element={<Notes />} />
+          <Route
+            path="notebook/workhours"
+            element={
+              <Suspense fallback={<div>Loading...</div>}>
+                <Workhours />
+              </Suspense>
+            }
+          />
+          <Route
+            path="notebook/payments"
+            element={
+              <Suspense fallback={<div>Loading...</div>}>
+                <Payments />
+              </Suspense>
+            }
+          />
+          <Route
+            path="notebook/goals"
+            element={
+              <Suspense fallback={<div>Loading...</div>}>
+                <Goals />
+              </Suspense>
+            }
+          />
+          <Route
+            path="notebook/notes"
+            element={
+              <Suspense fallback={<div>Loading...</div>}>
+                <Notes />
+              </Suspense>
+            }
+          />
 
           { /* Dev Sandbox */ }
-          <Route path="sandbox" element={<Sandbox />} />
+          <Route
+            path="sandbox"
+            element={
+              <Suspense fallback={<div>Loading...</div>}>
+                <Sandbox />
+              </Suspense>
+            }
+          />
 
           { /* HostFamily Sections */ }
           {/* <Route path="hostfamily/calendar" element={<CalendarView />} /> */}

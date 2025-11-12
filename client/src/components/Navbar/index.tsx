@@ -1,11 +1,10 @@
 import close from "assets/close.svg";
 import menu from "assets/menu.svg";
-import { navLinks } from "data";
 import { Portal } from "layout";
 import { useCallback, useMemo, useState } from "react";
-import { NavLinkComp as NavLink } from "./NavLink";
 import { Sidenav } from "./Sidenav";
-import { DesktopLinks, Footer, Logo, LogoText, MenuButton } from "./styled";
+import { Footer, Logo, LogoText, MenuButton } from "./styled";
+import { DesktopSidenav } from "./DesktopSidenav";
 
 export const Navbar = (): JSX.Element => {
   const [openSidenav, setOpenSidenav] = useState( false );
@@ -24,22 +23,6 @@ export const Navbar = (): JSX.Element => {
     );
   }, [openSidenav, toggleSidenav]);
 
-  const renderLinks = useMemo(() => {
-    const links = navLinks.map(link => {
-      const { iconSrc, label, link: href } = link;
-      return (
-        <NavLink
-          iconSrc={ iconSrc }
-          key={ `navLink_${ label }` }
-          label={ label }
-          link={ href }
-        />
-      );
-    });
-
-    return <DesktopLinks>{links}</DesktopLinks>;
-  }, []);
-
   const renderSidenav = useMemo(() => {
     if (!openSidenav) return null;
 
@@ -57,7 +40,7 @@ export const Navbar = (): JSX.Element => {
       {/* SIDENAV - ONLY MOBILE NAV */}
       { renderSidenav }
       {/* NAV LINKS - ONLY DESKTOP NAV */}
-      { renderLinks }
+      <DesktopSidenav />
       {/* FOOTER - ONLY DESKTOP NAV */}
       <Footer>© { new Date().getFullYear() }</Footer>
     </Portal>

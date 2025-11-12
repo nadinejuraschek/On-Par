@@ -2,7 +2,10 @@ import styled from "styled-components";
 import { Text } from "../../Text";
 
 export const SideNavMobile = styled.div`
-  background-color: var(--grey_25);
+  display: flex;
+  flex-direction: column;
+
+  background-color: var(--primary_50);
   padding: 24px;
 
   height: calc(100vh - 7rem);
@@ -17,9 +20,9 @@ export const SideNavMobile = styled.div`
 `;
 
 export const Links = styled.div`
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: repeat(6, 1fr);
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
 
   height: calc(100% - 2rem);
 `;

@@ -31,19 +31,6 @@ export const LogoText = styled(Text)`
   font-family: 'grand_hotelregular';
 `;
 
-export const DesktopLinks = styled.div`
-  display: none;
-
-  @media only screen and (min-width: 900px) {
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: repeat(6, 1fr);
-    row-gap: 1rem;
-
-    height: 100%;
-  }
-`;
-
 export const Footer = styled.footer`
   display: none;
 

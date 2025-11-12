@@ -3,12 +3,12 @@ import styled from "styled-components";
 export const StyledLayout = styled.div`
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: 70px calc(100vh - 70px);
+  grid-template-rows: 7rem calc(100vh - 7rem);
 
   @media screen and (min-width: 900px) {
     background-image: linear-gradient(to bottom, #b9c87940, var(--white));
     display: grid;
-    grid-template-columns: 150px auto;
+    grid-template-columns: 20rem auto;
 
     position: relative;
 
@@ -38,7 +38,7 @@ export const StyledView = styled.div`
 
   overflow: auto;
 
-  padding: 2rem;
+  padding: 1.6rem;
 
   display: grid;
   grid-template-columns: 1fr;
@@ -50,9 +50,9 @@ export const StyledView = styled.div`
 
     background-color: var(--grey_25);
     border-radius: 40px 0 0 0;
-    padding: 3.6rem;
+    padding: 1.6rem;
 
-    width: calc(100vw - 150px);
+    width: calc(100vw - 20rem);
   }
 `;
 
@@ -82,7 +82,7 @@ export const StyledNav = styled.nav`
 
     border-radius: 0 0 4rem 0;
     box-shadow: none;
-    padding: 2.4rem;
+    padding: 1.6rem;
 
     display: grid;
     grid-template-columns: 1fr;
@@ -90,7 +90,7 @@ export const StyledNav = styled.nav`
     row-gap: 1rem;
 
     height: 100vh;
-    width: 15rem;
+    width: 20rem;
 
     position: relative;
 
