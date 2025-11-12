@@ -14,7 +14,7 @@ export const navLinks = [
       label: "Notes", link: "/notes",
     },
   ] },
-  { label: "Resources", link: "/resources", subLinks: [
+  { label: "Resources", link: "", subLinks: [
     {
       label: "Resources", link: "/resources",
     },

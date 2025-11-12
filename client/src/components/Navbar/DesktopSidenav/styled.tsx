@@ -6,7 +6,7 @@ export const StyledSidenav = styled.div`
   @media only screen and (min-width: 900px) {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: 0.8rem;
 
     align-self: start;
 
@@ -17,7 +17,7 @@ export const StyledSidenav = styled.div`
 `;
 
 export const SidenavSection = styled.div`
-  padding: 2.4rem 0;
+  padding: 1.6rem 0;
 
   display: flex;
   flex-direction: column;
@@ -25,7 +25,7 @@ export const SidenavSection = styled.div`
 `;
 
 export const SidenavSectionLabel = styled.div`
-  color: var(--primary_700);
+  color: var(--primary_500);
   font-size: 1.8rem;
   margin-left: 1rem;
   text-transform: uppercase;
@@ -39,5 +39,9 @@ export const SidenavSectionLabel = styled.div`
 `;
 
 export const SidenavSectionSublinks = styled.div`
-  margin-left: 0.8rem;
+  margin-left: 1.2rem;
+
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
 `;
