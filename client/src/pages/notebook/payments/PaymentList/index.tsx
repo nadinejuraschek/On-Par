@@ -3,16 +3,15 @@ import { Payment } from "./Payment";
 import { List } from "./styled";
 import { IPaymentList } from "./types";
 
-export const PaymentList = ({ entries, refetchPayments }: IPaymentList): JSX.Element => {
+export const PaymentList = ({ entries }: IPaymentList): JSX.Element => {
   const renderEntries = useMemo(() => {
     return entries.map( payment => (
       <Payment
         key={ payment._id }
         payment={ payment }
-        refetchPayments={refetchPayments}
       />
     ));
-  }, [entries, refetchPayments]);
+  }, [entries]);
 
   return (
     <List>

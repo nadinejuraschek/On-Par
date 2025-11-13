@@ -12,7 +12,7 @@ export const WorkhourDay = ({ day, hours }: IWorkhourDay): JSX.Element => {
   }, [day, hours]);
 
   const renderTotalHours = useMemo(() => (
-    <Hours isOvertime={totalHours > 600}>
+    <Hours $isOvertime={totalHours > 600}>
       { totalHours === 0 ? null : `${TimeUtils.minToH(totalHours)} h` }
     </Hours>
   ), [totalHours]);

@@ -90,7 +90,7 @@ const registerUser = async (req: Request, res: Response) => {
   });
 
   if (!user) {
-    return res.status(500).json('Error when creaing user in DB.');
+    return res.status(500).json('Error when creating user in DB.');
   }
 
   let errors: string[] = [];
@@ -102,17 +102,18 @@ const registerUser = async (req: Request, res: Response) => {
     maxAge: 1000 * 60 * 60 * 24 * 365, // 1 year cookie
   });
 
+  const endOfWeekStartDate = dayjs(new Date(req.body.startDate)).endOf("week");
+
   // create empty payment entries for the whole year
   const createPaymentEntries = () => {
     return Array(52).fill({
       amount: null,
       paid: false,
-      date: null,
       late: false,
-    }).map((entry, i) => ({...entry, week: i + 1}));
+    }).map((entry, i) => ({...entry, date: endOfWeekStartDate.add(i + 1, 'week'), week: i + 1}));
   };
 
-  db.Payment.insertMany(createPaymentEntries())
+  await db.Payment.insertMany(createPaymentEntries())
     .then(insertedPayment => {
       const paymentIds = insertedPayment.map((payment) => payment._id);
       db.User.findByIdAndUpdate(

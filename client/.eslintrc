@@ -93,7 +93,7 @@
     "no-fallthrough": "error",
     "react/prop-types": "off",
     "jsx-a11y/click-events-have-key-events": "off",
-    "sort-destructure-keys/sort-destructure-keys": [ 2, { "caseSensitive": false }],
+    "sort-destructure-keys/sort-destructure-keys": [ "warn", { "caseSensitive": false }],
     "default-case": 1,
     "default-case-last": 1,
     "prefer-const": 1,

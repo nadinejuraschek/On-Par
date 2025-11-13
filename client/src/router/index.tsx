@@ -1,6 +1,6 @@
+import { LoadingSpinner } from "components";
 import { lazy, Suspense } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-
 const InnerLayoutWithNavbar = lazy(() => import("../layout/InnerWithNavbar"));
 const EmergencyNumbers = lazy(() => import("../pages/resources/emergencyNumbers"));
 const Goals = lazy(() => import("../pages/notebook/goals"));
@@ -29,7 +29,7 @@ export const Router = (): JSX.Element => {
           <Route
             path="profile"
             element={
-              <Suspense fallback={<div>Loading...</div>}>
+              <Suspense fallback={<LoadingSpinner />}>
                 <Profile />
               </Suspense>
             }
@@ -39,7 +39,7 @@ export const Router = (): JSX.Element => {
           <Route
             path="resources"
             element={
-              <Suspense fallback={<div>Loading...</div>}>
+              <Suspense fallback={<LoadingSpinner />}>
                 <Resources />
               </Suspense>
             }
@@ -47,7 +47,7 @@ export const Router = (): JSX.Element => {
           <Route
             path="resources/emergencynumbers"
             element={
-              <Suspense fallback={<div>Loading...</div>}>
+              <Suspense fallback={<LoadingSpinner />}>
                 <EmergencyNumbers />
               </Suspense>
             }
@@ -55,7 +55,7 @@ export const Router = (): JSX.Element => {
           <Route
             path="resources/tax"
             element={
-              <Suspense fallback={<div>Loading...</div>}>
+              <Suspense fallback={<LoadingSpinner />}>
                 <Tax />
               </Suspense>
             }
@@ -65,7 +65,7 @@ export const Router = (): JSX.Element => {
           <Route
             path="notebook/workhours"
             element={
-              <Suspense fallback={<div>Loading...</div>}>
+              <Suspense fallback={<LoadingSpinner />}>
                 <Workhours />
               </Suspense>
             }
@@ -73,7 +73,7 @@ export const Router = (): JSX.Element => {
           <Route
             path="notebook/payments"
             element={
-              <Suspense fallback={<div>Loading...</div>}>
+              <Suspense fallback={<LoadingSpinner />}>
                 <Payments />
               </Suspense>
             }
@@ -81,7 +81,7 @@ export const Router = (): JSX.Element => {
           <Route
             path="notebook/goals"
             element={
-              <Suspense fallback={<div>Loading...</div>}>
+              <Suspense fallback={<LoadingSpinner />}>
                 <Goals />
               </Suspense>
             }
@@ -89,7 +89,7 @@ export const Router = (): JSX.Element => {
           <Route
             path="notebook/notes"
             element={
-              <Suspense fallback={<div>Loading...</div>}>
+              <Suspense fallback={<LoadingSpinner />}>
                 <Notes />
               </Suspense>
             }
@@ -99,7 +99,7 @@ export const Router = (): JSX.Element => {
           <Route
             path="sandbox"
             element={
-              <Suspense fallback={<div>Loading...</div>}>
+              <Suspense fallback={<LoadingSpinner />}>
                 <Sandbox />
               </Suspense>
             }

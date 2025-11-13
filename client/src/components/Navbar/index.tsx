@@ -2,9 +2,9 @@ import close from "assets/close.svg";
 import menu from "assets/menu.svg";
 import { Portal } from "layout";
 import { useCallback, useMemo, useState } from "react";
+import { DesktopSidenav } from "./DesktopSidenav";
 import { Sidenav } from "./Sidenav";
 import { Footer, Logo, LogoText, MenuButton } from "./styled";
-import { DesktopSidenav } from "./DesktopSidenav";
 
 export const Navbar = (): JSX.Element => {
   const [openSidenav, setOpenSidenav] = useState( false );

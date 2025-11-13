@@ -1,24 +1,36 @@
 import { Button, DatePicker, Input, Modal } from "components";
 import { useUserContext } from "contexts";
 import * as dayjs from "dayjs";
-import { useEditPayment } from "hooks";
 import { ChangeEvent, useCallback, useMemo, useState } from "react";
 import { TPaymentFormData, paymentSchema } from "schema";
 import { ZodFormattedError } from "zod";
 import { IEditPaymentModal } from "./types";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { editPayment } from "api";
 
 export const EditPaymentModal = ({
   handleClose,
   originalPayment,
-  refetchPayments,
 }: IEditPaymentModal): JSX.Element => {
   const [{ user }] = useUserContext();
-
-  const { editPayment } = useEditPayment();
+  const queryClient = useQueryClient();
 
   const [errors, setErrors] = useState<ZodFormattedError<TPaymentFormData> | undefined>(undefined);
   const [submitting, setSubmitting] = useState(false);
   const [updatedPayment, setUpdatedPayment] = useState(originalPayment);
+
+  const {
+    // TODO: display error toast
+    // error,
+    // TODO: display loading
+    // isLoading,
+    mutate,
+  } = useMutation({
+    mutationFn: editPayment,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['payments'] });
+    },
+  });
 
   const handleAmountChange = useCallback((event: ChangeEvent) => {
     const target = event.target as HTMLInputElement;
@@ -51,14 +63,13 @@ export const EditPaymentModal = ({
 
     setErrors(undefined);
 
-    editPayment(originalPayment._id, updatedPayment);
+    mutate(updatedPayment);
     setSubmitting(false);
     handleClose();
-    refetchPayments();
-  }, [editPayment,
+  }, [
     handleClose,
+    mutate,
     originalPayment,
-    refetchPayments,
     updatedPayment]);
 
 

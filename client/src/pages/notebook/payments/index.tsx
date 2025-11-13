@@ -1,26 +1,33 @@
 import { Banner, Header, Icon, LoadingSpinner, Text } from "components";
 import { useUserContext } from "contexts";
 import * as dayjs from "dayjs";
-import { useFetchPayments } from "hooks";
 import { useMemo } from "react";
 import { PaymentList } from "./PaymentList";
 import { BannerWrapper, InfoText } from "./styled";
+import { useQuery } from "@tanstack/react-query";
+import { getPayments } from "api";
 
 const Payments = (): JSX.Element => {
   const [{ user }] = useUserContext();
 
-  const { data: payments, loading, refetch: refetchPayments } = useFetchPayments();
+  const {
+    data: payments,
+    // TODO: display error message
+    // error,
+    isLoading,
+  } = useQuery({
+    queryKey: ["payments"],
+    queryFn: getPayments,
+  });
 
-  const currentWeekNum = useMemo(() => dayjs(new Date()).diff(dayjs(user?.startDate), "week"), [user]);
+  const currentWeekNum = useMemo(() => dayjs(new Date()).diff(dayjs(user?.startDate), "week") + 1, [user]);
 
   const nextDueDate = useMemo(() => dayjs(new Date()).endOf("week").format("ddd DD MMM, YYYY"), []);
 
   const sortedPayments = useMemo(() => {
     if (!payments) return [];
 
-    return payments.sort((a, b) => a.week - b.week).filter((payment) => (
-      payment.week <= currentWeekNum
-    )).reverse();
+    return payments.sort((a, b) => a.week - b.week).filter((payment) => payment.week <= currentWeekNum).reverse();
   }, [currentWeekNum, payments]);
 
   const renderMissingPaymentsWarning = useMemo(() => {
@@ -45,12 +52,12 @@ const Payments = (): JSX.Element => {
   }, [currentWeekNum, payments]);
 
   const renderList = useMemo(() => {
-    if (loading) return <LoadingSpinner />;
+    if (isLoading) return <LoadingSpinner />;
 
     if (sortedPayments.length === 0) return null;
 
-    return <PaymentList entries={sortedPayments} refetchPayments={refetchPayments} />;
-  }, [loading, refetchPayments, sortedPayments]);
+    return <PaymentList entries={sortedPayments} />;
+  }, [isLoading, sortedPayments]);
 
   return (
     <>

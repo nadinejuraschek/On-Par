@@ -9,7 +9,7 @@ interface IUseFetchWorkhoursWeekly {
 }
 
 export function useFetchWorkhoursWeekly({ startDate }: IUseFetchWorkhoursWeekly) {
-  const [data, setData] = useState<{ hours: TWorkhour[], total: number }>({ hours: undefined, total: 0 });
+  const [data, setData] = useState<{ hours?: TWorkhour[], total: number }>({ hours: undefined, total: 0 });
   const [loading, setLoading] = useState(false);
 
   const getWorkhours = useCallback(async () => {

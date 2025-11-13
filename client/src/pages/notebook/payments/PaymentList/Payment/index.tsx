@@ -22,7 +22,6 @@ dayjs.extend(isSameOrBefore);
 
 export const Payment = ( {
   payment,
-  refetchPayments,
 }: IPaymentEntry ): JSX.Element => {
   const { amount, date, late, week } = payment;
 
@@ -35,8 +34,6 @@ export const Payment = ( {
   }, [payment]);
 
   const renderDateColumn = useMemo(() => {
-    if (!date) return null;
-
     return (
       <>
         <DayMonth>{dayjs(date).format("DD MMM")}</DayMonth>
@@ -46,9 +43,7 @@ export const Payment = ( {
   }, [date]);
 
   const renderPayment = useMemo(() => {
-    if (!amount) return null;
-
-    const formattedAmount = new Intl.NumberFormat("en-US", { currency: "USD", style: "currency" }).format(amount);
+    const formattedAmount = new Intl.NumberFormat("en-US", { currency: "USD", style: "currency" }).format(amount ?? 0);
     return <Text size="lg">{formattedAmount}</Text>;
   }, [amount]);
 
@@ -65,10 +60,9 @@ export const Payment = ( {
       <EditPaymentModal
         handleClose={() => setEditPayment(null)}
         originalPayment={editPayment}
-        refetchPayments={refetchPayments}
       />
     );
-  }, [editPayment, refetchPayments]);
+  }, [editPayment]);
 
   return (
     <>
