@@ -1,10 +1,11 @@
 import { Button, Header as HeaderComp, Icon, LoadingSpinner } from "components";
-import { useFetchNotes } from "hooks";
 import { ChangeEvent, useCallback, useMemo, useState } from "react";
 import { TNote } from "types";
 import { AddNoteModal } from "./AddNoteModal";
 import { NoteCard } from "./NoteCard";
 import { Grid, Header, List, Search, StyledPagination } from "./styled";
+import { useQuery } from "@tanstack/react-query";
+import { getNotes } from "api";
 // import { Suggestions } from "./Suggestions";
 
 const Notes = (): JSX.Element => {
@@ -12,7 +13,15 @@ const Notes = (): JSX.Element => {
   const [page, setPage] = useState(0);
   const [searchInput, setSearchInput] = useState("");
 
-  const { data: notesData, loading, refetch: refetchNotes } = useFetchNotes({ page });
+  const {
+    data: notesData,
+    // TODO: display error message
+    // error,
+    isLoading,
+  } = useQuery({
+    queryKey: ["notes"],
+    queryFn: getNotes,
+  });
 
   const handleSearch = useCallback((event: ChangeEvent) => {
     const target = event.target as HTMLInputElement;
@@ -23,15 +32,12 @@ const Notes = (): JSX.Element => {
     if (!openAddNoteModal) return null;
 
     return (
-      <AddNoteModal
-        toggleModal={() => setOpenAddNoteModal(!openAddNoteModal)}
-        refetchNotes={refetchNotes}
-      />
+      <AddNoteModal toggleModal={() => setOpenAddNoteModal(!openAddNoteModal)} />
     );
-  }, [openAddNoteModal, refetchNotes]);
+  }, [openAddNoteModal]);
 
   const renderNotes = useMemo(() => {
-    if (loading) return <LoadingSpinner />;
+    if (isLoading) return <LoadingSpinner />;
 
     if (!notesData || notesData.notes.length === 0) return null;
 
@@ -46,13 +52,11 @@ const Notes = (): JSX.Element => {
           color={ color }
           key={ note._id }
           note={note}
-          refetchNotes={refetchNotes}
         />
       ) });
   }, [
-    loading,
+    isLoading,
     notesData,
-    refetchNotes,
     searchInput]);
 
   const renderPagination = useMemo(() => {

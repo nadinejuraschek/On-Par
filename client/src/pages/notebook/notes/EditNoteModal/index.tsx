@@ -1,44 +1,50 @@
 import { Button, Input, Modal, Textarea } from "components";
-import { useEditNote } from "hooks";
 import { ChangeEvent, useCallback, useMemo, useState } from "react";
 import { TNoteFormData, noteSchema } from "schema";
 import { ZodFormattedError } from "zod";
 import { Form } from "./styled";
 import { IEditNoteModal } from "./types";
+import { editNote } from "api";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 export const EditNoteModal = ({
   handleEditCancel,
   note,
-  refetchNotes,
 }: IEditNoteModal): JSX.Element => {
+  const queryClient = useQueryClient();
+
   const [errors, setErrors] = useState<ZodFormattedError<TNoteFormData> | undefined>(undefined);
-  const [submitting, setSubmitting] = useState(false);
   const [updatedNote, setUpdatedNote] = useState(note);
 
-  const { editNote } = useEditNote();
+  const {
+    // TODO: display error toast
+    // error,
+    isPending,
+    mutate,
+  } = useMutation({
+    mutationFn: editNote,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['notes'] });
+    },
+  });
 
   const handleSubmit = useCallback((): void => {
     if (!note._id) return;
 
-    setSubmitting(true);
     const validation = noteSchema.safeParse(updatedNote);
 
     if (validation.success === false) {
       setErrors(validation.error.format());
-      setSubmitting(false);
       return;
     }
 
     setErrors(undefined);
 
-    editNote(note._id, updatedNote);
-    refetchNotes();
-    setSubmitting(false);
+    mutate(updatedNote);
     handleEditCancel();
-  }, [editNote,
+  }, [mutate,
     handleEditCancel,
     note,
-    refetchNotes,
     updatedNote]);
 
   const handleChange = useCallback((event: ChangeEvent): void => {
@@ -53,14 +59,14 @@ export const EditNoteModal = ({
       <Button
         fullWidth
         handleClick={handleSubmit}
-        loading={submitting}
+        loading={isPending}
         type="submit"
         variant="primary"
       >
         Save
       </Button>
     </>
-  ), [handleEditCancel, handleSubmit, submitting]);
+  ), [handleEditCancel, handleSubmit, isPending]);
 
   return (
     <Modal

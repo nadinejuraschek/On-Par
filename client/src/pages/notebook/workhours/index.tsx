@@ -5,7 +5,6 @@ import { AddHours } from "./AddHours";
 import { CardAddWorkhour, CardReminder, CardTimer, CardTracker, StyledContent } from "./styled";
 
 const Workhours = (): JSX.Element => {
-
   const { data: todayWorkhourTotal } = useFetchWorkhoursToday();
 
   const renderTimes = useMemo(() => <Timer time={ todayWorkhourTotal } />, [todayWorkhourTotal]);

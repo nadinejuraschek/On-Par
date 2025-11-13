@@ -1,10 +1,7 @@
 export * from "./useCreateGoal";
-export * from "./useCreateNote";
 export * from "./useCreateWorkhours";
 export * from "./useDeleteGoal";
-export * from "./useDeleteNote";
 export * from "./useDeleteWorkhours";
-export * from "./useEditNote";
 export * from "./useEditGoal";
 export * from "./useEditWorkhours";
 export * from "./useFetchNotes";
@@ -12,4 +9,3 @@ export * from "./useFetchGoals";
 export * from "./useFetchWorkhours";
 export * from "./useFetchWorkhoursToday";
 export * from "./useFetchWorkhoursWeekly";
-export * from "./useCreateNote";

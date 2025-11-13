@@ -1,40 +1,46 @@
 import { Button, Input, Modal, Textarea } from "components";
 import * as dayjs from "dayjs";
-import { useCreateNote } from "hooks";
 import { ChangeEvent, useCallback, useMemo, useState } from "react";
 import { TNoteFormData, noteSchema } from "schema";
 import { ZodFormattedError } from "zod";
 import { Form } from "./styled";
 import { IAddNoteModal } from "./types";
+import { createNote } from "api";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
-export const AddNoteModal = ({ refetchNotes, toggleModal }: IAddNoteModal): JSX.Element | null => {
+export const AddNoteModal = ({ toggleModal }: IAddNoteModal): JSX.Element | null => {
   const currentDate = dayjs().format("MMMM D, YYYY");
+  const queryClient = useQueryClient();
 
   const [errors, setErrors] = useState<ZodFormattedError<TNoteFormData> | undefined>(undefined);
   const [newNote, setNewNote] = useState( { date: currentDate, text: "", title: "" } );
-  const [submitting, setSubmitting] = useState(false);
 
-  const { createNote } = useCreateNote();
+  const {
+    // TODO: display error toast
+    // error,
+    isPending,
+    mutate,
+  } = useMutation({
+    mutationFn: createNote,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['notes'] });
+    },
+  });
 
   const handleSubmit = useCallback((): void => {
-    setSubmitting(true);
     const validation = noteSchema.safeParse(newNote);
 
     if (validation.success === false) {
       setErrors(validation.error.format());
-      setSubmitting(false);
       return;
     }
 
     setErrors(undefined);
 
-    createNote(newNote);
-    refetchNotes();
-    setSubmitting(false);
+    mutate(newNote);
     toggleModal();
-  }, [createNote,
+  }, [mutate,
     newNote,
-    refetchNotes,
     toggleModal]);
 
   const handleChange = useCallback((event: ChangeEvent): void => {
@@ -51,14 +57,14 @@ export const AddNoteModal = ({ refetchNotes, toggleModal }: IAddNoteModal): JSX.
       <Button
         fullWidth
         handleClick={handleSubmit}
-        loading={submitting}
+        loading={isPending}
         type="submit"
         variant="primary"
       >
         Save
       </Button>
     </>
-  ), [handleSubmit, submitting, toggleModal]);
+  ), [handleSubmit, isPending, toggleModal]);
 
   if (!open) return null;
 

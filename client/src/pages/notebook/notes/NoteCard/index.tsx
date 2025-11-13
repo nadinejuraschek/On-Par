@@ -1,32 +1,40 @@
 import { Button, Icon, Text } from "components";
-import { useDeleteNote } from "hooks";
 import { useCallback, useMemo, useState } from "react";
 import { TNote } from "types";
 import { Actions, Body, Content, StyledNote, Title, TitleText } from "./styled";
 import { INoteCard } from "./types";
 import { EditNoteModal } from "../EditNoteModal";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { deleteNote } from "api";
 
 export const NoteCard = ( {
   color,
   note,
-  refetchNotes,
 }: INoteCard ): JSX.Element => {
   const { _id, date, text, title } = note;
 
+  const queryClient = useQueryClient();
+
   const [openEditNoteModal, setOpenEditNoteModal] = useState(false);
   const [originalNote, setOriginalNote] = useState<TNote | null>(null);
-  const [submitting, setSubmitting] = useState(false);
 
-  const { deleteNote } = useDeleteNote();
+  const {
+    // TODO: display error toast
+    // error,
+    isPending,
+    mutate,
+  } = useMutation({
+    mutationFn: deleteNote,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['notes'] });
+    },
+  });
 
   const handleDeleteNote = useCallback(() => {
     if (!_id) return;
 
-    setSubmitting(true);
-    deleteNote(_id);
-    refetchNotes();
-    setSubmitting(false);
-  }, [_id, deleteNote, refetchNotes]);
+    mutate(_id);
+  }, [_id, mutate]);
 
   const handleEditCancel = useCallback(() => {
     setOpenEditNoteModal(false);
@@ -45,13 +53,11 @@ export const NoteCard = ( {
       <EditNoteModal
         handleEditCancel={handleEditCancel}
         note={originalNote}
-        refetchNotes={refetchNotes}
       />
     );
   }, [handleEditCancel,
     openEditNoteModal,
-    originalNote,
-    refetchNotes]);
+    originalNote]);
 
   return (
     <>
@@ -70,7 +76,7 @@ export const NoteCard = ( {
                 <Icon color="var(--grey_600)" type="pen" />
               </Button>
               <Button
-                loading={submitting}
+                loading={isPending}
                 handleClick={handleDeleteNote}
                 square
               >
