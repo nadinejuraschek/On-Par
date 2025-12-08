@@ -6,6 +6,7 @@ import { Form } from "./styled";
 import { IEditNoteModal } from "./types";
 import { editNote } from "api";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { toast } from "react-toastify";
 
 export const EditNoteModal = ({
   handleEditCancel,
@@ -17,14 +18,16 @@ export const EditNoteModal = ({
   const [updatedNote, setUpdatedNote] = useState(note);
 
   const {
-    // TODO: display error toast
-    // error,
     isPending,
     mutate,
   } = useMutation({
     mutationFn: editNote,
+    onError: () => {
+      toast.error("Your note could not be edited. Please try again later.")
+    },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['notes'] });
+      toast.success("Your note was edited successfully!");
     },
   });
 
