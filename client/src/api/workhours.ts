@@ -14,6 +14,10 @@ export async function getWorkhours() {
   return await axios.get<TWorkhour[]>("/api/user/:id/workhours").then((res) => res.data);
 }
 
+export async function getWorkhoursToday() {
+  return await axios.get("/api/user/:id/workhours/today").then((res) => res.data);
+}
+
 export async function createWorkhours(newHours: TNewWorkhourEntry) {
   return await axios.post("/api/workhours", newHours);
 }
@@ -23,5 +27,5 @@ export async function editWorkhours(updatedHours: TWorkhour) {
 }
 
 export async function deleteWorkhours(workhoursid: string) {
-  return await axios.put(`/api/workhours/${workhoursid}`);
+  return await axios.delete(`/api/workhours/${workhoursid}`);
 }

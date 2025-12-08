@@ -28,7 +28,6 @@ export const SidenavSectionLabel = styled.div`
   color: var(--primary_500);
   font-size: 1.8rem;
   margin-left: 1rem;
-  text-transform: uppercase;
 
   padding: 0.8rem 1.2rem;
 

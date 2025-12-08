@@ -1,7 +1,8 @@
-import { TGoalFilter } from "hooks";
+import { TGoalFilter } from "api";
+import { TGoalType } from "types";
 
 export interface IGoalsList {
-  filter?: { label: string; value: "education" | "personal" | "travel"; };
+  filter: TGoalFilter;
   title: string;
-  type: TGoalFilter;
+  type?: TGoalType;
 }

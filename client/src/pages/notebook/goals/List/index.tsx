@@ -1,22 +1,32 @@
 import { GoalItem, LoadingPlaceholder, Text } from "components";
-import { useFetchGoals } from "hooks";
 import { useMemo } from "react";
 import { Group, List } from "./styled";
 import { IGoalsList } from "./types";
+import { toast } from "react-toastify";
+import { fetchGoals as fetchGoalsFn } from "api";
+import { useQuery } from "@tanstack/react-query";
+import { TGoal } from "types";
 
 export const GoalsList = ({ filter, title, type }: IGoalsList): JSX.Element => {
-  const { data: goals, loading } = useFetchGoals({ filter: type });
+  const { data: goals, isLoading, isError } = useQuery<TGoal[]>({
+    queryKey: ["goals", filter],
+    queryFn: () => fetchGoalsFn({ filter }),
+  });
+
+  if (isError) {
+    toast.error("Could not fetch goals. Please try again later!");
+  }
 
   const renderItems = useMemo(() => {
-    if (loading) return <LoadingPlaceholder />;
+    if (isLoading) return <LoadingPlaceholder />;
 
     if (!goals) return null;
 
     return goals.filter((item) => {
-      if (!filter) {
+      if (!type) {
         return item;
       }
-      return filter?.value === item.type;
+      return type === item.type;
     }).map((item) => (
       <GoalItem
         checkable
@@ -31,7 +41,7 @@ export const GoalsList = ({ filter, title, type }: IGoalsList): JSX.Element => {
         type={item.type}
       />
     ));
-  }, [filter, goals, loading]);
+  }, [goals, isLoading, type]);
 
   return (
     <Group>

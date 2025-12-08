@@ -1,13 +1,26 @@
-import { Header, Text, Timer, WeeklyHours as WeeklyList } from "components";
-import { useFetchWorkhoursToday } from "hooks";
+import { Header, LoadingSpinner, Text, Timer, WeeklyHours as WeeklyList } from "components";
 import { useMemo } from "react";
 import { AddHours } from "./AddHours";
 import { CardAddWorkhour, CardReminder, CardTimer, CardTracker, StyledContent } from "./styled";
+import { useQuery } from "@tanstack/react-query";
+import { getWorkhoursToday } from "api";
 
 const Workhours = (): JSX.Element => {
-  const { data: todayWorkhourTotal } = useFetchWorkhoursToday();
+  const {
+    data: todayWorkhours,
+    // TODO: display error message
+    // error,
+    isLoading,
+  } = useQuery({
+    queryKey: ["workhoursToday"],
+    queryFn: getWorkhoursToday,
+  });
 
-  const renderTimes = useMemo(() => <Timer time={ todayWorkhourTotal } />, [todayWorkhourTotal]);
+  const renderTimes = useMemo(() => <Timer time={ todayWorkhours?.[0]?.total ?? 0 } />, [todayWorkhours]);
+
+  if (isLoading) {
+    return <LoadingSpinner />;
+  }
 
   return (
     <>

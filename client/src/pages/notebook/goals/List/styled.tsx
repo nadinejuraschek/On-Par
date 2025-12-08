@@ -15,7 +15,10 @@ export const List = styled.ul`
 
   margin: 0;
   overflow-y: auto;
-  padding: 0;
+  padding: 0.8rem;
+
+  background-color: var(--grey_100);
+  border-radius: 0.8rem;
 
   /* Hide scrollbar for IE, Edge and Firefox */
   -ms-overflow-style: none;  /* IE and Edge */

@@ -1,7 +1,8 @@
 import SelectComp from "react-select";
 import styled from "styled-components";
+import { TSelectOption } from "./types";
 
-export const StyledSelect = styled(SelectComp)`
+export const StyledSelect = styled(SelectComp<TSelectOption, false>)`
   div.selectInput__control {
     font-size: 1.4rem;
     line-height: 2rem;

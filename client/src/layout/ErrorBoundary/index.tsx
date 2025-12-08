@@ -26,7 +26,7 @@ export class ErrorBoundary extends Component<PropsWithChildren, IErrorBoundarySt
         <Wrapper>
           <Text size="xl" weight="bold">Oops! Something went wrong...</Text>
           <Text>You can leave me a message and I will try to fix the issue as soon as possible.</Text>
-          <a href="mailto:nadinejwebdev@gmail.com">
+          <a href="mailto:nadinejwebdev+onpar@gmail.com">
             <Button variant="primary">Send an Email</Button>
           </a>
         </Wrapper>

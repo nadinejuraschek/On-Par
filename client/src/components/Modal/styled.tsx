@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { IStyledHeader } from "./types";
+import { Text } from "components/Text";
 
 export const StyledModal = styled.div`
   background-color: var(--white);
@@ -56,7 +57,7 @@ export const Header = styled.div<IStyledHeader>`
   width: 100%;
 `;
 
-export const Body = styled.div``;
+export const Body = styled(Text)``;
 
 export const Footer = styled.div`
   display: flex;

@@ -1,3 +1,4 @@
+import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
 import { Button, DatePicker, Input, Select, Text } from "components";
 import { TSelectOption } from "components/Select/types";
@@ -5,7 +6,7 @@ import { countrySelectOptions } from "data";
 import { ChangeEvent, FormEvent, MouseEvent, useCallback, useState } from "react";
 import { toast } from "react-toastify";
 import { ZodFormattedError } from "zod";
-import { IRegister } from "./types";
+import { IRegister, TRegisterUser } from "./types";
 import { TRegisterFormData, registerSchema } from "../../../schema";
 import {
   Divider,
@@ -28,7 +29,40 @@ export const Register = ({ handleView }: IRegister): JSX.Element => {
     // role: "",
     // familyID: "",
   });
-  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const { isPending: isPendingRegister, mutate: register } = useMutation({
+    mutationFn: async (newUser: TRegisterUser) => {
+      const response = await axios({
+        url: "/api/user/register",
+        method: "POST",
+        data: newUser,
+      });
+      return response.data;
+    },
+    onSuccess: () => {
+      window.location.reload();
+    },
+    onError: () => {
+      toast.error("Could not register user. Please try again later!");
+    },
+  });
+
+  const { isPending: isPendingLogin, mutate: login } = useMutation({
+    mutationFn: async (user: { email: string; password: string }) => {
+      const response = await axios({
+        url: "/api/user/login",
+        method: "POST",
+        data: user,
+      });
+      return response.data;
+    },
+    onSuccess: () => {
+      window.location.reload();
+    },
+    onError: () => {
+      toast.error("Could not log in test user. Please try again later!");
+    },
+  });
 
   const handleInputChange = useCallback((event: ChangeEvent) => {
     const target = event.target as HTMLInputElement;
@@ -37,13 +71,11 @@ export const Register = ({ handleView }: IRegister): JSX.Element => {
 
   const handleSubmit = useCallback((event: FormEvent): void => {
     event.preventDefault();
-    setIsSubmitting(true);
 
     const validation = registerSchema.safeParse(registerData);
 
     if (validation.success === false) {
       setErrors(validation.error.format());
-      setIsSubmitting(false);
       return;
     }
 
@@ -55,33 +87,13 @@ export const Register = ({ handleView }: IRegister): JSX.Element => {
       role: "Au Pair",
     };
 
-    axios( {
-      url: "/api/user/register",
-      method: "POST",
-      data: newUser,
-    } )
-      .then( () => {
-        window.location.reload();
-      })
-      .catch( () => toast.error("Could not register user. Please try again later!"))
-      .finally(() => setIsSubmitting(false));
-  }, [registerData]);
+    register(newUser);
+  }, [registerData, register]);
 
   const handleGuest = useCallback((event: MouseEvent) => {
     event.preventDefault();
-    setIsSubmitting(true);
-
-    axios( {
-      url: "/api/user/login",
-      method: "POST",
-      data: { email: "tester@mail.com", password: "testing123" },
-    } )
-      .then( () => {
-        window.location.reload();
-      })
-      .catch( () => toast.error("Could not log in test user. Please try again later!"))
-      .finally(() => setIsSubmitting(false));
-  }, []);
+    login({ email: "tester@mail.com", password: "testing123" });
+  }, [login]);
 
   return (
     <FormWrapper>
@@ -126,7 +138,13 @@ export const Register = ({ handleView }: IRegister): JSX.Element => {
             error={errors?.country?.value?._errors?.[0] && errors.country.value._errors[0]}
             fullWidth
             handleChange={(option: TSelectOption) => {
-              setRegisterData((prev) => ({ ...prev, "country": option }));
+              setRegisterData((prev) => ({
+                ...prev,
+                "country": {
+                  label: option?.label ?? "",
+                  value: option?.value ?? "",
+                },
+              }));
             }}
             icon="globe"
             label="Home Country"
@@ -157,7 +175,7 @@ export const Register = ({ handleView }: IRegister): JSX.Element => {
           type="password"
           value={registerData.password}
         />
-        <Button loading={isSubmitting} type="submit" variant="primary">
+        <Button loading={isPendingRegister} type="submit" variant="primary">
           Register
         </Button>
         <Button handleClick={() => handleView(AUTH_VIEW.LOGIN)} variant="tertiary">
@@ -167,7 +185,7 @@ export const Register = ({ handleView }: IRegister): JSX.Element => {
           <hr />
           <DividerText>OR</DividerText>
         </Divider>
-        <Button loading={isSubmitting} handleClick={ handleGuest } variant="tertiary">
+        <Button loading={isPendingLogin} handleClick={ handleGuest } variant="tertiary">
           Use Guest Account
         </Button>
       </Form>

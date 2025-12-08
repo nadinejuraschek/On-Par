@@ -29,8 +29,8 @@ export const WorkhourDay = ({ day, hours }: IWorkhourDay): JSX.Element => {
   return (
     <StyledItem>
       <Date>
-        <Day>{dayjs(day).format("DD")}</Day>
-        <Month>{dayjs(day).format("MMM")}</Month>
+        <Day>{dayjs(day).format("ddd")}</Day>
+        <Month>{dayjs(day).format("MMM DD")}</Month>
       </Date>
       { renderTotalHours }
       <TrackerWrapper>

@@ -3,12 +3,13 @@ import { useCallback, useMemo, useState } from "react";
 import { AddGoalModal } from "./AddGoalModal";
 import { GoalsList } from "./List";
 import { Actions, Content, Filter, Layout, StyledButton } from "./styled";
+import { TGoalType } from "types";
 
 const Goals = (): JSX.Element => {
   const [openModal, setOpenModal] = useState(false);
-  const [filter, setFilter] = useState(undefined);
+  const [typeSort, setTypeSort] = useState<{ label: string; value: TGoalType } | undefined>(undefined);
 
-  const filterOptions = useMemo(() => ([
+  const typeOptions = useMemo(() => ([
     { label: "Education", value: "education" }, { label: "Personal", value: "personal" }, { label: "Travel", value: "travel" },
   ]), []);
 
@@ -17,32 +18,32 @@ const Goals = (): JSX.Element => {
   const renderThisMonthGoals = useMemo(() => {
     return (
       <GoalsList
-        filter={filter}
         title="This Month"
-        type="month"
+        filter="month"
+        type={typeSort?.value}
       />
     );
-  }, [filter]);
+  }, [typeSort]);
 
   const renderUpcomingGoals = useMemo(() => {
     return (
       <GoalsList
-        filter={filter}
+        filter="upcoming"
         title="Upcoming / Overdue"
-        type="upcoming"
+        type={typeSort?.value}
       />
     );
-  }, [filter]);
+  }, [typeSort]);
 
   const renderCompletedGoals = useMemo(() => {
     return (
       <GoalsList
-        filter={filter}
+        filter="completed"
         title="Completed"
-        type="completed"
+        type={typeSort?.value}
       />
     );
-  }, [filter]);
+  }, [typeSort]);
 
   const renderAddGoalModal = useMemo(() => {
     if (!openModal) return null;
@@ -58,12 +59,12 @@ const Goals = (): JSX.Element => {
           <Filter>
             <Select
               clearable
-              handleChange={(selectedFilter) => setFilter(selectedFilter)}
+              handleChange={(selectedFilter) => setTypeSort(selectedFilter)}
               name="filter"
               onlyInput
-              options={filterOptions}
+              options={typeOptions}
               placeholder="Filter by"
-              value={filter}
+              value={typeSort}
             />
           </Filter>
           <StyledButton handleClick={toggleModal} variant="primary">

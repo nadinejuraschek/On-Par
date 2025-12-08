@@ -1,11 +1,13 @@
 import { Button, DatePicker, Modal, Textarea, ToggleGroup } from "components";
-import { useEditGoal } from "hooks";
 import { ChangeEvent, useCallback, useMemo, useState } from "react";
 import { TGoalType } from "types";
 import { ZodFormattedError } from "zod";
 import { Form } from "./styled";
 import { IAddGoalModal } from "./types";
-import { TGoalFormData, goalSchema } from "../../../schema";
+import { TGoalFormData, goalSchema } from "../../../../schema";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { editGoal as editGoalFn } from 'api';
+import { toast } from "react-toastify";
 
 export const EditGoalModal = ({
   checked,
@@ -15,7 +17,7 @@ export const EditGoalModal = ({
   toggleModal,
   type,
 }: IAddGoalModal): JSX.Element => {
-  const { editGoal } = useEditGoal();
+  const queryClient = useQueryClient();
 
   const [errors, setErrors] = useState<ZodFormattedError<TGoalFormData> | undefined>(undefined);
   const [submitting, setSubmitting] = useState(false);
@@ -24,6 +26,17 @@ export const EditGoalModal = ({
     dueDate: dueDate ? new Date(dueDate) : new Date(),
     text,
     type,
+  });
+
+  const { isPending, mutate: editGoal } = useMutation({
+    mutationFn: () => editGoalFn({ goalId: id, updatedGoal }),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['goals'] });
+      toast.success("The goal has been updated successfully!");
+    },
+    onError: () => {
+      toast.error("Could not update the goal. Please try again later!");
+    },
   });
 
   const handleToggleType = useCallback((val: string) => {
@@ -42,13 +55,10 @@ export const EditGoalModal = ({
 
     setErrors(undefined);
 
-    editGoal(id, updatedGoal);
+    editGoal();
     setSubmitting(false);
     toggleModal();
-    // TODO: refetch goals
-    // refetchGoals();
   }, [editGoal,
-    id,
     toggleModal,
     updatedGoal]);
 
@@ -59,14 +69,14 @@ export const EditGoalModal = ({
       <Button
         fullWidth
         handleClick={handleSubmit}
-        loading={submitting}
+        loading={submitting || isPending}
         type="submit"
         variant="primary"
       >
         Save
       </Button>
     </>
-  ), [handleSubmit, submitting, toggleModal]);
+  ), [handleSubmit, isPending, submitting, toggleModal]);
 
   const toggleOptions = [
     { label: "Education", value: "education" }, { label: "Personal", value: "personal" }, { label: "Travel", value: "travel" },

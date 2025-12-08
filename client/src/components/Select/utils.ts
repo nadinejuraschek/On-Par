@@ -1,11 +1,15 @@
-import { Theme } from "react-select";
+import { CSSObjectWithLabel, ControlProps, StylesConfig, Theme } from "react-select";
+import { TSelectOption } from "./types";
 
-export const getSelectStyles = (icon = "", hasError: boolean) => ({
-  container: (baseStyles: { [key: string]: string }) => ({
+export const getSelectStyles = (
+  icon = "",
+  hasError: boolean,
+): StylesConfig<TSelectOption, false> => ({
+  container: (baseStyles: CSSObjectWithLabel) => ({
     ...baseStyles,
     width: "100%",
   }),
-  control: (baseStyles: { [key: string]: string }, state) => ({
+  control: (baseStyles: CSSObjectWithLabel, state: ControlProps<TSelectOption, false>) => ({
     ...baseStyles,
     borderColor: hasError ? "var(--error_300)" : "var(--grey_300)",
     borderRadius: "0.8rem",
@@ -14,11 +18,11 @@ export const getSelectStyles = (icon = "", hasError: boolean) => ({
     minHeight: "4rem",
     padding: icon ? "0 0 0 4rem" : "0 0 0 1.2rem",
   }),
-  singleValue: (baseStyles: { [key: string]: string }) => ({
+  singleValue: (baseStyles: CSSObjectWithLabel) => ({
     ...baseStyles,
     margin: 0,
   }),
-  valueContainer: (baseStyles: { [key: string]: string }) => ({
+  valueContainer: (baseStyles: CSSObjectWithLabel) => ({
     ...baseStyles,
     padding: 0,
   }),

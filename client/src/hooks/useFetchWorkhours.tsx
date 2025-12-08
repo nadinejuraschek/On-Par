@@ -1,29 +1,27 @@
 import axios from "axios";
-import { useCallback, useEffect, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
 import { toast } from "react-toastify";
-import { TWorkhour } from "types";
 
 export function useFetchWorkhours() {
-  const [data, setData] = useState<TWorkhour[]>(undefined);
-  const [loading, setLoading] = useState(false);
+  const { data, isLoading, isError, refetch } = useQuery({
+    queryKey: ["workhours"],
+    queryFn: async () => {
+      const response = await axios({
+        url: "/api/user/:id/workhours",
+        method: "GET",
+      });
+      return response.data;
+    },
+  });
 
-  const getWorkhours = useCallback(async () => {
-    setLoading(true);
-    await axios( {
-      url: "/api/user/:id/workhours",
-      method: "GET",
-    } ).then( res => setData(res.data))
-      .catch( () => toast.error("Could not fetch workhours. Please try again later!"))
-      .finally(() => setLoading(false));
-  }, []);
-
-  useEffect(() => {
-    getWorkhours();
-  }, [getWorkhours]);
+  if (isError) {
+    toast.error("Could not fetch workhours. Please try again later!");
+  }
 
   return {
-    data,
-    loading,
-    refetch: getWorkhours,
+    data: data ?? [],
+    loading: isLoading,
+    isError,
+    refetch,
   };
 }

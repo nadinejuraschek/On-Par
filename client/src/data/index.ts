@@ -5,7 +5,6 @@ export * from "./emergencyNumbers";
 export * from "./holidays";
 export * from "./hostFamily";
 export * from "./navLinks";
-export * from "./notebook";
 export * from "./quicklinks";
 export * from "./resources";
 export * from "./taxInfo";

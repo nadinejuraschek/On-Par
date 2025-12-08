@@ -1,38 +1,46 @@
 import { Button, DatePicker, Modal, Textarea, ToggleGroup } from "components";
-import { useCreateGoal } from "hooks";
+import { createGoal as createGoalFn } from "api";
 import { ChangeEvent, useCallback, useMemo, useState } from "react";
 import { ZodFormattedError } from "zod";
 import { Form } from "./styled";
 import { IAddGoalModal } from "./types";
 import { TGoalFormData, goalSchema } from "../../../../schema/goal.schema";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { toast } from "react-toastify";
 
 export const AddGoalModal = ({ toggleModal }: IAddGoalModal): JSX.Element => {
-  const { createGoal } = useCreateGoal();
+  const queryClient = useQueryClient();
 
   const [errors, setErrors] = useState<ZodFormattedError<TGoalFormData> | undefined>(undefined);
-  const [newGoal, setNewGoal] = useState({
-    dueDate: undefined,
-    text: undefined,
-    type: undefined,
+  const [newGoal, setNewGoal] = useState<TGoalFormData>({
+    dueDate: new Date(),
+    text: '',
+    type: 'personal',
   });
-  const [submitting, setSubmitting] = useState(false);
+
+  const { mutate: createGoal, isPending } = useMutation({
+    mutationFn: createGoalFn,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['goals'] });
+      toast.success("Your goal has been added successfully!");
+    },
+    onError: () => {
+      toast.error("The goal could not be added. Please try again later!");
+    },
+  });
 
   const handleSubmit = useCallback(() => {
-    setSubmitting(true);
-
     const validation = goalSchema.safeParse(newGoal);
 
     if (validation.success === false) {
       setErrors(validation.error.format());
-      setSubmitting(false);
       return;
     }
 
     setErrors(undefined);
 
     createGoal(newGoal);
-    setSubmitting(false);
-    // TODO: refetch goals
+
     toggleModal();
   }, [createGoal, newGoal, toggleModal]);
 
@@ -43,14 +51,14 @@ export const AddGoalModal = ({ toggleModal }: IAddGoalModal): JSX.Element => {
       <Button
         fullWidth
         handleClick={handleSubmit}
-        loading={submitting}
+        loading={isPending}
         type="submit"
         variant="primary"
       >
         Save
       </Button>
     </>
-  ), [handleSubmit, submitting, toggleModal]);
+  ), [handleSubmit, isPending, toggleModal]);
 
   const toggleOptions = [
     { label: "Education", value: "education" }, { label: "Personal", value: "personal" }, { label: "Travel", value: "travel" },

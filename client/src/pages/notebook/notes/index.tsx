@@ -4,7 +4,7 @@ import { TNote } from "types";
 import { AddNoteModal } from "./AddNoteModal";
 import { NoteCard } from "./NoteCard";
 import { Grid, Header, List, Search, StyledPagination } from "./styled";
-import { useQuery } from "@tanstack/react-query";
+import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import { getNotes } from "api";
 // import { Suggestions } from "./Suggestions";
 
@@ -19,8 +19,9 @@ const Notes = (): JSX.Element => {
     // error,
     isLoading,
   } = useQuery({
-    queryKey: ["notes"],
-    queryFn: getNotes,
+    queryKey: ["notes", page],
+    queryFn: () => getNotes(page - 1, searchInput),
+    placeholderData: keepPreviousData,
   });
 
   const handleSearch = useCallback((event: ChangeEvent) => {
@@ -39,9 +40,9 @@ const Notes = (): JSX.Element => {
   const renderNotes = useMemo(() => {
     if (isLoading) return <LoadingSpinner />;
 
-    if (!notesData || notesData.notes.length === 0) return null;
+    if (!notesData || notesData?.notes.length === 0) return null;
 
-    const filteredNotes = notesData.notes.filter((note) => {
+    const filteredNotes = notesData?.notes.filter((note) => {
       return note.title.includes(searchInput) || note.text.includes(searchInput);
     });
 
@@ -64,7 +65,7 @@ const Notes = (): JSX.Element => {
 
     return (
       <StyledPagination
-        handlePageChange={setPage}
+        handlePageChange={(pageNum) => setPage(pageNum)}
         limit={10}
         page={page + 1}
         totalCount={total}

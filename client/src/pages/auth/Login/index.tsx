@@ -1,5 +1,6 @@
 import axios from "axios";
 import { Button, Input, Text } from "components";
+import { useMutation } from "@tanstack/react-query";
 import { ChangeEvent, FormEvent, MouseEvent, useCallback, useState } from "react";
 import { toast } from "react-toastify";
 import { ZodFormattedError } from "zod";
@@ -14,7 +15,23 @@ export const Login = ({ handleView }: ILogin): JSX.Element => {
     email: "",
     password: "",
   });
-  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const { mutate: login, isPending } = useMutation({
+    mutationFn: async (credentials: TLoginFormData) => {
+      const response = await axios({
+        url: "/api/user/login",
+        method: "POST",
+        data: credentials,
+      });
+      return response.data;
+    },
+    onSuccess: () => {
+      window.location.reload();
+    },
+    onError: () => {
+      toast.error("Could not log you in. Please try again later!");
+    },
+  });
 
   const handleInputChange = useCallback((event: ChangeEvent) => {
     const target = event.target as HTMLInputElement;
@@ -23,47 +40,22 @@ export const Login = ({ handleView }: ILogin): JSX.Element => {
 
   const handleSubmit = useCallback((event: FormEvent) => {
     event.preventDefault();
-    setIsSubmitting(true);
 
     const validation = loginSchema.safeParse(loginData);
 
     if (validation.success === false) {
       setErrors(validation.error.format());
-      setIsSubmitting(false);
       return;
     }
 
     setErrors(undefined);
-
-    axios( {
-      url: "/api/user/login",
-      method: "POST",
-      data: loginData,
-    } )
-      .then( () => {
-        window.location.reload();
-      })
-      .catch( () => toast.error("Could not log you in. Please try again later!"))
-      .finally(() => setIsSubmitting(false));
-  }, [loginData]);
+    login(loginData);
+  }, [loginData, login]);
 
   const handleGuest = useCallback((event: MouseEvent) => {
     event.preventDefault();
-    setIsSubmitting(true);
-
-    axios( {
-      url: "/api/user/login",
-      method: "POST",
-      data: { email: "tester@mail.com", password: "testing123" },
-    } )
-      .then( () => {
-        window.location.reload();
-      })
-      .catch(() => {
-        toast.error("Could not log in test user. Please try again later!");
-      } )
-      .finally(() => setIsSubmitting(false));
-  }, []);
+    login({ email: "tester@mail.com", password: "testing123" });
+  }, [login]);
 
   return (
     <FormWrapper>
@@ -90,7 +82,7 @@ export const Login = ({ handleView }: ILogin): JSX.Element => {
           type="password"
           value={loginData.password}
         />
-        <Button loading={isSubmitting} type="submit" variant="primary">
+        <Button loading={isPending} type="submit" variant="primary">
           Log In
         </Button>
         <Button
@@ -103,7 +95,7 @@ export const Login = ({ handleView }: ILogin): JSX.Element => {
           <hr />
           <DividerText>OR</DividerText>
         </Divider>
-        <Button loading={isSubmitting} handleClick={ handleGuest } variant="tertiary">Use Guest Account</Button>
+        <Button loading={isPending} handleClick={ handleGuest } variant="tertiary">Use Guest Account</Button>
       </Form>
     </FormWrapper>
   );

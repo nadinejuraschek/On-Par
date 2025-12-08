@@ -1,9 +1,9 @@
 import axios from "axios";
 import { TNote } from "types";
 
-export async function getNotes() {
-  // return await axios.get<TNote[]>(`/api/user/:id/notes?page=${page}`).then((res) => res.data);
-  return await axios.get<{ notes: TNote[], total: number }>("/api/user/:id/notes").then((res) => res.data);
+export async function getNotes(page: number = 0, searchTerm?: string) {
+  const url = `/api/user/:id/notes?page=${page}`;
+  return await axios.get<{ notes: TNote[], total: number }>(searchTerm ? url + `?=${searchTerm}` : url).then((res) => res.data);
 }
 
 export async function createNote(newNote: TNote) {

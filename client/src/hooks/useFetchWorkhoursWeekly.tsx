@@ -1,6 +1,6 @@
 import axios from "axios";
 import * as dayjs from "dayjs";
-import { useCallback, useEffect, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
 import { toast } from "react-toastify";
 import { TWorkhour } from "types";
 
@@ -9,35 +9,33 @@ interface IUseFetchWorkhoursWeekly {
 }
 
 export function useFetchWorkhoursWeekly({ startDate }: IUseFetchWorkhoursWeekly) {
-  const [data, setData] = useState<{ hours?: TWorkhour[], total: number }>({ hours: undefined, total: 0 });
-  const [loading, setLoading] = useState(false);
+  const { data, isLoading, isError, refetch } = useQuery({
+    queryKey: ["workhoursWeekly", startDate],
+    queryFn: async () => {
+      const startOfWeek = startDate || dayjs().startOf("week").format("YYYY-MM-DD");
+      const endOfWeek = dayjs(startOfWeek).endOf("week").add(1, "day").format("YYYY-MM-DD");
 
-  const getWorkhours = useCallback(async () => {
-    setLoading(true);
+      const response = await axios({
+        url: `/api/user/:id/workhours/${startOfWeek}/${endOfWeek}`,
+        method: "GET",
+      });
 
-    const startOfWeek = startDate || dayjs().startOf("week").format("YYYY-MM-DD");
-    const endOfWeek = dayjs( startOfWeek ).endOf("week").add(1, "day").format("YYYY-MM-DD");
-
-    await axios( {
-      url: `/api/user/:id/workhours/${startOfWeek}/${endOfWeek}`,
-      method: "GET",
-    } ).then( res => {
-      const totalHours = res.data.reduce( (acc: number, cur: TWorkhour) => {
+      const totalHours = response.data.reduce((acc: number, cur: TWorkhour) => {
         return acc + cur.total;
       }, 0);
-      setData({ hours: res.data, total: totalHours });
-    } ).catch(() => {
-      toast.error("Could not fetch workhours. Please try again later!");
-    }).finally(() => setLoading(false));
-  }, [startDate]);
 
-  useEffect(() => {
-    getWorkhours();
-  }, [getWorkhours]);
+      return { hours: response.data, total: totalHours };
+    },
+  });
+
+  if (isError) {
+    toast.error("Could not fetch workhours. Please try again later!");
+  }
 
   return {
-    data,
-    loading,
-    refetch: getWorkhours,
+    data: data ?? { hours: [], total: 0 },
+    loading: isLoading,
+    isError,
+    refetch,
   };
 }

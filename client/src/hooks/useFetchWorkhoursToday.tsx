@@ -1,34 +1,31 @@
 import axios from "axios";
-import { useCallback, useEffect, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
 import { toast } from "react-toastify";
 import { TWorkhour } from "types";
 
 export function useFetchWorkhoursToday() {
-  const [data, setData] = useState<number>(0);
-  const [loading, setLoading] = useState(false);
-
-  const getWorkhoursToday = useCallback(async () => {
-    setLoading(true);
-    await axios( {
-      url: "/api/user/:id/workhours/today",
-      method: "GET",
-    } ).then( res => {
-      const totalHours = res.data.reduce((acc: number, cur: TWorkhour) => {
+  const { data, isLoading, isError, refetch } = useQuery({
+    queryKey: ["workhoursToday"],
+    queryFn: async () => {
+      const response = await axios({
+        url: "/api/user/:id/workhours/today",
+        method: "GET",
+      });
+      const totalHours = response.data.reduce((acc: number, cur: TWorkhour) => {
         return acc + cur.total;
       }, 0);
-      setData(totalHours);
-    } ).catch(() => {
-      toast.error("Could not fetch workhours. Please try again later!")
-    }).finally(() => setLoading(false));
-  }, []);
+      return totalHours;
+    },
+  });
 
-  useEffect(() => {
-    getWorkhoursToday();
-  }, [getWorkhoursToday]);
+  if (isError) {
+    toast.error("Could not fetch workhours. Please try again later!");
+  }
 
   return {
-    data,
-    loading,
-    refetch: getWorkhoursToday,
+    data: data ?? 0,
+    loading: isLoading,
+    isError,
+    refetch,
   };
 }

@@ -9,14 +9,18 @@ const getPayments = async (req: Request, res: Response) => {
     return res.status(403).json("Please log in to use this feature.");
   }
 
-  const result = await db.User.findById(req.user)
-    .populate('payments')
-    .then(payments => payments)
-    .catch(err => {
-      res.status(500).json({ error: err.message });
-    });
+  try {
+    const result = await db.User.findById(req.user)
+      .populate('payments');
 
-  return res.status(200).json(result?.payments);
+    if (!result) {
+      return res.status(404).json({ error: "User not found." });
+    }
+
+    return res.status(200).json(result.payments || []);
+  } catch (err: any) {
+    return res.status(500).json({ error: err.message });
+  }
 };
 
 // CREATE
@@ -26,19 +30,18 @@ const createPayment = async (req: Request, res: Response) => {
     return res.status(403).json("Please log in to use this feature.");
   }
 
-  await db.Payment.create(req.body)
-    .then(async insertedPayment => {
-      await db.User.findByIdAndUpdate(
-        { _id: req.user },
-        { $push: { payments: insertedPayment._id } })
-        .then(() => res.status(200).json('Payment has been created successfully!'))
-        .catch((err) => {
-          res.status(500).json({ error: err.message });
-        });
-    })
-    .catch(err => {
-      res.status(500).json({ error: err.message });
-    });
+  try {
+    const insertedPayment = await db.Payment.create(req.body);
+
+    await db.User.findByIdAndUpdate(
+      req.user,
+      { $push: { payments: insertedPayment._id } }
+    );
+
+    return res.status(200).json('Payment has been created successfully!');
+  } catch (err: any) {
+    return res.status(500).json({ error: err.message });
+  }
 };
 
 // UPDATE
@@ -48,13 +51,17 @@ const updatePayment = async (req: Request, res: Response) => {
     return res.status(403).json("Please log in to use this feature.");
   }
 
-  await db.Payment.findByIdAndUpdate(req.params.paymentid, req.body)
-    .then(() => {
-      res.status(200).json('Payment has been updated successfully!');
-    })
-    .catch(err => {
-      res.status(500).json({ error: err.message });
-    });
+  try {
+    const updatedPayment = await db.Payment.findByIdAndUpdate(req.params.paymentid, req.body);
+
+    if (!updatedPayment) {
+      return res.status(404).json({ error: "Payment not found." });
+    }
+
+    return res.status(200).json('Payment has been updated successfully!');
+  } catch (err: any) {
+    return res.status(500).json({ error: err.message });
+  }
 };
 
 // DELETE
@@ -64,15 +71,22 @@ const deletePayment = async (req: Request, res: Response) => {
     return res.status(403).json("Please log in to use this feature.");
   }
 
-  await db.Payment.findByIdAndRemove(req.params.paymentid)
-    .then(() => {
-      res
-        .status(200)
-        .json('Payment has been deleted successfully!');
-    })
-    .catch(err => {
-      res.status(500).json({ error: err.message });
-    });
+  try {
+    const deletedPayment = await db.Payment.findByIdAndDelete(req.params.paymentid);
+
+    if (!deletedPayment) {
+      return res.status(404).json({ error: "Payment not found." });
+    }
+
+    await db.User.findByIdAndUpdate(
+      req.user,
+      { $pull: { payments: req.params.paymentid } }
+    );
+
+    return res.status(200).json('Payment has been deleted successfully!');
+  } catch (err: any) {
+    return res.status(500).json({ error: err.message });
+  }
 };
 
 export const paymentController = {

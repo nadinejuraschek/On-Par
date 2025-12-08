@@ -1,11 +1,14 @@
-import { Badge, Button, Icon, Modal } from "components";
+import { Badge, Button, Icon } from "components";
 import * as dayjs from "dayjs";
-import { useDeleteGoal, useEditGoal } from "hooks";
-import { useCallback, useMemo, useState } from "react";
-import { EditGoalModal } from "./EditGoalModal";
 import { BadgesWrapper, ItemBody, Label, Overlay, StyledItem } from "./styled";
 import { IGoalItem } from "./types";
 import { getGoalIcon } from "./utils";
+import { ActionDelete } from "./ActionDelete";
+import { ActionEdit } from "./ActionEdit";
+import { useMemo } from "react";
+import { editGoal as editGoalFn } from "api";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { toast } from "react-toastify";
 
 export const GoalItem = ({
   checkable = true,
@@ -19,32 +22,27 @@ export const GoalItem = ({
   text,
   type = "personal",
 }: IGoalItem): JSX.Element => {
-  const [openDeleteConfirm, setOpenDeleteConfirm] = useState(false);
-  const [openEditModal, setOpenEditModal] = useState(false);
-  const [submittingDelete, setSubmittingDelete] = useState(false);
+  const queryClient = useQueryClient();
 
-  const { deleteGoal } = useDeleteGoal();
-  const { editGoal } = useEditGoal();
-
-  const closeModal = useCallback(() => {
-    setOpenDeleteConfirm(false);
-    setOpenEditModal(false);
-  }, []);
-
-  const handleEditGoal = useCallback(() => {
-    editGoal(id, { checked: true });
-    // TODO: refetch goals
-    // refetchGoals();
-  }, [editGoal, id]);
-
-  const handleDeleteGoal = useCallback(() => {
-    setSubmittingDelete(true);
-    deleteGoal(id);
-    setSubmittingDelete(false);
-    setOpenDeleteConfirm(false);
-    // TODO: refetch goals
-    // refetchGoals();
-  }, [deleteGoal, id]);
+  const { isPending, mutate: editGoal } = useMutation({
+    mutationFn: () => editGoalFn({
+      goalId: id,
+      updatedGoal: {
+        _id: id,
+        checked: true,
+        dueDate,
+        text,
+        type,
+      },
+    }),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['goals'] });
+      toast.success("The goal has been updated successfully!");
+    },
+    onError: () => {
+      toast.error("Could not update the goal. Please try again later!");
+    },
+  });
 
   const isOverdue = useMemo(() => !checked && dayjs().isAfter(dayjs(dueDate)), [checked, dueDate]);
 
@@ -54,27 +52,26 @@ export const GoalItem = ({
     return (
       <Overlay>
         {checkable && (
-          <Button handleClick={handleEditGoal} square>
+          <Button loading={isPending} handleClick={editGoal} square>
             <Icon type="check" />
           </Button>
         )}
-        {editable && (
-          <Button handleClick={() => setOpenEditModal(true)} square>
-            <Icon type="pen" />
-          </Button>
-        )}
-        {deletable && (
-          <Button handleClick={() => setOpenDeleteConfirm(true)} square>
-            <Icon type="trash" />
-          </Button>
-        )}
+        {editable && <ActionEdit checked={checked} dueDate={dueDate} id={id} text={text} type={type} />}
+        {deletable && <ActionDelete id={id} />}
       </Overlay>
     );
-  }, [checkable,
+  }, [
+    checkable,
     checked,
     deletable,
+    dueDate,
+    editGoal,
     editable,
-    handleEditGoal]);
+    id,
+    isPending,
+    text,
+    type,
+  ]);
 
   const renderBadges = useMemo(() => {
     const badgeIcon = <Icon size="1.2rem" type={getGoalIcon(type)} />;
@@ -87,67 +84,22 @@ export const GoalItem = ({
     );
   }, [dueDate, type]);
 
-  const renderDeleteConfirmModal = useMemo(() => {
-    if (!openDeleteConfirm) return null;
-
-    const actions = (
-      <>
-        <Button fullWidth handleClick={closeModal}>Cancel</Button>
-        <Button
-          fullWidth
-          handleClick={handleDeleteGoal}
-          loading={submittingDelete}
-          variant="danger"
-        >
-          Delete
-        </Button>
-      </>
-    );
-
-    return (
-      <Modal actions={actions} handleClose={closeModal} title="Delete Goal">
-        Are you sure you&apos;d like to delete this goal?
-      </Modal>
-    )
-  }, [openDeleteConfirm,
-    closeModal,
-    handleDeleteGoal,
-    submittingDelete]);
-
-  const renderEditModal = useMemo(() => {
-    if (!openEditModal) return null;
-
-    return (
-      <EditGoalModal checked={checked} dueDate={dueDate} id={id} text={text} toggleModal={closeModal} type={type} />
-    );
-  }, [checked,
-    dueDate,
-    id,
-    openEditModal,
-    text,
-    closeModal,
-    type]);
-
   return (
-    <>
-      <StyledItem
-        className={className}
-        $isChecked={checked}
-        $isOverdue={isOverdue}
-      >
-        <ItemBody>
-          <Label
-            $isChecked={checked}
-            size="md"
-          >
-            { label }
-          </Label>
-          {renderBadges}
-        </ItemBody>
-        {renderActions}
-      </StyledItem>
-      {renderDeleteConfirmModal}
-      {renderEditModal}
-    </>
+    <StyledItem
+      className={className}
+      $isChecked={checked}
+      $isOverdue={isOverdue}
+    >
+      <ItemBody>
+        <Label
+          $isChecked={checked}
+          size="md"
+        >
+          { label }
+        </Label>
+        {renderBadges}
+      </ItemBody>
+      {renderActions}
+    </StyledItem>
   );
 }

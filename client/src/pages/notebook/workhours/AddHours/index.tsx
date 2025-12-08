@@ -1,13 +1,15 @@
 import { Button, DatePicker, Text } from "components";
 import * as dayjs from "dayjs";
-import { useCreateWorkhours } from "hooks";
 import { useCallback, useState } from "react";
 import { TWorkhoursFormData, workhoursSchema } from "schema/workhours.schema";
 import { ZodFormattedError } from "zod";
 import { Form } from "./styled";
+import { createWorkhours as createWorkhoursFn } from "api";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 export const AddHours = (): JSX.Element => {
   const today = new Date();
+  const queryClient = useQueryClient();
 
   const [errors, setErrors] = useState<ZodFormattedError<TWorkhoursFormData> | undefined>(undefined);
   const [submitting, setSubmitting] = useState(false);
@@ -17,7 +19,12 @@ export const AddHours = (): JSX.Element => {
     end: undefined,
   });
 
-  const { createWorkhours } = useCreateWorkhours();
+  const { mutate: createWorkhours } = useMutation({
+    mutationFn: createWorkhoursFn,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['workhours'] });
+    }
+  });
 
   const handleSubmit = useCallback((): void => {
     setSubmitting(true);
@@ -44,7 +51,6 @@ export const AddHours = (): JSX.Element => {
 
     createWorkhours(newHours);
     setSubmitting(false);
-    // TODO: refetch hours
   }, [createWorkhours, workhoursData]);
 
   const handleChange = useCallback((date: Date, name: string): void => {

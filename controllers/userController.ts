@@ -12,28 +12,33 @@ const getUser = async (req: Request, res: Response) => {
     return res.status(403).json("Please log in to use this feature.");
   }
 
-  await db.User.findById(req.user)
-    .then(user => {
-      const userInfo = {
-        _id: user?._id,
-        birthday: user?.birthday,
-        country: user?.country,
-        email: user?.email,
-        endDate: user?.endDate,
-        familyID: user?.familyID,
-        firstname: user?.firstname,
-        lastname: user?.lastname,
-        location: user?.location,
-        permissions: user?.permissions,
-        profileImage: user?.profileImage,
-        role: user?.role,
-        startDate: user?.startDate,
-      };
-      res.status(200).json(userInfo);
-    })
-    .catch(err => {
-      res.status(500).json({ error: err.message });
-    });
+  try {
+    const user = await db.User.findById(req.user);
+
+    if (!user) {
+      return res.status(404).json({ error: "User not found." });
+    }
+
+    const userInfo = {
+      _id: user._id,
+      birthday: user.birthday,
+      country: user.country,
+      email: user.email,
+      endDate: user.endDate,
+      familyID: user.familyID,
+      firstname: user.firstname,
+      lastname: user.lastname,
+      location: user.location,
+      permissions: user.permissions,
+      profileImage: user.profileImage,
+      role: user.role,
+      startDate: user.startDate,
+    };
+
+    return res.status(200).json(userInfo);
+  } catch (err: any) {
+    return res.status(500).json({ error: err.message });
+  }
 };
 
 const getUserById = async (req: Request, res: Response) => {
@@ -42,112 +47,118 @@ const getUserById = async (req: Request, res: Response) => {
     return res.status(403).json("Please log in to use this feature.");
   }
 
-  await db.User.findById({ _id: req.params.id })
-    .then(user => {
-      const userInfo = {
-        _id: user?._id,
-        birthday: user?.birthday,
-        country: user?.country,
-        email: user?.email,
-        endDate: user?.endDate,
-        familyID: user?.familyID,
-        firstname: user?.firstname,
-        lastname: user?.lastname,
-        location: user?.location,
-        permissions: user?.permissions,
-        role: user?.role,
-        startDate: user?.startDate,
-      };
+  try {
+    const user = await db.User.findById(req.params.id);
 
-      res.status(200).json(userInfo);
-    })
-    .catch(err => {
-      res.status(500).json({ error: err.message });
-    });
+    if (!user) {
+      return res.status(404).json({ error: "User not found." });
+    }
+
+    const userInfo = {
+      _id: user._id,
+      birthday: user.birthday,
+      country: user.country,
+      email: user.email,
+      endDate: user.endDate,
+      familyID: user.familyID,
+      firstname: user.firstname,
+      lastname: user.lastname,
+      location: user.location,
+      permissions: user.permissions,
+      role: user.role,
+      startDate: user.startDate,
+    };
+
+    return res.status(200).json(userInfo);
+  } catch (err: any) {
+    return res.status(500).json({ error: err.message });
+  }
 };
 
 const registerUser = async (req: Request, res: Response) => {
-  // has the password
-  const password = await bcrypt.hash(req.body.password, 10);
+  try {
+    // hash the password
+    const password = await bcrypt.hash(req.body.password, 10);
 
-  // create user in database
-  const user = await db.User.create({
-    birthday: req.body.birthday,
-    role: req.body.role,
-    familyID: Math.floor(Math.random() * 90000) + 10000,
-    firstname: req.body.firstname.trim(),
-    lastname: req.body.lastname.trim(),
-    country: req.body.country,
-    startDate: req.body.startDate,
-    endDate: dayjs(req.body.startDate).add(1, 'years').toDate(),
-    email: req.body.email.toLowerCase(),
-    password: password,
-    permissions: {
-      shareBirthday: false,
-      shareEmail: false,
-      shareLastName: false,
-    },
-  });
+    // create user in database
+    const user = await db.User.create({
+      birthday: req.body.birthday,
+      role: req.body.role,
+      familyID: Math.floor(Math.random() * 90000) + 10000,
+      firstname: req.body.firstname.trim(),
+      lastname: req.body.lastname.trim(),
+      country: req.body.country,
+      startDate: req.body.startDate,
+      endDate: dayjs(req.body.startDate).add(1, 'years').toDate(),
+      email: req.body.email.toLowerCase(),
+      password: password,
+      permissions: {
+        shareBirthday: false,
+        shareEmail: false,
+        shareLastName: false,
+      },
+    });
 
-  if (!user) {
-    return res.status(500).json('Error when creating user in DB.');
+    if (!user) {
+      return res.status(500).json('Error when creating user in DB.');
+    }
+
+    const endOfWeekStartDate = dayjs(new Date(req.body.startDate)).endOf("week");
+
+    // create empty payment entries for the whole year
+    const createPaymentEntries = () => {
+      return Array.from({ length: 52 }, (_, i) => ({
+        amount: null,
+        paid: false,
+        late: false,
+        date: endOfWeekStartDate.add(i + 1, 'week'),
+        week: i + 1,
+      }));
+    };
+
+    const insertedPayment = await db.Payment.insertMany(createPaymentEntries());
+    const paymentIds = insertedPayment.map((payment) => payment._id);
+
+    await db.User.findByIdAndUpdate(
+      user._id,
+      { $push: { payments: paymentIds } }
+    );
+
+    // create cookie for user (only after successful registration)
+    const token = jwt.sign({ id: user._id }, process.env.APP_SECRET || '');
+    res.cookie('token', token, {
+      httpOnly: true,
+      maxAge: 1000 * 60 * 60 * 24 * 365, // 1 year cookie
+    });
+
+    return res.status(200).json(user._id);
+  } catch (err: any) {
+    return res.status(500).json({ error: err.message });
   }
-
-  let errors: string[] = [];
-
-  // create cookie for user
-  const token = jwt.sign({ id: user._id }, process.env.APP_SECRET || '');
-  res.cookie('token', token, {
-    httpOnly: true,
-    maxAge: 1000 * 60 * 60 * 24 * 365, // 1 year cookie
-  });
-
-  const endOfWeekStartDate = dayjs(new Date(req.body.startDate)).endOf("week");
-
-  // create empty payment entries for the whole year
-  const createPaymentEntries = () => {
-    return Array(52).fill({
-      amount: null,
-      paid: false,
-      late: false,
-    }).map((entry, i) => ({...entry, date: endOfWeekStartDate.add(i + 1, 'week'), week: i + 1}));
-  };
-
-  await db.Payment.insertMany(createPaymentEntries())
-    .then(insertedPayment => {
-      const paymentIds = insertedPayment.map((payment) => payment._id);
-      db.User.findByIdAndUpdate(
-        { _id: user._id },
-        { $push: { payments: paymentIds } })
-        .catch((err) => errors.push(err.message));
-    })
-    .catch((err) => errors.push(err.message));
-
-  if (errors.length > 0) {
-    return res.status(500).json({ error: errors.join(', ') });
-  }
-
-  res.status(200).json(user._id);
 };
 
 const loginUser = async (req: Request, res: Response) => {
-  const user = await db.User.findOne({ email: req.body.email.trim() });
-  if (!user) {
-    res.status(500).json({ message: 'No User found.' });
-    return;
-  }
-  const valid = await bcrypt.compare(req.body.password, user.password);
-  if (!valid) {
-    res.status(500).json({ message: 'Entered e-mail and password do not match!' });
-    return;
-  }
-  const token = jwt.sign({ id: user.id }, process.env.APP_SECRET || '');
-  res.cookie('token', token, {
-    httpOnly: true,
-    maxAge: 1000 * 60 * 60 * 24 * 365,
-  });
+  try {
+    const user = await db.User.findOne({ email: req.body.email.trim() });
+    if (!user) {
+      return res.status(401).json({ message: 'No User found.' });
+    }
 
-  res.status(200).json(user._id);
+    const valid = await bcrypt.compare(req.body.password, user.password);
+    if (!valid) {
+      return res.status(401).json({ message: 'Entered e-mail and password do not match!' });
+    }
+
+    const token = jwt.sign({ id: user._id }, process.env.APP_SECRET || '');
+    res.cookie('token', token, {
+      httpOnly: true,
+      maxAge: 1000 * 60 * 60 * 24 * 365,
+    });
+
+    return res.status(200).json(user._id);
+  } catch (err: any) {
+    return res.status(500).json({ error: err.message });
+  }
 };
 
 const signoutUser = (req: Request, res: Response) => {
@@ -162,11 +173,17 @@ const updateUser = async (req: Request, res: Response) => {
     return res.status(403).json("Please log in to use this feature.");
   }
 
-  await db.User.findByIdAndUpdate(req.params.id, req.body)
-    .then(() => res.status(200).json('User has been updated successfully!'))
-    .catch(err => {
-      res.status(500).json({ error: err.message });
-    });
+  try {
+    const updatedUser = await db.User.findByIdAndUpdate(req.params.id, req.body);
+
+    if (!updatedUser) {
+      return res.status(404).json({ error: "User not found." });
+    }
+
+    return res.status(200).json('User has been updated successfully!');
+  } catch (err: any) {
+    return res.status(500).json({ error: err.message });
+  }
 };
 
 // DELETE
@@ -176,13 +193,17 @@ const deleteUser = async (req: Request, res: Response) => {
     return res.status(403).json("Please log in to use this feature.");
   }
 
-  await db.User.findByIdAndRemove(req.params.id)
-    .then(() => {
-      res.status(200).json('User has been deleted successfully!');
-    })
-    .catch(err => {
-      res.status(500).json({ error: err.message });
-    });
+  try {
+    const deletedUser = await db.User.findByIdAndDelete(req.params.id);
+
+    if (!deletedUser) {
+      return res.status(404).json({ error: "User not found." });
+    }
+
+    return res.status(200).json('User has been deleted successfully!');
+  } catch (err: any) {
+    return res.status(500).json({ error: err.message });
+  }
 };
 
 export const userController = {
