@@ -3,17 +3,17 @@ import { useMemo } from "react";
 import { AddHours } from "./AddHours";
 import { CardAddWorkhour, CardReminder, CardTimer, CardTracker, StyledContent } from "./styled";
 import { useQuery } from "@tanstack/react-query";
-import { getWorkhoursToday } from "api";
+import { getWorkhours } from "api";
 
 const Workhours = (): JSX.Element => {
   const {
     data: todayWorkhours,
     // TODO: display error message
-    // error,
+    // isError,
     isLoading,
   } = useQuery({
-    queryKey: ["workhoursToday"],
-    queryFn: getWorkhoursToday,
+    queryKey: ["workhours"],
+    queryFn: () => getWorkhours({ filter: "today" }),
   });
 
   const renderTimes = useMemo(() => <Timer time={ todayWorkhours?.[0]?.total ?? 0 } />, [todayWorkhours]);

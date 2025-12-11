@@ -1,37 +1,37 @@
-import axios from "axios";
 import { Button } from "components";
 import { TUser } from "contexts/UserContext/types";
 import { ChangeEvent, useCallback, useState } from "react";
 import { toast } from "react-toastify";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { AvatarUpload } from "./AvatarUpload";
 import { Form } from "./Form";
 import { Permissions } from "./Permissions";
 import { FooterActions, StyledContent } from "./styled";
+import { editUser as editUserFn } from "api";
 
 export const UserInfo = ({ user }: { user: TUser }): JSX.Element => {
-  const [updating, setUpdating] = useState(false);
-
+  const queryClient = useQueryClient();
   const [formData, setFormData] = useState<TUser>(user);
 
-  const handleEdit = useCallback(() => {
-    setUpdating(true);
-
-    axios.put( "/api/user/" + user._id, {
-      birthday: formData.birthday,
-      firstname: formData.firstname,
-      lastname: formData.lastname,
-      permissions: {
-        shareBirthday: formData.permissions.shareBirthday,
-        shareEmail: formData.permissions.shareEmail,
-        shareLastName: formData.permissions.shareLastName,
+  const { isPending, mutate: editUser } = useMutation({
+    mutationFn: () => editUserFn({
+      id: user._id,
+      updatedData: {
+        birthday: formData.birthday,
+        firstname: formData.firstname,
+        lastname: formData.lastname,
+        permissions: formData.permissions,
+        profileImage: formData.profileImage,
       },
-      profileImage: formData.profileImage,
-    } ).then( () => {
+    }),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["user"] });
       toast.success("Profile updated successfully!");
-    } ).catch( () => {
+    },
+    onError: () => {
       toast.error("There was an error when updating your profile. Please try again later.");
-    } ).finally( () => setUpdating( false ));
-  }, [user, formData]);
+    },
+  });
 
   const handleInputChange = useCallback((e: ChangeEvent, field: string) => {
     const value = (e.target as HTMLInputElement).value;
@@ -55,7 +55,7 @@ export const UserInfo = ({ user }: { user: TUser }): JSX.Element => {
         <Form handleInputChange={handleInputChange} setFormData={setFormData} formData={formData} />
       </StyledContent>
       <FooterActions>
-        <Button handleClick={handleEdit} loading={updating} variant="primary">Save Changes</Button>
+        <Button handleClick={editUser} loading={isPending} variant="primary">Save Changes</Button>
       </FooterActions>
     </>
   );

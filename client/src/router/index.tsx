@@ -112,10 +112,9 @@ export const Router = (): JSX.Element => {
           {/* <Route path="messages" element={<Dev />} /> */}
           {/* <Route path="hostfamily" element={<HostFamily />} /> */}
           {/* <Route path="cluster" element={<Cluster />} /> */}
-
-          { /* Error Page */ }
-          { /* <Route path='*' component={ WrongTurn } /> */ }
         </Route>
+        { /* Error Page */ }
+        { /* <Route path='*' component={ WrongTurn } /> */ }
       </Routes>
     </BrowserRouter>
   );

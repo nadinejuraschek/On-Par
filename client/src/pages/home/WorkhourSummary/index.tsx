@@ -1,5 +1,4 @@
 import { Button, LoadingPlaceholder, Tabs } from "components";
-import { useFetchWorkhoursToday, useFetchWorkhoursWeekly } from "hooks";
 import { useMemo, useState } from "react";
 import {
   Container,
@@ -8,6 +7,9 @@ import {
   ProgressContainer,
   ProgressLabel,
 } from "./styled";
+import { useQuery } from "@tanstack/react-query";
+import { getWorkhours } from "api";
+import dayjs from "dayjs";
 
 const WORKHOUR_TABS = {
   DAY: 0,
@@ -21,15 +23,20 @@ export const WorkhourSummary = (): JSX.Element => {
     { label: "Today", value: WORKHOUR_TABS.DAY }, { label: "This Week", value: WORKHOUR_TABS.WEEK },
   ];
 
-  const { data: todayWorkhourTotal, loading: loadingWorkhoursToday } = useFetchWorkhoursToday();
   const {
-    data: weeklyWorkhoursData,
-    loading: loadingWorkhoursWeekly,
-  } = useFetchWorkhoursWeekly({});
+    data: workhoursData,
+    // TODO: display error message
+    // isError,
+    isLoading,
+  } = useQuery({
+    queryKey: ["workhours"],
+    queryFn: () => getWorkhours({ filter: "weekly" }),
+  });
 
   const renderDailyProgress = useMemo(() => {
-    const inPercent = (todayWorkhourTotal/600)*100;
-    const inHours = todayWorkhourTotal/60;
+    const todayHours = workhoursData?.find((day) => dayjs().isSame(day.date, 'day'))?.total ?? 0;
+    const inPercent = (todayHours/600)*100;
+    const inHours = todayHours/60;
 
     return (
       <ProgressContainer>
@@ -45,12 +52,15 @@ export const WorkhourSummary = (): JSX.Element => {
         </ProgressLabel>
       </ProgressContainer>
     );
-  }, [todayWorkhourTotal]);
+  }, [workhoursData]);
+
+  console.log('LOG workhoursData: ', workhoursData);
 
   // TODO: calculate weekly hours
   const renderWeeklyProgress = useMemo(() => {
-    const inPercent = (weeklyWorkhoursData.total/2700)*100;
-    const inHours = weeklyWorkhoursData.total/60;
+    return 'weekly';
+    /* const inPercent = (workhoursData.total/2700)*100;
+    const inHours = workhoursData.total/60;
 
     return (
       <ProgressContainer>
@@ -62,11 +72,11 @@ export const WorkhourSummary = (): JSX.Element => {
           <strong>{inHours}</strong> / 45 hours
         </ProgressLabel>
       </ProgressContainer>
-    );
-  }, [weeklyWorkhoursData]);
+    ); */
+  }, []);
 
   const renderContent = useMemo(() => {
-    if (loadingWorkhoursToday || loadingWorkhoursWeekly) {
+    if (isLoading) {
       <LoadingProgressContainer>
         <LoadingPlaceholder />
       </LoadingProgressContainer>
@@ -74,14 +84,13 @@ export const WorkhourSummary = (): JSX.Element => {
 
     return activeTab === WORKHOUR_TABS.DAY ? renderDailyProgress : renderWeeklyProgress;
   }, [activeTab,
-    loadingWorkhoursToday,
-    loadingWorkhoursWeekly,
+    isLoading,
     renderDailyProgress,
     renderWeeklyProgress]);
 
   return (
     <Container>
-      <Tabs activeTab={ activeTab } handleClick={ setActiveTab }  tabs={ tabs } variant="secondary" />
+      <Tabs activeTab={ activeTab } handleClick={setActiveTab}  tabs={ tabs } variant="secondary" />
       { renderContent }
       <Button link="/notebook/workhours" variant="primary">Go to Workhours Log</Button>
     </Container>

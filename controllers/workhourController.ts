@@ -11,6 +11,44 @@ const getWorkhours = async (req: Request, res: Response) => {
   }
 
   try {
+    const filter = req.query.filter;
+
+    // only return workhours for today
+    if (filter === "today") {
+      const today = dayjs().set('hour', 12).set('minute', 0).set('second', 0).set('millisecond', 0).toDate();
+
+      const result = await db.User.findById(req.user)
+      .populate({
+        path: 'workhours',
+        match: { date: today }
+      });
+
+      if (!result) {
+        return res.status(404).json({ error: "User not found." });
+      }
+
+      return res.status(200).json(result.workhours || []);
+    }
+
+    // return workhours for a specific week
+    if (filter === "weekly") {
+      const startDate = dayjs(req.params.startDate).set('hour', 12).set('minute', 0).set('second', 0).set('millisecond', 0).toDate();
+      const endDate = dayjs(req.params.endDate).set('hour', 12).set('minute', 0).set('second', 0).set('millisecond', 0).toDate();
+
+      const result = await db.User.findById(req.user)
+        .populate({
+          path: 'workhours',
+          match: { date: { $gte: startDate, $lt: endDate } }
+        });
+
+      if (!result) {
+        return res.status(404).json({ error: "User not found." });
+      }
+
+      return res.status(200).json({ hours: result.workhours || [], total: 0 });
+    }
+
+    // no filter specified, return all workhours
     const result = await db.User.findById(req.user)
       .populate('workhours');
 
@@ -24,7 +62,7 @@ const getWorkhours = async (req: Request, res: Response) => {
   }
 };
 
-const getWorkhoursDay = async (req: Request, res: Response) => {
+/* const getWorkhoursDay = async (req: Request, res: Response) => {
   const validUser = isValidUser(res, req.user);
   if (!validUser) {
     return res.status(403).json("Please log in to use this feature.");
@@ -47,9 +85,9 @@ const getWorkhoursDay = async (req: Request, res: Response) => {
   } catch (err: any) {
     return res.status(500).json({ error: err.message });
   }
-};
+}; */
 
-const getWorkhoursWeek = async (req: Request, res: Response) => {
+/* const getWorkhoursWeek = async (req: Request, res: Response) => {
   const validUser = isValidUser(res, req.user);
   if (!validUser) {
     return res.status(403).json("Please log in to use this feature.");
@@ -73,7 +111,7 @@ const getWorkhoursWeek = async (req: Request, res: Response) => {
   } catch (err: any) {
     return res.status(500).json({ error: err.message });
   }
-};
+}; */
 
 // CREATE
 const createWorkhour = async (req: Request, res: Response) => {
@@ -179,7 +217,5 @@ export const workhourController = {
   createWorkhour,
   deleteWorkhour,
   getWorkhours,
-  getWorkhoursDay,
-  getWorkhoursWeek,
   updateWorkhour,
 };

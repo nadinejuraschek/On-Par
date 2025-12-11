@@ -1,4 +1,5 @@
 import axios from "axios";
+import dayjs from "dayjs";
 import { TWorkhour } from "types";
 
 export type TNewWorkhourEntry = {
@@ -10,12 +11,30 @@ export type TNewWorkhourEntry = {
   }[];
 }
 
-export async function getWorkhours() {
-  return await axios.get<TWorkhour[]>("/api/user/:id/workhours").then((res) => res.data);
-}
+export async function getWorkhours({ endOfWeek, filter, startOfWeek } : { endOfWeek?: string; filter?: "today" | "weekly"; startOfWeek?: string }) {
+  const baseUrl = "/api/user/:id/workhours";
+  let url = "";
 
-export async function getWorkhoursToday() {
-  return await axios.get("/api/user/:id/workhours/today").then((res) => res.data);
+  if (filter === "weekly") {
+    // add fallback start and end dates
+    let startDate = startOfWeek;
+    let endDate = endOfWeek;
+    if (!startOfWeek && !endOfWeek) {
+      startDate = dayjs().startOf("week").format("YYYY-MM-DD");
+      endDate = dayjs().endOf("week").format("YYYY-MM-DD");
+    }
+    if (!startOfWeek) {
+      startDate = dayjs(endOfWeek).startOf("week").format("YYYY-MM-DD");
+    }
+    if (!endOfWeek) {
+      endDate = dayjs(startOfWeek).endOf("week").format("YYYY-MM-DD");
+    }
+    url = `${baseUrl}?filter=${filter || ""}/${startDate}/${endDate}`.trim().replace(/\s\s+/g, " ");
+  } else {
+    url = baseUrl.trim().replace(/\s\s+/g, " ");
+  }
+
+  return await axios.get<TWorkhour[]>(url).then((res) => res.data);
 }
 
 export async function createWorkhours(newHours: TNewWorkhourEntry) {

@@ -22,7 +22,7 @@ export const AddHours = (): JSX.Element => {
   const { mutate: createWorkhours } = useMutation({
     mutationFn: createWorkhoursFn,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['workhours'] });
+      queryClient.invalidateQueries({ queryKey: ["workhours"] });
     }
   });
 
