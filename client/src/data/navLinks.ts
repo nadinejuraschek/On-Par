@@ -1,5 +1,5 @@
 export const navLinks = [
-  { label: "Dashboard", link: "/" },
+  { label: "Dashboard", link: "/dashboard" },
   { label: "Notebook", link: "/notebook", subLinks: [
     {
       label: "Work Hours", link: "/workhours",

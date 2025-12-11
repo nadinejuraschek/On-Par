@@ -6,7 +6,6 @@ import { WorkhourList } from "./WorkhourList";
 import { getWorkhours } from "api";
 import { toast } from "react-toastify";
 import { useQuery } from "@tanstack/react-query";
-import { TWorkhour } from "types";
 
 export const WeeklyHours = (): JSX.Element => {
   const [startWeek, setStartWeek] = useState( dayjs().startOf( "week" ) );
@@ -39,11 +38,9 @@ export const WeeklyHours = (): JSX.Element => {
     );
   }, [endWeek, startWeek]);
 
-  const totalHours = useMemo(() => workhoursData?.reduce((acc: number, cur: TWorkhour) => {
+  /* const totalHours = useMemo(() => workhoursData?.reduce((acc: number, cur: TWorkhour) => {
     return acc + cur.total;
-  }, 0), [workhoursData]);
-
-  console.log('LOG totalHours: ', totalHours);
+  }, 0), [workhoursData]); */
 
   // sort array to display Sun - Sat
   const hours = useMemo(() => {

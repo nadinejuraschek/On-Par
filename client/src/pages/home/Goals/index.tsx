@@ -1,20 +1,26 @@
 import { Button, GoalItem, LoadingSpinner, Text } from "components";
 import { useMemo } from "react";
-import { Wrapper } from "./styled";
-import { fetchGoals as fetchGoalsFn } from "api";
+import { EmptyList, Wrapper } from "./styled";
+import { fetchGoals as fetchGoalsFn, GOAL_FILTER } from "api";
 import { useQuery } from "@tanstack/react-query";
 import { TGoal } from "types";
 
 export const Goals = (): JSX.Element => {
   const { data: goals, isLoading, isError } = useQuery<TGoal[]>({
     queryKey: ["goals"],
-    queryFn: () => fetchGoalsFn({ filter: "upcoming", limit: 3 }),
+    queryFn: () => fetchGoalsFn({ filter: GOAL_FILTER.UPCOMING }),
   });
 
   const renderGoals = useMemo(() => {
     if (isLoading) return <LoadingSpinner />;
 
-    if (isError || !goals) return null;
+    if (isError || !goals || goals.length === 0) {
+      return (
+        <EmptyList>
+          <Text size="sm">You&apos;ve got this! Go set yourself some goals.</Text>
+        </EmptyList>
+      );
+    }
 
     return goals.map((item) => (
       <GoalItem

@@ -1,14 +1,15 @@
 import { Banner, Header, Icon, LoadingSpinner, Text } from "components";
-import { useUserContext } from "contexts";
 import * as dayjs from "dayjs";
 import { useMemo } from "react";
 import { PaymentList } from "./PaymentList";
 import { BannerWrapper, InfoText } from "./styled";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { getPayments } from "api";
+import { TUser } from "contexts/UserContext/types";
 
 const Payments = (): JSX.Element => {
-  const [{ user }] = useUserContext();
+  const queryClient = useQueryClient();
+  const user: TUser | undefined = queryClient.getQueryData(["user"]);
 
   const {
     data: payments,

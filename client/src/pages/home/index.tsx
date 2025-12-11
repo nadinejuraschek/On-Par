@@ -1,9 +1,7 @@
-import axios from "axios";
 import { Button, Resources as ResourcesList, Text } from "components";
-import { useUserContext } from "contexts";
 import * as dayjs from "dayjs";
 import * as isSameOrAfter from "dayjs/plugin/isSameOrAfter"
-import { useCallback, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Countdown } from "./Countdown";
 import { Events } from "./Events";
@@ -23,23 +21,35 @@ import {
   TodayCard,
 } from "./styled";
 import { WorkhourSummary } from "./WorkhourSummary";
+import { logoutUser as logoutUserFn } from "api";
+import { toast } from "react-toastify";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { TUser } from "contexts/UserContext/types";
 
 dayjs.extend(isSameOrAfter);
 
 const Home = (): JSX.Element => {
-  const [{ user }] = useUserContext();
+  const navigate = useNavigate();
+  const queryClient = useQueryClient();
+
   const [message, setMessage] = useState( "" );
 
-  const navigate = useNavigate();
+  const user: TUser | undefined = queryClient.getQueryData(["user"]);
 
-  const handleLogout = useCallback(() => {
-    axios( {
-      url: "/api/user/signout",
-      method: "POST",
-    } ).then( () => {
-      navigate(0);
-    } );
-  }, [navigate]);
+  if (!user) {
+    navigate("/");
+  }
+
+  const { mutate: logoutUser, isPending } = useMutation({
+    mutationFn: logoutUserFn,
+    onError: () => {
+      toast.error("Could not log out. Please try again.");
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["user"] });
+      navigate("/");
+    },
+  });
 
   const hasCompletedYear = useMemo(() => dayjs(new Date()).isSameOrAfter(user?.endDate), [user]);
 
@@ -98,7 +108,7 @@ const Home = (): JSX.Element => {
         />
         <ButtonsWrapper>
           <Button link="/profile" variant="secondary">Profile</Button>
-          <Button handleClick={ handleLogout } variant="secondary">Log Out</Button>
+          <Button handleClick={ logoutUser } loading={isPending}  variant="secondary">Log Out</Button>
         </ButtonsWrapper>
       </HeaderCard>
 

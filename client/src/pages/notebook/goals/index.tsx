@@ -4,6 +4,7 @@ import { AddGoalModal } from "./AddGoalModal";
 import { GoalsList } from "./List";
 import { Actions, Content, Filter, Layout, StyledButton } from "./styled";
 import { TGoalType } from "types";
+import { GOAL_FILTER } from "api";
 
 const Goals = (): JSX.Element => {
   const [openModal, setOpenModal] = useState(false);
@@ -19,7 +20,7 @@ const Goals = (): JSX.Element => {
     return (
       <GoalsList
         title="This Month"
-        filter="month"
+        filter={GOAL_FILTER.MONTH}
         type={typeSort?.value}
       />
     );
@@ -28,7 +29,7 @@ const Goals = (): JSX.Element => {
   const renderUpcomingGoals = useMemo(() => {
     return (
       <GoalsList
-        filter="upcoming"
+        filter={GOAL_FILTER.UPCOMING}
         title="Upcoming / Overdue"
         type={typeSort?.value}
       />
@@ -38,7 +39,7 @@ const Goals = (): JSX.Element => {
   const renderCompletedGoals = useMemo(() => {
     return (
       <GoalsList
-        filter="completed"
+        filter={GOAL_FILTER.COMPLETED}
         title="Completed"
         type={typeSort?.value}
       />
@@ -59,7 +60,7 @@ const Goals = (): JSX.Element => {
           <Filter>
             <Select
               clearable
-              handleChange={(selectedFilter) => setTypeSort(selectedFilter)}
+              handleChange={(selectedTypeFilter: { label: string; value: TGoalType }) => setTypeSort(selectedTypeFilter)}
               name="filter"
               onlyInput
               options={typeOptions}

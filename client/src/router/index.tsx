@@ -1,15 +1,16 @@
 import { LoadingSpinner } from "components";
 import { lazy, Suspense } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-const InnerLayoutWithNavbar = lazy(() => import("../layout/InnerWithNavbar"));
+
 const EmergencyNumbers = lazy(() => import("../pages/resources/emergencyNumbers"));
+const Auth = lazy(() => import("../pages/auth"));
 const Goals = lazy(() => import("../pages/notebook/goals"));
-const Home = lazy(() => import("../pages/home"));
+const Dashboard = lazy(() => import("../pages/home"));
+const Main = lazy(() => import("layout/Main"));
 const Notes = lazy(() => import("../pages/notebook/notes"));
 const Payments = lazy(() => import("../pages/notebook/payments"));
 const Profile = lazy(() => import("../pages/profile"));
 const Resources = lazy(() => import("../pages/resources"));
-const Sandbox = lazy(() => import("../pages/sandbox"));
 const Tax = lazy(() => import("../pages/resources/tax"));
 const Workhours = lazy(() => import("../pages/notebook/workhours"));
 // const Landing = lazy(() => import("../pages/landing"));
@@ -21,16 +22,16 @@ export const Router = (): JSX.Element => {
         { /* Landing Page */ }
         {/* <Route path="/" element={ <Landing /> } /> */}
 
-        <Route path="/" element={<InnerLayoutWithNavbar />}>
-          { /* Home */ }
-          <Route index element={<Home />} />
+        <Route path="/">
+          { /* Dashboard */ }
+          <Route path="dashboard" element={<Main><Dashboard /></Main>} />
 
           { /* Profile */ }
           <Route
             path="profile"
             element={
               <Suspense fallback={<LoadingSpinner />}>
-                <Profile />
+                <Main><Profile /></Main>
               </Suspense>
             }
           />
@@ -40,7 +41,7 @@ export const Router = (): JSX.Element => {
             path="resources"
             element={
               <Suspense fallback={<LoadingSpinner />}>
-                <Resources />
+                <Main><Resources /></Main>
               </Suspense>
             }
           />
@@ -48,7 +49,7 @@ export const Router = (): JSX.Element => {
             path="resources/emergencynumbers"
             element={
               <Suspense fallback={<LoadingSpinner />}>
-                <EmergencyNumbers />
+                <Main><EmergencyNumbers /></Main>
               </Suspense>
             }
           />
@@ -56,7 +57,7 @@ export const Router = (): JSX.Element => {
             path="resources/tax"
             element={
               <Suspense fallback={<LoadingSpinner />}>
-                <Tax />
+                <Main><Tax /></Main>
               </Suspense>
             }
           />
@@ -66,7 +67,7 @@ export const Router = (): JSX.Element => {
             path="notebook/workhours"
             element={
               <Suspense fallback={<LoadingSpinner />}>
-                <Workhours />
+                <Main><Workhours /></Main>
               </Suspense>
             }
           />
@@ -74,7 +75,7 @@ export const Router = (): JSX.Element => {
             path="notebook/payments"
             element={
               <Suspense fallback={<LoadingSpinner />}>
-                <Payments />
+                <Main><Payments /></Main>
               </Suspense>
             }
           />
@@ -82,7 +83,7 @@ export const Router = (): JSX.Element => {
             path="notebook/goals"
             element={
               <Suspense fallback={<LoadingSpinner />}>
-                <Goals />
+                <Main><Goals /></Main>
               </Suspense>
             }
           />
@@ -90,17 +91,7 @@ export const Router = (): JSX.Element => {
             path="notebook/notes"
             element={
               <Suspense fallback={<LoadingSpinner />}>
-                <Notes />
-              </Suspense>
-            }
-          />
-
-          { /* Dev Sandbox */ }
-          <Route
-            path="sandbox"
-            element={
-              <Suspense fallback={<LoadingSpinner />}>
-                <Sandbox />
+                <Main><Notes /></Main>
               </Suspense>
             }
           />
@@ -112,6 +103,9 @@ export const Router = (): JSX.Element => {
           {/* <Route path="messages" element={<Dev />} /> */}
           {/* <Route path="hostfamily" element={<HostFamily />} /> */}
           {/* <Route path="cluster" element={<Cluster />} /> */}
+
+          {/* Auth */}
+          <Route index path="/" element={<Auth />} />
         </Route>
         { /* Error Page */ }
         { /* <Route path='*' component={ WrongTurn } /> */ }

@@ -1,6 +1,5 @@
-import axios from "axios";
 import { Button, Input, Text } from "components";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { ChangeEvent, FormEvent, MouseEvent, useCallback, useState } from "react";
 import { toast } from "react-toastify";
 import { ZodFormattedError } from "zod";
@@ -8,8 +7,13 @@ import { ILogin } from "./types";
 import { TLoginFormData, loginSchema } from "../../../schema/login.schema";
 import { Divider, DividerText, Form, FormWrapper } from "../styled";
 import { AUTH_VIEW } from "../types";
+import { loginUser as loginUserFn } from "api";
+import { useNavigate } from "react-router-dom";
 
 export const Login = ({ handleView }: ILogin): JSX.Element => {
+  const navigate = useNavigate();
+  const queryClient = useQueryClient();
+
   const [errors, setErrors] = useState<ZodFormattedError<TLoginFormData> | undefined>(undefined);
   const [loginData, setLoginData] = useState<TLoginFormData>({
     email: "",
@@ -17,16 +21,10 @@ export const Login = ({ handleView }: ILogin): JSX.Element => {
   });
 
   const { mutate: login, isPending } = useMutation({
-    mutationFn: async (credentials: TLoginFormData) => {
-      const response = await axios({
-        url: "/api/user/login",
-        method: "POST",
-        data: credentials,
-      });
-      return response.data;
-    },
+    mutationFn: loginUserFn,
     onSuccess: () => {
-      window.location.reload();
+      queryClient.invalidateQueries({ queryKey: ["user"] });
+      navigate("/dashboard");
     },
     onError: () => {
       toast.error("Could not log you in. Please try again later!");

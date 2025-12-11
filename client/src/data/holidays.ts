@@ -1,4 +1,4 @@
-import { TEvent } from "components/Event/types";
+import { EVENT_TYPE, TEvent } from "components/Event/types";
 import * as dayjs from "dayjs";
 import * as weekday from "dayjs/plugin/weekday";
 
@@ -50,144 +50,144 @@ export const holidays: TEvent[] = [
     name: "New Year's Day",
     day: 1,
     month: 0,
-    type: "holiday",
+    type: EVENT_TYPE.HOLIDAY,
   },
   {
     name: "Martin Luther King Jr. Day",
     day: getDatesOfDayOfWeek(currentYear, 0, 1)[2], // third Monday in January
     month: 0,
-    type: "holiday",
+    type: EVENT_TYPE.HOLIDAY,
   },
   {
     name: "Valentine's Day",
     day: 14,
     month: 1,
-    type: "holiday",
+    type: EVENT_TYPE.HOLIDAY,
   },
   {
     name: "President's Day",
     day: getDatesOfDayOfWeek(currentYear, 1, 1)[2], // third Monday in February
     month: 1,
-    type: "holiday",
+    type: EVENT_TYPE.HOLIDAY,
   },
   {
     name: "St. Patrick's Day",
     day: 17,
     month: 2,
-    type: "holiday",
+    type: EVENT_TYPE.HOLIDAY,
   },
   {
     name: "Easter Sunday",
     day: getEaster()[1],
     month: getEaster()[0],
-    type: "holiday",
+    type: EVENT_TYPE.HOLIDAY,
   },
   {
     name: "Easter Monday",
     day: getEaster()[1] + 1,
     month: getEaster()[0],
-    type: "holiday",
+    type: EVENT_TYPE.HOLIDAY,
   },
   {
     name: "Tax Day",
     day: 15,
     month: 3,
-    type: "holiday",
+    type: EVENT_TYPE.HOLIDAY,
   },
   {
     name: "Cinco de Mayo",
     day: 5,
     month: 4,
-    type: "holiday",
+    type: EVENT_TYPE.HOLIDAY,
   },
   {
     name: "Mother's Day",
     day: getDatesOfDayOfWeek(currentYear, 4, 0)[1], // second Sunday in May
     month: 4,
-    type: "holiday",
+    type: EVENT_TYPE.HOLIDAY,
   },
   {
     name: "Memorial Day",
     day: getDatesOfDayOfWeek(currentYear, 4, 1).pop(), // last Monday in May
     month: 4,
-    type: "holiday",
+    type: EVENT_TYPE.HOLIDAY,
   },
   {
     name: "Father's Day",
     day: getDatesOfDayOfWeek(currentYear, 4, 0)[2], // third Sunday in June
     month: 5,
-    type: "holiday",
+    type: EVENT_TYPE.HOLIDAY,
   },
   {
     name: "Juneteenth",
     day: 19,
     month: 5,
-    type: "holiday",
+    type: EVENT_TYPE.HOLIDAY,
   },
   {
     name: "Independence Day",
     day: 4,
     month: 6,
-    type: "holiday",
+    type: EVENT_TYPE.HOLIDAY,
   },
   {
     name: "Labor Day",
     day: getDatesOfDayOfWeek(currentYear, 8, 1)[0], // first Monday in September
     month: 8,
-    type: "holiday",
+    type: EVENT_TYPE.HOLIDAY,
   },
   {
     name: "Columbus Day",
     day: getDatesOfDayOfWeek(currentYear, 10, 4)[3], // second Monday in October
     month: 9,
-    type: "holiday",
+    type: EVENT_TYPE.HOLIDAY,
   },
   {
     name: "Halloween",
     day: 31,
     month: 9,
-    type: "holiday",
+    type: EVENT_TYPE.HOLIDAY,
   },
   {
     name: "Election Day",
     day: getDatesOfDayOfWeek(currentYear, 10, 1)[0] + 1, // Tuesday following the first Monday in November
     month: 10,
-    type: "holiday",
+    type: EVENT_TYPE.HOLIDAY,
   },
   {
     name: "Veteran's Day",
     day: getDatesOfDayOfWeek(currentYear, 10, 1)[3], // fourth Monday in October
     month: 10,
-    type: "holiday",
+    type: EVENT_TYPE.HOLIDAY,
   },
   {
     name: "Thanksgiving",
     day: getDatesOfDayOfWeek(currentYear, 10, 4)[3], // fourth Thursday in November
     month: 10,
-    type: "holiday",
+    type: EVENT_TYPE.HOLIDAY,
   },
   {
     name: "Black Friday",
     day: getDatesOfDayOfWeek(currentYear, 10, 4)[3] + 1,
     month: 10,
-    type: "holiday",
+    type: EVENT_TYPE.HOLIDAY,
   },
   {
     name: "Christmas Eve",
     day: 24,
     month: 11,
-    type: "holiday",
+    type: EVENT_TYPE.HOLIDAY,
   },
   {
     name: "Christmas Day",
     day: 25,
     month: 11,
-    type: "holiday",
+    type: EVENT_TYPE.HOLIDAY,
   },
   {
     name: "New Year's Eve",
     day: 31,
     month: 11,
-    type: "holiday",
+    type: EVENT_TYPE.HOLIDAY,
   },
 ];

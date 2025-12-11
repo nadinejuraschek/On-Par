@@ -54,8 +54,6 @@ export const WorkhourSummary = (): JSX.Element => {
     );
   }, [workhoursData]);
 
-  console.log('LOG workhoursData: ', workhoursData);
-
   // TODO: calculate weekly hours
   const renderWeeklyProgress = useMemo(() => {
     return 'weekly';

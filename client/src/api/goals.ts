@@ -2,7 +2,13 @@ import axios from "axios";
 import { TGoalFormData } from "schema/goal.schema";
 import { TGoal } from "types";
 
-export type TGoalFilter = "completed" | "month" | "upcoming";
+export enum GOAL_FILTER {
+  COMPLETED = "completed",
+  MONTH = "month",
+  UPCOMING = "upcoming",
+}
+
+export type TGoalFilter = GOAL_FILTER.COMPLETED | GOAL_FILTER.MONTH | GOAL_FILTER.UPCOMING;
 
 export async function createGoal(newGoal: TGoalFormData) {
   const url = "/api/goals";

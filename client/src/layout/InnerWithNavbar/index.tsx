@@ -1,13 +1,11 @@
 import { Navbar } from "components"
-import { Outlet } from "react-router-dom"
+import { ReactNode } from "react";
 
-const InnerLayoutWithNavbar = (): JSX.Element => {
+export const InnerLayoutWithNavbar = ({ children }: { children: ReactNode }): JSX.Element => {
   return (
     <>
       <Navbar />
-      <Outlet />
+      {children}
     </>
   )
 };
-
-export default InnerLayoutWithNavbar;

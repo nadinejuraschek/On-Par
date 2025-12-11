@@ -1,11 +1,11 @@
 import "react-toastify/dist/ReactToastify.min.css";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { LoadingSpinner } from "components";
-import { UserContextProvider } from "contexts";
-import { ErrorBoundary, Main } from "layout";
+import { ErrorBoundary } from "layout";
 import { Suspense } from "react";
 import { ToastContainer } from "react-toastify";
 import { ThemeProvider } from "styled-components";
+import { Router } from "router";
 
 const queryClient = new QueryClient();
 
@@ -15,9 +15,7 @@ export const App = (): JSX.Element => {
       <ErrorBoundary>
         <Suspense fallback={<main><LoadingSpinner /></main>}>
           <QueryClientProvider client={queryClient}>
-            <UserContextProvider>
-              <Main />
-            </UserContextProvider>
+            <Router />
             <ToastContainer
               closeButton
               closeOnClick

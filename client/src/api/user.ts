@@ -1,4 +1,26 @@
 import axios from "axios";
+import { TRegisterUser } from "pages/auth/Register/types";
+import { TLoginFormData } from "schema";
+
+export async function loginUser(credentials : TLoginFormData) {
+  const response = await axios.post("/api/user/login", credentials);
+  return response.data;
+}
+
+export async function registerUser(credentials: TRegisterUser) {
+  const response = await axios.post("/api/user/register", credentials);
+  return response.data;
+}
+
+export async function logoutUser() {
+  const response = await axios.post("/api/user/signout");
+  return response.data;
+}
+
+export async function getUserInfo() {
+  const response = await axios.get("/api/user");
+  return response.data;
+}
 
 export async function editUser({ id, updatedData }: {
   id: string;

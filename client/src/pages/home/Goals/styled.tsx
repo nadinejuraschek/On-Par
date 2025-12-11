@@ -9,3 +9,16 @@ export const Wrapper = styled.div`
   height: 100%;
   width: 100%;
 `;
+
+export const EmptyList = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px dashed var(--grey_200);
+  border-radius: 0.8rem;
+  padding: 1.6rem;
+  text-align: center;
+
+  height: 100%;
+`;

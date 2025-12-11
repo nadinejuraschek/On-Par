@@ -1,19 +1,37 @@
-import { createReducerContext } from "react-use";
-import { ACTIONS, IUserContext, TUserContextDispatchAction } from "./types";
+import { useQuery } from "@tanstack/react-query";
+import { createContext, ReactNode } from "react";
+import { getUserInfo as getUserInfoFn } from "api";
+import { LoadingSpinner } from "components";
+import { useNavigate } from "react-router-dom";
 
-const reducer = (state: IUserContext, action: TUserContextDispatchAction): IUserContext => {
-  switch(action.type) {
-  case ACTIONS.SET_USER:
-    return { ...state, user: action.payload };
-  default:
-    return state;
+
+const UserContext = createContext(null);
+
+export const UserProvider = ({ children }: { children: ReactNode }) => {
+  const navigate = useNavigate();
+
+  const { data: user, isError, isPending } = useQuery({
+    queryKey: ["user"],
+    queryFn: getUserInfoFn,
+    staleTime: Infinity,
+  });
+
+  if (isPending) {
+    return (
+      <main>
+        <LoadingSpinner />
+      </main>
+    );
   }
-};
 
-const initialState = {
-  user: null,
-};
+  if (isError) {
+    navigate("/");
+    return;
+  }
 
-const [useUserContext, UserContextProvider] = createReducerContext(reducer, initialState);
-
-export { useUserContext, UserContextProvider };
+  return (
+    <UserContext.Provider value={user}>
+      {children}
+    </UserContext.Provider>
+  );
+}

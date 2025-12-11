@@ -1,9 +1,10 @@
 import { Header, LoadingSpinner, Tabs } from "components";
-import { useUserContext } from "contexts";
 import { useMemo, useState } from "react";
 import { HostFamilyInfo } from "./HostFamilyInfo";
 import { Grid } from "./styled";
 import { UserInfo } from "./UserInfo";
+import { useQueryClient } from "@tanstack/react-query";
+import { TUser } from "contexts/UserContext/types";
 
 const PROFILE_TABS = {
   PROFILE: 0,
@@ -13,7 +14,8 @@ const PROFILE_TABS = {
 }
 
 const Profile = (): JSX.Element => {
-  const [{ user }] = useUserContext();
+  const queryClient = useQueryClient();
+  const user: TUser | undefined = queryClient.getQueryData(["user"]);
 
   const [ activeTab, setActiveTab ] = useState<number | string>(PROFILE_TABS.PROFILE);
 

@@ -1,5 +1,4 @@
 import { Button, DatePicker, Input, Modal } from "components";
-import { useUserContext } from "contexts";
 import * as dayjs from "dayjs";
 import { ChangeEvent, useCallback, useMemo, useState } from "react";
 import { TPaymentFormData, paymentSchema } from "schema";
@@ -7,13 +6,14 @@ import { ZodFormattedError } from "zod";
 import { IEditPaymentModal } from "./types";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { editPayment } from "api";
+import { TUser } from "contexts/UserContext/types";
 
 export const EditPaymentModal = ({
   handleClose,
   originalPayment,
 }: IEditPaymentModal): JSX.Element => {
-  const [{ user }] = useUserContext();
   const queryClient = useQueryClient();
+  const user: TUser | undefined = queryClient.getQueryData(["user"]);
 
   const [errors, setErrors] = useState<ZodFormattedError<TPaymentFormData> | undefined>(undefined);
   const [submitting, setSubmitting] = useState(false);
@@ -46,7 +46,7 @@ export const EditPaymentModal = ({
     const isPaymentOnTime = dayjs(selected).isSameOrBefore(endOfWeek);
 
     setUpdatedPayment(updatedPayment => ({ ...updatedPayment, date: selected, late: !isPaymentOnTime }));
-  }, [originalPayment, user]);
+  }, [originalPayment, user?.startDate]);
 
   const handleSubmit = useCallback(() => {
     if (!originalPayment._id) return;

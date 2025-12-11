@@ -1,12 +1,11 @@
-import { useMutation } from "@tanstack/react-query";
-import axios from "axios";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Button, DatePicker, Input, Select, Text } from "components";
 import { TSelectOption } from "components/Select/types";
 import { countrySelectOptions } from "data";
 import { ChangeEvent, FormEvent, MouseEvent, useCallback, useState } from "react";
 import { toast } from "react-toastify";
 import { ZodFormattedError } from "zod";
-import { IRegister, TRegisterUser } from "./types";
+import { IRegister } from "./types";
 import { TRegisterFormData, registerSchema } from "../../../schema";
 import {
   Divider,
@@ -16,8 +15,13 @@ import {
   FormWrapper,
 } from "../styled";
 import { AUTH_VIEW } from "../types";
+import { loginUser as loginUserFn, registerUser as registerUserFn } from "api";
+import { useNavigate } from "react-router-dom";
 
 export const Register = ({ handleView }: IRegister): JSX.Element => {
+  const navigate = useNavigate();
+  const queryClient = useQueryClient();
+
   const [errors, setErrors] = useState<ZodFormattedError<TRegisterFormData> | undefined>(undefined);
   const [registerData, setRegisterData] = useState<TRegisterFormData>({
     firstname: "",
@@ -31,16 +35,10 @@ export const Register = ({ handleView }: IRegister): JSX.Element => {
   });
 
   const { isPending: isPendingRegister, mutate: register } = useMutation({
-    mutationFn: async (newUser: TRegisterUser) => {
-      const response = await axios({
-        url: "/api/user/register",
-        method: "POST",
-        data: newUser,
-      });
-      return response.data;
-    },
+    mutationFn: registerUserFn,
     onSuccess: () => {
-      window.location.reload();
+      queryClient.invalidateQueries({ queryKey: ["user"] });
+      navigate("/dashboard");
     },
     onError: () => {
       toast.error("Could not register user. Please try again later!");
@@ -48,16 +46,10 @@ export const Register = ({ handleView }: IRegister): JSX.Element => {
   });
 
   const { isPending: isPendingLogin, mutate: login } = useMutation({
-    mutationFn: async (user: { email: string; password: string }) => {
-      const response = await axios({
-        url: "/api/user/login",
-        method: "POST",
-        data: user,
-      });
-      return response.data;
-    },
+    mutationFn: loginUserFn,
     onSuccess: () => {
-      window.location.reload();
+      queryClient.invalidateQueries({ queryKey: ["user"] });
+      navigate("/dashboard");
     },
     onError: () => {
       toast.error("Could not log in test user. Please try again later!");
