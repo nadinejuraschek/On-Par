@@ -189,9 +189,9 @@ const updateUser = async (req: Request, res: Response) => {
 // DELETE
 const deleteUser = async (req: Request, res: Response) => {
   const validUser = isValidUser(res, req.user);
-  if (!validUser) {
+  /* if (!validUser) {
     return res.status(403).json("Please log in to use this feature.");
-  }
+  } */
 
   try {
     const deletedUser = await db.User.findByIdAndDelete(req.params.id);
