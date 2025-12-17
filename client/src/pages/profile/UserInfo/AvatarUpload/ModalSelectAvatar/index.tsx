@@ -19,7 +19,7 @@ export const ModalSelectAvatar = ({
   profileImageSrc,
 }: IModalSelectAvatar): JSX.Element => {
   const defaultStyle = useMemo(() => {
-    const values = getAvatarStyleValues(profileImageSrc);
+    const values = getAvatarStyleValues(profileImageSrc ?? "");
     return profileImageSrc ? {
       accessories: accessoriesOptions.find((option) => option.value === values.accessories),
       clothesType: clothesTypeOptions.find((option) => option.value === values.clothesType),

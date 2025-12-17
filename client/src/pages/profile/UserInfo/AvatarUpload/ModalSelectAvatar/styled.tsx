@@ -28,18 +28,7 @@ export const Form = styled.div`
 
   padding: 0 0.4rem 2rem;
 
-  overflow-y: auto;
-
-  max-height: 20rem;
-
-  /* Hide scrollbar for IE, Edge and Firefox */
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
-
-  /* Hide scrollbar for Chrome, Safari and Opera */
-  &::-webkit-scrollbar {
-    display: none;
-  }
+  height: 26rem;
 `;
 
 export const FieldPair = styled.div`

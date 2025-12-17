@@ -40,9 +40,9 @@ const Profile = (): JSX.Element => {
 
   const tabs = [
     { label: "Profile", value: PROFILE_TABS.PROFILE },
-    { disabled: true, label: "Password", value: PROFILE_TABS.PASSWORD },
-    { disabled: true, label: "Host Family", value: PROFILE_TABS.HOST_FAMILY },
-    { disabled: true, label: "Cluster", value: PROFILE_TABS.CLUSTER },
+    { disabled: true, label: "Password", title: "Coming soon", value: PROFILE_TABS.PASSWORD },
+    { disabled: true, label: "Host Family", title: "Coming soon", value: PROFILE_TABS.HOST_FAMILY },
+    { disabled: true, label: "Cluster", title: "Coming soon", value: PROFILE_TABS.CLUSTER },
   ];
 
   return (

@@ -50,7 +50,10 @@ export const UserInfo = ({ user }: { user: TUser }): JSX.Element => {
   return (
     <>
       <StyledContent>
-        <AvatarUpload handleAvatarChange={handleAvatarChange} profileImageSrc={formData.profileImage} />
+        <AvatarUpload
+          handleAvatarChange={handleAvatarChange}
+          profileImageSrc={formData.profileImage ?? ""}
+        />
         <Permissions handleCheckboxChange={handleCheckboxChange} permissions={formData.permissions} />
         <Form handleInputChange={handleInputChange} setFormData={setFormData} formData={formData} />
       </StyledContent>

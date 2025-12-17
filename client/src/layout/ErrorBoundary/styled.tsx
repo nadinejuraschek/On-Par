@@ -10,3 +10,8 @@ export const Wrapper = styled.div`
   justify-content: center;
   gap: 1.6rem;
 `;
+
+export const ActionWrapper = styled.div`
+  display: flex;
+  gap: 1rem;
+`;

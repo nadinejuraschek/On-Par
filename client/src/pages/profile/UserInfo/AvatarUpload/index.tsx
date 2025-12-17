@@ -9,7 +9,7 @@ export const AvatarUpload = ({ handleAvatarChange, profileImageSrc }: IAvatarUpl
   const [openModalSelectAvatar, setOpenModalSelectAvatar] = useState(false);
 
   const renderModalSelectAvatar = useMemo(() => {
-    if (!openModalSelectAvatar) return;
+    if (!openModalSelectAvatar) return null;
 
     return (
       <ModalSelectAvatar
